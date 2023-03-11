@@ -1,8 +1,6 @@
-import { username, password, email, warning, toSha256, testFunc } from './validation.js';
+import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256 } from './validation.js';
 
-testFunc()
-
-(function() {
+(() => {
     var signUp = {
         userInfo: {},
         init: function() {
@@ -27,8 +25,9 @@ testFunc()
         },
         bindEvents: function() {
             this.submit.addEventListener('click',() => this.signUp());
-            this.email.addEventListener('change', () => email(this.email.value));
-            this.password.addEventListener('keyup', () => password(this.password.value));
+            this.email.addEventListener('keyup', () => isEmailValid(this.email.value));
+            this.password.addEventListener('keyup', () => isPasswordValid(this.password.value));
+            this.username.addEventListener('keyup', () => warning("", "red", "sign-up"));
             this.overlay.addEventListener('click', () => this.hide());
             this.close.addEventListener('click', () => this.hide());
             this.open.addEventListener('click', () => this.display());
@@ -41,12 +40,16 @@ testFunc()
             this.modal.classList.remove("active");
             this.overlay.classList.remove("active");
             this.form.reset();
-            warning("", "red");
+            warning("", "red", "sign-up");
         },
         isInputValid: async function() {
-            if (!email(this.email.value)) return;
-            if (!password(this.password.value)) return;
-            if (!await username(this.username.value)) return;
+            if (!isEmailValid(this.email.value)) return false;
+            if (!isPasswordValid(this.password.value)) return false;
+            const res = await isUsernameAvailable(this.username.value);
+            if (!res.result) {
+                warning(res.username + " is already used.", "red", "sign-up");
+                return false;
+            }
             return true;
         },
         setUserInfo: async function() {
