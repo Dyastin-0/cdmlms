@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/nav.css">
     <link rel="stylesheet" href="/styles/pin.css">
-    <link rel="stylesheet" href="./styles/sign_up.css">
-    <link rel="stylesheet" href="./styles/log_in.css">
+    <link rel="stylesheet" href="./styles/sign-up.css">
+    <link rel="stylesheet" href="./styles/log-in.css">
     <title> Library Management System </title>
 </head>
 <body>
@@ -89,7 +89,7 @@
             <option value="Female"> Female </option>
             <input type="date" placeholder="Birth date" id="birth-date">
             <div class="wrapper-input right">
-              <label class="warning" id="sign-up-warning"> qqqq </label>
+              <label class="warning" id="sign-up-warning"> </label>
             </div>
           </select>
         </div>
@@ -106,18 +106,18 @@
       </div>
     </div>
 
-    <div class="log-in">
+    <div class="log-in" id="log-in-modal">
       <div class="header">
         <label> Log in </label>
-        <button class="fa fa-close">  </button>
+        <button class="fa fa-close" id="log-in-close-button">  </button>
       </div>
-      <form class="form">
-        <input type="text" placeholder="Username">
-        <input type="text" placeholder="Password">
+      <form class="form" id="log-in-form">
+        <input type="text" placeholder="Username" id="log-in-username">
+        <input type="password" placeholder="Password" id="log-in-password">
         <label class="warning" id="log-in-warning">  </label>
       </form>
       <div class="footer">
-        <button> Log in </button>
+        <button id="log-in-account-button"> Log in </button>
         <label> Don't have an account? </label>
       </div>
     </div>
@@ -148,6 +148,7 @@
 
   <!--custom scripts-->
   <script src="./scripts/observer.js"></script>
-  <script type="module" src="./scripts/sign_up_module.js"></script>
+  <script type="module" src="./scripts/sign-up-module.js"></script>
+  <script type="module" src="./scripts/log-in-module.js"> </script>
 
 </html>

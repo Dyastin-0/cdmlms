@@ -1,11 +1,7 @@
-const warningLogin = document.getElementById("sign-up-warning");
-const warningSignup = document.getElementById("log-in-warning");
+const warningLogin = document.getElementById("log-in-warning");
+const warningSignup = document.getElementById("sign-up-warning");
 
-export function testFunc() {
-    console.log("TEST MOTHERFUCKER")
-}
-
-export function password(password) {
+export function isPasswordValid(password) {
     if (password == "") {
         warning("", "red", "sign-up");
         return;
@@ -32,31 +28,56 @@ export function password(password) {
     return true;
 }
 
-export async function isInputMatched(username, password) {
-    if (username == "" || password == "") {
-        warning("Incorrect username or password.", "red", "log-in");
-        return;
+export async function isUsernameAndPasswordMatched(username, password) {
+    let result = {error: null, data: null};
+
+    if (!username || !password) {
+        result.error = "Input username and password.";
+        return result;
+    }
+
+    try {
+        const querySnapshot = await db
+        .collection('users')
+        .where('username' , '==', username)
+        .where('password', '==', await toSha256(password))
+        .get();
+
+        if (querySnapshot.empty) {
+            result.error = "Invalid username or password.";
+            return result;
+        }
+        
+        const userData = querySnapshot.docs[0].data();
+        result.data = userData;
+        return result;
+    } catch (err) {
+        result.error = "An error occured while trying to log in.";
+        return result;
     }
 }
 
-export async function username(username) {
-    if (username == "") {
-        warning("Enter a username.", "red", "sign-up");
-        return;
+export async function isUsernameAvailable(username) {
+    let result = {result: null, username: null};
+    if (!username) {
+        throw warning("Enter a username.", "red", "sign-up");
     }
-    let isAvail = true;
-    let response = await db.collection('users')
+
+    let querySnapshot = await db.collection('users')
     .where('username', '==', username)
-    .get().then((data) => {
-        data.forEach(element => {
-            warning(element.data().username + " is already used, try another.", "red", "sign-up");
-            isAvail = false;
-        });
-    })
-    return isAvail;
+    .get();
+    
+    if (!querySnapshot.empty) {
+        result.result = false;
+        result.username = username;
+        return result;
+    }
+
+    result.result = true;
+    return result;
 }
 
-export function email(email) {
+export function isEmailValid(email) {
     if (email == "") {
         warning("", "red", "sign-up");
         return;
@@ -71,8 +92,6 @@ export function email(email) {
 }
 
 export function warning(message, color, where) {
-    warningSignup.textContent = message
-    if (where == "") return;
     if (where == "log-in") {
         warningLogin.style.color = color;
         warningLogin.textContent = message;
