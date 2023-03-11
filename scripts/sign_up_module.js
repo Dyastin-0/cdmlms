@@ -1,6 +1,8 @@
-import { validate } from './validation.js';
+import { username, password, email, warning, toSha256, testFunc } from './validation.js';
+
+testFunc()
+
 (function() {
-    validate.init();
     var signUp = {
         userInfo: {},
         init: function() {
@@ -25,8 +27,8 @@ import { validate } from './validation.js';
         },
         bindEvents: function() {
             this.submit.addEventListener('click',() => this.signUp());
-            this.email.addEventListener('change', () => validate.email(this.email.value));
-            this.password.addEventListener('keyup', () => validate.password(this.password.value));
+            this.email.addEventListener('change', () => email(this.email.value));
+            this.password.addEventListener('keyup', () => password(this.password.value));
             this.overlay.addEventListener('click', () => this.hide());
             this.close.addEventListener('click', () => this.hide());
             this.open.addEventListener('click', () => this.display());
@@ -39,12 +41,12 @@ import { validate } from './validation.js';
             this.modal.classList.remove("active");
             this.overlay.classList.remove("active");
             this.form.reset();
-            validate.warning("", "red");
+            warning("", "red");
         },
         isInputValid: async function() {
-            if (!validate.email(this.email.value)) return;
-            if (!validate.password(this.password.value)) return;
-            if (!await validate.username(this.username.value)) return;
+            if (!email(this.email.value)) return;
+            if (!password(this.password.value)) return;
+            if (!await username(this.username.value)) return;
             return true;
         },
         setUserInfo: async function() {
@@ -56,7 +58,7 @@ import { validate } from './validation.js';
                 birthDate: this.birthDate.value,
                 email: this.email.value,
                 username: this.username.value,
-                password: await validate.toSha256(this.password.value)
+                password: await toSha256(this.password.value)
             };
         },
         create: async function(userInfo) {
