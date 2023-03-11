@@ -1,0 +1,73 @@
+:root {
+    --card_width: 250px;
+    --row_increment: 10px;
+    --card_small: 23;
+    --card_medium: 36;
+    --card_large: 44;
+    --card_small_bg: 25;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    color: #353232;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: fit-content;
+    background: rgb(255, 255, 255);
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+}
+ 
+.content {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.content label {
+    font-size: 34px;
+    margin: 30px;
+    font-weight: bold;
+}
+
+.content img {
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.hide {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateX(-100%);
+}
+
+.show {
+    animation: animateX 0.5s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes animateX {
+    0% {
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0%);
+    }
+}

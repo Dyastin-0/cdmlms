@@ -1,0 +1,136 @@
+.nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin: 5px;
+    z-index: 9;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav.transparent {
+    background-color: transparent;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    padding-right: 5px;
+}
+
+.nav-button {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: left;
+    font-size: 22px;
+    color: #191919;
+    font-weight: 500;
+    border-width: 0px;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255);
+    margin-right: 20px;
+    padding: 10px;
+    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+}
+
+.nav-button:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.nav-button.black {
+    font-size: 18px;
+    margin-left: 10px;
+    width: fit-content;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: #353232;
+}
+
+.nav-button.black.small {
+    font-size: 14px;
+}
+
+.nav-button.black:hover {
+    color: #353232;
+}
+
+.wrapper {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row;
+    margin-left: 10px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 30px;
+}
+
+.wrapper.fit {
+    width: auto;
+    background: none;
+}
+
+.wrapper.button {
+    width: fit-content;
+    padding: 0;
+    background-color: transparent;
+}
+
+.wrapper.button .label {
+    margin: 5;
+    font-weight: 500;
+    font-size: 15px;
+    transition: opacity 0.3s;
+}
+
+.wrapper.button .label:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.search-icon {
+    padding-left: 15px;
+}
+
+.search-input {
+    height: 40px;
+    width: 100%;
+    font-size: 18px;
+    padding: 5px;
+    outline: none;
+    border-width: 0;
+    border-top-right-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    background-color: rgb(230, 230, 230);
+}
+
+.nav-button:hover {
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+.nav-button:focus {
+    opacity: 0.6;
+    border-color: transparent;
+    outline: none;
+}
+
+.nav-button:active {
+    opacity: 0.4;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    margin: none;
+    padding: none;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+}

@@ -1,0 +1,58 @@
+.pin-container {
+    margin: auto;
+    padding: auto;
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--card_width));
+    grid-auto-rows: var(--row_increment);
+    justify-content: center;
+    overflow: auto;
+}
+
+.pin-container .pin {
+    position: relative;
+    display: flex;
+    margin: 10px;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: rgb(235, 235, 235);
+    transition: box-shadow 0.3s;
+}
+
+.pin .label {
+    font-size: 24px;
+}
+
+.pin-container .pin.small {
+    grid-row-start: span var(--card_small);
+}
+
+.pin-container .pin.medium {
+    grid-row-start: span var(--card_medium);
+}
+
+.pin-container .pin.large {
+    grid-row-start: span var(--card_large);
+}
+
+.pin-container .pin:hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.pin:nth-child(2) {
+    animation-delay: 200ms;
+}
+
+.pin:nth-child(3) {
+    animation-delay: 400ms;
+}
+
+.pin:nth-child(4) {
+    animation-delay: 600ms;
+}
+
+
