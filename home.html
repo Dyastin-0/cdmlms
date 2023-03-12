@@ -31,8 +31,9 @@
             <button class="nav-button"><i class="fa fa-chevron-down"></i></button>
             <div class="drop-down-menu">
                 <button id="username"> Username </button>
-                <button> Profile </button>
-                <button> Settings </button>
+                <button id="profile"> Profile </button>
+                <button id="settings"> Settings </button>
+                <button id="log-out"> Logout </button>
             </div>
         </div>
     </nav>
@@ -55,6 +56,26 @@
 
 </body>
 
-<script type="module" src="./scripts/user-module.js"></script>
+<!-- scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB3GKLWSftrpcfQjahN0TGlyLnIMHG9ZUA",
+      authDomain: "librarymanagementsystem-f950a.firebaseapp.com",
+      databaseURL: "https://librarymanagementsystem-f950a-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "librarymanagementsystem-f950a",
+      storageBucket: "librarymanagementsystem-f950a.appspot.com",
+      messagingSenderId: "71574320410",
+      appId: "1:71574320410:web:069d5c5a3c0c3ef0bea8a3",
+      measurementId: "G-S7H8LTEH2P"
+    };
+  
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
+<script type="module" src="./scripts/user.js"></script>
 
 </html>
