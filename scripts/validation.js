@@ -57,12 +57,50 @@ export async function isUsernameAndPasswordMatched(username, password) {
     }
 }
 
+export function generateToken(userData) {
+    const date = new Date();
+    const token = {
+        expiration: (date.getTime() + (30 * 60 * 1000)),
+        id: userData.id,
+        isAdmin: userData.isAdmin
+    }
+    return token;
+}
+
+export async function deleteToken(token) {
+    await db.collection('authTokens')
+    .where('id', '==', token.id)
+    .get()
+    .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            doc.ref.delete();
+        });
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export async function isTokenValid(token) {
+    const response = await db.collection('authTokens')
+    .where('id', '==', token.id)
+    .get();
+
+    const currentTime = new Date().getTime();
+    const fetchedToken = response.docs[0].data(); 
+    if (fetchedToken.expiration > currentTime) return true;
+    await deleteToken(token);
+    localStorage.removeItem("session");
+    return false;
+}
+
 export async function isUsernameAvailable(username) {
-    let result = {result: null, username: null};
     if (!username) {
         throw warning("Enter a username.", "red", "sign-up");
     }
 
+    let result = {result: null, username: null};
+    
     let querySnapshot = await db.collection('users')
     .where('username', '==', username)
     .get();

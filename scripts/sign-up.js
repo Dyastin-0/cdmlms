@@ -60,6 +60,8 @@ import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256 }
                 sex: this.sex.value,
                 birthDate: this.birthDate.value,
                 email: this.email.value,
+                id: await toSha256(this.username.value),
+                isAdmin: false,
                 username: this.username.value,
                 password: await toSha256(this.password.value)
             };
