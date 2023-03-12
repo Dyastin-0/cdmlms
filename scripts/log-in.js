@@ -1,7 +1,6 @@
 import { isUsernameAndPasswordMatched, generateToken, warning } from './validation.js';
 import { user } from './user.js';
 
-
 const overlay = document.getElementById("overlay");
 const modal = document.getElementById("log-in-modal");
 const open = document.getElementById("log-in-modal-button");
@@ -22,6 +21,7 @@ function bindEvents() {
     username.addEventListener('keyup', () => warning("", "red", "log-in"));
     password.addEventListener('keyup', () => warning ("", "red", "log-in"));
 }
+
 function show() {
     overlay.classList.add("active");
     modal.classList.add("active");

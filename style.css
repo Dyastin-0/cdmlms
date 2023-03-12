@@ -38,8 +38,9 @@ html, body {
 }
 
 .content label {
-    font-size: 34px;
-    margin: 30px;
+    margin-top: 100px;
+    margin-left: 10px;
+    font-size: 64px;
     font-weight: bold;
 }
 

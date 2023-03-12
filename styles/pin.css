@@ -21,7 +21,8 @@
     transition: box-shadow 0.3s;
 }
 
-.pin .label {
+.pin label {
+    margin: 30px;
     font-size: 24px;
 }
 
@@ -41,18 +42,6 @@
     cursor: pointer;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
-}
-
-.pin:nth-child(2) {
-    animation-delay: 200ms;
-}
-
-.pin:nth-child(3) {
-    animation-delay: 400ms;
-}
-
-.pin:nth-child(4) {
-    animation-delay: 600ms;
 }
 
 
