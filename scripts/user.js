@@ -1,4 +1,4 @@
-import { isTokenValid, deleteToken } from "./validation.js";
+import { isTokenValid, deleteToken } from "./authToken.js";
 
 export const user = {
     init: function() {
@@ -10,8 +10,8 @@ export const user = {
         this.username = document.getElementById("username");
         this.logout = document.getElementById("log-out");
     },
-    bindEvents: function() {
-        this.logout.addEventListener('click', () => this.logOut());
+    bindEvents: async function() {
+        await this.logout.addEventListener('click', async () => await this.logOut());
     },
     fetchSession: function() {
         const token = JSON.parse(localStorage.getItem("session"));
@@ -53,9 +53,13 @@ export const user = {
     }, 
     logOut: async function() {
         const token = this.fetchSession();
-        await deleteToken(token);
-        localStorage.removeItem("session");
-        this.redirect();
+        try {
+            localStorage.removeItem("session");
+            await deleteToken(token);
+            await this.redirect();
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

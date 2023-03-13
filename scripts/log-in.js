@@ -1,4 +1,5 @@
-import { isUsernameAndPasswordMatched, generateToken, warning } from './validation.js';
+import { isUsernameAndPasswordMatched, warning } from './validation.js';
+import { generateToken } from './authToken.js';
 import { user } from './user.js';
 
 const overlay = document.getElementById("overlay");
