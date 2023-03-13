@@ -24,7 +24,7 @@ export function isPasswordValid(password) {
         }
     }
 
-    warning("Lookin' good!", "rgb(11, 240, 22)", "sign-up");
+    warning("", "rgb(11, 240, 22)", "sign-up");
     return true;
 }
 
