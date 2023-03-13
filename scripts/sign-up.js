@@ -1,88 +1,91 @@
 import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256 } from './validation.js';
 
-(() => {
-    var signUp = {
-        userInfo: {},
-        init: function() {
-            this.cacheDom();
-            this.bindEvents();
-        },
-        cacheDom: function() {
-            this.open = document.getElementById("sign-up-modal-button");
-            this.overlay = document.getElementById("overlay");
-            this.modal = document.getElementById("sign-up-modal");
-            this.close = this.modal.querySelector("#sign-up-close-button");
-            this.form = this.modal.querySelector("#sign-up-form");
-            this.submit = this.modal.querySelector("#sign-up-account-button");
-            this.firstName = this.modal.querySelector("#first-name");
-            this.lastName = this.modal.querySelector("#last-name");
-            this.middleName = this.modal.querySelector("#middle-name");
-            this.sex = this.modal.querySelector("#sex");
-            this.birthDate = this.modal.querySelector("#birth-date");
-            this.email = this.modal.querySelector("#email");
-            this.username = this.modal.querySelector("#user-name");
-            this.password = this.modal.querySelector("#password");
-        },
-        bindEvents: function() {
-            this.submit.addEventListener('click',() => this.signUp());
-            this.email.addEventListener('keyup', () => isEmailValid(this.email.value));
-            this.password.addEventListener('keyup', () => isPasswordValid(this.password.value));
-            this.username.addEventListener('keyup', () => warning("", "red", "sign-up"));
-            this.overlay.addEventListener('click', () => this.hide());
-            this.close.addEventListener('click', () => this.hide());
-            this.open.addEventListener('click', () => this.display());
-        },
-        display: function() {
-            this.modal.classList.add("active");
-            this.overlay.classList.add("active");
-        },
-        hide: function() {
-            this.modal.classList.remove("active");
-            this.overlay.classList.remove("active");
-            this.form.reset();
-            warning("", "red", "sign-up");
-        },
-        isInputValid: async function() {
-            if (!isEmailValid(this.email.value)) return false;
-            if (!isPasswordValid(this.password.value)) return false;
-            const res = await isUsernameAvailable(this.username.value);
-            if (!res.result) {
-                warning(res.username + " is already used.", "red", "sign-up");
-                return false;
-            }
-            return true;
-        },
-        setUserInfo: async function() {
-            this.userInfo = {
-                firstName: this.firstName.value,
-                lastName: this.lastName.value,
-                middleName: this.middleName.value,
-                sex: this.sex.value,
-                birthDate: this.birthDate.value,
-                email: this.email.value,
-                id: await toSha256(this.username.value),
-                isAdmin: false,
-                username: this.username.value,
-                password: await toSha256(this.password.value)
-            };
-        },
-        create: async function(userInfo) {
-            db.collection('users')
-            .doc(crypto.randomUUID())
-            .set(userInfo)
-            .catch((error) => {
-                alert(error)
-            });
-        },
-        signUp: async function() {
-            if (await this.isInputValid()) {
-                await this.setUserInfo();              
-                await this.create(this.userInfo);
-                this.userInfo = {};
-                alert("Created! Try and log in.");
-                this.hide();
-            }
-        }
+const open = document.getElementById("sign-up-modal-button");
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("sign-up-modal");
+const haveAccount = modal.querySelector("#have-account");
+const close = modal.querySelector("#sign-up-close-button");
+const form = modal.querySelector("#sign-up-form");
+const submit = modal.querySelector("#sign-up-account-button");
+const firstName = modal.querySelector("#first-name");
+const lastName = modal.querySelector("#last-name");
+const middleName = modal.querySelector("#middle-name");
+const sex = modal.querySelector("#sex");
+const birthDate = modal.querySelector("#birth-date");
+const email = modal.querySelector("#email");
+const username = modal.querySelector("#user-name");
+const password = modal.querySelector("#password");
+
+bindEvents();
+
+let userInfo = {};
+
+function bindEvents() {
+    submit.addEventListener('click',() => signUp());
+    email.addEventListener('keyup', () => isEmailValid(email.value));
+    password.addEventListener('keyup', () => isPasswordValid(password.value));
+    username.addEventListener('keyup', () => warning("", "red", "sign-up"));
+    firstName.addEventListener('keyup', () => warning("", "red", "sign-up"));
+    lastName.addEventListener('keyup', () => warning("", "red", "sign-up"));
+    middleName.addEventListener('keyup', () => warning("", "red", "sign-up"));
+    birthDate.addEventListener('change', () => warning("", "red", "sign-up"));
+    overlay.addEventListener('click', () => hide());
+    close.addEventListener('click', () => hide());
+    open.addEventListener('click', () => display());
+}
+function display() {
+    modal.classList.add("active");
+    overlay.classList.add("active");
+}
+function hide() {
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+    form.reset();
+    warning("", "red", "sign-up");
+}
+async function isInputValid() {
+    if(!firstName.value || !lastName.value 
+        || !middleName.value || !birthDate.value) {
+        warning("There is an empty field.", "red", "sign-up");
+        return false;
     }
-    signUp.init()
-})();
+    if (!isEmailValid(email.value)) return false;
+    if (!isPasswordValid(password.value)) return false;
+    const res = await isUsernameAvailable(username.value);
+    if (!res.result) {
+        warning(res.username + " is already used.", "red", "sign-up");
+        return false;
+    }
+    return true;
+}
+async function setUserInfo() {
+    userInfo = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        middleName: middleName.value,
+        sex: sex.value,
+        birthDate: birthDate.value,
+        email: email.value,
+        id: await toSha256(username.value),
+        isAdmin: false,
+        username: username.value,
+        password: await toSha256(password.value)
+    };
+}
+async function create() {
+    db.collection('users')
+    .doc(crypto.randomUUID())
+    .set(userInfo)
+    .catch((error) => {
+        alert(error)
+    });
+}
+async function signUp(userInfo) {
+    if (await isInputValid()) {
+        await setUserInfo();              
+        await create(userInfo);
+        userInfo = {};
+        alert("Created! Try and log in.");
+        hide();
+    }
+}

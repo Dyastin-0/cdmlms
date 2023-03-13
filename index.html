@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/styles/pin.css">
     <link rel="stylesheet" href="./styles/sign-up.css">
     <link rel="stylesheet" href="./styles/log-in.css">
-    <title> Library Management System </title>
+    <title> Cdmlms </title>
 </head>
 <body>
 
@@ -78,31 +78,31 @@
         <button class="fa fa-close" id="sign-up-close-button">  </button>
       </div>
       <form class="form" id="sign-up-form">
-        <div class="wrapper-input center">
-          <input type="text" placeholder="First name" id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
-          <input type="text" placeholder="Last name" id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
-          <input type="text" placeholder="Middle name" id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
-        </div>
-        <div class="wrapper-input space-between">
+
+          <input type="text" placeholder="First name" 
+          id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
+          <input type="text" placeholder="Last name"
+           id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
+          <input type="text" placeholder="Middle name" 
+          id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+
           <select name="Sex" id="sex">
             <option value="Male"> Male </option>
             <option value="Female"> Female </option>
-            <input type="date" placeholder="Birth date" id="birth-date">
-            <div class="wrapper-input right">
-              <label class="warning" id="sign-up-warning"> </label>
-            </div>
           </select>
-        </div>
-        <div class="wrapper-input center">
+
+          <label for="birth-date"> Birth date </label>
+          <input type="date" placeholder="Birth date" id="birth-date">
+          <label class="warning" id="sign-up-warning"> </label>
+
           <input type="text" placeholder="Email" id="email">
           <input type="text" placeholder="User name" id="user-name">
           <input type="password" placeholder="Password" id="password">
-        </div>
       </form>
 
       <div class="footer">
         <button id="sign-up-account-button"> Sign up </button>
-        <label> Already have an account? </label>
+        <label class="underlined" id="have-account"> Already have an account? </label>
       </div>
     </div>
 
@@ -118,7 +118,7 @@
       </form>
       <div class="footer">
         <button id="log-in-account-button"> Log in </button>
-        <label> Don't have an account? </label>
+        <label class="underlined"> Don't have an account? </label>
       </div>
     </div>
 
