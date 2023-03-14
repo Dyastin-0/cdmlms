@@ -63,7 +63,7 @@ html, body {
 }
 
 .show {
-    animation: animateX 0.5s linear;
+    animation: animateX 0.25s linear;
     animation-fill-mode: forwards;
 }
 
