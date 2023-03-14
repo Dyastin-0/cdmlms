@@ -1,68 +1,66 @@
 import { isTokenValid, deleteToken } from "./authToken.js";
 
-export const user = {
-    init: function() {
-        this.cacheDom();
-        this.bindEvents();
-        this.redirect();
-    },
-    cacheDom: function() {
-        this.username = document.getElementById("username");
-        this.logout = document.getElementById("log-out");
-    },
-    bindEvents: async function() {
-        await this.logout.addEventListener('click', async () => await this.logOut());
-    },
-    fetchSession: function() {
-        const token = JSON.parse(localStorage.getItem("session"));
-        return token;
-    },
-    redirect: async function() {
-        const token = this.fetchSession();
+const username = document.getElementById("username");
+const logout = document.getElementById("log-out");
 
-        if(window.location.pathname == '/index.html') {
-            return;
-        }
+function init() {
+    bindEvents();
+    redirect();
+    renderData(fetchSession());
+}
 
-        if(token === null) {
-            window.location.href = './index.html';
-            return;
-        }
+async function bindEvents() {
+    await logout.addEventListener('click', async () => await logOut());
+}
 
-        if(!isTokenValid(token)) {
-            alert("Session expired, log in again.");
-            window.location.href = "./index.html";
-        }
+function fetchSession() {
+    const token = JSON.parse(localStorage.getItem("session"));
+    return token;
+}
 
-        if(window.location.pathname !== '/home.html') {
-            window.location.href = './home.html';
-            await this.renderData(token);
-        } else {
-            await this.renderData(token);
-        }
-    },
-    renderData: async function(token) {
-        const querySnapshot = await db
-        .collection('users')
-        .where('id', '==', token.id)
-        .get();
+export async function redirect() {
+    const token = fetchSession();
 
-        const userData = querySnapshot.docs[0].data();
+    if(window.location.pathname == '/index.html') {
+        return;
+    }
 
-        this.username.textContent = userData.username;
-    }, 
-    logOut: async function() {
-        const token = this.fetchSession();
-        try {
-            localStorage.removeItem("session");
-            await deleteToken(token);
-            await this.redirect();
-        } catch (error) {
-            console.log(error);
-        }
+    if(token === null) {
+        window.location.href = './index.html';
+        return;
+    }
+
+    if(!isTokenValid(token)) {
+        window.location.href = "./index.html";
+    }
+
+    if(window.location.pathname !== '/home.html') {
+        window.location.href = './home.html';
+    }
+}
+
+async function renderData(token) {
+    const querySnapshot = await db
+    .collection('users')
+    .where('id', '==', token.id)
+    .get();
+
+    const userData = querySnapshot.docs[0].data();
+
+    username.textContent = userData.username;
+}
+
+async function logOut() {
+    const token = fetchSession();
+    try {
+        localStorage.removeItem("session");
+        await deleteToken(token);
+        await redirect();
+    } catch (error) {
+        console.log(error);
     }
 }
 
 if (window.location.pathname === '/home.html') {
-    user.init();
+    init();
 }

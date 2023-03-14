@@ -8,6 +8,15 @@ export function generateToken(userData) {
     return token;
 }
 
+export async function saveToken(token) {
+    await db.collection('authTokens')
+    .doc(crypto.randomUUID())
+    .set(token)
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 export async function deleteToken(token) {
     console.log("Deleting token " + token)
     try {

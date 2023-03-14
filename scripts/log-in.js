@@ -1,6 +1,7 @@
 import { isUsernameAndPasswordMatched, warning } from './validation.js';
-import { generateToken } from './authToken.js';
-import { user } from './user.js';
+import { generateToken, saveToken } from './authToken.js';
+import { redirect } from './user.js';
+import { showSignUp } from './sign-up.js';
 
 const overlay = document.getElementById("overlay");
 const modal = document.getElementById("log-in-modal");
@@ -10,24 +11,30 @@ const form = modal.querySelector("#log-in-form");
 const username = form.querySelector("#log-in-username");
 const password = form.querySelector("#log-in-password");
 const submit = modal.querySelector("#log-in-account-button");
+const modalLabel = modal.querySelector("#dont-have-account");
 
-user.redirect();
+redirect();
 bindEvents();
 
 function bindEvents() {
-    open.addEventListener('click', () => show());
-    overlay.addEventListener('click', () => hide());
+    open.addEventListener('click', () => showLogIn());
+    overlay.addEventListener('click', () => hideLogIn());
     submit.addEventListener('click', async () => logIn());
-    close.addEventListener('click', () => hide());
+    close.addEventListener('click', () => hideLogIn());
     username.addEventListener('keyup', () => warning("", "red", "log-in"));
     password.addEventListener('keyup', () => warning ("", "red", "log-in"));
+    modalLabel.addEventListener('click', () => {
+        hideLogIn();
+        showSignUp();
+    });
 }
 
-function show() {
+export function showLogIn() {
     overlay.classList.add("active");
     modal.classList.add("active");
 }
-function hide() {
+
+function hideLogIn() {
     overlay.classList.remove("active");
     modal.classList.remove("active");
     form.reset();
@@ -46,13 +53,4 @@ async function logIn() {
     } else {
         warning(response.error, "red", "log-in");
     }
-}
-
-async function saveToken(token) {
-    await db.collection('authTokens')
-    .doc(crypto.randomUUID())
-    .set(token)
-    .catch(err => {
-        console.log(err)
-    })
 }

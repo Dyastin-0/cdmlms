@@ -1,9 +1,10 @@
 import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256 } from './validation.js';
+import { showLogIn } from './log-in.js';
 
 const open = document.getElementById("sign-up-modal-button");
 const overlay = document.getElementById("overlay");
 const modal = document.getElementById("sign-up-modal");
-const haveAccount = modal.querySelector("#have-account");
+const modalLabel = modal.querySelector("#have-account");
 const close = modal.querySelector("#sign-up-close-button");
 const form = modal.querySelector("#sign-up-form");
 const submit = modal.querySelector("#sign-up-account-button");
@@ -29,20 +30,27 @@ function bindEvents() {
     lastName.addEventListener('keyup', () => warning("", "red", "sign-up"));
     middleName.addEventListener('keyup', () => warning("", "red", "sign-up"));
     birthDate.addEventListener('change', () => warning("", "red", "sign-up"));
-    overlay.addEventListener('click', () => hide());
-    close.addEventListener('click', () => hide());
-    open.addEventListener('click', () => display());
+    overlay.addEventListener('click', () => hideSignUp());
+    close.addEventListener('click', () => hideSignUp());
+    open.addEventListener('click', () => showSignUp());
+    modalLabel.addEventListener('click', () => {
+        hideSignUp();
+        showLogIn();
+    });
 }
-function display() {
+
+export function showSignUp() {
     modal.classList.add("active");
     overlay.classList.add("active");
 }
-function hide() {
+
+function hideSignUp() {
     modal.classList.remove("active");
     overlay.classList.remove("active");
     form.reset();
     warning("", "red", "sign-up");
 }
+
 async function isInputValid() {
     if(!firstName.value || !lastName.value 
         || !middleName.value || !birthDate.value) {
@@ -58,6 +66,7 @@ async function isInputValid() {
     }
     return true;
 }
+
 async function setUserInfo() {
     userInfo = {
         firstName: firstName.value,
@@ -72,6 +81,7 @@ async function setUserInfo() {
         password: await toSha256(password.value)
     };
 }
+
 async function create() {
     db.collection('users')
     .doc(crypto.randomUUID())
@@ -80,6 +90,7 @@ async function create() {
         alert(error)
     });
 }
+
 async function signUp(userInfo) {
     if (await isInputValid()) {
         await setUserInfo();              
