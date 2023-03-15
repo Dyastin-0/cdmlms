@@ -21,8 +21,8 @@ function bindEvents() {
     overlay.addEventListener('click', () => hideLogIn());
     submit.addEventListener('click', async () => logIn());
     close.addEventListener('click', () => hideLogIn());
-    username.addEventListener('keyup', () => warning("", "red", "log-in"));
-    password.addEventListener('keyup', () => warning ("", "red", "log-in"));
+    username.addEventListener('keyup', () => warning("", "log-in"));
+    password.addEventListener('keyup', () => warning ("", "log-in"));
     modalLabel.addEventListener('click', () => {
         hideLogIn();
         showSignUp();
@@ -38,19 +38,19 @@ function hideLogIn() {
     overlay.classList.remove("active");
     modal.classList.remove("active");
     form.reset();
-    warning("", "red", "log-in");
+    warning("", "log-in");
 }
 
 async function logIn() {
     const response = await isUsernameAndPasswordMatched(username.value,
     password.value);
     if (!response.error) {
-        const token = await generateToken(response.data);
+        const token = generateToken(response.data);
         await saveToken(token);
         localStorage.setItem("session", JSON.stringify(token));
         window.location.href = './home.html';
         hide();
     } else {
-        warning(response.error, "red", "log-in");
+        warning(response.error, "log-in");
     }
 }

@@ -1,4 +1,4 @@
-import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256 } from './validation.js';
+import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
 import { showLogIn } from './log-in.js';
 
 const open = document.getElementById("sign-up-modal-button");
@@ -13,6 +13,7 @@ const lastName = modal.querySelector("#last-name");
 const middleName = modal.querySelector("#middle-name");
 const sex = modal.querySelector("#sex");
 const birthDate = modal.querySelector("#birth-date");
+const id = modal.querySelector("#id");
 const email = modal.querySelector("#email");
 const username = modal.querySelector("#user-name");
 const password = modal.querySelector("#password");
@@ -25,11 +26,12 @@ function bindEvents() {
     submit.addEventListener('click',() => signUp());
     email.addEventListener('keyup', () => isEmailValid(email.value));
     password.addEventListener('keyup', () => isPasswordValid(password.value));
-    username.addEventListener('keyup', () => warning("", "red", "sign-up"));
-    firstName.addEventListener('keyup', () => warning("", "red", "sign-up"));
-    lastName.addEventListener('keyup', () => warning("", "red", "sign-up"));
-    middleName.addEventListener('keyup', () => warning("", "red", "sign-up"));
-    birthDate.addEventListener('change', () => warning("", "red", "sign-up"));
+    username.addEventListener('keyup', () => warning("", "sign-up"));
+    firstName.addEventListener('keyup', () => warning("", "sign-up"));
+    lastName.addEventListener('keyup', () => warning("", "sign-up"));
+    id.addEventListener('keyup', () => isIdValid(id.value));
+    middleName.addEventListener('keyup', () => warning("", "sign-up"));
+    birthDate.addEventListener('change', () => warning("", "sign-up"));
     overlay.addEventListener('click', () => hideSignUp());
     close.addEventListener('click', () => hideSignUp());
     open.addEventListener('click', () => showSignUp());
@@ -48,20 +50,22 @@ function hideSignUp() {
     modal.classList.remove("active");
     overlay.classList.remove("active");
     form.reset();
-    warning("", "red", "sign-up");
+    warning("", "sign-up");
 }
 
 async function isInputValid() {
     if(!firstName.value || !lastName.value 
-        || !middleName.value || !birthDate.value) {
-        warning("There is an empty field.", "red", "sign-up");
+        || !middleName.value || !birthDate.value
+        || !id.value) {
+        warning("There is an empty field.", "sign-up");
         return false;
     }
     if (!isEmailValid(email.value)) return false;
+    if (!isIdValid(id.value)) return false;
     if (!isPasswordValid(password.value)) return false;
     const res = await isUsernameAvailable(username.value);
     if (!res.result) {
-        warning(res.username + " is already used.", "red", "sign-up");
+        warning(res.username + " is already used.", "sign-up");
         return false;
     }
     return true;
@@ -75,7 +79,7 @@ async function setUserInfo() {
         sex: sex.value,
         birthDate: birthDate.value,
         email: email.value,
-        id: await toSha256(username.value),
+        id: await toSha256(id.value),
         isAdmin: false,
         username: username.value,
         password: await toSha256(password.value)
@@ -97,6 +101,6 @@ async function signUp(userInfo) {
         await create(userInfo);
         userInfo = {};
         alert("Created! Try and log in.");
-        hide();
+        hideSignUp();
     }
 }

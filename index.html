@@ -97,7 +97,8 @@
           <label class="warning" id="sign-up-warning"> </label>
 
           <input type="text" placeholder="Email" id="email">
-          <input type="text" placeholder="User name" id="user-name">
+          <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
+          <input type="text" placeholder="Username" id="user-name">
           <input type="password" placeholder="Password" id="password">
       </form>
 
@@ -112,20 +113,21 @@
         <label> Log in </label>
         <button class="fa fa-close" id="log-in-close-button">  </button>
       </div>
+
       <form class="form" id="log-in-form">
-        <input type="text" placeholder="Username" id="log-in-username">
+        <input type="text" placeholder="Username or ID" id="log-in-username">
         <input type="password" placeholder="Password" id="log-in-password">
         <label class="warning" id="log-in-warning">  </label>
       </form>
+
       <div class="footer">
         <button id="log-in-account-button"> Log in </button>
         <label class="underlined" id="dont-have-account"> Don't have an account? </label>
       </div>
     </div>
 
-  </div>
+Sign up
 
-</body>
 
 <!-- scripts -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>

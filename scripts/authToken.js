@@ -18,7 +18,6 @@ export async function saveToken(token) {
 }
 
 export async function deleteToken(token) {
-    console.log("Deleting token " + token)
     try {
         const querySnapshot = await db
         .collection('authTokens')
@@ -31,7 +30,6 @@ export async function deleteToken(token) {
     } catch (error) {
         console.log(error)
     }
-    console.log("token delete");
 }
 
 export async function isTokenValid(token) {
