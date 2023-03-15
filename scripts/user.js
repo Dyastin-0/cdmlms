@@ -1,16 +1,16 @@
 import { isTokenValid, deleteToken } from "./authToken.js";
-import { fetchAllBooks } from "./books.js";
+import { fetchAllBooks, formatBook } from "./books.js";
 
-let allBooks = {};
+let allBooks = await fetchAllBooks();
 let myBooks = {};
 const username = document.getElementById("username");
 const logout = document.getElementById("log-out");
+const all = document.getElementById("all");
 
 async function init() {
     bindEvents();
     redirect();
     renderData(fetchSession());
-    allBooks = await fetchAllBooks();
 }
 
 async function bindEvents() {
@@ -50,12 +50,12 @@ async function renderData(token) {
     .get();
 
     const userData = querySnapshot.docs[0].data();
-
     username.textContent = userData.username;
 
     allBooks.forEach(book => {
-        console.log(book.data())
-    })
+        const pin = formatBook(book.data());
+        all.appendChild(pin);
+    });
 }
 
 async function logOut() {
