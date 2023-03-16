@@ -61,12 +61,15 @@ async function isInputValid() {
         return false;
     }
     if (!isEmailValid(email.value)) return false;
-    if (!await isIdAvailable(id.value)) return false;
+    const idRes = await isIdAvailable(id.value);
+    if (!idRes.result) {
+        warning(idRes.id + " is already used, contact the MIS if there is any problem.", "sign-up");
+        return false;
+    }
     if (!isIdValid(id.value)) return false;
     if (!isPasswordValid(password.value)) return false;
     const res = await isUsernameAvailable(username.value);
     if (!res.result) {
-        console.log("here")
         warning(res.username + " is already used.", "sign-up");
         return false;
     }

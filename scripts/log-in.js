@@ -13,7 +13,6 @@ const password = form.querySelector("#log-in-password");
 const submit = modal.querySelector("#log-in-account-button");
 const modalLabel = modal.querySelector("#dont-have-account");
 
-redirect();
 bindEvents();
 
 function bindEvents() {

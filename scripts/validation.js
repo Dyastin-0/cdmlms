@@ -65,7 +65,8 @@ export async function isUsernameAvailable(username) {
 
     let result = {result: null, username: null};
     
-    let querySnapshot = await db.collection('users')
+    const querySnapshot = await db
+    .collection('users')
     .where('username', '==', username)
     .get();
     
@@ -75,6 +76,24 @@ export async function isUsernameAvailable(username) {
         return result;
     }
 
+    result.result = true;
+    return result;
+}
+
+export async function isIdAvailable(id) {
+    let result = {result: null, id: null};
+
+    const querySnapshot = await db
+    .collection('users')
+    .where('id', '==', await toSha256(id))
+    .get();
+
+    if (!querySnapshot.empty) {
+        result.result = false;
+        result.id = id;
+        return result;
+    }
+    
     result.result = true;
     return result;
 }
@@ -91,21 +110,6 @@ export async function isIdValid(id) {
     }
     warning("Invalid ID format.", "sign-up");
     return false;
-}
-
-export async function isIdAvailable(id) {
-    try {    
-        const querySnapshot = await db
-        .collection('users')
-        .where('id', '==', id)
-        .get();
-
-        if (querySnapshot.empty) return true;
-        warning(id + " is already used. Contact the MIS if there's a problem.", "sign-up");
-        return false;
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 export function isEmailValid(email) {
