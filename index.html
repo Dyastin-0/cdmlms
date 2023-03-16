@@ -16,11 +16,14 @@
 <body>
 
   <nav class="nav trasparent">
-    <button class="nav-button"> <img class="logo" src="./images/cdm_logo.png"> </button>
+    <button class="nav-button large"> <img class="logo" src="./images/cdm_logo.png">
+      CDMLMS
+    </button>
     <div class="wrapper fit">
-      <button class="nav-button"> About </button>
-      <button class="nav-button"> <i class="fa fa-sign-in fa-lg" id="log-in-modal-button"></i> </button>
-      <button class="nav-button" id="sign-up-modal-button"> sign up </button>
+      <button class="nav-button medium"> News </button>
+      <button class="nav-button medium"> About </button>
+      <button class="nav-button medium"> <i class="fa fa-sign-in fa-lg" id="log-in-modal-button"></i> </button>
+      <button class="nav-button medium" id="sign-up-modal-button"> sign up </button>
     </div>
   </nav>
 
@@ -39,7 +42,7 @@
           <label> Designed and devoloped by CpE Students </label>
         </div>
         <div class="pin small hide">
-          <label> Books now browse-able online! </label>
+          <label> Books now browsable online! </label>
         </div>
         <div class="pin medium hide">
           <label> Sign up now and browse our library!   </label>
@@ -99,7 +102,7 @@
           <input type="text" placeholder="Email" id="email">
           <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
           <input type="text" placeholder="Username" id="user-name">
-          <input type="password" placeholder="Password" id="password">
+          <input type="password" placeholder="Password" id="password" autocomplete="on">
       </form>
 
       <div class="footer">
@@ -116,7 +119,7 @@
 
       <form class="form" id="log-in-form">
         <input type="text" placeholder="Username or ID" id="log-in-username">
-        <input type="password" placeholder="Password" id="log-in-password">
+        <input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
         <label class="warning" id="log-in-warning">  </label>
       </form>
 
@@ -126,32 +129,16 @@
       </div>
     </div>
 
-Sign up
-
-
-<!-- scripts -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB3GKLWSftrpcfQjahN0TGlyLnIMHG9ZUA",
-      authDomain: "librarymanagementsystem-f950a.firebaseapp.com",
-      databaseURL: "https://librarymanagementsystem-f950a-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "librarymanagementsystem-f950a",
-      storageBucket: "librarymanagementsystem-f950a.appspot.com",
-      messagingSenderId: "71574320410",
-      appId: "1:71574320410:web:069d5c5a3c0c3ef0bea8a3",
-      measurementId: "G-S7H8LTEH2P"
-    };
-  
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
+  <!-- scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="./scripts/firebase.js"></script>
+  <!---->
 
   <!--custom scripts-->
   <script src="./scripts/observer.js"></script>
   <script type="module" src="./scripts/sign-up.js"></script>
   <script type="module" src="./scripts/log-in.js"> </script>
+  <!---->
 
 </html>

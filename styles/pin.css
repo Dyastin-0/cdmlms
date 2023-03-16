@@ -23,7 +23,27 @@
     margin-top: 10px;
     text-align: left;
     font-size: 28px;
-    
+}
+
+.pin label.title {
+    padding: 5px;
+    margin: none;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.pin label.author {
+    padding: 5px;
+    margin: none;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.pin label.genre {
+    padding: 5px;
+    margin: none;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .pin-container .pin.small {

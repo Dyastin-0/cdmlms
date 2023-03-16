@@ -48,8 +48,9 @@ async function logIn() {
         const token = generateToken(response.data);
         await saveToken(token);
         localStorage.setItem("session", JSON.stringify(token));
+        hideLogIn();
+        if (response.data.isAdmin) window.location.href = './admin.html';
         window.location.href = './home.html';
-        hide();
     } else {
         warning(response.error, "log-in");
     }

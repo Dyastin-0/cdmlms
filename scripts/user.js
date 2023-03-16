@@ -9,7 +9,7 @@ const all = document.getElementById("all");
 
 async function init() {
     bindEvents();
-    redirect();
+    await redirect();
     renderData(fetchSession());
 }
 
@@ -34,7 +34,8 @@ export async function redirect() {
         return;
     }
 
-    if(!isTokenValid(token)) {
+    if(! await isTokenValid(token)) {
+        alert("Session expired.");
         window.location.href = "./index.html";
     }
 

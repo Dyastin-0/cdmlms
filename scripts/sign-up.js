@@ -1,4 +1,4 @@
-import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
+import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256, isIdValid, isIdAvailable } from './validation.js';
 import { showLogIn } from './log-in.js';
 
 const open = document.getElementById("sign-up-modal-button");
@@ -61,6 +61,7 @@ async function isInputValid() {
         return false;
     }
     if (!isEmailValid(email.value)) return false;
+    if (!await isIdAvailable(id.value)) return false;
     if (!isIdValid(id.value)) return false;
     if (!isPasswordValid(password.value)) return false;
     const res = await isUsernameAvailable(username.value);

@@ -93,6 +93,20 @@ export async function isIdValid(id) {
     return false;
 }
 
+export async function isIdAvailable(id) {
+    try {    
+        const querySnapshot = db
+        .collection('users')
+        .where('id', '==', id)
+        .get();
+
+        if (querySnapshot.empty) return true;
+    return false;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export function isEmailValid(email) {
     if (email == "") {
         warning("", "sign-up");

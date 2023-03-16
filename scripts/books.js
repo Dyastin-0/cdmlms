@@ -7,8 +7,11 @@ export function formatBook(book) {
     pin.classList.add("pin");
     pin.classList.add("small");
 
+    title.classList.add("title");
     title.textContent = "Title: " + book.title;
+    author.classList.add("author");
     author.textContent = "Author: " + book.author;
+    genre.classList.add("genre");
     genre.textContent = "Genre/s: " + book.genre;
 
     pin.appendChild(title);
