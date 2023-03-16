@@ -82,6 +82,7 @@
         <button class="fa fa-close" id="sign-up-close-button">  </button>
       </div>
       <form class="form" id="sign-up-form">
+        <label class="warning" id="sign-up-warning">  </label>
 
           <input type="text" placeholder="First name" 
           id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
@@ -97,7 +98,6 @@
 
           <label for="birth-date"> Birth date </label>
           <input type="date" placeholder="Birth date" id="birth-date">
-          <label class="warning" id="sign-up-warning"> </label>
 
           <input type="text" placeholder="Email" id="email">
           <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
@@ -116,11 +116,10 @@
         <label> Log in </label>
         <button class="fa fa-close" id="log-in-close-button">  </button>
       </div>
-
       <form class="form" id="log-in-form">
+        <label class="warning" id="log-in-warning">  </label>
         <input type="text" placeholder="Username or ID" id="log-in-username">
         <input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
-        <label class="warning" id="log-in-warning">  </label>
       </form>
 
       <div class="footer">

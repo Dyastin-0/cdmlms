@@ -95,13 +95,14 @@ export async function isIdValid(id) {
 
 export async function isIdAvailable(id) {
     try {    
-        const querySnapshot = db
+        const querySnapshot = await db
         .collection('users')
         .where('id', '==', id)
         .get();
 
         if (querySnapshot.empty) return true;
-    return false;
+        warning(id + " is already used. Contact the MIS if there's a problem.", "sign-up");
+        return false;
     } catch (error) {
         console.log(error)
     }
@@ -124,11 +125,23 @@ export function isEmailValid(email) {
 }
 
 export function warning(message, where) {
+    if (!message && where == "log-in") {
+        warningLogin.style.display = "none";
+        return;
+    }
+
+    if (!message && where == "sign-up") {
+        warningSignup.style.display = "none";
+        return;
+    }
+
     if (where == "log-in") {
         warningLogin.textContent = message;
+        warningLogin.style.display = "flex";
     }
     if (where == "sign-up") {
         warningSignup.textContent = message;
+        warningSignup.style.display = "flex";
     }
 }
 

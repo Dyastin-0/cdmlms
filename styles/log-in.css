@@ -2,6 +2,9 @@
     width: 270px;
     height: fit-content;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
     top: 50%;

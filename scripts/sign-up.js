@@ -66,6 +66,7 @@ async function isInputValid() {
     if (!isPasswordValid(password.value)) return false;
     const res = await isUsernameAvailable(username.value);
     if (!res.result) {
+        console.log("here")
         warning(res.username + " is already used.", "sign-up");
         return false;
     }
