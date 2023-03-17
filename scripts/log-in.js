@@ -1,43 +1,20 @@
-import { isUsernameAndPasswordMatched, warning } from './validation.js';
-import { generateToken, saveToken } from './authToken.js';
-import { redirect } from './user.js';
-import { showSignUp } from './sign-up.js';
+import { warning } from './validation.js';
+import { isUsernameAndPasswordMatched } from './authentication.js';
+import { generateToken, saveToken } from './auth-token.js';
+import { loginUiInit, hideLogIn } from './ui.js';
 
-const overlay = document.getElementById("overlay");
 const modal = document.getElementById("log-in-modal");
-const open = document.getElementById("log-in-modal-button");
-const close = modal.querySelector("#log-in-close-button");
-const form = modal.querySelector("#log-in-form");
-const username = form.querySelector("#log-in-username");
-const password = form.querySelector("#log-in-password");
+const username = modal.querySelector("#log-in-username");
+const password = modal.querySelector("#log-in-password");
 const submit = modal.querySelector("#log-in-account-button");
-const modalLabel = modal.querySelector("#dont-have-account");
 
+loginUiInit();
 bindEvents();
 
 function bindEvents() {
-    open.addEventListener('click', () => showLogIn());
-    overlay.addEventListener('click', () => hideLogIn());
     submit.addEventListener('click', async () => logIn());
-    close.addEventListener('click', () => hideLogIn());
     username.addEventListener('keyup', () => warning("", "log-in"));
-    password.addEventListener('keyup', () => warning ("", "log-in"));
-    modalLabel.addEventListener('click', () => {
-        hideLogIn();
-        showSignUp();
-    });
-}
-
-export function showLogIn() {
-    overlay.classList.add("active");
-    modal.classList.add("active");
-}
-
-function hideLogIn() {
-    overlay.classList.remove("active");
-    modal.classList.remove("active");
-    form.reset();
-    warning("", "log-in");
+    password.addEventListener('keyup', () => warning("", "log-in"));
 }
 
 async function logIn() {

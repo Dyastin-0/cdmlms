@@ -1,4 +1,4 @@
-import { isTokenValid, deleteToken } from "./authToken.js";
+import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllBooks, formatBook } from "./books.js";
 
 let allBooks = await fetchAllBooks();

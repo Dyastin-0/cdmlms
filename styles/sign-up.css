@@ -71,7 +71,7 @@
 
 .form select {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     outline-width: 0;
     font-size: 15px;
     background-color: rgb(235, 235, 235);
@@ -89,7 +89,7 @@
 
 .form input {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     width: 90%;
     height: 15px;
     font-size: 16px;
@@ -132,7 +132,7 @@
 
 .warning {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     background-color: rgb(189, 79, 98);
     border-radius: 3px;
     width: 90%;

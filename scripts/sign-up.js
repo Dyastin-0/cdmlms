@@ -1,12 +1,8 @@
-import { isUsernameAvailable, isPasswordValid, isEmailValid, warning, toSha256, isIdValid, isIdAvailable } from './validation.js';
-import { showLogIn } from './log-in.js';
+import { isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
+import { isUsernameAvailable, isIdAvailable } from './authentication.js';
+import { signupUiInit, hideSignUp } from './ui.js';
 
-const open = document.getElementById("sign-up-modal-button");
-const overlay = document.getElementById("overlay");
 const modal = document.getElementById("sign-up-modal");
-const modalLabel = modal.querySelector("#have-account");
-const close = modal.querySelector("#sign-up-close-button");
-const form = modal.querySelector("#sign-up-form");
 const submit = modal.querySelector("#sign-up-account-button");
 const firstName = modal.querySelector("#first-name");
 const lastName = modal.querySelector("#last-name");
@@ -17,7 +13,9 @@ const id = modal.querySelector("#id");
 const email = modal.querySelector("#email");
 const username = modal.querySelector("#user-name");
 const password = modal.querySelector("#password");
+const confirmPassword = modal.querySelector("#password-confirm");
 
+signupUiInit();
 bindEvents();
 
 let userInfo = {};
@@ -32,28 +30,9 @@ function bindEvents() {
     id.addEventListener('keyup', () => isIdValid(id.value));
     middleName.addEventListener('keyup', () => warning("", "sign-up"));
     birthDate.addEventListener('change', () => warning("", "sign-up"));
-    overlay.addEventListener('click', () => hideSignUp());
-    close.addEventListener('click', () => hideSignUp());
-    open.addEventListener('click', () => showSignUp());
-    modalLabel.addEventListener('click', () => {
-        hideSignUp();
-        showLogIn();
-    });
 }
 
-export function showSignUp() {
-    modal.classList.add("active");
-    overlay.classList.add("active");
-}
-
-function hideSignUp() {
-    modal.classList.remove("active");
-    overlay.classList.remove("active");
-    form.reset();
-    warning("", "sign-up");
-}
-
-async function isInputValid() {
+async function areInputValid() {
     if(!firstName.value || !lastName.value 
         || !middleName.value || !birthDate.value
         || !id.value) {
@@ -67,6 +46,10 @@ async function isInputValid() {
         return false;
     }
     if (!isIdValid(id.value)) return false;
+    if (password.value !== confirmPassword.value) {
+        warning("Password does not match.", "sign-up");
+        return false;
+    }
     if (!isPasswordValid(password.value)) return false;
     const res = await isUsernameAvailable(username.value);
     if (!res.result) {
@@ -101,7 +84,7 @@ async function create() {
 }
 
 async function signUp(userInfo) {
-    if (await isInputValid()) {
+    if (await areInputValid()) {
         await setUserInfo();              
         await create(userInfo);
         userInfo = {};
