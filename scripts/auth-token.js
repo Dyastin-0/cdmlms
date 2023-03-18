@@ -1,7 +1,7 @@
 export function generateToken(userData) {
     const date = new Date();
     const token = {
-        expiration: (date.getTime() + (30 * 60 * 1000)),
+        expiration: (date.getTime() + (5 * 1000)),
         id: userData.id,
         isAdmin: userData.isAdmin
     }

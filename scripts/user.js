@@ -25,21 +25,21 @@ function fetchSession() {
 export async function redirect() {
     const token = fetchSession();
 
-    if(window.location.pathname == '/index.html') {
+    if (window.location.pathname == '/index.html') {
         return;
     }
 
-    if(token === null) {
+    if (token === null) {
         window.location.href = './index.html';
         return;
     }
 
-    if(! await isTokenValid(token)) {
+    if (! await isTokenValid(token)) {
         alert("Session expired.");
         window.location.href = "./index.html";
     }
 
-    if(window.location.pathname !== '/home.html') {
+    if (window.location.pathname !== '/home.html') {
         window.location.href = './home.html';
     }
 }

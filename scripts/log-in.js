@@ -2,11 +2,14 @@ import { warning } from './validation.js';
 import { isUsernameAndPasswordMatched } from './authentication.js';
 import { generateToken, saveToken } from './auth-token.js';
 import { loginUiInit, hideLogIn } from './ui.js';
+import { redirect } from './user.js';
 
 const modal = document.getElementById("log-in-modal");
 const username = modal.querySelector("#log-in-username");
 const password = modal.querySelector("#log-in-password");
 const submit = modal.querySelector("#log-in-account-button");
+
+redirect();
 
 loginUiInit();
 bindEvents();

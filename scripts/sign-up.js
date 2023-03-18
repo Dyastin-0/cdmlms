@@ -33,7 +33,7 @@ function bindEvents() {
 }
 
 async function areInputValid() {
-    if(!firstName.value || !lastName.value 
+    if (!firstName.value || !lastName.value 
         || !middleName.value || !birthDate.value
         || !id.value) {
         warning("There is an empty field.", "sign-up");
