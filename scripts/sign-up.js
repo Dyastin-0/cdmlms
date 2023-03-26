@@ -1,6 +1,6 @@
 import { isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
 import { isUsernameAvailable, isIdAvailable } from './authentication.js';
-import { signupUiInit, hideSignUp } from './ui.js';
+import { signupUiInit, hideSignUp } from './ui/index/sign-up-ui.js';
 
 const modal = document.getElementById("sign-up-modal");
 const submit = modal.querySelector("#sign-up-account-button");

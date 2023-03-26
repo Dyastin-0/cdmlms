@@ -9,7 +9,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 5px rgb(0, 0, 0, 0.2);
 }
 
 .nav.transparent {
@@ -70,25 +69,30 @@
 }
 
 .wrapper {
-    width: 100%;
+    background-color: none;
+    width: fit-content;
     height: fit-content;
     display: flex;
     justify-content: flex-start;
     margin-right: 10px;
     align-items: center;
-    background-color: rgb(230, 230, 230);
     border-radius: 30px;
+}
+
+.wrapper.space-between {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.wrapper.space-between:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.5s;
 }
 
 .wrapper.fit {
     width: auto;
     background: none;
-}
-
-.wrapper.button {
-    width: fit-content;
-    padding:0 ;
-    background-color: transparent;
 }
 
 .wrapper.button .label {
@@ -108,29 +112,21 @@
     border-radius: 30px;
 }
 
-.search-button {
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 24px;
-    color: #191919;
-    font-weight: 500;
-    border-width: 0px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-width: 0;
-    background-color: transparent;
-    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
-}
-
-.search-input {
+.search {
     height: 40px;
     width: 100%;
     font-size: 18px;
     outline: none;
     border-width: 0;
-    border-top-right-radius: 30px 30px;
-    border-bottom-right-radius: 30px 30px;
+    border-radius: 30px;
+    padding-left: 10px;
+    margin-right: 10px;
     background-color: rgb(230, 230, 230);
+}
+
+.search-item {
+    height: 20px;
+    width: 100%;
 }
 
 .nav-button:hover {
@@ -156,47 +152,4 @@
     padding: none;
     border-radius: 50%;
     box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
-}
-
-@media (width <= 390px) {
-    .wrapper.search {
-        position: relative;
-        width: fit-content;
-    }
-    
-    .search-button {
-        padding: 15px;
-    }
-
-    .search-input {
-        padding-left: 15px;
-         border-radius: 30px;
-         width: 200px;
-    }
-
-    .drop-down-search {
-        opacity: 0;
-        transform: translateY(-10px) scaleY(0);
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        width: fit-content;
-        height: fit-content;
-        top: calc(100% + 5px);
-        background-color: rgb(235, 235, 235);
-        border-radius: 30px;
-        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    }
-    
-    .wrapper.search:hover > .drop-down-search,
-    .wrapper.search > .search-input:focus + .search-button + .drop-down-search {
-        transform: translateY(0) scaleY(1);
-        opacity: 1;
-    }
-
-    .wrapper.search > .search-input:focus + .search-input,
-    .wrapper.search > .search-input:not(:placeholder-shown) + .drop-down-search {
-        transform: translateY(0) scaleY(1);
-        opacity: 1;
-    }
 }

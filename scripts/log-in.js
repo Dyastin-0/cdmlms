@@ -1,7 +1,7 @@
 import { warning } from './validation.js';
 import { isUsernameAndPasswordMatched } from './authentication.js';
 import { generateToken, saveToken } from './auth-token.js';
-import { loginUiInit, hideLogIn } from './ui.js';
+import { loginUiInit, hideLogIn } from './ui/index/log-in-ui.js';
 import { redirect } from './user.js';
 
 const modal = document.getElementById("log-in-modal");
@@ -24,13 +24,21 @@ async function logIn() {
     const response = await isUsernameAndPasswordMatched(username.value,
     password.value);
     if (!response.error) {
-        const token = generateToken(response.data);
-        await saveToken(token);
-        localStorage.setItem("session", JSON.stringify(token));
-        hideLogIn();
-        if (response.data.isAdmin) window.location.href = './admin.html';
-        window.location.href = './home.html';
+        handleSuccess(response);
     } else {
-        warning(response.error, "log-in");
+        handleError(response.error);
     }
+}
+
+async function handleSuccess(response) {
+    const token = generateToken(response.data);
+    await saveToken(token);
+    localStorage.setItem("session", JSON.stringify(token));
+    hideLogIn();
+    if (response.data.isAdmin) window.location.href = './admin.html';
+    window.location.href = './home.html';
+}
+
+function handleError(error) {
+    warning(error, "log-in");
 }

@@ -1,8 +1,8 @@
 :root {
-    --card_width: 250px;
+    --card_width: 200px;
     --row_increment: 10px;
     --card_small: 23;
-    --card_medium: 36;
+    --card_medium: 30;
     --card_large: 44;
     --card_small_bg: 25;
 }
@@ -19,6 +19,24 @@ html, body {
     height: fit-content;
     background: rgb(255, 255, 255);
     color: #353232;
+}
+
+.overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    right: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: opacity 1s;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .main {
