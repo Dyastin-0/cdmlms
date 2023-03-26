@@ -29,23 +29,10 @@
                         <option value="author"> Author </option>
                 </select>
                 </div>
-                <div class="drop-down-menu left fit" id="recent-searches">
-                    <Label> Recent searches </Label>
-                    <div class="wrapper space-between">
-                        <div class="search-item"> Book </div>
-                        <button class="fit fa fa-close"></button>
-                    </div>
-                    <div class="wrapper space-between">
-                        <div class="search-item"> Test search </div>
-                        <button class="fit fa fa-close"></button>
-                    </div>
-                    <div class="wrapper space-between">
-                        <div class="search-item"> Test </div>
-                        <button class="fit fa fa-close"></button>
-                    </div>
-                    <div class="wrapper space-between">
-                        <div class="search-item"> Test </div>
-                        <button class="fit fa fa-close"></button>
+                <div class="drop-down-menu left fit" id="recent-searches-modal">
+                    <Label class="head"> Recent searches </Label>
+                    <div class="recent-searches" id="recent-searches">
+
                     </div>
                 </div>
             </div>
@@ -81,11 +68,9 @@
 
     </div>
 
-    <div class="search-result" id="search-results">
+    <div class="search-modal" id="search-modal">
         <label> Result </label>
-
-            
-        </div>
+        <div class="search-result" id="search-results"></div>
     </div>
 
     <div class="overlay" id="overlay"></div>

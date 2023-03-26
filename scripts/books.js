@@ -55,7 +55,7 @@ export async function fetchAllBooks() {
         });
 
         cacheBooks(allBooks);
-        return books;``
+        return books;
     } catch (error) {
         console.log(error)
     }
@@ -65,7 +65,8 @@ export async function findBookBy(by, input) {
     try {
         const querySnapshot = await db
         .collection('books')
-        .where(by, '==', input)
+        .orderBy(by).startAt(input)
+        .endAt(input + "\uf8ff")
         .get();
         
         const search = {error: null, results: []};
@@ -75,11 +76,11 @@ export async function findBookBy(by, input) {
             search.results.push(book.data());
         });
 
-        if(search.results != null) {
+        if(search.results.length > 0) {
             return search;
         }
 
-        search.error = "Not found.";
+        search.error = "Not found, check if you are searching with the right field.";
         return search;
     } catch (error) {
         console.log(error)

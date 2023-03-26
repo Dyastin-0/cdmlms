@@ -1,6 +1,6 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllBooks, formatBook, findBookBy } from "./books.js";
-import { bindSearchEvent, generateSearchResultItem } from "./ui/home/search-ui.js";
+import { addRecentSearch, displayRecentSearches, bindSearchEvent, generateSearchResultItem, generateErrorResult } from "./ui/home/search-ui.js";
 
 let allBooks = await fetchAllBooks();
 let myBooks = {};
@@ -16,13 +16,15 @@ async function init() {
     await redirect();
     bindSearchEvent();
     renderData(fetchSession());
+    const userId = fetchSession().id;
+    displayRecentSearches(userId);
 }
 
 async function bindEvents() {
     await logout.addEventListener('click', async () => await logOut());
     await searchInput.addEventListener('keyup', async (e) => {
         if (e.key === "Enter") {
-            await search();
+            await search(searchBy.value, searchInput.value);
         }
     });
 }
@@ -80,14 +82,19 @@ async function logOut() {
     }
 }
 
-async function search() {
-    const search = await findBookBy(searchBy.value, searchInput.value);
-    
-    if (!search.error) {
+export async function search(by, input) {
+    const id = fetchSession().id;
+    addRecentSearch(id, searchInput.value);
+    displayRecentSearches(id);
+    const search = await findBookBy(by, input);
+    if (search.error === null) {
         search.results.forEach((book) => {
             const result = generateSearchResultItem(book);
             searchResult.appendChild(result);
-        })
+        });
+    } else {
+        const error = generateErrorResult(search.error);
+        searchResult.appendChild(error);
     }
 }
 

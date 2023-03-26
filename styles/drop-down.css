@@ -8,7 +8,7 @@
 
 .drop-down-menu {
     opacity: 0;
-    transform: translateY(-10px) scaleY(0);
+    transform: translateY(-10px);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -32,7 +32,6 @@
 }
 
 .drop-down-menu.left {
-    overflow: hidden;
     right: none;
     left: 0;
 }
@@ -43,7 +42,7 @@
 }
 
 .drop-down > .nav-button:focus + .drop-down-menu {
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     opacity: 1;
 }
 
@@ -68,6 +67,6 @@
     cursor: pointer;
 }
 
-.drop-down-menu label {
+.drop-down-menu .head {
     font-weight: 500;
 }
