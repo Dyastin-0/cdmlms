@@ -1,14 +1,14 @@
 .pin-container {
     width: 100%;
     height: fit-content;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, var(--card_width));
-    grid-auto-rows: var(--row_increment);
+    display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .pin-container .pin {
-    position: relative;
+    width: 220px;
+    min-width: 220px;
     display: flex;
     margin: 10px;
     flex-direction: column;
@@ -47,15 +47,15 @@
 }
 
 .pin-container .pin.small {
-    grid-row-start: span var(--card_small);
+    height: 220px;
 }
 
 .pin-container .pin.medium {
-    grid-row-start: span var(--card_medium);
+    height: 280px;
 }
 
 .pin-container .pin.large {
-    grid-row-start: span var(--card_large);
+    height: 300px;
 }
 
 .pin-container .pin:hover {

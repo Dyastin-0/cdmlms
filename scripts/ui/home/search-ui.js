@@ -12,7 +12,7 @@ const overlay = document.getElementById("overlay");
 export function bindSearchEvent() {
     searchInput.addEventListener('click', () => displayRecentSearch());
 
-    searchInput.addEventListener('focusout', () => hideSearch());
+    searchInput.addEventListener('focusout', () => hideRecentSearch());
 
     overlay.addEventListener('click', () => {
         hideSearchResult();
@@ -22,21 +22,22 @@ export function bindSearchEvent() {
     searchInput.addEventListener('keyup', (e) => {
         if (e.key === "Enter") {
             document.activeElement.blur();
+            searchInput.value = '';
             displaySearchResult();
             overlay.classList.add("active");
         }
     });
 }
 
-function hideSearch() {
-    recentSearchModal.style.transform = "translateY(-10px)";
+function hideRecentSearch() {
+    recentSearchModal.style.transform = "scaleY(0)";
     recentSearchModal.style.opacity = "0";
     searchResult.innerHTML = "";
 
 }
 
 function displayRecentSearch() {
-    recentSearchModal.style.transform = "translateY(0) ";
+    recentSearchModal.style.transform = "scaleY(1)";
     recentSearchModal.style.opacity = "1";
 }
 
@@ -82,26 +83,36 @@ export function generateErrorResult(error) {
     return container;
 }
 
-export function addRecentSearch(userId, searchQuery) {
-    if (!searchQuery) return;
-    const searchHistoryKey = "cached_searches_" + userId;
-    const recentSearchJson = localStorage.getItem(searchHistoryKey);
-  
-    const searchHistory = recentSearchJson ? JSON.parse(recentSearchJson) : [];
+export function addRecentSearch(id, input) {
+    if (!input) return;
 
-    searchHistory.unshift(searchQuery);
+    const key = "cached_searches_" + id;
+    const cachedSearches = localStorage.getItem(key);
+  
+    const index = cachedSearches ? cachedSearches.indexOf(input) : -1;
+
+    if (index !== -1) {
+        moveRecentSearchToTop(key, input, cachedSearches);
+        return;
+    }
+
+    const searchHistory = cachedSearches ? JSON.parse(cachedSearches) : [];
+
+    searchHistory.unshift(input);
   
     const cachedSearchHistory = searchHistory.slice(0, 5);
 
-    localStorage.setItem(searchHistoryKey, JSON.stringify(cachedSearchHistory));
+    localStorage.setItem(key, JSON.stringify(cachedSearchHistory));
 }
 
 export function displayRecentSearches(id) {
     recentSearch.innerHTML = "";
     const key = "cached_searches_" + id;
-    const recentSearchJson = JSON.parse(localStorage.getItem(key));
+    const cachedSearches = JSON.parse(localStorage.getItem(key));
 
-    recentSearchJson.forEach((searchItem) => {
+    if (!cachedSearches) return;
+
+    cachedSearches.forEach((searchItem) => {
         const container = document.createElement("div");
         const label = document.createElement("label");
         const button = document.createElement("button");
@@ -121,25 +132,35 @@ export function displayRecentSearches(id) {
         
         label.addEventListener('click', () => {
             search(searchBy.value, label.textContent);
+            moveRecentSearchToTop(key, label.textContent, cachedSearches);
+            displayRecentSearches(id);
             displaySearchResult();
             overlay.classList.add("active");
-        })
+        });
 
         button.addEventListener('click', () => {
-            deleteRecentSearch(label.textContent, key);
+            deleteRecentSearch(label.textContent, key, cachedSearches);
             displayRecentSearches(id);
-        })
+        });
 
         recentSearch.appendChild(container);
     });
 }
 
-function deleteRecentSearch(target, key) {
-    const cachedSearches = JSON.parse(localStorage.getItem(key));
-
+function deleteRecentSearch(target, key, cachedSearches) {
     const index = cachedSearches.indexOf(target);
 
     cachedSearches.splice(index, 1);
+
+    localStorage.setItem(key, JSON.stringify(cachedSearches));
+}
+
+function moveRecentSearchToTop(key, target, cachedSearches) {
+    const index = cachedSearches.indexOf(target);
+
+    cachedSearches.splice(index, 1);
+
+    cachedSearches.unshift(target);
 
     localStorage.setItem(key, JSON.stringify(cachedSearches));
 }

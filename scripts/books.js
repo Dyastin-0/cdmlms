@@ -15,13 +15,13 @@ export function formatBook(book) {
     pin.classList.add("small");
 
     title.classList.add("title");
-    title.textContent = "Title: " + book.title;
+    title.textContent = book.title;
     author.classList.add("author");
-    author.textContent = "Author: " + book.author;
+    author.textContent = book.author;
     genre.classList.add("genre");
-    genre.textContent = "Genre/s: " + book.genre;
+    genre.textContent = book.genre;
     isbn.classList.add("author");
-    isbn.textContent = "ISBN: " + book.isbn;
+    isbn.textContent = book.isbn;
 
     pin.appendChild(title);
     pin.appendChild(author);
