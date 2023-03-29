@@ -36,12 +36,14 @@ function fetchSession() {
 
 export async function redirect() {
     const token = fetchSession();
+    const location = window.location.pathname;
 
-    if (window.location.pathname == '/index.html') {
+    if (location === '/index.html' || location === '/') {
         return;
     }
 
     if (token === null) {
+        alert("TEST")
         window.location.href = './index.html';
         return;
     }
@@ -50,7 +52,7 @@ export async function redirect() {
         alert("Session expired.");
         window.location.href = "./index.html";
     }
-
+    
     if (window.location.pathname !== '/home.html') {
         window.location.href = './home.html';
     }
