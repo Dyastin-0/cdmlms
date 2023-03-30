@@ -20,28 +20,29 @@
             <button class="nav-button large"> <img class="logo" src="./images/cdm_logo.png">
                 CDMLMS
               </button>
-            <div class="drop-down">
-                <div class="wrapper">
-                    <input class="search" placeholder="Search" id="search-input">
-                    <select class="select" id="search-by">
-                        <option value="title"> Title </option>
-                        <option value="isbn"> ISBN </option>
-                        <option value="author"> Author </option>
-                        <option value="genre"> Genre </option>
+        </div>
+        <button class="nav-button search fa fa-search" id="search-button"></button>
+        <div class="drop-down" id="search-drop-down">
+            <div class="wrapper">
+                <input class="search" placeholder="Search" id="search-input">
+                <select class="select" id="search-by">
+                    <option value="title"> Title </option>
+                    <option value="isbn"> ISBN </option>
+                    <option value="author"> Author </option>
+                    <option value="genre"> Genre </option>
                 </select>
-                </div>
-                <div class="drop-down-menu left fit" id="recent-searches-modal">
-                    <Label class="head"> Recent searches </Label>
-                    <div class="recent-searches" id="recent-searches">
-                    </div>
+            </div>
+            <div class="drop-down-menu left fit" id="recent-searches-modal">
+                <Label class="head" id="recent-search-label"> Recent searches </Label>
+                <div class="recent-searches" id="recent-searches">
                 </div>
             </div>
         </div>
-        
+
         <div class="wrapper">
-            <button class="nav-button large"><i class="fa fa-bell"></i></button>
+            <button class="nav-button large" id="user-notification"><i class="fa fa-bell"></i></button>
             <div class="drop-down">
-                <button class="nav-button large"><i class="fa fa-chevron-down"></i></button>
+                <button class="nav-button large" id="user-drop-down"><i class="fa fa-chevron-down"></i></button>
                 <div class="drop-down-menu">
                     <button id="username"> Username </button>
                     <button id="profile"> Profile </button>

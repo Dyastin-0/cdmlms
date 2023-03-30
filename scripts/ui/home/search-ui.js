@@ -6,13 +6,18 @@ const recentSearchModal = document.getElementById("recent-searches-modal");
 const recentSearch = document.getElementById("recent-searches");
 const searchModal = document.getElementById("search-modal");
 const searchResult = document.getElementById("search-results");
+const searchButton = document.getElementById("search-button");
+const searchDropDown = document.getElementById("search-drop-down");
+const userDropDown = document.getElementById("user-drop-down");
+const userNotification = document.getElementById("user-notification");
 
 const overlay = document.getElementById("overlay");
 
 export function bindSearchEvent() {
-    searchInput.addEventListener('click', () => displayRecentSearch());
-
-    searchInput.addEventListener('focusout', () => hideRecentSearch());
+    searchInput.addEventListener('click', () => {
+        displayRecentSearch();
+        addGlobalClickSearch();
+    });
 
     overlay.addEventListener('click', () => {
         hideSearchResult();
@@ -27,6 +32,72 @@ export function bindSearchEvent() {
             overlay.classList.add("active");
         }
     });
+
+    searchButton.addEventListener('click', () => {
+        addGlobalClickButton();
+        displaySearchBar('130px');
+        hideNavElements();
+    });
+}
+
+function hideSearchBar() {
+    searchDropDown.style.display = 'none';
+    searchInput.style.width = '0';
+}
+
+function displaySearchBar(width) {
+    searchDropDown.style.display = 'flex';
+    searchInput.style.width = width;
+}
+
+function hideNavElements() {
+    searchButton.style.display = 'none';
+    userDropDown.style.display = 'none';
+    userNotification.style.display = 'none';
+}
+
+function displayNavElements() {
+    userDropDown.style.display = 'flex';
+    userNotification.style.display = 'flex';
+    searchButton.style.display = 'none';
+}
+
+function addGlobalClickSearch() {
+    document.addEventListener('click', handleGlobalClickSearch);
+}
+
+function addGlobalClickButton() {
+    document.addEventListener('click', handleGlobalClickButton);
+}
+
+function handleGlobalClickButton(e) {
+    const elements = [searchButton, searchInput, searchBy, overlay];
+    const isClicked = elements.some(element => element.contains(e.target));
+    const target = e.target.id;
+    let isChild = null;
+
+    if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
+
+    if (!isClicked && !isChild) {
+        hideSearchBar();
+        displayNavElements();
+        document.removeEventListener('click', handleGlobalClickButton);
+    }
+}
+
+function handleGlobalClickSearch(e) {
+    const isClicked = searchInput.contains(e.target);
+    const isSearhByClicked = searchBy.contains(e.target);
+    const target = e.target.id ? e.target.id : null;
+
+    let isChild = null;
+
+    if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
+
+    if (!isClicked && !isChild && !isSearhByClicked) {
+        hideRecentSearch();
+        document.removeEventListener('click', handleGlobalClickSearch);
+    }
 }
 
 function hideRecentSearch() {
@@ -87,7 +158,7 @@ export function addRecentSearch(id, input) {
     if (!input) return;
 
     const key = "cached_searches_" + id;
-    const cachedSearches = localStorage.getItem(key);
+    const cachedSearches = JSON.parse(localStorage.getItem(key));
   
     const index = cachedSearches ? cachedSearches.indexOf(input) : -1;
 
@@ -119,13 +190,16 @@ export function displayRecentSearches(id) {
 
         container.classList.add("wrapper");
         container.classList.add("space-between");
-
+        container.id = 'recent-search-container';
+    
         label.classList.add("recent-search");
         label.textContent = searchItem;
+        label.id = 'recent-search-label';
 
         button.classList.add("fit");
         button.classList.add("fa");
         button.classList.add("fa-close");
+        button.id = 'delete-recent-button';
 
         container.appendChild(label);
         container.appendChild(button);
@@ -157,6 +231,8 @@ function deleteRecentSearch(target, key, cachedSearches) {
 
 function moveRecentSearchToTop(key, target, cachedSearches) {
     const index = cachedSearches.indexOf(target);
+
+    if (index === 0) return;
 
     cachedSearches.splice(index, 1);
 

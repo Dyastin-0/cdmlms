@@ -23,14 +23,6 @@
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-.select {
-    font-size: 15px;
-    border-radius: 5px;
-    padding: 5px;
-    outline: none;
-    border-width: 0;
-}
-
 .drop-down-menu.left {
     right: none;
     left: 0;
@@ -54,8 +46,9 @@
     font-size: 18px;
     font-weight: 500;
     padding: 5px;
-    margin-top: 3px;
+    margin: 3px;
     border-radius: 5px;
+    background-color: transparent;
 }
 
 .drop-down-menu button.fit {

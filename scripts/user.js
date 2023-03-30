@@ -37,13 +37,12 @@ function fetchSession() {
 export async function redirect() {
     const token = fetchSession();
     const location = window.location.pathname;
-
-    if (location === '/index.html' || location === '/') {
+    
+    if (location === '/index.html') {
         return;
     }
 
     if (token === null) {
-        alert("TEST")
         window.location.href = './index.html';
         return;
     }
