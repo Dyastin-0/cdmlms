@@ -35,7 +35,7 @@ export function bindSearchEvent() {
 
     searchButton.addEventListener('click', () => {
         addGlobalClickButton();
-        displaySearchBar('130px');
+        displaySearchBar('100px');
         hideNavElements();
     });
 }
@@ -59,7 +59,7 @@ function hideNavElements() {
 function displayNavElements() {
     userDropDown.style.display = 'flex';
     userNotification.style.display = 'flex';
-    searchButton.style.display = 'none';
+    searchButton.style.display = 'flex';
 }
 
 function addGlobalClickSearch() {
