@@ -197,9 +197,10 @@ export function addRecentSearch(id, input) {
 export function displayRecentSearches(id) {
     recentSearch.innerHTML = "";
     recentSearchMobile.innerHTML = "";
+    
     const key = "cached_searches_" + id;
     const fetched = localStorage.getItem(key);
-    const cachedSearches = fetched ? JSON.parse(fetched) : fetched ;
+    const cachedSearches = fetched ? JSON.parse(fetched) : fetched;
 
     if (!cachedSearches) return;
     generateRecentSearchItem(key, id, cachedSearches, recentSearch, searchBy);
