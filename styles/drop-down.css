@@ -38,7 +38,7 @@
     opacity: 1;
 }
 
-.drop-down-menu button {
+.button {
     height: fit-content;
     width: 100%;
     display: flex;
@@ -51,7 +51,7 @@
     background-color: transparent;
 }
 
-.drop-down-menu button.fit {
+.button.fit {
     width: fit-content;
 }
 

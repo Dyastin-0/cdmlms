@@ -11,20 +11,30 @@ const searchInput = document.getElementById("search-input");
 const searchBy = document.getElementById("search-by");
 const searchResult = document.getElementById("search-results");
 
+const searchInputMobile = document.getElementById("search-input-mobile");
+const searchByMobile = document.getElementById("search-by-mobile");
+const searchResultMobile = document.getElementById("recent-searches-mobile");
+
 async function init() {
     bindEvents();
     await redirect();
     bindSearchEvent();
     renderData(fetchSession());
-    const userId = fetchSession().id;
-    displayRecentSearches(userId);
+    const id = fetchSession().id;
+    displayRecentSearches(id);
 }
 
 async function bindEvents() {
-    await logout.addEventListener('click', async () => await logOut());
-    await searchInput.addEventListener('keyup', async (e) => {
+    logout.addEventListener('click', async () => await logOut());
+    searchInput.addEventListener('keyup', async (e) => {
+        if (e.key === "Enter" && searchInput.value != '') {
+            await search(searchBy.value, searchInput.value, searchResult);
+        }
+    });
+
+    searchInputMobile.addEventListener('click', async (e) => {
         if (e.key === "Enter") {
-            await search(searchBy.value, searchInput.value);
+            await search(searchByMobile.value, searchInputMobile.value, searchResultMobile);
         }
     });
 }
@@ -83,19 +93,20 @@ async function logOut() {
     }
 }
 
-export async function search(by, input) {
+export async function search(by, input, container) {
     const id = fetchSession().id;
     addRecentSearch(id, searchInput.value);
     displayRecentSearches(id);
+
     const search = await findBookBy(by, input);
     if (search.error === null) {
         search.results.forEach((book) => {
             const result = generateSearchResultItem(book);
-            searchResult.appendChild(result);
+            container.appendChild(result);
         });
     } else {
         const error = generateErrorResult(search.error);
-        searchResult.appendChild(error);
+        container.appendChild(error);
     }
 }
 

@@ -7,16 +7,30 @@ const recentSearch = document.getElementById("recent-searches");
 const searchModal = document.getElementById("search-modal");
 const searchResult = document.getElementById("search-results");
 const searchButton = document.getElementById("search-button");
-const searchDropDown = document.getElementById("search-drop-down");
-const userDropDown = document.getElementById("user-drop-down");
-const userNotification = document.getElementById("user-notification");
-
 const overlay = document.getElementById("overlay");
+//mobile
+const backButton = document.getElementById("back-button-search-modal-mobile");
+const recentSearchModalMobile = document.getElementById("recent-search-modal-mobile");
+const searchByMobile = document.getElementById("search-by-mobile");
+const searchInputMobile = document.getElementById("search-input-mobile");
+const recentSearchesMobile = document.getElementById("recent-searches-modal-mobile");
+const searchResultMobile = document.getElementById("search-results-mobile");
 
 export function bindSearchEvent() {
     searchInput.addEventListener('click', () => {
         displayRecentSearch();
-        addGlobalClickSearch();
+        addGlobalClick();
+    });
+
+    searchInputMobile.addEventListener('click', () => {
+        displayRecentSearchMobile();
+        addGlobalClickMobile();
+    });
+
+    searchResultMobile.addEventListener('keyup', () => {
+        if (e.key === "Enter" && searchInput.value != '') {
+            displaySearchResultMobile();
+        }
     });
 
     overlay.addEventListener('click', () => {
@@ -25,7 +39,7 @@ export function bindSearchEvent() {
     })
 
     searchInput.addEventListener('keyup', (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" && searchInput.value != '') {
             document.activeElement.blur();
             searchInput.value = '';
             displaySearchResult();
@@ -34,60 +48,39 @@ export function bindSearchEvent() {
     });
 
     searchButton.addEventListener('click', () => {
-        addGlobalClickButton();
-        displaySearchBar('100px');
-        hideNavElements();
+        displayRecentSearchModalMobile();
+    });
+
+    backButton.addEventListener('click', () => {
+        hideRecentSearchModalMobile();
     });
 }
 
-function hideSearchBar() {
-    searchDropDown.style.display = 'none';
-    searchInput.style.width = '0';
+function hideRecentSearchModalMobile() {
+    recentSearchModalMobile.style.opacity = '0';
+    recentSearchModalMobile.style.pointerEvents = 'none';
 }
 
-function displaySearchBar(width) {
-    searchDropDown.style.display = 'flex';
-    searchInput.style.width = width;
+function displayRecentSearchModalMobile() {
+    recentSearchModalMobile.style.opacity = '1';
+    recentSearchModalMobile.style.pointerEvents = 'all';
 }
 
-function hideNavElements() {
-    searchButton.style.display = 'none';
-    userDropDown.style.display = 'none';
-    userNotification.style.display = 'none';
+function addGlobalClick() {
+    document.addEventListener('click', (e) => {
+        handleGlobalClick(e, searchInput, searchBy)
+    });
 }
 
-function displayNavElements() {
-    userDropDown.style.display = 'flex';
-    userNotification.style.display = 'flex';
-    searchButton.style.display = 'flex';
+function addGlobalClickMobile() {
+    document.addEventListener('click', (e) => {
+        handleGlobalClickMobile(e, searchInputMobile, searchByMobile);
+    });
 }
 
-function addGlobalClickSearch() {
-    document.addEventListener('click', handleGlobalClickSearch);
-}
-
-function addGlobalClickButton() {
-    document.addEventListener('click', handleGlobalClickButton);
-}
-
-function handleGlobalClickButton(e) {
-    const elements = [searchButton, searchInput, searchBy, overlay];
-    const isClicked = elements.some(element => element.contains(e.target));
-    const target = e.target.id;
-    let isChild = null;
-
-    if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
-
-    if (!isClicked && !isChild) {
-        hideSearchBar();
-        displayNavElements();
-        document.removeEventListener('click', handleGlobalClickButton);
-    }
-}
-
-function handleGlobalClickSearch(e) {
-    const isClicked = searchInput.contains(e.target);
-    const isSearhByClicked = searchBy.contains(e.target);
+function handleGlobalClickMobile(e, input, by) {
+    const isClicked = input.contains(e.target);
+    const isSearhByClicked = by.contains(e.target);
     const target = e.target.id ? e.target.id : null;
 
     let isChild = null;
@@ -95,15 +88,35 @@ function handleGlobalClickSearch(e) {
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild && !isSearhByClicked) {
-        hideRecentSearch();
-        document.removeEventListener('click', handleGlobalClickSearch);
+        hideRecentSearch(recentSearchesMobile, searchInputMobile);
+        document.removeEventListener('click', handleGlobalClickMobile);
     }
 }
 
-function hideRecentSearch() {
-    recentSearchModal.style.transform = "scaleY(0)";
-    recentSearchModal.style.opacity = "0";
-    searchResult.innerHTML = "";
+function handleGlobalClick(e, input, by) {
+    const isClicked = input.contains(e.target);
+    const isSearhByClicked = by.contains(e.target);
+    const target = e.target.id ? e.target.id : null;
+
+    let isChild = null;
+
+    if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
+
+    if (!isClicked && !isChild && !isSearhByClicked) {
+        hideRecentSearch(recentSearchModal, searchResult);
+        document.removeEventListener('click', handleGlobalClick);
+    }
+}
+
+function displayRecentSearchMobile() {
+    recentSearchesMobile.style.transform = "scaleY(1)";
+    recentSearchesMobile.style.opacity = "1";
+}
+
+function hideRecentSearch(container, input) {
+    container.style.transform = "scaleY(0)";
+    container.style.opacity = "0";
+    input.innerHTML = "";
 
 }
 
@@ -119,7 +132,7 @@ function displaySearchResult() {
 
 function hideSearchResult() {
     searchModal.style.transform = "translate(-50%, -50%) scale(0)";
-    searchModal.style.opacity = "0";
+    searchModal.style.opacity = "0";    
 }
 
 export function generateSearchResultItem(data) {
@@ -158,7 +171,7 @@ export function addRecentSearch(id, input) {
     if (!input) return;
 
     const key = "cached_searches_" + id;
-    const cachedSearches = JSON.parse(localStorage.getItem(key));
+    const cachedSearches = localStorage.getItem(key).empty ? JSON.parse(localStorage.getItem(key)) : localStorage.getItem(key);
   
     const index = cachedSearches ? cachedSearches.indexOf(input) : -1;
 
@@ -166,6 +179,8 @@ export function addRecentSearch(id, input) {
         moveRecentSearchToTop(key, input, cachedSearches);
         return;
     }
+
+    console.log(cachedSearches)
 
     const searchHistory = cachedSearches ? JSON.parse(cachedSearches) : [];
 
@@ -196,6 +211,7 @@ export function displayRecentSearches(id) {
         label.textContent = searchItem;
         label.id = 'recent-search-label';
 
+        button.classList.add("button");
         button.classList.add("fit");
         button.classList.add("fa");
         button.classList.add("fa-close");
@@ -205,19 +221,22 @@ export function displayRecentSearches(id) {
         container.appendChild(button);
         
         label.addEventListener('click', () => {
-            search(searchBy.value, label.textContent);
+            search(searchBy.value, label.textContent, searchResult);
             moveRecentSearchToTop(key, label.textContent, cachedSearches);
             displayRecentSearches(id);
             displaySearchResult();
             overlay.classList.add("active");
         });
-
+    
         button.addEventListener('click', () => {
             deleteRecentSearch(label.textContent, key, cachedSearches);
             displayRecentSearches(id);
         });
 
+        const clone = container.cloneNode(true);
         recentSearch.appendChild(container);
+        recentSearchesMobile.appendChild(clone);
+        
     });
 }
 
@@ -231,8 +250,10 @@ function deleteRecentSearch(target, key, cachedSearches) {
 
 function moveRecentSearchToTop(key, target, cachedSearches) {
     const index = cachedSearches.indexOf(target);
-
+    console.log(index, target)
     if (index === 0) return;
+
+    console.log(cachedSearches)
 
     cachedSearches.splice(index, 1);
 

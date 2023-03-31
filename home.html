@@ -17,7 +17,7 @@
     
     <nav class="nav">
         <div class="wrapper">
-            <button class="nav-button large"> <img class="logo" src="./images/cdm_logo.png">
+            <button class="nav-button medium"> <img class="logo" src="./images/cdm_logo.png">
                 CDMLMS
               </button>
         </div>
@@ -44,10 +44,10 @@
             <div class="drop-down">
                 <button class="nav-button large" id="user-drop-down"><i class="fa fa-chevron-down"></i></button>
                 <div class="drop-down-menu">
-                    <button id="username"> Username </button>
-                    <button id="profile"> Profile </button>
-                    <button id="settings"> Settings </button>
-                    <button id="log-out"> Logout </button>
+                    <button class="button" id="username"> Username </button>
+                    <button class="button" id="profile"> Profile </button>
+                    <button class="button" id="settings"> Settings </button>
+                    <button class="button" id="log-out"> Logout </button>
                 </div>
             </div>
         </div>
@@ -75,6 +75,30 @@
     </div>
 
     <div class="overlay" id="overlay"></div>
+
+    <div class="search-modal-mobile" id="recent-search-modal-mobile">
+        <div class="drop-down">
+            <div class="wrapper padding">
+                <button class="fa fa-chevron-left nav-button" id="back-button-search-modal-mobile"></button>
+                <input class="search" placeholder="Search" id="search-input-mobile">
+                <select class="select" id="search-by-mobile">
+                    <option value="title"> Title </option>
+                    <option value="isbn"> ISBN </option>
+                    <option value="author"> Author </option>
+                    <option value="genre"> Genre </option>
+                </select>
+                <div class="drop-down-menu left fit" id="recent-searches-modal-mobile">
+                    <Label class="head" id="recent-search-label"> Recent searches </Label>
+                    <div class="recent-searches" id="recent-searches-mobile">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-result-mobile" id="search-results-mobile">
+
+        </div>
+    </div>
+
 </body>
 
 <!-- scripts -->
