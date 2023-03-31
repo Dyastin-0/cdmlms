@@ -11,10 +11,8 @@ const featured = document.getElementById("featured");
 const searchInput = document.getElementById("search-input");
 const searchBy = document.getElementById("search-by");
 const searchResult = document.getElementById("search-results");
-
 const searchInputMobile = document.getElementById("search-input-mobile");
 const searchByMobile = document.getElementById("search-by-mobile");
-const searchResultMobile = document.getElementById("recent-searches-mobile");
 
 async function init() {
     bindEvents();
