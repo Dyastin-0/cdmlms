@@ -14,7 +14,7 @@ const recentSearchModalMobile = document.getElementById("recent-search-modal-mob
 const searchByMobile = document.getElementById("search-by-mobile");
 const searchInputMobile = document.getElementById("search-input-mobile");
 const recentSearchesMobile = document.getElementById("recent-searches-modal-mobile");
-const searchResultMobile = document.getElementById("search-results-mobile");
+const recentSearchMobile = document.getElementById("recent-search-mobile");
 
 export function bindSearchEvent() {
     searchInput.addEventListener('click', () => {
@@ -22,14 +22,25 @@ export function bindSearchEvent() {
         addGlobalClick();
     });
 
-    searchInputMobile.addEventListener('click', () => {
-        displayRecentSearchMobile();
-        addGlobalClickMobile();
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === "Enter" && searchInput.value != '') {
+            searchInput.value = '';
+            displaySearchResult();
+            overlay.classList.add("active");
+        }
     });
 
-    searchResultMobile.addEventListener('keyup', () => {
-        if (e.key === "Enter" && searchInput.value != '') {
-            displaySearchResultMobile();
+    displayRecentSearchesMobile();
+    // searchInputMobile.addEventListener('click', () => {
+    //     displayRecentSearchMobile();
+    //     addGlobalClickMobile();
+    // });
+
+    searchInputMobile.addEventListener('keyup', (e) => {
+        if (e.key === "Enter" && searchInputMobile.value != '') {
+            displaySearchResult();
+            searchInputMobile.value = '';
+            overlay.classList.add("active");
         }
     });
 
@@ -38,21 +49,14 @@ export function bindSearchEvent() {
         overlay.classList.remove("active");
     })
 
-    searchInput.addEventListener('keyup', (e) => {
-        if (e.key === "Enter" && searchInput.value != '') {
-            document.activeElement.blur();
-            searchInput.value = '';
-            displaySearchResult();
-            overlay.classList.add("active");
-        }
-    });
-
     searchButton.addEventListener('click', () => {
         displayRecentSearchModalMobile();
     });
 
     backButton.addEventListener('click', () => {
         hideRecentSearchModalMobile();
+        hideSearchResult();
+        overlay.classList.remove("active");
     });
 }
 
@@ -88,7 +92,7 @@ function handleGlobalClickMobile(e, input, by) {
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild && !isSearhByClicked) {
-        hideRecentSearch(recentSearchesMobile, searchInputMobile);
+        hideRecentSearch(recentSearchesMobile, searchResult);
         document.removeEventListener('click', handleGlobalClickMobile);
     }
 }
@@ -108,7 +112,7 @@ function handleGlobalClick(e, input, by) {
     }
 }
 
-function displayRecentSearchMobile() {
+export function displayRecentSearchesMobile() {
     recentSearchesMobile.style.transform = "scaleY(1)";
     recentSearchesMobile.style.opacity = "1";
 }
@@ -171,8 +175,9 @@ export function addRecentSearch(id, input) {
     if (!input) return;
 
     const key = "cached_searches_" + id;
-    const cachedSearches = localStorage.getItem(key).empty ? JSON.parse(localStorage.getItem(key)) : localStorage.getItem(key);
-  
+    const fetched = localStorage.getItem(key);
+    const cachedSearches = fetched ? JSON.parse(fetched) : fetched;
+    
     const index = cachedSearches ? cachedSearches.indexOf(input) : -1;
 
     if (index !== -1) {
@@ -180,9 +185,7 @@ export function addRecentSearch(id, input) {
         return;
     }
 
-    console.log(cachedSearches)
-
-    const searchHistory = cachedSearches ? JSON.parse(cachedSearches) : [];
+    const searchHistory = cachedSearches ? cachedSearches : [];
 
     searchHistory.unshift(input);
   
@@ -193,17 +196,24 @@ export function addRecentSearch(id, input) {
 
 export function displayRecentSearches(id) {
     recentSearch.innerHTML = "";
+    recentSearchMobile.innerHTML = "";
     const key = "cached_searches_" + id;
-    const cachedSearches = JSON.parse(localStorage.getItem(key));
+    const fetched = localStorage.getItem(key);
+    const cachedSearches = fetched ? JSON.parse(fetched) : fetched ;
 
     if (!cachedSearches) return;
+    generateRecentSearchItem(key, id, cachedSearches, recentSearch, searchBy);
+    generateRecentSearchItem(key, id, cachedSearches, recentSearchMobile, searchByMobile);
+}
 
+function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
     cachedSearches.forEach((searchItem) => {
         const container = document.createElement("div");
         const label = document.createElement("label");
         const button = document.createElement("button");
 
         container.classList.add("wrapper");
+        container.classList.add("search");
         container.classList.add("space-between");
         container.id = 'recent-search-container';
     
@@ -221,7 +231,7 @@ export function displayRecentSearches(id) {
         container.appendChild(button);
         
         label.addEventListener('click', () => {
-            search(searchBy.value, label.textContent, searchResult);
+            search(by.value, label.textContent, searchResult);
             moveRecentSearchToTop(key, label.textContent, cachedSearches);
             displayRecentSearches(id);
             displaySearchResult();
@@ -233,10 +243,7 @@ export function displayRecentSearches(id) {
             displayRecentSearches(id);
         });
 
-        const clone = container.cloneNode(true);
-        recentSearch.appendChild(container);
-        recentSearchesMobile.appendChild(clone);
-        
+        wrapper.appendChild(container);
     });
 }
 
@@ -250,10 +257,8 @@ function deleteRecentSearch(target, key, cachedSearches) {
 
 function moveRecentSearchToTop(key, target, cachedSearches) {
     const index = cachedSearches.indexOf(target);
-    console.log(index, target)
-    if (index === 0) return;
 
-    console.log(cachedSearches)
+    if (index === 0) return;
 
     cachedSearches.splice(index, 1);
 

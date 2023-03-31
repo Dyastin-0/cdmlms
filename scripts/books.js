@@ -75,8 +75,6 @@ export async function findBookBy(by, input) {
         queryResult.forEach((book) => {
             search.results.push(book.data());
         });
-        console.log([by, input])
-        console.log(search.results)
 
         if(search.results.length > 0) {
             return search;

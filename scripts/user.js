@@ -1,6 +1,7 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllBooks, formatBook, findBookBy } from "./books.js";
-import { addRecentSearch, displayRecentSearches, bindSearchEvent, generateSearchResultItem, generateErrorResult } from "./ui/home/search-ui.js";
+import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
+    generateSearchResultItem, generateErrorResult } from "./ui/home/search-ui.js";
 
 let allBooks = await fetchAllBooks();
 let myBooks = {};
@@ -26,15 +27,16 @@ async function init() {
 
 async function bindEvents() {
     logout.addEventListener('click', async () => await logOut());
+
     searchInput.addEventListener('keyup', async (e) => {
-        if (e.key === "Enter" && searchInput.value != '') {
-            await search(searchBy.value, searchInput.value, searchResult);
+        if (e.key === "Enter" && searchInput.value !== '') {
+            await search(searchBy.value, searchInput.value);
         }
     });
 
-    searchInputMobile.addEventListener('click', async (e) => {
-        if (e.key === "Enter") {
-            await search(searchByMobile.value, searchInputMobile.value, searchResultMobile);
+    searchInputMobile.addEventListener('keyup', async (e) => {
+        if (e.key === "Enter" && searchInputMobile.value !== '') {
+            await search(searchByMobile.value, searchInputMobile.value);
         }
     });
 }
@@ -93,20 +95,19 @@ async function logOut() {
     }
 }
 
-export async function search(by, input, container) {
+export async function search(by, input) {
     const id = fetchSession().id;
-    addRecentSearch(id, searchInput.value);
+    addRecentSearch(id, input);
     displayRecentSearches(id);
-
     const search = await findBookBy(by, input);
     if (search.error === null) {
         search.results.forEach((book) => {
             const result = generateSearchResultItem(book);
-            container.appendChild(result);
+            searchResult.appendChild(result);
         });
     } else {
         const error = generateErrorResult(search.error);
-        container.appendChild(error);
+        searchResult.appendChild(error);
     }
 }
 
