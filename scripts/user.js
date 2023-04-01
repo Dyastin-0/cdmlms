@@ -1,7 +1,7 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllBooks, formatBook, findBookBy } from "./books.js";
 import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
-    generateSearchResultItem, generateErrorResult } from "./ui/home/search-ui.js";
+    generateSearchResultItem, generateErrorResult, displayRecentSearchMobile } from "./ui/home/search-ui.js";
 
 let allBooks = await fetchAllBooks();
 let myBooks = {};
@@ -21,6 +21,7 @@ async function init() {
     renderData(fetchSession());
     const id = fetchSession().id;
     displayRecentSearches(id);
+    displayRecentSearchMobile();
 }
 
 async function bindEvents() {
@@ -48,18 +49,18 @@ export async function redirect() {
     const token = fetchSession();
     const location = window.location.pathname;
     
-    if (location === '/index.html') {
+    if (location === '/') {
         return;
     }
 
     if (token === null) {
-        window.location.href = './index.html';
+        window.location.href = './';
         return;
     }
 
     if (! await isTokenValid(token)) {
         alert("Session expired.");
-        window.location.href = "./index.html";
+        window.location.href = "./";
     }
     
     if (window.location.pathname !== '/home.html') {
@@ -89,7 +90,7 @@ async function logOut() {
         await deleteToken(token);
         await redirect();
     } catch (error) {
-        console.log(error);
+        console.error(error)
     }
 }
 

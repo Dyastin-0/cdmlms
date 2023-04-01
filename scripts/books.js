@@ -57,7 +57,7 @@ export async function fetchAllBooks() {
         cacheBooks(allBooks);
         return books;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -83,7 +83,7 @@ export async function findBookBy(by, input) {
         search.error = "Not found, check if you are searching with the right field.";
         return search;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 

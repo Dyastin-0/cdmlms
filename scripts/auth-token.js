@@ -13,7 +13,7 @@ export async function saveToken(token) {
     .doc(crypto.randomUUID())
     .set(token)
     .catch(err => {
-        console.log(err)
+        console.error(err)
     })
 }
 
@@ -28,7 +28,7 @@ export async function deleteToken(token) {
         const deletePromises = querySnapshot.docs.map(doc => doc.ref.delete());
         await Promise.all(deletePromises);
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -46,6 +46,6 @@ export async function isTokenValid(token) {
         localStorage.removeItem("session");
         return false;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }

@@ -59,7 +59,7 @@ export async function isUsernameAvailable(username) {
     result.result = true;
     return result;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 

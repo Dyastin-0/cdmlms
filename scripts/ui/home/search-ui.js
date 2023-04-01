@@ -1,5 +1,6 @@
 import { search } from "../../user.js";
 
+//desktop view ui elements
 const searchInput = document.getElementById("search-input");
 const searchBy = document.getElementById("search-by");
 const recentSearchModal = document.getElementById("recent-searches-modal");
@@ -8,7 +9,8 @@ const searchModal = document.getElementById("search-modal");
 const searchResult = document.getElementById("search-results");
 const searchButton = document.getElementById("search-button");
 const overlay = document.getElementById("overlay");
-//mobile
+
+//mobile view ui elements
 const backButton = document.getElementById("back-button-search-modal-mobile");
 const recentSearchModalMobile = document.getElementById("recent-search-modal-mobile");
 const searchByMobile = document.getElementById("search-by-mobile");
@@ -17,6 +19,7 @@ const recentSearchesMobile = document.getElementById("recent-searches-modal-mobi
 const recentSearchMobile = document.getElementById("recent-search-mobile");
 
 export function bindSearchEvent() {
+    //desktop view
     searchInput.addEventListener('click', () => {
         displayRecentSearch();
         addGlobalClick();
@@ -30,12 +33,7 @@ export function bindSearchEvent() {
         }
     });
 
-    displayRecentSearchesMobile();
-    // searchInputMobile.addEventListener('click', () => {
-    //     displayRecentSearchMobile();
-    //     addGlobalClickMobile();
-    // });
-
+    //mobile view
     searchInputMobile.addEventListener('keyup', (e) => {
         if (e.key === "Enter" && searchInputMobile.value != '') {
             displaySearchResult();
@@ -43,11 +41,6 @@ export function bindSearchEvent() {
             overlay.classList.add("active");
         }
     });
-
-    overlay.addEventListener('click', () => {
-        hideSearchResult();
-        overlay.classList.remove("active");
-    })
 
     searchButton.addEventListener('click', () => {
         displayRecentSearchModalMobile();
@@ -58,43 +51,19 @@ export function bindSearchEvent() {
         hideSearchResult();
         overlay.classList.remove("active");
     });
+
+    //global
+    overlay.addEventListener('click', () => {
+        hideSearchResult();
+        overlay.classList.remove("active");
+    })
 }
 
-function hideRecentSearchModalMobile() {
-    recentSearchModalMobile.style.opacity = '0';
-    recentSearchModalMobile.style.pointerEvents = 'none';
-}
-
-function displayRecentSearchModalMobile() {
-    recentSearchModalMobile.style.opacity = '1';
-    recentSearchModalMobile.style.pointerEvents = 'all';
-}
-
+//global click for the searchInput on desktop view, specifically for hiding its modal
 function addGlobalClick() {
     document.addEventListener('click', (e) => {
         handleGlobalClick(e, searchInput, searchBy)
     });
-}
-
-function addGlobalClickMobile() {
-    document.addEventListener('click', (e) => {
-        handleGlobalClickMobile(e, searchInputMobile, searchByMobile);
-    });
-}
-
-function handleGlobalClickMobile(e, input, by) {
-    const isClicked = input.contains(e.target);
-    const isSearhByClicked = by.contains(e.target);
-    const target = e.target.id ? e.target.id : null;
-
-    let isChild = null;
-
-    if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
-
-    if (!isClicked && !isChild && !isSearhByClicked) {
-        hideRecentSearch(recentSearchesMobile, searchResult);
-        document.removeEventListener('click', handleGlobalClickMobile);
-    }
 }
 
 function handleGlobalClick(e, input, by) {
@@ -107,20 +76,30 @@ function handleGlobalClick(e, input, by) {
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild && !isSearhByClicked) {
-        hideRecentSearch(recentSearchModal, searchResult);
         document.removeEventListener('click', handleGlobalClick);
     }
 }
 
-export function displayRecentSearchesMobile() {
+//hide && display of modals
+function hideRecentSearchModalMobile() {
+    recentSearchModalMobile.style.opacity = '0';
+    recentSearchModalMobile.style.pointerEvents = 'none';
+}
+
+function displayRecentSearchModalMobile() {
+    recentSearchModalMobile.style.opacity = '1';
+    recentSearchModalMobile.style.pointerEvents = 'all';
+}
+
+export function displayRecentSearchMobile() {
     recentSearchesMobile.style.transform = "scaleY(1)";
     recentSearchesMobile.style.opacity = "1";
 }
 
-function hideRecentSearch(container, input) {
-    container.style.transform = "scaleY(0)";
-    container.style.opacity = "0";
-    input.innerHTML = "";
+function hideRecentSearch() {
+    recentSearchModal.style.transform = "scaleY(0)";
+    recentSearchModal.style.opacity = "0";
+    searchResult.innerHTML = "";
 
 }
 
@@ -136,9 +115,11 @@ function displaySearchResult() {
 
 function hideSearchResult() {
     searchModal.style.transform = "translate(-50%, -50%) scale(0)";
-    searchModal.style.opacity = "0";    
+    searchModal.style.opacity = "0";   
+    hideRecentSearch(); 
 }
 
+//Search result item
 export function generateSearchResultItem(data) {
     const container = document.createElement("div");
     const titleLabel = document.createElement("label");
@@ -171,6 +152,7 @@ export function generateErrorResult(error) {
     return container;
 }
 
+// Recent search items
 export function addRecentSearch(id, input) {
     if (!input) return;
 
@@ -193,7 +175,6 @@ export function addRecentSearch(id, input) {
 
     localStorage.setItem(key, JSON.stringify(cachedSearchHistory));
 }
-
 export function displayRecentSearches(id) {
     recentSearch.innerHTML = "";
     recentSearchMobile.innerHTML = "";
@@ -214,7 +195,6 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         const button = document.createElement("button");
 
         container.classList.add("wrapper");
-        container.classList.add("search");
         container.classList.add("space-between");
         container.id = 'recent-search-container';
     
@@ -222,8 +202,7 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         label.textContent = searchItem;
         label.id = 'recent-search-label';
 
-        button.classList.add("button");
-        button.classList.add("fit");
+        button.classList.add("delete-button");
         button.classList.add("fa");
         button.classList.add("fa-close");
         button.id = 'delete-recent-button';
