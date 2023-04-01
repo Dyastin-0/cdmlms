@@ -1,35 +1,45 @@
+import { getQuery, searchQuery } from "./firestore-api.js";
+
 function bindPinEvent(pin) {
     pin.addEventListener('click', () => {
         console.log("Test");
     });
 }
 
-export function formatBook(book) {
-    const pin = document.createElement("div");
-    const title = document.createElement("label");
-    const author = document.createElement("label");
-    const genre = document.createElement("label");
-    const isbn = document.createElement("label");
+export function formatBooks(books) {
+    let formattedBoooks = [];
 
-    pin.classList.add("pin");
-    pin.classList.add("small");
+    books.forEach((book) => {
+        const pin = document.createElement("div");
+        const title = document.createElement("label");
+        const author = document.createElement("label");
+        const genre = document.createElement("label");
+        const isbn = document.createElement("label");
 
-    title.classList.add("title");
-    title.textContent = book.title;
-    author.classList.add("author");
-    author.textContent = book.author;
-    genre.classList.add("genre");
-    genre.textContent = book.genre;
-    isbn.classList.add("author");
-    isbn.textContent = book.isbn;
+        pin.classList.add("pin");
+        pin.classList.add("small");
 
-    pin.appendChild(title);
-    pin.appendChild(author);
-    pin.appendChild(genre);
-    pin.appendChild(isbn);
+        title.classList.add("title");
+        title.textContent = book.title;
 
-    bindPinEvent(pin);
-    return pin;
+        author.classList.add("author");
+        author.textContent = book.author;
+
+        genre.classList.add("genre");
+        genre.textContent = book.genre;
+        
+        isbn.classList.add("author");
+        isbn.textContent = book.isbn;
+
+        pin.appendChild(title);
+        pin.appendChild(author);
+        pin.appendChild(genre);
+        pin.appendChild(isbn);
+
+        formattedBoooks.push(pin);
+    });
+
+    return formattedBoooks;
 }
 
 export async function fetchAllBooks() {
@@ -41,10 +51,9 @@ export async function fetchAllBooks() {
     }
 
     localStorage.removeItem("books");
+
     try {
-        const querySnapshot = await db
-        .collection('books')
-        .get();
+        const querySnapshot = await getQuery('books');
 
         const books = querySnapshot.docs;
         let allBooks = [];
@@ -55,19 +64,15 @@ export async function fetchAllBooks() {
         });
 
         cacheBooks(allBooks);
-        return books;
+        return fetchCachedBooks();
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
 export async function findBookBy(by, input) {
     try {
-        const querySnapshot = await db
-        .collection('books')
-        .orderBy(by).startAt(input)
-        .endAt(input + "\uf8ff")
-        .get();
+        const querySnapshot = await searchQuery('books', by, input, input);
         
         const search = {error: null, results: []};
         const queryResult = querySnapshot.docs;

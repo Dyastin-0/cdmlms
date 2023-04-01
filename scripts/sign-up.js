@@ -1,6 +1,7 @@
 import { isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
 import { isUsernameAvailable, isIdAvailable } from './authentication.js';
 import { signupUiInit, hideSignUp } from './ui/index/sign-up-ui.js';
+import { saveQuery } from './firestore-api.js';
 
 const modal = document.getElementById("sign-up-modal");
 const submit = modal.querySelector("#sign-up-account-button");
@@ -32,7 +33,7 @@ function bindEvents() {
     birthDate.addEventListener('change', () => warning("", "sign-up"));
 }
 
-async function areInputValid() {
+async function areInputsValid() {
     if (!firstName.value || !lastName.value 
         || !middleName.value || !birthDate.value
         || !id.value) {
@@ -75,18 +76,13 @@ async function setUserInfo() {
 }
 
 async function create() {
-    db.collection('users')
-    .doc(crypto.randomUUID())
-    .set(userInfo)
-    .catch((error) => {
-        alert(error)
-    });
+    await saveQuery('users', crypto.randomUUID(), userInfo);
 }
 
-async function signUp(userInfo) {
-    if (await areInputValid()) {
+async function signUp() {
+    if (await areInputsValid()) {
         await setUserInfo();              
-        await create(userInfo);
+        await create();
         userInfo = {};
         alert("Created! Try and log in.");
         hideSignUp();

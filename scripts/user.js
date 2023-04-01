@@ -1,9 +1,10 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
-import { fetchAllBooks, formatBook, findBookBy } from "./books.js";
+import { fetchAllBooks, formatBooks, findBookBy } from "./books.js";
+import { getQueryOneField } from "./firestore-api.js";
 import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
     generateSearchResultItem, generateErrorResult, displayRecentSearchMobile } from "./ui/home/search-ui.js";
 
-let allBooks = await fetchAllBooks();
+let cachedFeatured = {};
 let myBooks = {};
 const username = document.getElementById("username");
 const logout = document.getElementById("log-out");
@@ -18,6 +19,7 @@ async function init() {
     bindEvents();
     await redirect();
     bindSearchEvent();
+    cachedFeatured = await fetchAllBooks();
     renderData(fetchSession());
     const id = fetchSession().id;
     displayRecentSearches(id);
@@ -48,8 +50,8 @@ function fetchSession() {
 export async function redirect() {
     const token = fetchSession();
     const location = window.location.pathname;
-    
-    if (location === '/') {
+
+    if (location === '/' && token === null) {
         return;
     }
 
@@ -57,8 +59,8 @@ export async function redirect() {
         window.location.href = './';
         return;
     }
-
-    if (! await isTokenValid(token)) {
+    
+    if (!await isTokenValid(token)) {
         alert("Session expired.");
         window.location.href = "./";
     }
@@ -69,17 +71,17 @@ export async function redirect() {
 }
 
 async function renderData(token) {
-    const querySnapshot = await db
-    .collection('users')
-    .where('id', '==', token.id)
-    .get();
+    const querySnapshot = await getQueryOneField('users',
+    'id',
+    token.id);
 
     const userData = querySnapshot.docs[0].data();
     username.textContent = userData.username;
 
-    allBooks.books.forEach(book => {
-        const pin = formatBook(book);
-        featured.appendChild(pin);
+    const formattedBooks = formatBooks(cachedFeatured.books);
+
+    formattedBooks.forEach((formattedBook) => {
+        featured.appendChild(formattedBook);
     });
 }
 
@@ -96,9 +98,12 @@ async function logOut() {
 
 export async function search(by, input) {
     const id = fetchSession().id;
+
     addRecentSearch(id, input);
     displayRecentSearches(id);
+
     const search = await findBookBy(by, input);
+
     if (search.error === null) {
         search.results.forEach((book) => {
             const result = generateSearchResultItem(book);

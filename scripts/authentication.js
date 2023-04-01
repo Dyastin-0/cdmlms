@@ -1,3 +1,4 @@
+import { getQueryOneField, getQueryTwoFields } from './firestore-api.js';
 import { toSha256 } from './validation.js';
 
 export async function isUsernameAndPasswordMatched(username, password) {
@@ -9,17 +10,13 @@ export async function isUsernameAndPasswordMatched(username, password) {
     }
 
     try {
-        const querySnapshot0 = await db
-        .collection('users')
-        .where('username' , '==', username)
-        .where('password', '==', await toSha256(password))
-        .get();
+        const querySnapshot0 = await getQueryTwoFields('users',
+         'username', 'password',
+          username, await toSha256(password));
 
-        const querySnapshot1 = await db
-        .collection('users')
-        .where('id' , '==', await toSha256(username))
-        .where('password', '==', await toSha256(password))
-        .get();
+        const querySnapshot1 = await getQueryTwoFields('users',
+         'username', 'password',
+          await toSha256(username), await toSha256(password));
 
         if (!querySnapshot0.empty) {
             const userData = querySnapshot0.docs[0].data();
@@ -45,10 +42,9 @@ export async function isUsernameAvailable(username) {
     let result = {result: null, username: null};
     
     try {
-        const querySnapshot = await db
-        .collection('users')
-        .where('username', '==', username)
-        .get();
+        const querySnapshot = await getQueryOneField('users',
+         'username',
+          username);
 
         if (!querySnapshot.empty) {
             result.result = false;
@@ -66,10 +62,9 @@ export async function isUsernameAvailable(username) {
 export async function isIdAvailable(id) {
     let result = {result: null, id: null};
 
-    const querySnapshot = await db
-    .collection('users')
-    .where('id', '==', await toSha256(id))
-    .get();
+    const querySnapshot = await getQueryOneField('users',
+    'id',
+     await toSha256(id));
 
     if (!querySnapshot.empty) {
         result.result = false;

@@ -29,11 +29,8 @@
   <div class="main">
 
     <div class="content center">
-
       <label class="hide"> Colegio de Montalban </label>
-
       <div class="pin-container">
-
         <div class="pin medium hide">
           <label> The new library management system of Colegio de Montalban </label>
         </div>
@@ -46,17 +43,12 @@
         <div class="pin medium hide">
           <label> Sign up now and browse our library!   </label>
         </div>
-
       </div>
-
     </div>
     
     <div class="content center">
-      
       <label class="hide"> Browsing the library made easy! </label>
-
       <div class="pin-container">
-
         <div class="pin small hide">
           <label> Create an account; </label>
         </div>
@@ -69,64 +61,79 @@
         <div class="pin small hide">
           <label> and borrow the book you need! </label>
         </div>
-
       </div>
     </div>
 
-    <div class="overlay" id="overlay"></div>
-
-    <div class="sign-up" id="sign-up-modal">
-      <div class="header">
-        <label> Sign up </label>
-        <button class="fa fa-close" id="sign-up-close-button">  </button>
+    <div class="footer-global hide">
+      <div class="footer-wrapper">
+          <label class="footer-label"> Address </label>
+          <label class="footer-text"> Kasiglahan Montalban, Rizal, Philippines </label>
       </div>
-      <form class="form" id="sign-up-form" action="">
-        <label class="warning" id="sign-up-warning">  </label>
+      <div class="footer-wrapper">
+          <label class="footer-label"> Contact </label>
+          <label class="footer-text"> 0282968667 / 0283959731 </label>
+      </div>    
+      <div class="footer-wrapper">
+          <label class="footer-label"> Official email address  </label>
+          <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+      </div>    
+      <div class="footer-wrapper">
+          <label class="footer-label"> Facebook page </label>
+          <label class="footer-text"> https://www.facebook.com/colegio de montalban MIS </label>
+      </div>    
+  </div>
 
-          <input type="text" placeholder="First name" 
-          id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
-          <input type="text" placeholder="Last name"
-           id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
-          <input type="text" placeholder="Middle name" 
-          id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+  </div>
 
-          <select name="Sex" id="sex">
-            <option value="Male"> Male </option>
-            <option value="Female"> Female </option>
-          </select>
+  <div class="overlay" id="overlay"></div>
 
-          <label for="birth-date"> Birth date </label>
-          <input type="date" placeholder="Birth date" id="birth-date">
-
-          <input type="text" placeholder="Email" id="email">
-          <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
-          <input type="text" placeholder="Username" id="user-name">
-          <input type="password" placeholder="Password" id="password" autocomplete="on">
-          <input type="password" placeholder="Confirm password" id="password-confirm" autocomplete="on">
-      </form>
-
-      <div class="footer">
-        <button id="sign-up-account-button"> Sign up </button>
-        <label class="underlined" id="have-account"> Already have an account? </label>
-      </div>
+  <div class="sign-up" id="sign-up-modal">
+    <div class="header">
+      <label> Sign up </label>
+      <button class="fa fa-close" id="sign-up-close-button">  </button>
     </div>
-
-    <div class="log-in" id="log-in-modal">
-      <div class="header">
-        <label> Log in </label>
-        <button class="fa fa-close" id="log-in-close-button">  </button>
-      </div>
-      <form class="form" id="log-in-form">
-        <label class="warning" id="log-in-warning">  </label>
-        <input type="text" placeholder="Username or ID" id="log-in-username">
-        <input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
-      </form>
-
-      <div class="footer">
-        <button id="log-in-account-button"> Log in </button>
-        <label class="underlined" id="dont-have-account"> Don't have an account? </label>
-      </div>
+    <form class="form" id="sign-up-form" action="">
+      <label class="warning" id="sign-up-warning">  </label>
+        <input type="text" placeholder="First name" 
+        id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
+        <input type="text" placeholder="Last name"
+          id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
+        <input type="text" placeholder="Middle name" 
+        id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+        <select name="Sex" id="sex">
+          <option value="Male"> Male </option>
+          <option value="Female"> Female </option>
+        </select>
+        <label for="birth-date"> Birth date </label>
+        <input type="date" placeholder="Birth date" id="birth-date">
+        <input type="text" placeholder="Email" id="email">
+        <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
+        <input type="text" placeholder="Username" id="user-name">
+        <input type="password" placeholder="Password" id="password" autocomplete="on">
+        <input type="password" placeholder="Confirm password" id="password-confirm" autocomplete="on">
+    </form>
+    <div class="footer">
+      <button id="sign-up-account-button"> Sign up </button>
+      <label class="underlined" id="have-account"> Already have an account? </label>
     </div>
+  </div>
+
+  <div class="log-in" id="log-in-modal">
+    <div class="header">
+      <label> Log in </label>
+      <button class="fa fa-close" id="log-in-close-button">  </button>
+    </div>
+    <form class="form" id="log-in-form">
+      <label class="warning" id="log-in-warning">  </label>
+      <input type="text" placeholder="Username or ID" id="log-in-username">
+      <input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
+    </form>
+    <div class="footer">
+      <button id="log-in-account-button"> Log in </button>
+      <label class="underlined" id="dont-have-account"> Don't have an account? </label>
+    </div>
+  </div>
+
 </body>
 
   <!-- scripts -->

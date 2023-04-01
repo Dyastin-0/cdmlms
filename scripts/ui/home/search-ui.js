@@ -76,6 +76,7 @@ function handleGlobalClick(e, input, by) {
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild && !isSearhByClicked) {
+        hideRecentSearch();
         document.removeEventListener('click', handleGlobalClick);
     }
 }

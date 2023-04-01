@@ -1,3 +1,5 @@
+import { deleteQuery, getQueryTwoFields, saveQuery } from "./firestore-api.js";
+
 export function generateToken(userData) {
     const date = new Date();
     const token = {
@@ -9,43 +11,31 @@ export function generateToken(userData) {
 }
 
 export async function saveToken(token) {
-    await db.collection('authTokens')
-    .doc(crypto.randomUUID())
-    .set(token)
-    .catch(err => {
-        console.error(err)
-    })
+    await saveQuery('authTokens', crypto.randomUUID(), token);
 }
 
 export async function deleteToken(token) {
-    try {
-        const querySnapshot = await db
-        .collection('authTokens')
-        .where('expiration', '==', token.expiration)
-        .where('id', '==', token.id)
-        .get();
-        
-        const deletePromises = querySnapshot.docs.map(doc => doc.ref.delete());
-        await Promise.all(deletePromises);
-    } catch (error) {
-        console.error(error)
-    }
+    await deleteQuery('authTokens',
+     'expiration', 'id',
+      token.expiration, token.id);
 }
 
 export async function isTokenValid(token) {
     try {
-        const response = await db.collection('authTokens')
-        .where('id', '==', token.id)
-        .where('expiration', '==', token.expiration)
-        .get();
+        const response = await getQueryTwoFields('authTokens',
+         'expiration', 'id', 
+         token.expiration, token.id);
 
         const currentTime = new Date().getTime();
         const fetchedToken = response.docs[0].data(); 
+
         if (fetchedToken.expiration > currentTime) return true;
+
         await deleteToken(token);
         localStorage.removeItem("session");
+
         return false;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
