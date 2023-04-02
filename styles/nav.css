@@ -75,55 +75,6 @@
     color: #353232;
 }
 
-.wrapper {
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-    justify-content: flex-start;
-    margin-right: 10px;
-    align-items: center;
-    border-radius: 5px;
-}
-
-.wrapper.space-between {
-    width: 100%;
-    justify-content: space-between;
-}
-
-.wrapper.padding {
-    padding: 5px;
-    width: calc(100% - 10px);
-}
-
-.wrapper.space-between:hover {
-    opacity: 0.7;
-    cursor: pointer;
-    background-color: rgb(210, 210, 210);
-    transition: background-color 0.5s;
-}
-
-.wrapper.fit {
-    width: auto;
-    background: none;
-}
-
-.wrapper.button .label {
-    margin: 5;
-    font-weight: 500;
-    font-size: 15px;
-    transition: opacity 0.3s;
-}
-
-.wrapper.button .label:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
-
-.wrapper.search {
-    padding: 0;
-    border-radius: 30px;
-}
-
 .search {
     height: 40px;
     width: 100%;
