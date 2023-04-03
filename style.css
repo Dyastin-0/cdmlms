@@ -17,7 +17,7 @@ html, body {
     width: 100%;
     min-width: 335px;
     height: fit-content;
-    background: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
     color: #353232;
 }
 
@@ -82,24 +82,38 @@ html, body {
 }
 
 .show {
-    animation: animateX 0.25s linear;
+    animation: animateX 1s ease-in-out;
     animation-fill-mode: forwards;
 }
 
 .footer-global {
-    width: calc(100% - 80px);
+    width: calc(100% - 20px);
     height: fit-content;
     bottom: 0;
     left: 0;
     right: 0;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     box-shadow: 0 0 5px rgb(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 10px;
+}
+
+.footer-link {
+    border-radius: 5px;
+    padding: 5px;
+    color: #353232;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    cursor: pointer;
+    background-color: rgb(235, 235, 235);
 }
 
 .footer-wrapper {
-    width: 300px;
+    width: 270px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -107,11 +121,18 @@ html, body {
 
 .footer-label {
     font-size: 15px;
-    font-weight: 450;
+    font-weight: 550;
 }
 
 .footer-text {
-    font-size: 15px;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.footer-text:hover {
+    background-color: rgb(235, 235, 235);
 }
 
 @keyframes animateX {

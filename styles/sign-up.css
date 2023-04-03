@@ -99,7 +99,7 @@
     margin: 5px;
     padding: 5px;
     opacity: 0.8;
-    transition: box-shadow 0.3s, opacity 0.3s;
+    transition: box-shadow 0.5s, opacity 0.5s;
 }
 
 .footer button:hover {

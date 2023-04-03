@@ -8,13 +8,13 @@
 
 .pin-container .pin {
     width: 220px;
-    min-width: 220px;
     display: flex;
     margin: 10px;
     flex-direction: column;
     border-radius: 10px;
     background-color: rgb(235, 235, 235);
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.5s ease-in-out,
+        border-radius 0.5s ease-in-out;
 }
 
 .pin label {
@@ -60,7 +60,7 @@
 
 .pin-container .pin:hover {
     cursor: pointer;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
 }
 

@@ -84,11 +84,13 @@ function handleGlobalClick(e, input, by) {
 //hide && display of modals
 function hideRecentSearchModalMobile() {
     recentSearchModalMobile.style.opacity = '0';
+    recentSearchModalMobile.style.transform = 'translateY(-50%) scaleY(0)';
     recentSearchModalMobile.style.pointerEvents = 'none';
 }
 
 function displayRecentSearchModalMobile() {
     recentSearchModalMobile.style.opacity = '1';
+    recentSearchModalMobile.style.transform = 'translateY(0) scaleY(1)';
     recentSearchModalMobile.style.pointerEvents = 'all';
 }
 
@@ -98,14 +100,14 @@ export function displayRecentSearchMobile() {
 }
 
 function hideRecentSearch() {
-    recentSearchModal.style.transform = "scaleY(0)";
+    recentSearchModal.style.transform = "translateY(-50%) scaleY(0)";
     recentSearchModal.style.opacity = "0";
     searchResult.innerHTML = "";
 
 }
 
 function displayRecentSearch() {
-    recentSearchModal.style.transform = "scaleY(1)";
+    recentSearchModal.style.transform = "translateY(0) scaleY(1)";
     recentSearchModal.style.opacity = "1";
 }
 
@@ -210,7 +212,7 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
 
         container.appendChild(label);
         container.appendChild(button);
-        
+    
         label.addEventListener('click', () => {
             search(by.value, label.textContent, searchResult);
             moveRecentSearchToTop(key, label.textContent, cachedSearches);
