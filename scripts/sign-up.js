@@ -1,7 +1,8 @@
 import { isPasswordValid, isEmailValid, warning, toSha256, isIdValid } from './validation.js';
-import { isUsernameAvailable, isIdAvailable } from './authentication.js';
+import { isUsernameAvailable, isIdAvailable, isEmailAvailable } from './authentication.js';
 import { signupUiInit, hideSignUp } from './ui/index/sign-up-ui.js';
 import { saveQuery } from './firestore-api.js';
+import { createUser } from './auth-api.js';
 
 const modal = document.getElementById("sign-up-modal");
 const submit = modal.querySelector("#sign-up-account-button");
@@ -41,6 +42,13 @@ async function areInputsValid() {
         return false;
     }
     if (!isEmailValid(email.value)) return false;
+    
+    const emailRes = await isEmailAvailable(email.value);
+    if (!emailRes.result) {
+        warning(emailRes.email + " is already used.", "sign-up");
+        return false;
+    }
+
     const idRes = await isIdAvailable(id.value);
     if (!idRes.result) {
         warning(idRes.id + " is already used, contact the MIS if there is any problem.", "sign-up");
@@ -77,6 +85,7 @@ async function setUserInfo() {
 
 async function create() {
     await saveQuery('users', crypto.randomUUID(), userInfo);
+    await createUser(userInfo.email, userInfo.password);
 }
 
 async function signUp() {

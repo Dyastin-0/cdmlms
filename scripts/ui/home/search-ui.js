@@ -1,27 +1,29 @@
+import { saveQuery } from "../../firestore-api.js";
 import { search } from "../../user.js";
+import { displayDropDown, hideDropDown } from "./home-ui-utils.js";
 
 //desktop view ui elements
-const searchInput = document.getElementById("search-input");
-const searchBy = document.getElementById("search-by");
-const recentSearchModal = document.getElementById("recent-searches-modal");
-const recentSearch = document.getElementById("recent-searches");
-const searchModal = document.getElementById("search-modal");
-const searchResult = document.getElementById("search-results");
-const searchButton = document.getElementById("search-button");
-const overlay = document.getElementById("overlay");
+const searchInput = document.querySelector("#search-input");
+const searchBy = document.querySelector("#search-by");
+const recentSearchModal = document.querySelector("#recent-searches-modal");
+const recentSearch = document.querySelector("#recent-searches");
+const searchModal = document.querySelector("#search-modal");
+const searchResult = document.querySelector("#search-results");
+const overlay = document.querySelector("#overlay");
 
 //mobile view ui elements
-const backButton = document.getElementById("back-button-search-modal-mobile");
-const recentSearchModalMobile = document.getElementById("recent-search-modal-mobile");
-const searchByMobile = document.getElementById("search-by-mobile");
-const searchInputMobile = document.getElementById("search-input-mobile");
-const recentSearchesMobile = document.getElementById("recent-searches-modal-mobile");
-const recentSearchMobile = document.getElementById("recent-search-mobile");
+const searchButton = document.querySelector("#search-button");
+const backButton = document.querySelector("#back-button-search-modal-mobile");
+const recentSearchModalMobile = document.querySelector("#recent-search-modal-mobile");
+const searchByMobile = document.querySelector("#search-by-mobile");
+const searchInputMobile = document.querySelector("#search-input-mobile");
+const recentSearchesMobile = document.querySelector("#recent-searches-modal-mobile");
+const recentSearchMobile = document.querySelector("#recent-search-mobile");
 
 export function bindSearchEvent() {
     //desktop view
     searchInput.addEventListener('click', () => {
-        displayRecentSearch();
+        displayDropDown(recentSearchModal);
         addGlobalClick();
     });
 
@@ -43,11 +45,18 @@ export function bindSearchEvent() {
     });
 
     searchButton.addEventListener('click', () => {
-        displayRecentSearchModalMobile();
+        displayDropDown(recentSearchModalMobile);
+        const book = {
+            title: "Test Booook 2",
+            author: "Test Authoooor 2",
+            isbn: "3958392225382",
+            genre: "Education"
+        }
+        saveQuery('books', crypto.randomUUID(), book)
     });
 
     backButton.addEventListener('click', () => {
-        hideRecentSearchModalMobile();
+        hideDropDown(recentSearchModalMobile);
         hideSearchResult();
         overlay.classList.remove("active");
     });
@@ -82,17 +91,6 @@ function handleGlobalClick(e, input, by) {
 }
 
 //hide && display of modals
-function hideRecentSearchModalMobile() {
-    recentSearchModalMobile.style.opacity = '0';
-    recentSearchModalMobile.style.transform = 'translateY(-50%) scaleY(0)';
-    recentSearchModalMobile.style.pointerEvents = 'none';
-}
-
-function displayRecentSearchModalMobile() {
-    recentSearchModalMobile.style.opacity = '1';
-    recentSearchModalMobile.style.transform = 'translateY(0) scaleY(1)';
-    recentSearchModalMobile.style.pointerEvents = 'all';
-}
 
 export function displayRecentSearchMobile() {
     recentSearchesMobile.style.transform = "scaleY(1)";
@@ -100,15 +98,9 @@ export function displayRecentSearchMobile() {
 }
 
 function hideRecentSearch() {
-    recentSearchModal.style.transform = "translateY(-50%) scaleY(0)";
-    recentSearchModal.style.opacity = "0";
+    hideDropDown(recentSearchModal);
     searchResult.innerHTML = "";
 
-}
-
-function displayRecentSearch() {
-    recentSearchModal.style.transform = "translateY(0) scaleY(1)";
-    recentSearchModal.style.opacity = "1";
 }
 
 function displaySearchResult() {

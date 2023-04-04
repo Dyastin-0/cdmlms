@@ -38,6 +38,27 @@ export async function isUsernameAndPasswordMatched(username, password) {
     }
 }
 
+export async function isEmailAvailable(email) {
+    let result = {result: null, email: null};
+
+    try {
+        const querySnapshot = await getQueryOneField('users',
+        'email',
+        email);
+
+        if (!querySnapshot.empty) {
+            result.result = false;
+            result.email = email;
+            return result;
+        }
+
+        result.result = true;
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function isUsernameAvailable(username) {
     let result = {result: null, username: null};
     

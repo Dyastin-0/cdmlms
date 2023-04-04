@@ -16,8 +16,10 @@ export function formatBooks(books) {
         const genre = document.createElement("label");
         const isbn = document.createElement("label");
 
+
         pin.classList.add("pin");
         pin.classList.add("small");
+        pin.classList.add("hide");
 
         title.classList.add("title");
         title.textContent = book.title;

@@ -1,29 +1,32 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllBooks, formatBooks, findBookBy } from "./books.js";
 import { getQueryOneField } from "./firestore-api.js";
+import { userDropDownInit } from "./ui/home/user-drop-down-ui.js";
 import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
     generateSearchResultItem, generateErrorResult, displayRecentSearchMobile } from "./ui/home/search-ui.js";
 
 let cachedFeatured = {};
 let myBooks = {};
-const username = document.getElementById("username");
-const logout = document.getElementById("log-out");
-const featured = document.getElementById("featured");
-const searchInput = document.getElementById("search-input");
-const searchBy = document.getElementById("search-by");
-const searchResult = document.getElementById("search-results");
-const searchInputMobile = document.getElementById("search-input-mobile");
-const searchByMobile = document.getElementById("search-by-mobile");
+const username = document.querySelector("#username");
+const logout = document.querySelector("#log-out");
+const featured = document.querySelector("#featured");
+const searchInput = document.querySelector("#search-input");
+const searchBy = document.querySelector("#search-by");
+const searchResult = document.querySelector("#search-results");
+const searchInputMobile = document.querySelector("#search-input-mobile");
+const searchByMobile = document.querySelector("#search-by-mobile");
 
 async function init() {
     bindEvents();
     await redirect();
     bindSearchEvent();
+    userDropDownInit();
     cachedFeatured = await fetchAllBooks();
-    renderData(fetchSession());
+    await renderData(fetchSession());
     const id = fetchSession().id;
     displayRecentSearches(id);
     displayRecentSearchMobile();
+    observerScroll();
 }
 
 async function bindEvents() {

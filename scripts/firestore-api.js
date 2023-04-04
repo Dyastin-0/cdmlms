@@ -1,4 +1,4 @@
-export async function deleteQuery(collection , firstField, secondField, firstValue, secondValue) {
+export async function deleteQuery(collection, firstField, secondField, firstValue, secondValue) {
     try {
         const querySnapshot = await getQueryTwoFields(collection, 
             firstField, secondField, 
@@ -11,7 +11,7 @@ export async function deleteQuery(collection , firstField, secondField, firstVal
     }
 }
 
-export async function getQueryTwoFields(collection , firstField, secondField, firstValue, secondValue) {
+export async function getQueryTwoFields(collection, firstField, secondField, firstValue, secondValue) {
     try {
         const querySnapshot = await db
         .collection(collection)
@@ -21,11 +21,11 @@ export async function getQueryTwoFields(collection , firstField, secondField, fi
         
         return querySnapshot;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
-export async function getQueryOneField(collection , firstField, firstValue) {
+export async function getQueryOneField(collection, firstField, firstValue) {
     try {
         const querySnapshot = await db
         .collection(collection)
