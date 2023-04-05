@@ -1,5 +1,5 @@
 import { isTokenValid, deleteToken } from "./auth-token.js";
-import { fetchAllBooks, formatBooks, findBookBy } from "./books.js";
+import { fetchAllFeaturedBooks, formatBooks, findBookBy } from "./books.js";
 import { getQueryOneField } from "./firestore-api.js";
 import { userDropDownInit } from "./ui/home/user-drop-down-ui.js";
 import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
@@ -16,12 +16,14 @@ const searchResult = document.querySelector("#search-results");
 const searchInputMobile = document.querySelector("#search-input-mobile");
 const searchByMobile = document.querySelector("#search-by-mobile");
 
+const splashScreen = document.querySelector("#splash-screen");
+
 async function init() {
-    bindEvents();
     await redirect();
+    bindEvents();
     bindSearchEvent();
     userDropDownInit();
-    cachedFeatured = await fetchAllBooks();
+    cachedFeatured = await fetchAllFeaturedBooks();
     await renderData(fetchSession());
     const id = fetchSession().id;
     displayRecentSearches(id);
@@ -86,6 +88,8 @@ async function renderData(token) {
     formattedBooks.forEach((formattedBook) => {
         featured.appendChild(formattedBook);
     });
+
+    splashScreen.remove();
 }
 
 async function logOut() {

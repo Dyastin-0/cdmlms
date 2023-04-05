@@ -89,10 +89,8 @@ html, body {
 .footer-global {
     width: calc(100% - 20px);
     height: fit-content;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
+    background-color: rgb(255, 255, 255);
     justify-content: center;
     flex-wrap: wrap;
     padding: 10px;
@@ -132,6 +130,23 @@ html, body {
 
 .footer-text:hover {
     background-color: rgb(235, 235, 235);
+}
+
+.spinner {
+    font-size: 50px;
+    width: fit-content;
+    align-self: center;
+    margin-bottom: 50px;
+    animation: infiniteRotate 2s linear infinite;
+}
+
+@keyframes infiniteRotate {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(-180deg);
+    }
 }
 
 @keyframes animateX {

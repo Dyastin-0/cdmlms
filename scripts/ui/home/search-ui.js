@@ -46,13 +46,6 @@ export function bindSearchEvent() {
 
     searchButton.addEventListener('click', () => {
         displayDropDown(recentSearchModalMobile);
-        const book = {
-            title: "Test Booook 2",
-            author: "Test Authoooor 2",
-            isbn: "3958392225382",
-            genre: "Education"
-        }
-        saveQuery('books', crypto.randomUUID(), book)
     });
 
     backButton.addEventListener('click', () => {
@@ -191,16 +184,18 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
 
         container.classList.add("wrapper");
         container.classList.add("space-between");
-        container.id = 'recent-search-container';
+        container.id = crypto.randomUUID();
     
         label.classList.add("recent-search");
         label.textContent = searchItem;
-        label.id = 'recent-search-label';
+        label.id = crypto.randomUUID();
 
         button.classList.add("delete-button");
         button.classList.add("fa");
         button.classList.add("fa-close");
-        button.id = 'delete-recent-button';
+        const buttonId = crypto.randomUUID();
+        button.id = buttonId;
+        button.ariaLabel = buttonId;
 
         container.appendChild(label);
         container.appendChild(button);

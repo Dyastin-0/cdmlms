@@ -1,0 +1,42 @@
+.splash-screen {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: scale(0);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+    right: 0;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    pointer-events: none;
+}
+
+.splash-screen.active {
+    transform: scale(1);
+}
+
+.splash-screen-logo {
+    height: 100%;
+    display: flex;
+    transform: scale(0.3);
+}
+
+.splash-screen-label {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-self: center;
+    text-align: center;
+}
+
+.splash-screen-text {
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-self: center;
+    text-align: center;
+}

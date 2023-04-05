@@ -1,5 +1,3 @@
-import { saveQuery } from "./firestore-api.js";
-
 export async function createUser(email, password) {
     auth.createUserWithEmailAndPassword(email, password)
     .then((credentials) => {

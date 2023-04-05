@@ -1,4 +1,4 @@
-import { getQuery, searchQuery } from "./firestore-api.js";
+import { getQueryWithLimit, searchQuery } from "./firestore-api.js";
 
 function bindPinEvent(pin) {
     pin.addEventListener('click', () => {
@@ -44,7 +44,7 @@ export function formatBooks(books) {
     return formattedBoooks;
 }
 
-export async function fetchAllBooks() {
+export async function fetchAllFeaturedBooks() {
     const cachedBooks = fetchCachedBooks();
     const currentTime = new Date().getTime();
 
@@ -55,7 +55,7 @@ export async function fetchAllBooks() {
     localStorage.removeItem("books");
 
     try {
-        const querySnapshot = await getQuery('books');
+        const querySnapshot = await getQueryWithLimit('books', 5);
 
         const books = querySnapshot.docs;
         let allBooks = [];

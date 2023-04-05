@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Library Management System of Colegio de Montalban.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
@@ -11,18 +12,20 @@
     <link rel="stylesheet" href="./styles/pin.css">
     <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="./styles/search-result.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/cdm_logo.png">
+    <link rel="stylesheet" href="./styles/splash-screen.css">
+    <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
 <body>
     
     <nav class="nav">
         <div class="wrapper">
-            <button class="nav-button medium"> <img class="logo" src="./images/cdm_logo.png">
+            <button class="nav-button medium">
+                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
                 CDMLMS
               </button>
         </div>
-        <button class="nav-button search fa fa-search" id="search-button"></button>
+        <button class="nav-button search fa fa-search" id="search-button" aria-label="search-button"></button>
         <div class="drop-down" id="search-drop-down">
             <div class="wrapper">
                 <input class="search" placeholder="Search" id="search-input">
@@ -41,9 +44,11 @@
         </div>
 
         <div class="wrapper">
-            <button class="nav-button large" id="user-notification"><i class="fa fa-bell"></i></button>
+            <button class="nav-button large" id="user-notification" aria-label="user-notification">
+                <i class="fa fa-bell"></i>
+            </button>
             <div class="user-drop-down">
-                <button class="nav-button large" id="user-drop-down-button">
+                <button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
                     <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu" id="user-drop-down">
@@ -54,23 +59,23 @@
                 </div>
             </div>
         </div>
+
     </nav>
 
-    <div class="main">
+    <main class="main">
 
-        <div class="content">
+        <!-- <content class="content">
             <label class="label left"> Your books </label>
-           
             <div class="pin-container" id="your-book"> </div>
-        </div>
+        </content> -->
 
-        <div class="content">
+        <content class="content">
             <label class="label left"> Featured Books </label>
+            <div class="pin-container" id="featured">
+            </div>
+        </content>
 
-            <div class="pin-container" id="featured"> </div>
-        </div>
-
-        <div class="footer-global">
+        <footer class="footer-global">
             <div class="footer-wrapper hide">
                 <label class="footer-label"> Address </label>
                 <a class="footer-link"
@@ -93,9 +98,9 @@
                     Colegio de Montalban MIS
                   </a>
             </div>    
-          </div>
+        </footer>
 
-    </div>
+    </main>
 
     <div class="search-modal" id="search-modal">
         <label> Result </label>
@@ -107,7 +112,7 @@
     <div class="search-modal-mobile" id="recent-search-modal-mobile">
         <div class="drop-down">
             <div class="wrapper padding">
-                <button class="fa fa-chevron-up nav-button" id="back-button-search-modal-mobile"></button>
+                <button class="fa fa-chevron-up nav-button" id="back-button-search-modal-mobile" aria-label="back-button-search-modal-mobile"></button>
                 <input class="search" placeholder="Search" id="search-input-mobile">
                 <select class="select" id="search-by-mobile">
                     <option value="title"> Title </option>
@@ -122,6 +127,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="splash-screen active" id="splash-screen">
+        <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
+        <label class="fa fa-spinner spinner" id="featured-spinner"></label>
+        <label class="splash-screen-label"> From </label>
+        <label class="splash-screen-text"> CdM Software Development Club </label>
     </div>
 
 </body>

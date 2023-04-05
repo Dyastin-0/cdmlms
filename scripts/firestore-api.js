@@ -50,6 +50,19 @@ export async function getQuery(collection) {
     }
 }
 
+export async function getQueryWithLimit(collection, limit) {
+    try {
+        const querySnapshot = await db
+        .collection(collection)
+        .limit(limit)
+        .get();
+
+        return querySnapshot;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function saveQuery(collection, documentID, document) {
     try {
         await db.collection(collection)
