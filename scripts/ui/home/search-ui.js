@@ -1,4 +1,3 @@
-import { saveQuery } from "../../firestore-api.js";
 import { search } from "../../user.js";
 import { displayDropDown, hideDropDown } from "./home-ui-utils.js";
 
@@ -57,6 +56,7 @@ export function bindSearchEvent() {
     //global
     overlay.addEventListener('click', () => {
         hideSearchResult();
+        searchResult.innerHTML = "";
         overlay.classList.remove("active");
     })
 }
@@ -92,8 +92,6 @@ export function displayRecentSearchMobile() {
 
 function hideRecentSearch() {
     hideDropDown(recentSearchModal);
-    searchResult.innerHTML = "";
-
 }
 
 function displaySearchResult() {
@@ -184,16 +182,16 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
 
         container.classList.add("wrapper");
         container.classList.add("space-between");
-        container.id = crypto.randomUUID();
+        container.id = 'recent-search';
     
         label.classList.add("recent-search");
         label.textContent = searchItem;
-        label.id = crypto.randomUUID();
+        label.id = 'recent-search';
 
         button.classList.add("delete-button");
         button.classList.add("fa");
         button.classList.add("fa-close");
-        const buttonId = crypto.randomUUID();
+        const buttonId = 'recent-search';
         button.id = buttonId;
         button.ariaLabel = buttonId;
 

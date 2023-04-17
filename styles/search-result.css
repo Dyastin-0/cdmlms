@@ -19,6 +19,7 @@
 .search-result {
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,6 +90,7 @@
 
 .search-modal-mobile {
     position: fixed;
+    overflow-y: auto;
     opacity: 0;
     top: 0;
     bottom: 0;
