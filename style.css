@@ -56,7 +56,7 @@ html, body {
     align-items: center;
 }
 
-.content label {
+.content .label {
     text-align: center;
     margin-top: 100px;
     margin-left: 10px;

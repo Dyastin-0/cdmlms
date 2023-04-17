@@ -1,6 +1,6 @@
 .pin-container {
     width: 100%;
-    height: fit-content;
+    /* height: fit-content; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -9,18 +9,22 @@
 .pin-container .pin {
     width: 220px;
     display: flex;
+    position: relative;
     margin: 10px;
     flex-direction: column;
     border-radius: 10px;
+    bottom: 0;
     background-color: rgb(235, 235, 235);
-    transition: box-shadow 0.5s ease-in-out,
-        border-radius 0.5s ease-in-out;
+    transition: border-radius 0.5s,
+        bottom 0.3s;
 }
 
 .pin label {
+    cursor: inherit;
+    font-weight: 700;
+    margin: 10px;
     padding: 10px;
     display: flex;
-    margin-top: 10px;
     text-align: left;
     font-size: 28px;
 }
@@ -60,7 +64,7 @@
 
 .pin-container .pin:hover {
     cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    bottom: 10px;
     border-radius: 15px;
 }
 

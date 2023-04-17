@@ -15,7 +15,7 @@ export async function isUsernameAndPasswordMatched(username, password) {
           username, await toSha256(password));
 
         const querySnapshot1 = await getQueryTwoFields('users',
-         'username', 'password',
+         'id', 'password',
           await toSha256(username), await toSha256(password));
 
         if (!querySnapshot0.empty) {
