@@ -82,7 +82,7 @@ html, body {
 }
 
 .show {
-    animation: animateX 1s ease-in-out;
+    animation: animateX 0.5s ease-in;
     animation-fill-mode: forwards;
 }
 
@@ -100,7 +100,7 @@ html, body {
     border-radius: 5px;
     padding: 5px;
     color: #353232;
-    text-decoration: none;
+    text-decoration: underline;
     transition: background-color 0.3s ease-in-out;
 }
 

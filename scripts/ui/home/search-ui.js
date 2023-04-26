@@ -36,6 +36,7 @@ export function bindSearchEvent() {
 
     //mobile view
     searchInputMobile.addEventListener('keyup', (e) => {
+        e.preventDefault();
         if (e.key === "Enter" && searchInputMobile.value != '') {
             displaySearchResult();
             searchInputMobile.value = '';
