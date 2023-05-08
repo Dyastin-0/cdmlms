@@ -1,24 +1,35 @@
-.sign-up {
-    width: 270px;
-    height: fit-content;
+.set-up {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: rgb(250, 250, 250);
     position: fixed;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
+    transform: translateY(-50%, -50%) scale(0);
     top: 50%;
     left: 50%;
     border-radius: 10px;
-    z-index: 11;
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 111;
 }
 
-
-.sign-up.active {
+.set-up.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.header-label {
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.header-text {
+    font-size: 18px;
+    font-weight: 300;
+    padding: 15px;
+    text-align: left;
 }
 
 .header {
@@ -49,6 +60,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.form select {
+    padding: 5px;
+    margin-bottom: 8px;
+    outline-width: 0;
+    font-size: 15px;
+    background-color: rgb(235, 235, 235);
+    border: none;
+    border-radius: 5px;
+}
+
+.form select:hover {
+    cursor: pointer;
 }
 
 .form label {

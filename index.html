@@ -24,6 +24,8 @@
     </button>
     <div class="wrapper fit">
       <button class="nav-button medium" id="about" aria-label="about"> About </button>
+      <button class="nav-button medium none" id="home" aria-label="home"> Home </button>
+      <button class="nav-button medium none" id="display-name-index" aria-label="display-name-index"> Display name </button>
       <button class="nav-button medium" id="log-in-modal-button" aria-label="log-in-modal-button">
         <i class="fa fa-sign-in fa-lg"></i>
       </button>
@@ -58,7 +60,7 @@
           <label> Create an account; </label>
         </div>
         <div class="pin small hide">
-          <label> Activate with your email; </label>
+          <label> Log in; </label>
         </div>
         <div class="pin small hide">
           <label> Browse; </label>
@@ -104,23 +106,10 @@
       <label> Sign up </label>
       <button class="fa fa-close" id="sign-up-close-button" aria-label="sign-up-close-button"></button>
     </div>
+
     <form class="form" id="sign-up-form" action="">
       <label class="warning" id="sign-up-warning">  </label>
-        <input type="text" placeholder="First name" 
-        id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
-        <input type="text" placeholder="Last name"
-          id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
-        <input type="text" placeholder="Middle name" 
-        id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
-        <select name="Sex" id="sex">
-          <option value="Male"> Male </option>
-          <option value="Female"> Female </option>
-        </select>
-        <label for="birth-date"> Birth date </label>
-        <input type="date" placeholder="Birth date" id="birth-date">
         <input type="text" placeholder="Email" id="email">
-        <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
-        <input type="text" placeholder="Username" id="user-name">
         <input type="password" placeholder="Password" id="password" autocomplete="on">
         <input type="password" placeholder="Confirm password" id="password-confirm" autocomplete="on">
     </form>
@@ -137,7 +126,7 @@
     </div>
     <form class="form" id="log-in-form">
       <label class="warning" id="log-in-warning">  </label>
-      <input type="text" placeholder="Username or ID" id="log-in-username">
+      <input type="text" placeholder="Email" id="log-in-email">
       <input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
     </form>
     <div class="footer">
@@ -159,6 +148,7 @@
   <script src="./scripts/observer.js"></script>
   <script type="module" src="./scripts/sign-up.js"></script>
   <script type="module" src="./scripts/log-in.js"> </script>
+  <script type="module" src="./scripts/ui/nav-ui.js"></script>
   <!---->
 
 </html>

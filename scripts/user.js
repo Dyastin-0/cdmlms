@@ -1,13 +1,31 @@
-import { isTokenValid, deleteToken } from "./auth-token.js";
 import { fetchAllFeaturedBooks, formatBooks, findBookBy } from "./books.js";
-import { getQueryOneField } from "./firestore-api.js";
 import { userDropDownInit } from "./ui/home/user-drop-down-ui.js";
 import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
     generateSearchResultItem, generateErrorResult, displayRecentSearchMobile } from "./ui/home/search-ui.js";
+import { signOutFirebaseAuth } from "./auth-api.js";
+import { getQueryOneField } from "./firestore-api.js";
+import { isIdValid, warning } from "./validation.js";
+import { isDisplayNameAvailable, isIdAvailable } from "./authentication.js";
+
+auth.onAuthStateChanged(user => {
+    if (user) {
+        user.getIdTokenResult()
+        .then(async (IdTokenResult) => {
+            const expiration = Date.parse(IdTokenResult.expirationTime);
+            const dateNow = new Date().getTime();
+            if (dateNow > expiration) {
+                await signOutFirebaseAuth();
+                window.location.href = './';
+            }
+        });
+    } else {
+        window.location.href = './';
+    }
+});
 
 let cachedFeatured = {};
 let myBooks = {};
-const username = document.querySelector("#username");
+const username = document.querySelector("#display-name");
 const logout = document.querySelector("#log-out");
 const featured = document.querySelector("#featured");
 const searchInput = document.querySelector("#search-input");
@@ -17,16 +35,26 @@ const searchInputMobile = document.querySelector("#search-input-mobile");
 const searchByMobile = document.querySelector("#search-by-mobile");
 
 const splashScreen = document.querySelector("#splash-screen");
+const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
+
+const cancelSetupButton = document.querySelector("#cancel-setup");
+const doneSetupButton = document.querySelector("#done-setup");
+
+const firstName = oneTimeSetupModal.querySelector("#first-name");
+const lastName = oneTimeSetupModal.querySelector("#last-name");
+const middleName = oneTimeSetupModal.querySelector("#middle-name");
+const sex = oneTimeSetupModal.querySelector("#sex");
+const birthDate = oneTimeSetupModal.querySelector("#birth-date");
+const id = oneTimeSetupModal.querySelector("#id");
+const displayName = oneTimeSetupModal.querySelector("#display-name");
 
 async function init() {
-    await redirect();
+    await firstLogin();
     bindEvents();
     bindSearchEvent();
     userDropDownInit();
     cachedFeatured = await fetchAllFeaturedBooks();
-    await renderData(fetchSession());
-    const id = fetchSession().id;
-    displayRecentSearches(id);
+    await renderData();
     displayRecentSearchMobile();
     observerScroll();
 }
@@ -45,69 +73,50 @@ async function bindEvents() {
             await search(searchByMobile.value, searchInputMobile.value);
         }
     });
+
+    cancelSetupButton.addEventListener('click', async () => await logOut());
+
+    doneSetupButton.addEventListener('click', async () => {
+        await auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const querySnapshot = await getQueryOneField("users", "email", user.email);
+                const currentUser = querySnapshot.docs[0].ref;
+                if (await areInputsValid()) {
+                    setupInformation(currentUser);
+                    oneTimeSetupModal.classList.remove("active");
+                    splashScreen.remove();
+                }
+            }
+        });
+    });
 }
 
-function fetchSession() {
-    const token = JSON.parse(localStorage.getItem("session"));
-    return token;
-}
-
-export async function redirect() {
-    const token = fetchSession();
-    const location = window.location.pathname;
-
-    if (location === '/' && token === null) {
-        return;
-    }
-
-    if (token === null) {
-        window.location.href = './';
-        return;
-    }
-    
-    if (!await isTokenValid(token)) {
-        alert("Session expired.");
-        window.location.href = "./";
-    }
-    
-    if (window.location.pathname !== '/home.html') {
-        window.location.href = './home.html';
-    }
-}
-
-async function renderData(token) {
-    const querySnapshot = await getQueryOneField('users',
-    'id',
-    token.id);
-
-    const userData = querySnapshot.docs[0].data();
-    username.textContent = userData.username;
+async function renderData() {
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            displayRecentSearches(user.uid);
+        }
+    });
 
     const formattedBooks = formatBooks(cachedFeatured.books);
 
     formattedBooks.forEach((formattedBook) => {
         featured.appendChild(formattedBook);
     });
-
-    splashScreen.remove();
 }
 
 async function logOut() {
-    const token = fetchSession();
-    try {
-        localStorage.removeItem("session");
-        await deleteToken(token);
-        await redirect();
-    } catch (error) {
-        console.error(error)
-    }
+    await signOutFirebaseAuth();
+    window.location.href = './';
 }
 
 export async function search(by, input) {
-    const id = fetchSession().id;
-
-    addRecentSearch(id, input);
-    displayRecentSearches(id);
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            addRecentSearch(user.uid, input);
+            displayRecentSearches(user.uid);
+        }
+    });
 
     const search = await findBookBy(by, input);
 
@@ -122,6 +131,63 @@ export async function search(by, input) {
     }
 }
 
-if (window.location.pathname === '/home.html') {
-    init();
+async function firstLogin() {
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            const querySnapshot = await getQueryOneField('users', 'email', user.email);
+            const currentUser = querySnapshot.docs[0];
+            const isNewUser = currentUser.data().newUser;
+            if (isNewUser) {
+                oneTimeSetupModal.classList.add("active");
+            } else {
+                splashScreen.remove();
+                username.textContent = currentUser.data().displayName;
+            }
+        }
+    });
 }
+
+async function areInputsValid() {
+    if (!firstName.value || !lastName.value 
+        || !middleName.value || !birthDate.value
+        || !id.value || !displayName.value || !birthDate.value) {
+        warning("There is an empty field.", "setup");
+        return false;
+    }
+
+    if (!birthDate.value) {
+        warning("Provide your birth date.", "setup");
+        return false;
+    }
+
+    if (!isIdValid(id.value)) return false;
+
+    const idRes = await isIdAvailable(id.value);
+    if (!idRes.result) {
+        warning(idRes.id + " is already used, contact the MIS if there is any problem.", "setup");
+        return false;
+    }
+
+    const res = await isDisplayNameAvailable(displayName.value);
+    if (!res.result) {
+        warning(res.displayName + " is already used.", "setup");
+        return false;
+    }
+
+    return true;
+}
+
+async function setupInformation(userRef) {
+    userRef.update({
+        newUser: false,
+        firstName: firstName.value,
+        middleName: middleName.value,
+        lastName: lastName.value,
+        sex: sex.value,
+        birthDate: birthDate.value,
+        id: id.value,
+        displayName: displayName.value
+    })
+}
+
+init();

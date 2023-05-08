@@ -1,11 +1,10 @@
 import { deleteQuery, getQueryTwoFields, saveQuery } from "./firestore-api.js";
 
-export function generateToken(userData) {
+export function generateToken(id) {
     const date = new Date();
     const token = {
         expiration: (date.getTime() + (30 * 60 * 1000)),
         id: userData.id,
-        isAdmin: userData.isAdmin
     }
     return token;
 }

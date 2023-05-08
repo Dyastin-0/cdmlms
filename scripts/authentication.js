@@ -59,17 +59,17 @@ export async function isEmailAvailable(email) {
     }
 }
 
-export async function isUsernameAvailable(username) {
-    let result = {result: null, username: null};
+export async function isDisplayNameAvailable(displayName) {
+    let result = {result: null, displayName: null};
     
     try {
         const querySnapshot = await getQueryOneField('users',
-         'username',
-          username);
+         'displayName',
+          displayName);
 
         if (!querySnapshot.empty) {
             result.result = false;
-            result.username = username;
+            result.displayName = displayName;
             return result;
         }
 
@@ -85,7 +85,7 @@ export async function isIdAvailable(id) {
 
     const querySnapshot = await getQueryOneField('users',
     'id',
-     await toSha256(id));
+     await id);
 
     if (!querySnapshot.empty) {
         result.result = false;

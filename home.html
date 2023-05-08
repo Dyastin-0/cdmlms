@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="./styles/search-result.css">
     <link rel="stylesheet" href="./styles/splash-screen.css">
+    <link rel="stylesheet" href="./styles/view-book.css">
+    <link rel="stylesheet" href="./styles/set-up.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
 <body>
-    
-    <nav class="nav">
+
+    <main class="main" id="main">
+
+        <nav class="nav">
         <div class="wrapper">
             <button class="nav-button medium">
                 <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
@@ -52,7 +56,7 @@
                     <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu" id="user-drop-down">
-                    <button class="button" id="username"> Username </button>
+                    <button class="button" id="display-name"> Display name </button>
                     <button class="button" id="settings"> Settings </button>
                     <button class="button" id="log-out"> Logout </button>
                 </div>
@@ -60,8 +64,6 @@
         </div>
 
     </nav>
-
-    <main class="main">
 
         <!-- <content class="content">
             <label class="label left"> Your books </label>
@@ -126,6 +128,42 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="set-up" id="one-time-setup-modal">
+        <label class="header-label"> Get started </label>
+        <p class="header-text"> This is a one-time setup, we need to set your information 
+            <br> 
+            befor you can continue. </p>
+        <form class="form" id="sign-up-form" action="">
+            <label class="warning" id="setup-warning">  </label>
+            <input type="text" placeholder="First name" 
+            id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Last name"
+            id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Middle name" 
+            id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <select name="Sex" id="sex">
+            <option value="Male"> Male </option>
+            <option value="Female"> Female </option>
+            </select>
+            <label for="birth-date"> Birth date </label>
+            <input type="date" placeholder="Birth date" id="birth-date">
+            <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
+            <input type="text" placeholder="Display name" id="display-name">
+        </form>
+        <div class="footer">
+            <button id="cancel-setup"> Cancel </button>
+            <button id="done-setup"> Done </button>
+        </div>
+    </div>
+
+    <div class="view-book-modal">
+        <div class="header">
+            <label> Book </label>
+            <button class="fa fa-close"></button>
+        </div>
+        <label class="book-title"> Test </label>
     </div>
 
     <div class="splash-screen active" id="splash-screen">

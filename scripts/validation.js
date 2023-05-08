@@ -1,5 +1,6 @@
 const warningLogin = document.getElementById("log-in-warning");
 const warningSignup = document.getElementById("sign-up-warning");
+const warningSetup = document.getElementById("setup-warning");
 
 export function isPasswordValid(password) {
     if (!password) {
@@ -13,21 +14,21 @@ export function isPasswordValid(password) {
         return true;
     }
 
-    warning("Password must be 6 characters and contains non-consecutive.", "sign-up");
+    warning("Password must be at least 6 characters, and not contain the same character consecutively.", "sign-up");
     return false;
 }
 
 export async function isIdValid(id) {
     if (!id) {
-        warning("", "sign-up");
+        warning("", "setup");
         return;
     }
     const regEx = /^\d{2}-\d{5}$/;
     if (regEx.test(id) && id.length === 8) {
-        warning("", "sign-up");
+        warning("", "setup");
         return true;
     }
-    warning("Invalid ID format.", "sign-up");
+    warning("Invalid ID format.", "setup");
     return false;
 }
 
@@ -58,6 +59,11 @@ export function warning(message, where) {
         return;
     }
 
+    if (!message && where == "setup") {
+        warningSetup.style.display = "none";
+        return;
+    }
+
     if (where == "log-in") {
         warningLogin.textContent = message;
         warningLogin.style.display = "flex";
@@ -65,6 +71,11 @@ export function warning(message, where) {
     if (where == "sign-up") {
         warningSignup.textContent = message;
         warningSignup.style.display = "flex";
+    }
+    
+    if (where == "setup") {
+        warningSetup.textContent = message;
+        warningSetup.style.display = "flex";
     }
 }
 
