@@ -9,27 +9,40 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
     <link rel="stylesheet" href="./styles/nav.css">
+    <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="/styles/pin.css">
     <link rel="stylesheet" href="./styles/sign-up.css">
     <link rel="stylesheet" href="./styles/log-in.css">
+    <link rel="stylesheet" href="./styles/user-profile.css">
+    <link rel="stylesheet" href="./styles/confirm-dialog.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Cdmlms </title>
 </head>
 <body>
 
   <nav class="nav trasparent">
-    <button class="nav-button medium">
+    <button class="nav-button medium" id="index-button">
       <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
       CDMLMS
     </button>
     <div class="wrapper fit">
       <button class="nav-button medium" id="about" aria-label="about"> About </button>
-      <button class="nav-button medium none" id="home" aria-label="home"> Home </button>
-      <button class="nav-button medium none" id="display-name-index" aria-label="display-name-index"> Display name </button>
-      <button class="nav-button medium" id="log-in-modal-button" aria-label="log-in-modal-button">
+      <button class="nav-button medium none logged-in" id="home" aria-label="home"> Home </button>
+      <button class="nav-button medium none logged-in" id="display-name-index" aria-label="display-name-index">  </button>
+      <button class="nav-button medium none logged-out" id="log-in-modal-button" aria-label="log-in-modal-button">
         <i class="fa fa-sign-in fa-lg"></i>
       </button>
-      <button class="nav-button medium" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
+      <button class="nav-button medium none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
+      <div class="user-drop-down">
+        <button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
+            <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+        </button>
+        <div class="drop-down-menu" id="user-drop-down">
+            <button class="button" id="display-name"> Display name </button>
+            <button class="button" id="settings"> Settings </button>
+            <button class="button" id="log-out"> Logout </button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -135,12 +148,46 @@
     </div>
   </div>
 
+  <div class="user-profile-modal" id="user-profile-modal">
+    <div class="header">
+        <label class="left" id="profile-modal-header"> Profile </label>
+        <button class="fa fa-close" id="close-profile">  </button>
+    </div>
+    <div class="background"> 
+        <div class="photo-overlay fa fa-upload" id="photo-overlay">
+            <form id="photo-input-form"> <input type="file" id="photo-input"> </form>
+            <label for="photo-input"></label> 
+        </div>
+        <div class="photo" id="profile-photo"> 
+            <img src="" alt="." id="display-photo">    
+        </div>    
+    </div>
+    <label class="name" id="full-name"> Name </label>
+    <label class="other-info" id="display-email"></label>
+    <label class="other-info" id="display-verified"></label>
+  </div>
+
+  <div class="confirm-dialog" id="confirm-dialog-modal">
+    <div class="header">
+        <label id="comfirm-dialog-header"> Confirm </label>
+        <button class="fa fa-close" id="confirm-dialog-close-button">  </button>
+    </div>
+
+    <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
+
+    <div class="footer-dialog">
+        <button id="yes-button"> Yes </button>
+        <button id="no-button"> No </button>
+    </div>
+</div>
+
 </body>
 
   <!-- scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
   <script src="./scripts/firebase.js"></script>
   <!---->
 
@@ -148,7 +195,7 @@
   <script src="./scripts/observer.js"></script>
   <script type="module" src="./scripts/sign-up.js"></script>
   <script type="module" src="./scripts/log-in.js"> </script>
-  <script type="module" src="./scripts/ui/nav-ui.js"></script>
+  <script type="module" src="./scripts/ui/nav-ui-index.js"></script>
   <!---->
 
 </html>

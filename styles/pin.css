@@ -15,7 +15,7 @@
     border-radius: 10px;
     bottom: 0;
     background-color: rgb(235, 235, 235);
-    transition: border-radius 0.5s,
+    transition: border-radius 0.3s,
         bottom 0.3s;
 }
 

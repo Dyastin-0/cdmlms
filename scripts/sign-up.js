@@ -31,9 +31,15 @@ async function areInputsValid() {
 async function signUp() {
     if (await areInputsValid()) {      
         if (await createUser(email.value, password.value)) {
-            alert("Account created!");
+            alert("Account created! You will receive an email verification shortly, and will be redirected to set-up page.");
             await logInFirebaseAuth(email.value, password.value);
             await saveQuery('users', crypto.randomUUID(), {email: email.value, newUser: true});
+            auth.onAuthStateChanged(user => {
+                user.sendEmailVerification()
+                .catch(error => {
+                    console.error(error);
+                });
+            });
             window.location.href = './home.html';
             hideSignUp();
         }     

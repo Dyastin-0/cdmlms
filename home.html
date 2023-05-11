@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="./styles/splash-screen.css">
     <link rel="stylesheet" href="./styles/view-book.css">
     <link rel="stylesheet" href="./styles/set-up.css">
+    <link rel="stylesheet" href="./styles/user-profile.css">
+    <link rel="stylesheet" href="./styles/confirm-dialog.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
@@ -24,7 +26,7 @@
 
         <nav class="nav">
         <div class="wrapper">
-            <button class="nav-button medium">
+            <button class="nav-button medium" id="index-button">
                 <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
                 CDMLMS
               </button>
@@ -133,8 +135,9 @@
     <div class="set-up" id="one-time-setup-modal">
         <label class="header-label"> Get started </label>
         <p class="header-text"> This is a one-time setup, we need to set your information 
-            <br> 
-            befor you can continue. </p>
+            befor you can continue. Make sure you have opened the verification link sent on your
+            email.
+        </p>
         <form class="form" id="sign-up-form" action="">
             <label class="warning" id="setup-warning">  </label>
             <input type="text" placeholder="First name" 
@@ -161,9 +164,28 @@
     <div class="view-book-modal">
         <div class="header">
             <label> Book </label>
-            <button class="fa fa-close"></button>
+            <button class="fa fa-close" id="close-profile"></button>
         </div>
         <label class="book-title"> Test </label>
+    </div>
+
+    <div class="user-profile-modal" id="user-profile-modal">
+        <div class="header">
+            <label class="left" id="profile-modal-header"> Profile </label>
+            <button class="fa fa-close" id="close-profile">  </button>
+        </div>
+        <div class="background"> 
+            <div class="photo-overlay fa fa-upload" id="photo-overlay">
+                <form id="photo-input-form"> <input type="file" id="photo-input"> </form>
+                <label for="photo-input"></label> 
+            </div>
+            <div class="photo" id="profile-photo"> 
+                <img src="" alt="." id="display-photo">    
+            </div>    
+        </div>
+        <label class="name" id="full-name"> Name </label>
+        <label class="other-info" id="display-email"></label>
+        <label class="other-info" id="display-verified"> </label>
     </div>
 
     <div class="splash-screen active" id="splash-screen">
@@ -173,18 +195,34 @@
         <label class="splash-screen-text"> CdM Software Development Club </label>
     </div>
 
+    <div class="confirm-dialog" id="confirm-dialog-modal">
+        <div class="header">
+            <label id="comfirm-dialog-header"> Confirm </label>
+            <button class="fa fa-close" id="confirm-dialog-close-button">  </button>
+        </div>
+
+        <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
+
+        <div class="footer-dialog">
+            <button id="yes-button"> Yes </button>
+            <button id="no-button"> No </button>
+        </div>
+    </div>
+
 </body>
 
 <!-- scripts -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 <script src="./scripts/firebase.js"></script>
 <!---->
 
 <!--custom scripts-->
-<script type="module" src="./scripts/user.js"></script>
+<script type="module" src="./scripts/user-first-login.js"></script>
 <script src="./scripts/observer.js"></script>
+<script type="module" src="./scripts/ui/nav-ui-home.js"></script>
 <!---->
 
 </html>

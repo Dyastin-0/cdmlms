@@ -1,42 +1,4 @@
-import { getQueryOneField, getQueryTwoFields } from './firestore-api.js';
-import { toSha256 } from './validation.js';
-
-export async function isUsernameAndPasswordMatched(username, password) {
-    let result = {error: null, data: null};
-
-    if (!username || !password) {
-        result.error = "Input username and password.";
-        return result;
-    }
-
-    try {
-        const querySnapshot0 = await getQueryTwoFields('users',
-         'username', 'password',
-          username, await toSha256(password));
-
-        const querySnapshot1 = await getQueryTwoFields('users',
-         'id', 'password',
-          await toSha256(username), await toSha256(password));
-
-        if (!querySnapshot0.empty) {
-            const userData = querySnapshot0.docs[0].data();
-            result.data = userData;
-            return result;
-        }
-
-        if (!querySnapshot1.empty) {
-            const userData = querySnapshot1.docs[0].data();
-            result.data = userData;
-            return result;
-        } 
-
-        result.error = "Invalid username or password.";
-        return result;
-    } catch (err) {
-        result.error = err;
-        return result;
-    }
-}
+import { getQueryOneField } from './firestore-api.js';
 
 export async function isEmailAvailable(email) {
     let result = {result: null, email: null};

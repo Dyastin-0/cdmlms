@@ -35,9 +35,9 @@
     background-color: rgb(255, 255, 255);   
     padding: 10px;
     margin: 5px;
-    transition: background-color 0.5s ease-in-out, 
-        color 0.5s ease-in-out, 
-        opacity 0.5s ease-in-out;
+    transition: background-color 0.3s ease-in-out, 
+        color 0.3s ease-in-out, 
+        opacity 0.3s ease-in-out;
 }
 
 .nav-button.none {
@@ -119,7 +119,7 @@
 }
 
 .chevron {
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 @media (max-width: 495px) {
