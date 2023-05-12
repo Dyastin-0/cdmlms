@@ -18,7 +18,7 @@ export function isPasswordValid(password) {
     return false;
 }
 
-export async function isIdValid(id) {
+export function isIdValid(id) {
     if (!id) {
         warning("", "setup");
         return;

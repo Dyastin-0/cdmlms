@@ -37,7 +37,7 @@ auth.onAuthStateChanged(user => {
 bindEvents();
 
 //initialize data
-export async function init(user, currentUserData) {
+export async function userInit(user, currentUserData) {
     bindSearchEvent();
     userDropDownInit();
     cachedFeatured = await fetchAllFeaturedBooks();

@@ -1,5 +1,6 @@
 import { fetchProfilePhoto, uploadProfilePhoto } from "./storage-api.js";
 import { displayConfirmDialog } from "./confirm-dialog.js";
+import { toastMessage } from "./toast-message.js";
 
 const profileModal = document.getElementById("user-profile-modal");
 const profileHeader = profileModal.querySelector("#profile-modal-header");
@@ -47,24 +48,25 @@ function bindEvents() {
 
     photoInput.addEventListener('input', async (event) => {
         auth.onAuthStateChanged(async (user) => {
-            if (user && user.emailVerified) {
-                const photo = event.target.files[0];
-                await uploadProfilePhoto(user, photo);
-
-                const imageURL = await fetchProfilePhoto(user);
-                const confirmMessage = "Are you sure you want to update your display photo?";
-                const process = () => updateProfilePhoto(user, imageURL);
-                await displayConfirmDialog(process, confirmMessage);
-
-            } else {
-                alert("Verify your account to start customizing your profile.");
+            if (user) {
+                if (user.emailVerified) {
+                    const photo = event.target.files[0];
+                    const confirmMessage = "Are you sure you want to update your display photo?";
+                    const toastMessage = "Profile photo changed!"
+                    const process = () => updateProfilePhoto(photo, user);
+                    await displayConfirmDialog(process, confirmMessage, toastMessage);
+                } else {
+                    toastMessage("Verify your account to start customizing your profile.");
+                }
             }
             photoInputForm.reset();
         })
     });
 }
 
-async function updateProfilePhoto(user, imageURL) {
+async function updateProfilePhoto(photo, user) {
+    await uploadProfilePhoto(user, photo);
+    const imageURL = await fetchProfilePhoto(user);
     await user.updateProfile({
         photoURL: imageURL
     })
@@ -72,15 +74,16 @@ async function updateProfilePhoto(user, imageURL) {
 }
 
 export async function displayProfile(user, userData) {
-    user.emailVerified ? verified.textContent = "Verified ✓" : verified.textContent = "Not verified";
-    if (!userData.newUser) {
+    await user.reload();
+    if (userData && !userData.newUser) {
         email.textContent = user.email;
         displayedName.textContent = user.displayName;
         profileHeader.textContent = user.displayName;
-        if (user.photoURL) profilePhoto.src = user.photoURL;
+        user.photoURL? profilePhoto.src = user.photoURL : null;
         fullName.textContent = userData.firstName + " " + userData.middleName + " " + userData.lastName;
     } else {
         displayedName.textContent = user.email;
         email.textContent = user.email;
     }
+    user.emailVerified ? verified.textContent = "Verified ✓" : verified.textContent = "Not verified";
 }

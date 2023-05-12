@@ -1,7 +1,10 @@
 import { isPasswordValid, isEmailValid, warning} from './validation.js';
-import { signupUiInit, hideSignUp } from './ui/index/sign-up-ui.js';
+import { signupUiInit } from './ui/index/sign-up-ui.js';
+import { hideSignUp } from './ui/index/sign-up-ui.js';
 import { createUser, logInFirebaseAuth } from './auth-api.js';
 import { saveQuery } from './firestore-api.js';
+import { toastMessage } from './toast-message.js';
+import { displayConfirmDialog } from './confirm-dialog.js';
 
 const modal = document.getElementById("sign-up-modal");
 const submit = modal.querySelector("#sign-up-account-button");
@@ -30,18 +33,27 @@ async function areInputsValid() {
 
 async function signUp() {
     if (await areInputsValid()) {      
+        const toastText = "Account created!";
         if (await createUser(email.value, password.value)) {
-            alert("Account created! You will receive an email verification shortly, and will be redirected to set-up page.");
-            await logInFirebaseAuth(email.value, password.value);
-            await saveQuery('users', crypto.randomUUID(), {email: email.value, newUser: true});
-            auth.onAuthStateChanged(user => {
-                user.sendEmailVerification()
-                .catch(error => {
-                    console.error(error);
-                });
-            });
-            window.location.href = './home.html';
-            hideSignUp();
-        }     
+            await initialAccoutSetUp();
+            toastMessage(toastText);
+        }
     }
+}
+
+async function initialAccoutSetUp() {
+    await logInFirebaseAuth(email.value, password.value);
+    await saveQuery('users', crypto.randomUUID(), {email: email.value, newUser: true});
+    auth.onAuthStateChanged(user => {
+        user.sendEmailVerification()
+        .catch(error => {
+            console.error(error);
+        });
+    });
+    hideSignUp();
+    displayConfirmDialog(redirect, "Redirect to setup page?", null);
+}
+
+function redirect() {
+    window.location.href = './home.html';
 }

@@ -1,8 +1,9 @@
 import { getQueryOneField } from "./firestore-api.js";
 import { isIdValid, warning } from "./validation.js";
 import { isDisplayNameAvailable, isIdAvailable } from "./dataAvailabilityCheck.js";
-import { init } from "./user.js";
+import { userInit } from "./user.js";
 import { logOut } from "./user.js";
+import { displayConfirmDialog } from "./confirm-dialog.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
@@ -31,7 +32,7 @@ async function checkIfFirstLogin() {
                 oneTimeSetupModal.classList.add("active");
             } else {
                 splashScreen.remove();
-                await init(user, currentUser.data());
+                await userInit(user, currentUser.data());
             }
         }
     });
@@ -59,16 +60,20 @@ async function verifyEmailAndInputs(user) {
     }
 
     if (await areInputsValid()) {
-        await setupInformation(currentUserRef, user);
-        oneTimeSetupModal.classList.remove("active");
-        splashScreen.remove();
-        user.reload()
-        .then(async () => {
-            const querySnapshot = await getQueryOneField('users', 'email', user.email);
-            const currentUser = querySnapshot.docs[0];
-            await init(user, currentUser.data());
-        })
+        const process = () => { finalAccountSetup(currentUserRef, user) };
+        const confirmMessage = "Make sure that all the information you have put in belongs to you. Continue?";
+        const toastMessage = "Account setup done! Browse the library mah g.";
+        await displayConfirmDialog(process, confirmMessage, toastMessage);
     }
+}
+
+async function finalAccountSetup(currentUserRef, user) {
+    await setupInformation(currentUserRef, user);
+    oneTimeSetupModal.classList.remove("active");
+    splashScreen.remove();
+    const querySnapshot = await getQueryOneField('users', 'email', user.email);
+    const currentUser = querySnapshot.docs[0];
+    userInit(user, currentUser.data());
 }
 
 async function setupInformation(userRef, user) {
@@ -99,6 +104,7 @@ async function isEmailVerified(user) {
 //input checks
 async function areInputsValid() {
     if (!areInputFieldsFilled()) return false;
+
     if (!areInputDataValid()) return false;
 
     const areInputAvailable = await areInputUsed();
@@ -130,8 +136,7 @@ function areInputDataValid() {
         return false;
     }
 
-    if (!isIdValid(id.value)) return false;
-    return true;
+    return isIdValid(id.value);
 }
 
 async function areInputUsed() {

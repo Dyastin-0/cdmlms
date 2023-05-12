@@ -1,0 +1,43 @@
+.toast-message {
+    width: 250px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 5px rgb(0, 0, 0, 0.1);
+    position: fixed;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    top: -25%;
+    left: 50%;
+    border-radius: 10px;
+    z-index: 23;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+
+.toast-message.active {
+    top: 10%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.toast-message .message {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.toast-message button {
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 8px;
+    border-radius: 50px;
+    border-width: 0;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.toast-message button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(0, 0, 0, 0.1);
+}

@@ -18,8 +18,11 @@ auth.onAuthStateChanged(async (user) => {
     if (user) {
         showLoggedInButtons();
         userProfileInit();
-        const querySnapshot = await getQueryOneField('users', 'email', user.email);
-        const currentUserData = querySnapshot.docs[0].data();
+        let currentUserData;
+        if (user.emailVerified) {
+            const querySnapshot = await getQueryOneField('users', 'email', user.email);
+            currentUserData = querySnapshot.docs[0].data();
+        }
         displayProfile(user, currentUserData);
     } else {
         showLoggedOutButtons();
