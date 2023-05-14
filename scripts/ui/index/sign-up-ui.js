@@ -1,4 +1,4 @@
-import { warning } from '/scripts/validation.js';
+import { warning } from '/scripts/utils/validation.js';
 import { showLogIn } from './log-in-ui.js';
 
 const overlay = document.getElementById("overlay");

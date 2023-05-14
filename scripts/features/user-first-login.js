@@ -1,9 +1,9 @@
-import { getQueryOneField } from "./firestore-api.js";
-import { isIdValid, warning } from "./validation.js";
-import { isDisplayNameAvailable, isIdAvailable } from "./dataAvailabilityCheck.js";
+import { getQueryOneField } from "../firebase/firestore-api.js";
+import { isIdValid, warning } from "../utils/validation.js";
+import { isDisplayNameAvailable, isIdAvailable } from "../utils/data-availability.js";
 import { userInit } from "./user.js";
 import { logOut } from "./user.js";
-import { displayConfirmDialog } from "./confirm-dialog.js";
+import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
@@ -31,8 +31,8 @@ async function checkIfFirstLogin() {
             if (isNewUser) {
                 oneTimeSetupModal.classList.add("active");
             } else {
-                splashScreen.remove();
                 await userInit(user, currentUser.data());
+                splashScreen.remove();
             }
         }
     });
@@ -41,11 +41,10 @@ async function checkIfFirstLogin() {
 function bindEvents() {
     doneSetupButton.addEventListener('click', async () => {
         auth.onAuthStateChanged(async (user) => {
-            await verifyEmailAndInputs(user);
+            if (user) await verifyEmailAndInputs(user);
         });
     });
 
-    
     cancelSetupButton.addEventListener('click', async () => await logOut());
 }
 
@@ -60,7 +59,7 @@ async function verifyEmailAndInputs(user) {
     }
 
     if (await areInputsValid()) {
-        const process = () => { finalAccountSetup(currentUserRef, user) };
+        const process = async () => { finalAccountSetup(currentUserRef, user) };
         const confirmMessage = "Make sure that all the information you have put in belongs to you. Continue?";
         const toastMessage = "Account setup done! Browse the library mah g.";
         await displayConfirmDialog(process, confirmMessage, toastMessage);
@@ -69,15 +68,15 @@ async function verifyEmailAndInputs(user) {
 
 async function finalAccountSetup(currentUserRef, user) {
     await setupInformation(currentUserRef, user);
-    oneTimeSetupModal.classList.remove("active");
-    splashScreen.remove();
     const querySnapshot = await getQueryOneField('users', 'email', user.email);
     const currentUser = querySnapshot.docs[0];
-    userInit(user, currentUser.data());
+    oneTimeSetupModal.classList.remove("active");
+    await userInit(user, currentUser.data());
+    splashScreen.remove();
 }
 
 async function setupInformation(userRef, user) {
-    userRef.update({
+    await userRef.update({
         newUser: false,
         firstName: firstName.value,
         middleName: middleName.value,
@@ -87,7 +86,7 @@ async function setupInformation(userRef, user) {
         id: id.value
     });
 
-    user.updateProfile({
+    await user.updateProfile({
         displayName: displayName.value
     });
 }
@@ -104,10 +103,9 @@ async function isEmailVerified(user) {
 //input checks
 async function areInputsValid() {
     if (!areInputFieldsFilled()) return false;
-
     if (!areInputDataValid()) return false;
 
-    const areInputAvailable = await areInputUsed();
+    const areInputAvailable = await areInputsAvailable();
     if (!areInputAvailable) return false;
     return true;
 }
@@ -117,10 +115,9 @@ function areInputFieldsFilled() {
     firstName.value,
     lastName.value,
     middleName.value,
-    birthDate.value,
+    sex.value,
     id.value,
     displayName.value,
-    birthDate.value
     ];
 
     if (inputs.some(field => !field)) {
@@ -139,7 +136,7 @@ function areInputDataValid() {
     return isIdValid(id.value);
 }
 
-async function areInputUsed() {
+async function areInputsAvailable() {
     const idRes = await isIdAvailable(id.value);
     if (!idRes.result) {
         warning(idRes.id + " is already used, contact the MIS if there is any problem.", "setup");

@@ -24,12 +24,7 @@ let isOpen = false;
 function handleGlobalClick(e) {
     const isClicked = userDropDownButton.contains(e.target);
 
-    const target = e.target.id ? e.target.id : null;
-
-    let isChild = null;
-    if (target) isChild = userDropDown.querySelector("#" + e.target.id) ? true : false;
-
-    if (!isClicked && !isChild) {
+    if (!isClicked) {
         hideDropDown(userDropDown);
         isOpen = false;
         chevron.style.transform = 'rotateY(360deg)';

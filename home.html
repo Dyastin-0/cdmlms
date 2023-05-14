@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Library Management System of Colegio de Montalban.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
     <link rel="stylesheet" href="./styles/nav.css">
     <link rel="stylesheet" href="./styles/pin.css">
@@ -173,7 +173,7 @@
     <div class="user-profile-modal" id="user-profile-modal">
         <div class="header">
             <label class="left" id="profile-modal-header"> Profile </label>
-            <button class="fa fa-close" id="close-profile">  </button>
+            <button class="fa fa-close" id="close-profile" aria-label="close-profile-button">  </button>
         </div>
         <div class="background"> 
             <div class="photo-overlay fa fa-upload" id="photo-overlay">
@@ -187,6 +187,9 @@
         <label class="name" id="full-name"> Name </label>
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="display-verified"> </label>
+        <div class="footer">
+            <button id="edit-profile"> Edit profile </button>
+        </div>
     </div>
 
     <div class="splash-screen active" id="splash-screen">
@@ -199,7 +202,7 @@
     <div class="confirm-dialog" id="confirm-dialog-modal">
         <div class="header">
             <label id="comfirm-dialog-header"> Confirm </label>
-            <button class="fa fa-close" id="confirm-dialog-close-button">  </button>
+            <button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">  </button>
         </div>
 
         <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
@@ -212,7 +215,7 @@
 
     <div class="toast-message" id="toast-message-modal">
         <p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
-        <button class="fa fa-close" id="toast-button">  </button>
+        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
     </div>
 
 </body>
@@ -222,13 +225,13 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-<script src="./scripts/firebase.js"></script>
+<script src="./scripts/firebase/firebase.js"></script>
 <!---->
 
 <!--custom scripts-->
-<script type="module" src="./scripts/user-first-login.js"></script>
+<script type="module" src="./scripts/features/user-first-login.js"></script>
 <script src="./scripts/observer.js"></script>
-<script type="module" src="./scripts/ui/nav-ui-home.js"></script>
+<script type="module" src="./scripts/ui/home/nav-ui-home.js"></script>
 <!---->
 
 </html>

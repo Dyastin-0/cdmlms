@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Library Management System of Colegio de Montalban.">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="./styles/style.css">
 	<link rel="stylesheet" href="./styles/wrapper.css">
 	<link rel="stylesheet" href="./styles/nav.css">
 	<link rel="stylesheet" href="./styles/drop-down.css">
@@ -16,12 +16,13 @@
 	<link rel="stylesheet" href="./styles/user-profile.css">
 	<link rel="stylesheet" href="./styles/confirm-dialog.css">
 	<link rel="stylesheet" href="./styles/toast-message.css">
+	<link rel="stylesheet" href="./styles/splash-screen.css">
 	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
 	<title> Cdmlms </title>
 </head>
 <body>
 
-	<nav class="nav trasparent">
+	<nav class="nav trasparent" id="index-navbar">
 		<button class="nav-button medium" id="index-button">
 		<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
 		CDMLMS
@@ -150,7 +151,7 @@
 	<div class="user-profile-modal" id="user-profile-modal">
 		<div class="header">
 			<label class="left" id="profile-modal-header"> Profile </label>
-			<button class="fa fa-close" id="close-profile">  </button>
+			<button class="fa fa-close" id="close-profile" aria-label="close-profile-button">  </button>
 		</div>
 		<div class="background"> 
 			<div class="photo-overlay fa fa-upload" id="photo-overlay">
@@ -166,10 +167,18 @@
 		<label class="other-info" id="display-verified"></label>
 	</div>
 
+	<div class="splash-screen active" id="splash-screen">
+        <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
+        <label class="fa fa-spinner spinner" id="featured-spinner"></label>
+        <label class="splash-screen-label"> From </label>
+        <label class="splash-screen-text"> CdM Software Development Club </label>
+    </div>
+
 	<div class="confirm-dialog" id="confirm-dialog-modal">
 		<div class="header">
 			<label id="comfirm-dialog-header"> Confirm </label>
-			<button class="fa fa-close" id="confirm-dialog-close-button">  </button>
+			<button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">
+			</button>
 		</div>
 
 		<p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
@@ -182,7 +191,7 @@
 
 	<div class="toast-message" id="toast-message-modal">
 		<p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
-		<button class="fa fa-close" id="toast-button">  </button>
+		<button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
 	</div>
 
 </body>
@@ -192,14 +201,14 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-  <script src="./scripts/firebase.js"></script>
+  <script src="./scripts/firebase/firebase.js"></script>
   <!---->
 
   <!--custom scripts-->
   <script src="./scripts/observer.js"></script>
-  <script type="module" src="./scripts/sign-up.js"></script>
-  <script type="module" src="./scripts/log-in.js"> </script>
-  <script type="module" src="./scripts/ui/nav-ui-index.js"></script>
+  <script type="module" src="./scripts/features/sign-up.js"></script>
+  <script type="module" src="./scripts/features/log-in.js"> </script>
+  <script type="module" src="./scripts/ui/index/nav-ui-index.js"></script>
   <!---->
 
 </html>

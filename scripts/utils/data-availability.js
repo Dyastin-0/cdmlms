@@ -1,4 +1,4 @@
-import { getQueryOneField } from './firestore-api.js';
+import { getQueryOneField } from '../firebase/firestore-api.js';
 
 export async function isEmailAvailable(email) {
     let result = {result: null, email: null};

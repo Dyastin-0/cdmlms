@@ -1,4 +1,4 @@
-import { warning } from "./validation.js";
+import { warning } from "../utils/validation.js";
 
 export async function createUser(email, password) {
     let isSuccess = false;

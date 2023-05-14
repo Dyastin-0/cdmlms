@@ -1,4 +1,4 @@
-import { search } from "../../user.js";
+import { search } from "../../features/search-book.js";
 import { displayDropDown, hideDropDown } from "./home-ui-utils.js";
 
 //desktop view ui elements

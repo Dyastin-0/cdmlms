@@ -1,9 +1,9 @@
-import { fetchAllFeaturedBooks, formatBooks, findBookBy } from "./books.js";
-import { userDropDownInit } from "./ui/home/user-drop-down-ui.js";
-import { addRecentSearch, displayRecentSearches, bindSearchEvent, 
-    generateSearchResultItem, generateErrorResult, displayRecentSearchMobile } from "./ui/home/search-ui.js";
-import { signOutFirebaseAuth } from "./auth-api.js";
+import { fetchAllFeaturedBooks, formatBooks } from "./books.js";
+import { userDropDownInit } from "../ui/home/user-drop-down-ui.js";
+import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
+import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
+import { search } from "./search-book.js";
 
 let cachedFeatured = {};
 let myBooks = {};
@@ -12,7 +12,6 @@ const logout = document.querySelector("#log-out");
 const featured = document.querySelector("#featured");
 const searchInput = document.querySelector("#search-input");
 const searchBy = document.querySelector("#search-by");
-const searchResult = document.querySelector("#search-results");
 const searchInputMobile = document.querySelector("#search-input-mobile");
 const searchByMobile = document.querySelector("#search-by-mobile");
 
@@ -36,18 +35,16 @@ auth.onAuthStateChanged(user => {
 
 bindEvents();
 
-//initialize data
 export async function userInit(user, currentUserData) {
-    bindSearchEvent();
     userDropDownInit();
     cachedFeatured = await fetchAllFeaturedBooks();
-    await renderData(user, currentUserData);
+    renderData(user, currentUserData);
+    bindSearchEvent();
     displayRecentSearches(user.uid);
     displayRecentSearchMobile();
     observerScroll();
 }
 
-//data rendering
 async function renderData(user, currentUserData) {
     displayProfile(user, currentUserData);
     renderBooks();
@@ -60,33 +57,10 @@ function renderBooks() {
     });
 }
 
-//user functions
 export async function logOut() {
     await signOutFirebaseAuth();
 }
 
-export async function search(by, input) {
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            addRecentSearch(user.uid, input);
-            displayRecentSearches(user.uid);
-        }
-    });
-
-    const search = await findBookBy(by, input);
-
-    if (search.error === null) {
-        search.results.forEach((book) => {
-            const result = generateSearchResultItem(book);
-            searchResult.appendChild(result);
-        });
-    } else {
-        const error = generateErrorResult(search.error);
-        searchResult.appendChild(error);
-    }
-}
-
-//bind DOM element events
 async function bindEvents() {
     logout.addEventListener('click', async () => await logOut());
 

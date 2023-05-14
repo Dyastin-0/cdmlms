@@ -1,18 +1,20 @@
-import { signOutFirebaseAuth } from "../auth-api.js";
-import { userDropDownInit } from "./home/user-drop-down-ui.js";
-import { userProfileInit } from "../user-profile.js";
-import { displayProfile } from "../user-profile.js";
-import { getQueryOneField } from "../firestore-api.js";
+import { signOutFirebaseAuth } from "../../firebase/auth-api.js";
+import { userDropDownInit } from "../home/user-drop-down-ui.js";
+import { userProfileInit } from "../../features/user-profile.js";
+import { displayProfile } from "../../features/user-profile.js";
+import { getQueryOneField } from "../../firebase/firestore-api.js";
 
-const indexButton = document.getElementById("index-button");
-
-const openLogIn = document.getElementById("log-in-modal-button");
-const openSignUp = document.getElementById("sign-up-modal-button");
-const homeButton = document.getElementById("home");
-const logOutButton = document.querySelector("#log-out");
+const indexNavbar = document.querySelector("#index-navbar")
+const indexButton = indexNavbar.querySelector("#index-button");
+const openLogIn = indexNavbar.querySelector("#log-in-modal-button");
+const openSignUp = indexNavbar.querySelector("#sign-up-modal-button");
+const homeButton = indexNavbar.querySelector("#home");
+const logOutButton = indexNavbar.querySelector("#log-out");
 
 const userDropDown = document.querySelector("#user-drop-down");
 const userDropDownButton = document.querySelector("#user-drop-down-button");
+
+const splashScreen = document.querySelector("#splash-screen");
 
 auth.onAuthStateChanged(async (user) => {
     if (user) {
@@ -27,6 +29,7 @@ auth.onAuthStateChanged(async (user) => {
     } else {
         showLoggedOutButtons();
     }
+    splashScreen.remove();
 });
 
 navUiInit();

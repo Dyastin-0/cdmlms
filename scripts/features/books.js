@@ -1,4 +1,4 @@
-import { getQueryWithLimit, searchQuery } from "./firestore-api.js";
+import { getQueryWithLimit, searchQuery } from "../firebase/firestore-api.js";
 
 function bindPinEvent(pin) {
     pin.addEventListener('click', () => {
@@ -90,7 +90,7 @@ export async function findBookBy(by, input) {
         search.error = "Not found, check if you are searching with the right field.";
         return search;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 

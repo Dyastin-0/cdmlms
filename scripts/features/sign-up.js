@@ -1,12 +1,12 @@
-import { isPasswordValid, isEmailValid, warning} from './validation.js';
-import { signupUiInit } from './ui/index/sign-up-ui.js';
-import { hideSignUp } from './ui/index/sign-up-ui.js';
-import { createUser, logInFirebaseAuth } from './auth-api.js';
-import { saveQuery } from './firestore-api.js';
-import { toastMessage } from './toast-message.js';
-import { displayConfirmDialog } from './confirm-dialog.js';
+import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
+import { signupUiInit } from '../ui/index/sign-up-ui.js';
+import { hideSignUp } from '../ui/index/sign-up-ui.js';
+import { createUser, logInFirebaseAuth } from '../firebase/auth-api.js';
+import { saveQuery } from '../firebase/firestore-api.js';
+import { toastMessage } from '../utils/toast-message.js';
+import { displayConfirmDialog } from '../utils/confirm-dialog.js';
 
-const modal = document.getElementById("sign-up-modal");
+const modal = document.querySelector("#sign-up-modal");
 const submit = modal.querySelector("#sign-up-account-button");
 const email = modal.querySelector("#email");
 const password = modal.querySelector("#password");
@@ -17,11 +17,22 @@ bindEvents();
 
 function bindEvents() {
     submit.addEventListener('click',() => signUp());
-    email.addEventListener('keyup', () => isEmailValid(email.value));
-    password.addEventListener('keyup', () => isPasswordValid(password.value));
+    email.addEventListener('keyup', (e) => {
+        e.key === "Enter" ? signUp() : null;
+    });
+    password.addEventListener('keyup', (e) => {
+        e.key === "Enter" ? signUp() : null;
+    });
+    confirmPassword.addEventListener('keyup', (e) => {
+        e.key === "Enter" ? signUp() : null; 
+    });
 }
 
 async function areInputsValid() {
+    if (!email.value || !password.value || !confirmPassword.value) {
+        warning("There is an empty field.", "sign-up");
+        return false;
+    }
     if (!isEmailValid(email.value)) return false;
     if (password.value !== confirmPassword.value) {
         warning("Password does not match.", "sign-up");
@@ -54,6 +65,6 @@ async function initialAccoutSetUp() {
     displayConfirmDialog(redirect, "Redirect to setup page?", null);
 }
 
-function redirect() {
+async function redirect() {
     window.location.href = './home.html';
 }
