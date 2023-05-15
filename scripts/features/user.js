@@ -4,12 +4,14 @@ import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
 import { search } from "./search-book.js";
+import { sessionTokenCheck } from "./session-token.js";
 
 let cachedFeatured = {};
 let myBooks = {};
 
 const logout = document.querySelector("#log-out");
-const featured = document.querySelector("#featured");
+const discover = document.querySelector("#discover");
+
 const searchInput = document.querySelector("#search-input");
 const searchBy = document.querySelector("#search-by");
 const searchInputMobile = document.querySelector("#search-input-mobile");
@@ -17,22 +19,7 @@ const searchByMobile = document.querySelector("#search-by-mobile");
 
 const indexButton = document.querySelector("#index-button");
 
-auth.onAuthStateChanged(user => {
-    if (user) {
-        user.getIdTokenResult()
-        .then(async (IdTokenResult) => {
-            const expiration = Date.parse(IdTokenResult.expirationTime);
-            const dateNow = new Date().getTime();
-            if (dateNow > expiration) {
-                await signOutFirebaseAuth();
-                window.location.href = './';
-            }
-        });
-    } else {
-        window.location.href = './';
-    }
-});
-
+sessionTokenCheck();
 bindEvents();
 
 export async function userInit(user, currentUserData) {
@@ -53,7 +40,7 @@ async function renderData(user, currentUserData) {
 function renderBooks() {
     const formattedBooks = formatBooks(cachedFeatured.books);
     formattedBooks.forEach((formattedBook) => {
-        featured.appendChild(formattedBook);
+        discover.appendChild(formattedBook);
     });
 }
 

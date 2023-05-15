@@ -18,9 +18,7 @@ const photoInputForm = profileModal.querySelector("#photo-input-form");
 
 const overlay = document.getElementById("overlay");
 
-export function userProfileInit() {
-    bindEvents();
-}
+bindEvents();
 
 function bindEvents() {
     profileButton.addEventListener('click', () => {

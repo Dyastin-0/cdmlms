@@ -44,10 +44,8 @@ async function areInputsValid() {
 
 async function signUp() {
     if (await areInputsValid()) {      
-        const toastText = "Account created!";
         if (await createUser(email.value, password.value)) {
             await initialAccoutSetUp();
-            toastMessage(toastText);
         }
     }
 }
@@ -62,7 +60,7 @@ async function initialAccoutSetUp() {
         });
     });
     hideSignUp();
-    displayConfirmDialog(redirect, "Redirect to setup page?", null);
+    displayConfirmDialog(redirect, "Account created! Redirect to setup page?", null, null);
 }
 
 async function redirect() {

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./styles/user-profile.css">
     <link rel="stylesheet" href="./styles/confirm-dialog.css">
     <link rel="stylesheet" href="./styles/toast-message.css">
+    <link rel="stylesheet" href="./styles/edit-profile.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
@@ -26,56 +27,50 @@
     <main class="main" id="main">
 
         <nav class="nav">
-        <div class="wrapper">
-            <button class="nav-button medium" id="index-button">
-                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-                CDMLMS
-              </button>
-        </div>
-        <button class="nav-button search fa fa-search" id="search-button" aria-label="search-button"></button>
-        <div class="drop-down" id="search-drop-down">
             <div class="wrapper">
-                <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
-                <select class="select" id="search-by">
-                    <option value="title"> Title </option>
-                    <option value="isbn"> ISBN </option>
-                    <option value="author"> Author </option>
-                    <option value="genre"> Genre </option>
-                </select>
-            </div>
-            <div class="drop-down-menu left fit" id="recent-searches-modal">
-                <Label class="head" id="recent-search-label"> Recent searches </Label>
-                <div class="recent-searches" id="recent-searches">
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper">
-            <button class="nav-button large" id="user-notification" aria-label="user-notification">
-                <i class="fa fa-bell"></i>
-            </button>
-            <div class="user-drop-down">
-                <button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
-                    <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+                <button class="nav-button medium" id="index-button">
+                    <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+                    CDMLMS
                 </button>
-                <div class="drop-down-menu" id="user-drop-down">
-                    <button class="button" id="display-name"> Display name </button>
-                    <button class="button" id="settings"> Settings </button>
-                    <button class="button" id="log-out"> Logout </button>
+            </div>
+            <button class="nav-button search fa fa-search" id="search-button" aria-label="search-button"></button>
+            <div class="drop-down" id="search-drop-down">
+                <div class="wrapper">
+                    <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
+                    <select class="select" id="search-by">
+                        <option value="title"> Title </option>
+                        <option value="isbn"> ISBN </option>
+                        <option value="author"> Author </option>
+                        <option value="genre"> Genre </option>
+                    </select>
+                </div>
+                <div class="drop-down-menu left fit" id="recent-searches-modal">
+                    <Label class="head" id="recent-search-label"> Recent searches </Label>
+                    <div class="recent-searches" id="recent-searches">
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </nav>
-
-        <!-- <content class="content">
-            <label class="label left"> Your books </label>
-            <div class="pin-container" id="your-book"> </div>
-        </content> -->
+            <div class="wrapper">
+                <button class="nav-button large" id="user-notification" aria-label="user-notification">
+                    <i class="fa fa-bell"></i>
+                </button>
+                <div class="user-drop-down">
+                    <button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
+                        <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+                    </button>
+                    <div class="drop-down-menu" id="user-drop-down">
+                        <button class="button" id="display-name"> Display name </button>
+                        <button class="button" id="settings"> Settings </button>
+                        <button class="button" id="log-out"> Logout </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
         <content class="content">
-            <label class="label left"> Featured Books </label>
-            <div class="pin-container" id="featured">
+            <label class="label left hide"> Discover </label>
+            <div class="pin-container" id="discover">
             </div>
         </content>
 
@@ -139,7 +134,7 @@
             befor you can continue. Make sure you have opened the verification link sent on your
             email.
         </p>
-        <form class="form" id="sign-up-form" action="">
+        <form class="form">
             <label class="warning" id="setup-warning">  </label>
             <input type="text" placeholder="First name" 
             id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
@@ -188,7 +183,33 @@
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="display-verified"> </label>
         <div class="footer">
-            <button id="edit-profile"> Edit profile </button>
+            <button id="edit-profile-button"> Edit profile </button>
+        </div>
+    </div>
+
+    <div class="edit-profile-modal" id="edit-profile-modal">
+        <div class="header">
+            <label> Edit profile </label>
+            <button class="fa fa-close" id="close-edit-profile"></button>
+        </div>
+        <form class="form" id="edit-profile-form">
+            <label class="warning" id="edit-warning">  </label>
+            <input type="text" placeholder="First name" 
+            id="edit-first-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Last name"
+            id="edit-last-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Middle name" 
+            id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <select name="Sex" id="edit-sex">
+            <option value="Male"> Male </option>
+            <option value="Female"> Female </option>
+            </select>
+            <label for="edit-birth-date"> Birth date </label>
+            <input type="date" placeholder="Birth date" id="edit-birth-date">
+            <input type="text" placeholder="Display name" id="edit-display-name">
+        </form>
+        <div class="footer">
+            <button id="done-edit"> Done </button>
         </div>
     </div>
 
@@ -196,7 +217,7 @@
         <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
         <label class="fa fa-spinner spinner" id="featured-spinner"></label>
         <label class="splash-screen-label"> From </label>
-        <label class="splash-screen-text"> CdM Software Development Club </label>
+        <label class="splash-screen-text"> Agile Sprinters </label>
     </div>
 
     <div class="confirm-dialog" id="confirm-dialog-modal">
@@ -231,7 +252,7 @@
 <!--custom scripts-->
 <script type="module" src="./scripts/features/user-first-login.js"></script>
 <script src="./scripts/observer.js"></script>
-<script type="module" src="./scripts/ui/home/nav-ui-home.js"></script>
+<script type="module" src="./scripts/features/edit-profile.js"></script>
 <!---->
 
 </html>

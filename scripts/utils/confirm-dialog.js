@@ -16,8 +16,9 @@ export async function displayConfirmDialog(process, message, toastText) {
         .then(() => {
             if (toastText) toastMessage(toastText);
         })
-        .catch(() => {
-            toastText("Something went wrong, try again.");
+        .catch((error) => {
+            console.log(error)
+            toastMessage("Something went wrong, try again.");
         })
         .finally(() => {
             removeEventListeners(yesHandler, clearConfirmEvent);

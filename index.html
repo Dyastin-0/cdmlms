@@ -11,11 +11,10 @@
 	<link rel="stylesheet" href="./styles/nav.css">
 	<link rel="stylesheet" href="./styles/drop-down.css">
 	<link rel="stylesheet" href="/styles/pin.css">
+	<link rel="stylesheet" href="./styles/toast-message.css">
+	<link rel="stylesheet" href="./styles/confirm-dialog.css">
 	<link rel="stylesheet" href="./styles/sign-up.css">
 	<link rel="stylesheet" href="./styles/log-in.css">
-	<link rel="stylesheet" href="./styles/user-profile.css">
-	<link rel="stylesheet" href="./styles/confirm-dialog.css">
-	<link rel="stylesheet" href="./styles/toast-message.css">
 	<link rel="stylesheet" href="./styles/splash-screen.css">
 	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
 	<title> Cdmlms </title>
@@ -30,21 +29,11 @@
 		<div class="wrapper fit">
 			<button class="nav-button medium" id="about" aria-label="about"> About </button>
 			<button class="nav-button medium none logged-in" id="home" aria-label="home"> Home </button>
-			<button class="nav-button medium none logged-in" id="display-name-index" aria-label="display-name-index">  </button>
+			<button class="nav-button medium none logged-in" id="log-out-button"> Log out </button>
 			<button class="nav-button medium none logged-out" id="log-in-modal-button" aria-label="log-in-modal-button">
 			<i class="fa fa-sign-in fa-lg"></i>
 			</button>
 			<button class="nav-button medium none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
-			<div class="user-drop-down">
-				<button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
-				<i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
-				</button>
-				<div class="drop-down-menu" id="user-drop-down">
-					<button class="button" id="display-name"> Display name </button>
-					<button class="button" id="settings"> Settings </button>
-					<button class="button" id="log-out"> Logout </button>
-				</div>
-			</div>
 		</div>
 	</nav>
 
@@ -53,16 +42,16 @@
 			<label class="label hide"> Colegio de Montalban </label>
 			<div class="pin-container">
 				<div class="pin medium hide">
-					<label> The new library management system of Colegio de Montalban </label>
+					<label class="header"> The new library management system of Colegio de Montalban </label>
 				</div>
 				<div class="pin medium hide">
-					<label> Designed and devoloped by CpE Students </label>
+					<label class="header"> Designed and devoloped by CpE Students </label>
 				</div>
 				<div class="pin medium hide">
-					<label> Books now browsable online! </label>
+					<label class="header"> Books now browsable online! </label>
 				</div>
 				<div class="pin medium hide">
-					<label> Sign up and browse our library!   </label>
+					<label class="header"> Sign up and browse our library!   </label>
 				</div>
 			</div>
 		</content>
@@ -71,16 +60,16 @@
 			<label class="label hide"> Browsing the library made easy! </label>
 			<div class="pin-container">
 				<div class="pin small hide">
-					<label> Create an account; </label>
+					<label class="header"> Create an account; </label>
 				</div>
 				<div class="pin small hide">
-					<label> Log in; </label>
+					<label class="header"> Log in; </label>
 				</div>
 				<div class="pin small hide">
-					<label> Browse; </label>
+					<label class="header"> Browse; </label>
 				</div>
 				<div class="pin small hide">
-					<label> and borrow the book you need! </label>
+					<label class="header"> and borrow the book you need! </label>
 				</div>
 			</div>
 		</content>
@@ -123,8 +112,8 @@
 		<form class="form" id="sign-up-form" action="">
 			<label class="warning" id="sign-up-warning">  </label>
 			<input type="text" placeholder="Email" id="email">
-			<input type="password" placeholder="Password" id="password" autocomplete="on">
-			<input type="password" placeholder="Confirm password" id="password-confirm" autocomplete="on">
+			<input type="password" placeholder="Password" id="password" autocomplete="on" enterkeyhint="Enter">
+			<input type="password" placeholder="Confirm password" id="password-confirm" autocomplete="on" enterkeyhint="Enter">
 		</form>
 		<div class="footer">
 			<button id="sign-up-account-button"> Sign up </button>
@@ -139,8 +128,8 @@
 		</div>
 		<form class="form" id="log-in-form">
 			<label class="warning" id="log-in-warning">  </label>
-			<input type="text" placeholder="Email" id="log-in-email">
-			<input type="password" placeholder="Password" id="log-in-password" autocomplete="on">
+			<input type="text" placeholder="Email" id="log-in-email" enterkeyhint="Enter">
+			<input type="password" placeholder="Password" id="log-in-password" autocomplete="on" enterkeyhint="Enter">
 		</form>
 		<div class="footer">
 			<button id="log-in-account-button"> Log in </button>
@@ -148,51 +137,31 @@
 		</div>
 	</div>
 
-	<div class="user-profile-modal" id="user-profile-modal">
-		<div class="header">
-			<label class="left" id="profile-modal-header"> Profile </label>
-			<button class="fa fa-close" id="close-profile" aria-label="close-profile-button">  </button>
-		</div>
-		<div class="background"> 
-			<div class="photo-overlay fa fa-upload" id="photo-overlay">
-				<form id="photo-input-form"> <input type="file" id="photo-input"> </form>
-				<label for="photo-input"></label> 
-			</div>
-			<div class="photo" id="profile-photo"> 
-				<img src="" alt="." id="display-photo">    
-			</div>    
-		</div>
-		<label class="name" id="full-name"> Name </label>
-		<label class="other-info" id="display-email"></label>
-		<label class="other-info" id="display-verified"></label>
-	</div>
-
 	<div class="splash-screen active" id="splash-screen">
         <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
         <label class="fa fa-spinner spinner" id="featured-spinner"></label>
         <label class="splash-screen-label"> From </label>
-        <label class="splash-screen-text"> CdM Software Development Club </label>
+        <label class="splash-screen-text"> Agile Sprinters </label>
     </div>
 
 	<div class="confirm-dialog" id="confirm-dialog-modal">
-		<div class="header">
-			<label id="comfirm-dialog-header"> Confirm </label>
-			<button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">
-			</button>
-		</div>
+        <div class="header">
+            <label id="comfirm-dialog-header"> Confirm </label>
+            <button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">  </button>
+        </div>
 
-		<p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
+        <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
 
-		<div class="footer-dialog">
-			<button id="yes-button"> Yes </button>
-			<button id="no-button"> No </button>
-		</div>
-	</div>
+        <div class="footer-dialog">
+            <button id="yes-button"> Yes </button>
+            <button id="no-button"> No </button>
+        </div>
+    </div>
 
 	<div class="toast-message" id="toast-message-modal">
-		<p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
-		<button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
-	</div>
+        <p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
+        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
+    </div>
 
 </body>
 

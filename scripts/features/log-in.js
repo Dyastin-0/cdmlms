@@ -7,7 +7,6 @@ const password = modal.querySelector("#log-in-password");
 const submit = modal.querySelector("#log-in-account-button");
 
 observerScroll();
-
 loginUiInit();
 bindEvents();
 

@@ -1,6 +1,7 @@
 const warningLogin = document.getElementById("log-in-warning");
 const warningSignup = document.getElementById("sign-up-warning");
 const warningSetup = document.getElementById("setup-warning");
+const editWarning = document.getElementById("edit-warning");
 
 export function isPasswordValid(password) {
     if (!password) {
@@ -49,6 +50,10 @@ export function isEmailValid(email) {
 }
 
 export function warning(message, where) {
+    if (!message && where == "edit") {
+        editWarning.style.display = "none";
+    }
+
     if (!message && where == "log-in") {
         warningLogin.style.display = "none";
         return;
@@ -64,18 +69,27 @@ export function warning(message, where) {
         return;
     }
 
+    if (where == "edit") {
+        editWarning.textContent = message;
+        editWarning.style.display = "flex";
+    }
+
     if (where == "log-in") {
         warningLogin.textContent = message;
         warningLogin.style.display = "flex";
+        return;
     }
+
     if (where == "sign-up") {
         warningSignup.textContent = message;
         warningSignup.style.display = "flex";
+        return;
     }
     
     if (where == "setup") {
         warningSetup.textContent = message;
         warningSetup.style.display = "flex";
+        return;
     }
 }
 
