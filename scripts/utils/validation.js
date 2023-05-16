@@ -1,4 +1,4 @@
-const warningLogin = document.getElementById("log-in-warning");
+const warningLogin = document.getElementById("sign-in-warning");
 const warningSignup = document.getElementById("sign-up-warning");
 const warningSetup = document.getElementById("setup-warning");
 const editWarning = document.getElementById("edit-warning");

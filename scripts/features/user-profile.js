@@ -46,13 +46,12 @@ function bindEvents() {
     photoInput.addEventListener('input', async (event) => {
         auth.onAuthStateChanged(async (user) => {
             if (user) {
-                //nested --- dont want to display the toastMessage when the user logs out
                 if (user.emailVerified) { 
                     const photo = event.target.files[0];
                     const confirmMessage = "Are you sure you want to update your display photo?";
-                    const toastMessage = "Profile photo changed!"
+                    const toastText = "Profile photo updated!";
                     const process = () => updateProfilePhoto(photo, user);
-                    await displayConfirmDialog(process, confirmMessage, toastMessage);
+                    await displayConfirmDialog(process, confirmMessage, toastText);
                 } else {
                     toastMessage("Verify your account to start customizing your profile.");
                 }
@@ -66,7 +65,7 @@ async function updateProfilePhoto(photo, user) {
     toastMessage("Uploading your photo...");
     await uploadProfilePhoto(user, photo);
     const imageURL = await fetchProfilePhoto(user);
-    user.updateProfile({
+    await user.updateProfile({
         photoURL: imageURL
     });
     profilePhoto.src = imageURL;

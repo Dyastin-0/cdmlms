@@ -12,7 +12,7 @@ export async function createUser(email, password) {
     return isSuccess;
 }
 
-export async function logInFirebaseAuth(email, password) {
+export async function signInFirebaseAuth(email, password) {
     let isSuccess = false;
     await auth.signInWithEmailAndPassword(email, password)
     .then(() => {

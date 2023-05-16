@@ -62,7 +62,7 @@
                     <div class="drop-down-menu" id="user-drop-down">
                         <button class="button" id="display-name"> Display name </button>
                         <button class="button" id="settings"> Settings </button>
-                        <button class="button" id="log-out"> Logout </button>
+                        <button class="button" id="sign-out"> Sign out </button>
                     </div>
                 </div>
             </div>
@@ -102,8 +102,13 @@
     </main>
 
     <div class="search-modal" id="search-modal">
-        <label> Result </label>
-        <div class="search-result" id="search-results"></div>
+        <div class="header">
+            <label class="result-label"> Result </label>
+            <button class="fa fa-close" id="close-result-button"></button>
+        </div>
+        <div class="pin-container" id="search-results">
+
+        </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -129,10 +134,10 @@
     </div>
 
     <div class="set-up" id="one-time-setup-modal">
-        <label class="header-label"> Get started </label>
-        <p class="header-text"> This is a one-time setup, we need to set your information 
-            befor you can continue. Make sure you have opened the verification link sent on your
-            email.
+        <label class="header-label"> Accout Setup</label>
+        <p class="header-text"> This is a one-time setup, we need to get your personal information 
+            before you can continue. Make sure you have opened the verification link sent on your
+            email (Disregard if you have signed in with your Google account).
         </p>
         <form class="form">
             <label class="warning" id="setup-warning">  </label>

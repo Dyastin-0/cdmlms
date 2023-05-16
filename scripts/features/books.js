@@ -19,7 +19,6 @@ export function formatBooks(books) {
 
         pin.classList.add("pin");
         pin.classList.add("small");
-        pin.classList.add("hide");
 
         title.classList.add("title");
         title.textContent = book.title;
@@ -87,7 +86,7 @@ export async function findBookBy(by, input) {
             return search;
         }
 
-        search.error = "Not found, check if you are searching with the right field.";
+        search.error = "Not found. Note, search is case-sensitive, and does not searches a word in between.";
         return search;
     } catch (error) {
         console.error(error);

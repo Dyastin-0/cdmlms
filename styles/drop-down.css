@@ -30,7 +30,7 @@
 
 .drop-down-menu.fit {
     position: absolute;
-    width: 100%;
+    width: calc(100% - 10px);
 }
 
 .drop-down > .nav-button:focus + .drop-down-menu {

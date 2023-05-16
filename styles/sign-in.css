@@ -1,4 +1,4 @@
-.log-in {
+.sign-in {
     width: 270px;
     height: fit-content;
     position: fixed;
@@ -15,7 +15,24 @@
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.log-in.active {
+.sign-in.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);  
+}
+
+.or-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.google-button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.google-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }

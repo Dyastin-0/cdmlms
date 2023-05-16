@@ -16,9 +16,9 @@
 }
 
 .logo {
-    width: 40px;
-    height: 40px;
-    padding-right: 5px;
+    width: 30px;
+    height: 30px;
+    padding-right: 1px;
 }
 
 .nav-button {
@@ -33,8 +33,8 @@
     border-width: 0px;
     border-radius: 100px;
     background-color: rgb(255, 255, 255);   
-    padding: 10px;
-    margin: 5px;
+    padding: 5px;
+    margin-left: 10px;
     transition: background-color 0.3s ease-in-out, 
         color 0.3s ease-in-out, 
         opacity 0.3s ease-in-out;

@@ -9,6 +9,6 @@ const scrollObserver = new IntersectionObserver((entries) => {
 });
 
 function observerScroll() {
-    const elements = document.querySelectorAll(".hide");
+    const elements = document.body.querySelectorAll(".hide");
     elements.forEach((element) => scrollObserver.observe(element));
 }

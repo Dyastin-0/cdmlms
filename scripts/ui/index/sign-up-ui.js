@@ -1,5 +1,5 @@
 import { warning } from '/scripts/utils/validation.js';
-import { showLogIn } from './log-in-ui.js';
+import { showSignIn } from './sign-in-ui.js';
 
 const overlay = document.getElementById("overlay");
 
@@ -15,7 +15,7 @@ export function signupUiInit() {
     closeSignUp.addEventListener('click', () => hideSignUp());
     haveAccountLabel.addEventListener('click', () => {
         hideSignUp();
-        showLogIn();
+        showSignIn();
     });
 }
 

@@ -1,6 +1,8 @@
 import { search } from "../../features/search-book.js";
 import { displayDropDown, hideDropDown } from "./home-ui-utils.js";
 
+const closeResultButton = document.querySelector("#close-result-button");
+
 //desktop view ui elements
 const searchInput = document.querySelector("#search-input");
 const searchBy = document.querySelector("#search-by");
@@ -59,7 +61,13 @@ export function bindSearchEvent() {
         hideSearchResult();
         searchResult.innerHTML = "";
         overlay.classList.remove("active");
-    })
+    });
+
+    closeResultButton.addEventListener('click', () => {
+        hideSearchResult();
+        searchResult.innerHTML = "";
+        overlay.classList.remove("active");
+    });
 }
 
 //global click for the searchInput on desktop view, specifically for hiding its modal
@@ -104,39 +112,6 @@ function hideSearchResult() {
     searchModal.style.transform = "translate(-50%, -50%) scale(0)";
     searchModal.style.opacity = "0";   
     hideRecentSearch(); 
-}
-
-//Search result item
-export function generateSearchResultItem(data) {
-    const container = document.createElement("div");
-    const titleLabel = document.createElement("label");
-    const authorLabel = document.createElement("label");
-
-    container.classList.add("result-item");
-    titleLabel.classList.add("title");
-    authorLabel.classList.add("author");
-
-    titleLabel.textContent = data.title;
-    authorLabel.textContent = data.author;
-
-    container.appendChild(titleLabel);
-    container.appendChild(authorLabel);
-
-    return container;
-}
-
-export function generateErrorResult(error) {
-    const container = document.createElement("div");
-    const errorLabel = document.createElement("label");
-
-    container.classList.add("result-item");
-    errorLabel.classList.add("error");
-
-    errorLabel.textContent = error;
-
-    container.appendChild(errorLabel);
-
-    return container;
 }
 
 // Recent search items

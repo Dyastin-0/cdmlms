@@ -1,12 +1,13 @@
 import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
 import { signupUiInit } from '../ui/index/sign-up-ui.js';
 import { hideSignUp } from '../ui/index/sign-up-ui.js';
-import { createUser, logInFirebaseAuth } from '../firebase/auth-api.js';
+import { createUser, signInFirebaseAuth } from '../firebase/auth-api.js';
 import { saveQuery } from '../firebase/firestore-api.js';
-import { toastMessage } from '../utils/toast-message.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
+import { signInWithGoogle } from './sign-in.js';
 
 const modal = document.querySelector("#sign-up-modal");
+const signUpGoogle = document.querySelector("#sign-up-google");
 const submit = modal.querySelector("#sign-up-account-button");
 const email = modal.querySelector("#email");
 const password = modal.querySelector("#password");
@@ -17,6 +18,9 @@ bindEvents();
 
 function bindEvents() {
     submit.addEventListener('click',() => signUp());
+    signUpGoogle.addEventListener('click', () => {
+        signInWithGoogle();
+    });
     email.addEventListener('keyup', (e) => {
         e.key === "Enter" ? signUp() : null;
     });
@@ -51,7 +55,7 @@ async function signUp() {
 }
 
 async function initialAccoutSetUp() {
-    await logInFirebaseAuth(email.value, password.value);
+    await signInFirebaseAuth(email.value, password.value);
     await saveQuery('users', crypto.randomUUID(), {email: email.value, newUser: true});
     auth.onAuthStateChanged(user => {
         user.sendEmailVerification()

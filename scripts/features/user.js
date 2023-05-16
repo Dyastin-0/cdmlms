@@ -9,7 +9,7 @@ import { sessionTokenCheck } from "./session-token.js";
 let cachedFeatured = {};
 let myBooks = {};
 
-const logout = document.querySelector("#log-out");
+const signOut = document.querySelector("#sign-out");
 const discover = document.querySelector("#discover");
 
 const searchInput = document.querySelector("#search-input");
@@ -49,7 +49,7 @@ export async function logOut() {
 }
 
 async function bindEvents() {
-    logout.addEventListener('click', async () => await logOut());
+    signOut.addEventListener('click', async () => await logOut());
 
     searchInput.addEventListener('keyup', async (e) => {
         if (e.key === "Enter" && searchInput.value !== '') {

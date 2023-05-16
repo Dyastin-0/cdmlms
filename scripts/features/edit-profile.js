@@ -1,5 +1,6 @@
 import { getQueryOneField } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
+import { toastMessage } from '../utils/toast-message.js';
 import { displayProfile } from './user-profile.js';
 
 const openEditProfile = document.querySelector("#edit-profile-button");
@@ -51,12 +52,13 @@ function bindEvents() {
             });
         }
         const confirmMessage = "Save the changes you made?";
-        const toastText = "Profile updated!";
+        const toastText = "Profile info updated!";
         displayConfirmDialog(process, confirmMessage, toastText);
     });
 }
 
 async function processChanges(user, changes) {
+    toastMessage("Updating your profile info...");
     const querySnapshot = await getQueryOneField('users', 'email', user.email);
     const userDataRef = querySnapshot.docs[0].ref;
     await saveChanges(user, userDataRef, changes, editedDisplayName.value)
