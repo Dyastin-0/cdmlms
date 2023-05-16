@@ -1,4 +1,7 @@
 import { warning } from "../utils/validation.js";
+import { toastMessage } from '../utils/toast-message.js';
+import { getQueryOneField } from '../firebase/firestore-api.js';
+import { initialAccountSetUp } from "../features/account-setup.js";
 
 export async function createUser(email, password) {
     let isSuccess = false;
@@ -22,6 +25,26 @@ export async function signInFirebaseAuth(email, password) {
         warning('Invalid credentials.', 'log-in');
     });
     return isSuccess;
+}
+
+export async function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    auth.signInWithPopup(provider)
+    .then(async (result) => {
+        const querySnapshot = await getQueryOneField('users', 'email', result.user.email);
+        let isSetUpDone;
+        querySnapshot.docs[0] ? isSetUpDone = true : isSetUpDone = false;
+        if (!isSetUpDone) {
+            await initialAccountSetUp(result.user.email);
+        }
+        window.location.href = './home.html';
+    })
+    .catch((error) => {
+        console.error(error);
+        toastMessage("Something when wrong, try again.");
+    });
 }
 
 export async function signOutFirebaseAuth() {

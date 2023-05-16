@@ -3,7 +3,6 @@
     height: fit-content;
     display: flex;
     justify-content: flex-start;
-    margin-right: 10px;
     align-items: center;
     border-radius: 5px;
 }
@@ -21,7 +20,7 @@
 .wrapper.space-between:hover {
     cursor: pointer;
     background-color: rgb(210, 210, 210);
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in;
 }
 
 .wrapper.fit {

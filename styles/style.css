@@ -100,7 +100,7 @@ html, body {
     padding: 5px;
     color: #353232;
     text-decoration: underline;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in;
 }
 
 .footer-link:hover {
@@ -124,7 +124,7 @@ html, body {
     font-size: 14px;
     padding: 5px;
     border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in;
 }
 
 .footer-text:hover {

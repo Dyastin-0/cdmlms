@@ -12,7 +12,7 @@
     left: 50%;
     border-radius: 10px;
     z-index: 11;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
 .sign-up.active {
@@ -75,7 +75,7 @@
     box-sizing: content-box;
     background-color: rgb(235, 235, 235);
     outline-width: 0;
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in;
 }
 
 .form button label {
@@ -105,7 +105,7 @@
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in;
 }
 
 .footer button:hover {

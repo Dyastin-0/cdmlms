@@ -4,7 +4,7 @@ import { hideSignUp } from '../ui/index/sign-up-ui.js';
 import { createUser, signInFirebaseAuth } from '../firebase/auth-api.js';
 import { saveQuery } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
-import { signInWithGoogle } from './sign-in.js';
+import { signInWithGoogle } from '../firebase/auth-api.js';
 
 const modal = document.querySelector("#sign-up-modal");
 const signUpGoogle = document.querySelector("#sign-up-google");
@@ -17,8 +17,12 @@ signupUiInit();
 bindEvents();
 
 function bindEvents() {
-    submit.addEventListener('click',() => signUp());
-    signUpGoogle.addEventListener('click', () => {
+    submit.addEventListener('click',(e) => {
+        e.preventDefault();
+        signUp();
+    });
+    signUpGoogle.addEventListener('click', (e) => {
+        e.preventDefault();
         signInWithGoogle();
     });
     email.addEventListener('keyup', (e) => {
@@ -52,21 +56,4 @@ async function signUp() {
             await initialAccoutSetUp();
         }
     }
-}
-
-async function initialAccoutSetUp() {
-    await signInFirebaseAuth(email.value, password.value);
-    await saveQuery('users', crypto.randomUUID(), {email: email.value, newUser: true});
-    auth.onAuthStateChanged(user => {
-        user.sendEmailVerification()
-        .catch(error => {
-            console.error(error);
-        });
-    });
-    hideSignUp();
-    displayConfirmDialog(redirect, "Account created! Redirect to setup page?", null, null);
-}
-
-async function redirect() {
-    window.location.href = './home.html';
 }

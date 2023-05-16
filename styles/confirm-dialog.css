@@ -13,7 +13,7 @@
     left: 50%;
     border-radius: 10px;
     z-index: 27;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
 .confirm-dialog.active {
@@ -40,7 +40,7 @@
     padding-top: 5px;
     margin-right: 10px;
     margin-bottom: 10px;
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in;
 }
 
 .confirm-dialog .footer-dialog button:hover {
