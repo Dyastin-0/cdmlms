@@ -86,7 +86,7 @@ export async function findBookBy(by, input) {
             return search;
         }
 
-        search.error = "Not found. Note, search is case-sensitive, and does not searches a word in between.";
+        search.error = "Search not found. Note, search is case-sensitive, and does not searches a word in between.";
         return search;
     } catch (error) {
         console.error(error);

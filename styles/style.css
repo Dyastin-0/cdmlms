@@ -15,7 +15,7 @@
 
 html, body {
     width: 100%;
-    min-width: 335px;
+    min-width: 300px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
     color: #353232;
@@ -59,7 +59,7 @@ html, body {
 .content .label {
     text-align: center;
     margin-top: 100px;
-    font-size: 64px;
+    font-size: 44px;
     font-weight: bold;
 }
 
@@ -81,7 +81,7 @@ html, body {
 }
 
 .show {
-    animation: animateX 0.5s ease-in;
+    animation: animateX 0.5s ease;
     animation-fill-mode: forwards;
 }
 
@@ -100,7 +100,7 @@ html, body {
     padding: 5px;
     color: #353232;
     text-decoration: underline;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease;
 }
 
 .footer-link:hover {
@@ -124,7 +124,7 @@ html, body {
     font-size: 14px;
     padding: 5px;
     border-radius: 5px;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease;
 }
 
 .footer-text:hover {

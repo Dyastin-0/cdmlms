@@ -13,7 +13,7 @@
     left: 50%;
     border-radius: 10px;
     z-index: 23;
-    transition: opacity 0.3s ease-in, transform 0.3s ease-in, top 0.3s ease-in;
+    transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease;
 }
 
 .toast-message.active {
@@ -34,7 +34,7 @@
     padding: 8px;
     border-radius: 50px;
     border-width: 0;
-    transition: box-shadow 0.3s ease-in;
+    transition: box-shadow 0.3s ease;
 }
 
 .toast-message button:hover {

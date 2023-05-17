@@ -5,7 +5,7 @@ const closeResultButton = document.querySelector("#close-result-button");
 
 //desktop view ui elements
 const searchInput = document.querySelector("#search-input");
-const searchBy = document.querySelector("#search-by");
+const searchBy = document.querySelector("#selected-filter");
 const recentSearchModal = document.querySelector("#recent-searches-modal");
 const recentSearch = document.querySelector("#recent-searches");
 const searchModal = document.querySelector("#search-modal");
@@ -16,7 +16,7 @@ const overlay = document.querySelector("#overlay");
 const searchButton = document.querySelector("#search-button");
 const backButton = document.querySelector("#back-button-search-modal-mobile");
 const recentSearchModalMobile = document.querySelector("#recent-search-modal-mobile");
-const searchByMobile = document.querySelector("#search-by-mobile");
+const searchByMobile = document.querySelector("#selected-filter-mobile");
 const searchInputMobile = document.querySelector("#search-input-mobile");
 const recentSearchesMobile = document.querySelector("#recent-searches-modal-mobile");
 const recentSearchMobile = document.querySelector("#recent-search-mobile");
@@ -73,20 +73,19 @@ export function bindSearchEvent() {
 //global click for the searchInput on desktop view, specifically for hiding its modal
 function addGlobalClick() {
     document.addEventListener('click', (e) => {
-        handleGlobalClick(e, searchInput, searchBy)
+        handleGlobalClick(e, searchInput)
     });
 }
 
-function handleGlobalClick(e, input, by) {
+function handleGlobalClick(e, input) {
     const isClicked = input.contains(e.target);
-    const isSearhByClicked = by.contains(e.target);
     const target = e.target.id ? e.target.id : null;
 
     let isChild = null;
 
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
-    if (!isClicked && !isChild && !isSearhByClicked) {
+    if (!isClicked && !isChild) {
         hideRecentSearch();
         document.removeEventListener('click', handleGlobalClick);
     }
@@ -174,8 +173,8 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         container.appendChild(label);
         container.appendChild(button);
     
-        label.addEventListener('click', () => {
-            search(by.value, label.textContent, searchResult);
+        label.addEventListener('click', async () => {
+            await search(by.textContent.toLowerCase().trim(), label.textContent);
             moveRecentSearchToTop(key, label.textContent, cachedSearches);
             displayRecentSearches(id);
             displaySearchResult();

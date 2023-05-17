@@ -4,6 +4,7 @@ import { isDisplayNameAvailable, isIdAvailable } from "../utils/data-availabilit
 import { userInit } from "./user.js";
 import { logOut } from "./user.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
+import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
@@ -11,7 +12,7 @@ const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
 const firstName = oneTimeSetupModal.querySelector("#first-name");
 const lastName = oneTimeSetupModal.querySelector("#last-name");
 const middleName = oneTimeSetupModal.querySelector("#middle-name");
-const sex = oneTimeSetupModal.querySelector("#sex");
+const sex = oneTimeSetupModal.querySelector("#setup-selected-sex");
 const birthDate = oneTimeSetupModal.querySelector("#birth-date");
 const id = oneTimeSetupModal.querySelector("#id");
 const displayName = oneTimeSetupModal.querySelector("#display-name");
@@ -20,6 +21,7 @@ const cancelSetupButton = document.querySelector("#cancel-setup");
 const doneSetupButton = document.querySelector("#done-setup");
 
 bindEvents();
+setupSexDropDownInit();
 checkIfFirstLogin();
 
 async function checkIfFirstLogin() {
@@ -81,7 +83,7 @@ async function setupInformation(userRef, user) {
         firstName: firstName.value,
         middleName: middleName.value,
         lastName: lastName.value,
-        sex: sex.value,
+        sex: sex.textContent.trim(),
         birthDate: birthDate.value,
         id: id.value
     });
@@ -115,7 +117,7 @@ function areInputFieldsFilled() {
     firstName.value,
     lastName.value,
     middleName.value,
-    sex.value,
+    sex.textContent.trim(),
     id.value,
     displayName.value,
     ];

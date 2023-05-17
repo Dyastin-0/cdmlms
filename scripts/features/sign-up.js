@@ -1,10 +1,8 @@
 import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
 import { signupUiInit } from '../ui/index/sign-up-ui.js';
-import { hideSignUp } from '../ui/index/sign-up-ui.js';
-import { createUser, signInFirebaseAuth } from '../firebase/auth-api.js';
-import { saveQuery } from '../firebase/firestore-api.js';
-import { displayConfirmDialog } from '../utils/confirm-dialog.js';
+import { createUser } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
+import { initialAccoutSetUpAndEmailVerification } from './account-setup.js';
 
 const modal = document.querySelector("#sign-up-modal");
 const signUpGoogle = document.querySelector("#sign-up-google");
@@ -41,11 +39,13 @@ async function areInputsValid() {
         warning("There is an empty field.", "sign-up");
         return false;
     }
+
     if (!isEmailValid(email.value)) return false;
     if (password.value !== confirmPassword.value) {
         warning("Password does not match.", "sign-up");
         return false;
     }
+    
     if (!isPasswordValid(password.value)) return false;
     return true;
 }
@@ -53,7 +53,7 @@ async function areInputsValid() {
 async function signUp() {
     if (await areInputsValid()) {      
         if (await createUser(email.value, password.value)) {
-            await initialAccoutSetUp();
+            await initialAccoutSetUpAndEmailVerification(email.value, password.value);
         }
     }
 }

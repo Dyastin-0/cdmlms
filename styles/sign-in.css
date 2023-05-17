@@ -12,7 +12,7 @@
     z-index: 12;
     border-radius: 10px;
     background-color: rgb(250, 250, 250);
-    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .sign-in.active {
@@ -22,6 +22,7 @@
 
 .or-label {
     font-size: 14px;
+    margin-top: 8px;
     margin-bottom: 8px;
     font-weight: 500;
 }

@@ -20,7 +20,7 @@
 .wrapper.space-between:hover {
     cursor: pointer;
     background-color: rgb(210, 210, 210);
-    transition: background-color 0.5s ease-in;
+    transition: background-color 0.5s ease;
 }
 
 .wrapper.fit {

@@ -29,15 +29,20 @@
     align-items: center;
     align-self: left;
     color: #191919;
+    outline: none;
     font-weight: 500;
     border-width: 0px;
     border-radius: 100px;
     background-color: rgb(255, 255, 255);   
-    padding: 5px;
-    margin-left: 10px;
-    transition: background-color 0.3s ease-in-out, 
-        color 0.3s ease-in-out, 
-        opacity 0.3s ease-in-out;
+    padding: 8px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease, 
+        color 0.3s ease, 
+        opacity 0.3s ease;
+}
+
+.nav-button.margin {
+    margin-left: 5px;
 }
 
 .nav-button.none {
@@ -45,7 +50,6 @@
 }
 
 .nav-button.large {
-    font-weight: bolder;
     font-size: 22px;
 }
 
@@ -53,36 +57,37 @@
     font-size: 16px;
 }
 
-.nav-button.search {
-    margin: none;
-    width: fit-content;
+.nav-button.medium.display-none {
     display: none;
-    transform: scale(0);
+}
+
+.nav-button.small {
+    padding: 5px;
+    margin-right: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    width: 75px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    
 }
 
 .nav-button:hover {
-    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-.nav-button.black {
-    font-size: 18px;
-    margin-left: 10px;
-    width: fit-content;
-    padding: 10px;
-    color: rgb(255, 255, 255);
-    background-color: #353232;
-}
-
-.nav-button.black.small {
-    font-size: 14px;
-}
-
-.nav-button.black:hover {
-    color: #353232;
+.nav-button.small.fit {
+    padding: 2px;
+    justify-content: left;
+    width: 100%;
 }
 
 .search {
-    height: 40px;
+    height: 35px;
     width: 100%;
     font-size: 18px;
     outline: none;
@@ -94,13 +99,8 @@
     background-color: rgb(230, 230, 230);
 }
 
-.nav-button:hover {
-    background-color: rgb(230, 230, 230);
-    cursor: pointer;
-}
-
 .nav-button:focus {
-    opacity: 0.6;
+    background-color: rgb(230, 230, 230);
     border-color: transparent;
     outline: none;
 }
@@ -120,13 +120,12 @@
 }
 
 .chevron {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 495px) {
-    .nav-button.search {
+    .nav-button.medium.display-none {
         display: block;
-        transform: scale(1);
     }
 
     #search-drop-down {

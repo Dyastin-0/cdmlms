@@ -11,7 +11,7 @@
     position: fixed;
     flex-direction: column;
     border-radius: 10px;
-    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .user-profile-modal.active {

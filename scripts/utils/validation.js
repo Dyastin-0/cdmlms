@@ -54,7 +54,7 @@ export function warning(message, where) {
         editWarning.style.display = "none";
     }
 
-    if (!message && where == "log-in") {
+    if (!message && where == "sign-in") {
         warningLogin.style.display = "none";
         return;
     }

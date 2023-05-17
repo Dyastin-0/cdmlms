@@ -1,5 +1,4 @@
 .search-modal {
-    /* min-width: 80%; */
     width: fit-content;
     height: fit-content;
     position: fixed;
@@ -67,7 +66,7 @@
     background-color: rgb(255, 255, 255);
     transform: translateY(-50%) scaleY(0);
     right: 0;
-    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .delete-button {
@@ -81,7 +80,7 @@
     margin: 3px;
     border-radius: 30px;
     background-color: transparent;
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {

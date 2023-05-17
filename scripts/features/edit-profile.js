@@ -12,7 +12,7 @@ const closeEditProfile = editProfileModal.querySelector("#close-edit-profile");
 const editedFirstName = editProfileModal.querySelector("#edit-first-name");
 const editedLastName = editProfileModal.querySelector("#edit-last-name");
 const editedMiddleName = editProfileModal.querySelector("#edit-middle-name");
-const editedSex = editProfileModal.querySelector("#edit-sex");
+const editedSex = editProfileModal.querySelector("#selected-sex");
 const editedBirthDate = editProfileModal.querySelector("#edit-birth-date");
 const editedDisplayName = editProfileModal.querySelector("#edit-display-name");
 
@@ -40,7 +40,7 @@ function bindEvents() {
             firstName: editedFirstName.value,
             lastName: editedLastName.value,
             middleName: editedMiddleName.value,
-            sex: editedSex.value,
+            sex: editedSex.textContent.trim(),
             birthDate: editedBirthDate.value
         }
 
@@ -86,7 +86,7 @@ async function getInfo() {
             editedFirstName.value = currentUserData.firstName;
             editedLastName.value = currentUserData.lastName;
             editedMiddleName.value = currentUserData.middleName;
-            editedSex.value = currentUserData.sex;
+            editedSex.textContent = currentUserData.sex;
             editedBirthDate.value = currentUserData.birthDate;
             editedDisplayName.value = user.displayName;
         }
@@ -105,7 +105,7 @@ function areInputFieldsFilled() {
     editedFirstName.value,
     editedLastName.value,
     editedMiddleName.value,
-    editedSex.value,
+    editedSex.textContent.trim(),
     editedDisplayName.value,
     ];
 

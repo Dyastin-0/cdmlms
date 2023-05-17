@@ -24,49 +24,54 @@
 </head>
 <body>
 
-    <main class="main" id="main">
-
-        <nav class="nav">
+    <nav class="nav">
+        <div class="wrapper">
+            <button class="nav-button medium" id="index-button">
+                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+                CDMLMS
+            </button>
+        </div>
+        <button class="nav-button medium display-none fa fa-search" id="search-button" aria-label="search-button"></button>
+        <div class="drop-down" id="search-drop-down">
             <div class="wrapper">
-                <button class="nav-button medium" id="index-button">
-                    <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-                    CDMLMS
-                </button>
-            </div>
-            <button class="nav-button search fa fa-search" id="search-button" aria-label="search-button"></button>
-            <div class="drop-down" id="search-drop-down">
-                <div class="wrapper">
-                    <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
-                    <select class="select" id="search-by">
-                        <option value="title"> Title </option>
-                        <option value="isbn"> ISBN </option>
-                        <option value="author"> Author </option>
-                        <option value="genre"> Genre </option>
-                    </select>
-                </div>
-                <div class="drop-down-menu left fit" id="recent-searches-modal">
-                    <Label class="head" id="recent-search-label"> Recent searches </Label>
-                    <div class="recent-searches" id="recent-searches">
-                    </div>
-                </div>
-            </div>
-
-            <div class="wrapper">
-                <button class="nav-button large" id="user-notification" aria-label="user-notification">
-                    <i class="fa fa-bell"></i>
-                </button>
-                <div class="user-drop-down">
-                    <button class="nav-button large" id="user-drop-down-button" aria-label="user-drop-down-button">
-                        <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+                <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
+                <div class="drop-down" id="filter-drop-down">
+                    <button class="nav-button small" id="filter-by-drop-down-button" aria-label="filter-by-drop-down-button">
+                        <label id="selected-filter">Title</label>
+                        <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron"></i>
                     </button>
-                    <div class="drop-down-menu" id="user-drop-down">
-                        <button class="button" id="display-name"> Display name </button>
-                        <button class="button" id="settings"> Settings </button>
-                        <button class="button" id="sign-out"> Sign out </button>
+                    <div class="drop-down-menu left fit" id="filter-drop-down-menu">
+                        <button class="nav-button small fit" id="author-filter"> Title </button>
+                        <button class="nav-button small fit" id="title-filter"> Author </button>
+                        <button class="nav-button small fit" id="isbn-filter"> ISBN </button>
                     </div>
                 </div>
             </div>
-        </nav>
+            <div class="drop-down-menu left fit" id="recent-searches-modal">
+                <Label class="head" id="recent-search-label"> Recent searches </Label>
+                <div class="recent-searches" id="recent-searches">
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <button class="nav-button medium" id="user-notification" aria-label="user-notification">
+                <i class="fa fa-bell"></i>
+            </button>
+            <div class="user-drop-down">
+                <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
+                    <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu" id="user-drop-down">
+                    <button class="nav-button small fit" id="display-name"> Display name </button>
+                    <button class="nav-button small fit" id="settings"> Settings </button>
+                    <button class="nav-button small fit" id="sign-out"> Sign out </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main" id="main">
 
         <content class="content">
             <label class="label left hide"> Discover </label>
@@ -74,33 +79,34 @@
             </div>
         </content>
 
-        <footer class="footer-global">
-            <div class="footer-wrapper hide">
-                <label class="footer-label"> Address </label>
-                <a class="footer-link"
-                    href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
-                    target="_blank">
-                    Kasiglahan Village, Montalban, Rizal
-                </a>
-            </div>
-            <div class="footer-wrapper hide">
-                <label class="footer-label"> Contact </label>
-                <label class="footer-text"> 0282968667 | 0283959731 </label>
-            </div>    
-            <div class="footer-wrapper hide">
-                <label class="footer-label"> Email address  </label>
-                <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
-            </div>    
-            <div class="footer-wrapper hide">
-                <label class="footer-label"> Facebook page </label>
-                <a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
-                    Colegio de Montalban MIS
-                  </a>
-            </div>    
-        </footer>
-
     </main>
 
+    <footer class="footer-global">
+        <div class="footer-wrapper hide">
+            <label class="footer-label"> Address </label>
+            <a class="footer-link"
+                href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
+                target="_blank">
+                Kasiglahan Village, Montalban, Rizal
+            </a>
+        </div>
+        <div class="footer-wrapper hide">
+            <label class="footer-label"> Contact </label>
+            <label class="footer-text"> 0282968667 | 0283959731 </label>
+        </div>    
+        <div class="footer-wrapper hide">
+            <label class="footer-label"> Email address  </label>
+            <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+        </div>    
+        <div class="footer-wrapper hide">
+            <label class="footer-label"> Facebook page </label>
+            <a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
+                Colegio de Montalban MIS
+              </a>
+        </div>    
+    </footer>
+
+    <!-- modals -->
     <div class="search-modal" id="search-modal">
         <div class="header">
             <label class="result-label"> Result </label>
@@ -116,14 +122,21 @@
     <div class="search-modal-mobile" id="recent-search-modal-mobile">
         <div class="drop-down">
             <div class="wrapper padding left">
-                <button class="fa fa-chevron-up nav-button" id="back-button-search-modal-mobile" aria-label="back-button-search-modal-mobile"></button>
+                <button class="fa fa-chevron-up nav-button medium" id="back-button-search-modal-mobile" aria-label="back-button-search-modal-mobile"></button>
                 <input class="search" placeholder="Search" id="search-input-mobile" enterkeyhint="Enter">
-                <select class="select" id="search-by-mobile">
-                    <option value="title"> Title </option>
-                    <option value="isbn"> ISBN </option>
-                    <option value="author"> Author </option>
-                    <option value="genre"> Genre </option>
-                </select>
+                
+                <div class="drop-down" id="filter-drop-down-mobile">
+                    <button class="nav-button small" id="filter-by-drop-down-button-mobile" aria-label="filter-by-drop-down-button-mobile">
+                        <label id="selected-filter-mobile">Title</label>
+                        <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron-mobile"></i>
+                    </button>
+                    <div class="drop-down-menu upper left fit" id="filter-drop-down-menu-mobile">
+                        <button class="nav-button small fit" id="author-filter-mobile"> Title </button>
+                        <button class="nav-button small fit" id="title-filter-mobile"> Author </button>
+                        <button class="nav-button small fit" id="isbn-filter-mobile"> ISBN </button>
+                    </div>
+                </div>
+
                 <div class="drop-down-menu left fit" id="recent-searches-modal-mobile">
                     <Label class="head" id="recent-search-label"> Recent searches </Label>
                     <div class="recent-searches" id="recent-search-mobile">
@@ -147,10 +160,18 @@
             id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
             <input type="text" placeholder="Middle name" 
             id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <select name="Sex" id="sex">
-            <option value="Male"> Male </option>
-            <option value="Female"> Female </option>
-            </select>
+            
+            <div class="drop-down" id="setup-sex-drop-down">
+                <button class="nav-button small" id="setup-sex-drop-down-button" aria-label="setup-sex-drop-down-button">
+                    <label id="setup-selected-sex"> Male </label>
+                    <i class="fa fa-chevron-down chevron" id="setup-sex-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu left fit" id="setup-sex-drop-down-menu">
+                    <button class="nav-button small fit" id="setup-male-sex"> Male </button>
+                    <button class="nav-button small fit" id="setup-female-sex"> Female </button>
+                </div>
+            </div>
+
             <label for="birth-date"> Birth date </label>
             <input type="date" placeholder="Birth date" id="birth-date">
             <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
@@ -176,7 +197,7 @@
             <button class="fa fa-close" id="close-profile" aria-label="close-profile-button">  </button>
         </div>
         <div class="background"> 
-            <div class="photo-overlay fa fa-upload" id="photo-overlay">
+            <div class="photo-overlay fa fa-camera" id="photo-overlay">
                 <form id="photo-input-form"> <input type="file" id="photo-input"> </form>
                 <label for="photo-input"></label> 
             </div>
@@ -205,10 +226,18 @@
             id="edit-last-name" onkeydown="return /[a-z]/i.test(event.key)">
             <input type="text" placeholder="Middle name" 
             id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <select name="Sex" id="edit-sex">
-            <option value="Male"> Male </option>
-            <option value="Female"> Female </option>
-            </select>
+
+            <div class="drop-down" id="sex-drop-down">
+                <button class="nav-button small" id="sex-drop-down-button" aria-label="sex-drop-down-button">
+                    <label id="selected-sex"> Male </label>
+                    <i class="fa fa-chevron-down chevron" id="sex-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu left fit" id="sex-drop-down-menu">
+                    <button class="nav-button small fit" id="male-sex"> Male </button>
+                    <button class="nav-button small fit" id="female-sex"> Female </button>
+                </div>
+            </div>
+
             <label for="edit-birth-date"> Birth date </label>
             <input type="date" placeholder="Birth date" id="edit-birth-date">
             <input type="text" placeholder="Display name" id="edit-display-name">
