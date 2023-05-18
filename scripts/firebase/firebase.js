@@ -1,12 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyB3GKLWSftrpcfQjahN0TGlyLnIMHG9ZUA",
-  authDomain: "librarymanagementsystem-f950a.firebaseapp.com",
-  databaseURL: "https://librarymanagementsystem-f950a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "librarymanagementsystem-f950a",
-  storageBucket: "librarymanagementsystem-f950a.appspot.com",
-  messagingSenderId: "71574320410",
-  appId: "1:71574320410:web:069d5c5a3c0c3ef0bea8a3",
-  measurementId: "G-S7H8LTEH2P"
+  apiKey: "AIzaSyD1x6vjIeLZMeVl8xjuuUW7GvLyDiqgIAY",
+  authDomain: "cdmlms.firebaseapp.com",
+  projectId: "cdmlms",
+  storageBucket: "cdmlms.appspot.com",
+  messagingSenderId: "53224930778",
+  appId: "1:53224930778:web:50923cf5555c8133d054e3",
+  measurementId: "G-TRJ8QD2CLG"
 };
 
 firebase.initializeApp(firebaseConfig);

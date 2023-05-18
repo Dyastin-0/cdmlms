@@ -1,10 +1,5 @@
 :root {
-    --card_width: 220px;
-    --row_increment: 10px;
-    --card_small: 23;
-    --card_medium: 30;
-    --card_large: 44;
-    --card_small_bg: 25;
+    
 }
 
 * {

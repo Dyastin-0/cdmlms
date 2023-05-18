@@ -33,7 +33,7 @@ async function checkIfFirstLogin() {
             if (isNewUser) {
                 oneTimeSetupModal.classList.add("active");
             } else {
-                await userInit(user, currentUser.data());
+                userInit(user, currentUser.data());
                 splashScreen.remove();
             }
         }
