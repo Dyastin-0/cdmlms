@@ -14,9 +14,9 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    right: 5px;
+    right: 0;
     top: calc(100% + 3px);
-    background-color: rgb(235, 235, 235);
+    background-color: var(--dark-shade);
     padding: 5px;
     box-shadow: 0 5px 5px rgb(0, 0, 0, 0.1);
     border-radius: 5px;

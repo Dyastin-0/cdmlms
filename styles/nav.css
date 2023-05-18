@@ -1,11 +1,10 @@
 .nav {
     position: sticky;
-    top: 0;
-    width: 100%;
+    top: 10px;
+    width: calc(100% - 20px);
     z-index: 9;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--dark-shade);
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,12 +27,12 @@
     justify-content: center;
     align-items: center;
     align-self: left;
-    color: #191919;
+    background-color: var(--dark-shade);
+    color: var(--white);
     outline: none;
     font-weight: 500;
-    border-width: 0px;
-    border-radius: 100px;
-    background-color: rgb(255, 255, 255);   
+    border: none;
+    border-radius: 100px;  
     padding: 8px;
     margin-right: 5px;
     transition: background-color 0.3s ease, 
@@ -43,6 +42,10 @@
 
 .nav-button.margin {
     margin-left: 5px;
+}
+
+.nav-button.bg-none {
+    background: none;
 }
 
 .nav-button.none {
@@ -66,9 +69,9 @@
     margin-right: 0;
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 300;
     width: 75px;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--dark-shade);
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
@@ -77,13 +80,17 @@
 
 .nav-button:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .nav-button.small.fit {
     padding: 2px;
+    background: none;
     justify-content: left;
     width: 100%;
+}
+
+.nav-button.small.fit:hover {
+    background-color: var(--dark-shade);
 }
 
 .search {
@@ -96,17 +103,12 @@
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
-    background-color: rgb(230, 230, 230);
-}
-
-.nav-button:focus {
-    background-color: rgb(230, 230, 230);
-    border-color: transparent;
-    outline: none;
+    color: var(--white);
+    background-color: rgb(0, 0, 0, 0.2);
 }
 
 .nav-button:active {
-    opacity: 0.4;
+    opacity: 0.8;
 }
 
 .floating-button {
@@ -123,7 +125,7 @@
     transition: transform 0.3s ease;
 }
 
-@media (max-width: 495px) {
+@media (max-width: 560px) {
     .nav-button.medium.display-none {
         display: block;
     }

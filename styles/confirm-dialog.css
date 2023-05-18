@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--green-solid);
     box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
     position: fixed;
     opacity: 0;
@@ -31,7 +31,8 @@
 
 .confirm-dialog .footer-dialog button {
     font-size: 14px;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--dark-shade);
+    color: var(--white);
     border-width: 0px;
     border-radius: 10px;
     padding-left: 10px;
@@ -45,7 +46,7 @@
 
 .confirm-dialog .footer-dialog button:hover {
     cursor: pointer;
-    box-shadow: 0 0 5px rgb(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px var(--dark-shade);
 }
 
 .confirm-dialog .footer-dialog label {

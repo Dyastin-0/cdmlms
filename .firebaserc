@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "librarymanagementsystem-f950a"
-  }
+    "default": "cdmlms",
+    "cdmlms": "cdmlms"
+  },
+  "targets": {},
+  "etags": {}
 }

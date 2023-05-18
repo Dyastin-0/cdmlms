@@ -11,7 +11,7 @@
     left: 50%;
     z-index: 12;
     border-radius: 10px;
-    background-color: rgb(250, 250, 250);
+    background-color: var(--green-solid);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 

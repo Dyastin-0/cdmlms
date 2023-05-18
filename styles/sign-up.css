@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(250, 250, 250);
+    background-color: var(--green-solid);
     position: fixed;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
@@ -33,7 +33,8 @@
 }
 
 .header button {
-    border-color: transparent;
+    border: none;
+    color: var(--white);
     background: transparent;
     margin: 10px;
 }
@@ -55,10 +56,11 @@
     margin-bottom: 8px;
     width: 90%;
     height: 15px;
-    font-size: 16px;
+    font-size: 14px;
     border-width: 0;
     border-radius: 5px;
-    background-color: rgb(235, 235, 235);
+    background-color: var(--dark-shade);
+    color: var(--white);
     outline-width: 0;
 }
 
@@ -72,7 +74,8 @@
     border-width: 0;
     border-radius: 5px;
     box-sizing: content-box;
-    background-color: rgb(235, 235, 235);
+    color: var(--white);
+    background-color: var(--dark-shade);
     outline-width: 0;
     transition: box-shadow 0.3s ease;
 }
@@ -84,32 +87,18 @@
 }
 
 .form button:hover {
-    box-shadow: 0 0 5px rgb(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px var(--dark-shade);
     cursor: pointer;
 }
 
 .footer {
     display: flex;
     width: 100%;
+    padding-top: 8px;
     padding-bottom: 10px;
     bottom: 0;
     justify-content: center;
     align-items: center;
-}
-
- .footer button {
-    font-size: 14px;
-    background-color: rgb(235, 235, 235);
-    border-width: 0px;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 5px;
-    transition: box-shadow 0.3s ease;
-}
-
-.footer button:hover {
-    cursor: pointer;
-    box-shadow: 0 0 5px rgb(0, 0, 0, 0.2);
 }
 
 .footer label {
@@ -119,13 +108,12 @@
 .warning {
     padding: 5px;
     margin-bottom: 8px;
-    background-color: rgb(189, 79, 98);
+    background-color: rgb(161, 36, 57);
     border-radius: 3px;
     width: 90%;
     display: none;
     font-weight: 400;
     font-size: 14px;
-    color: white;
 }
 
 .underlined:hover {
