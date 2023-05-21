@@ -16,7 +16,7 @@
     height: fit-content;
     right: 0;
     top: calc(100% + 3px);
-    background-color: var(--dark-shade);
+    background-color: var(--green-solid);
     padding: 5px;
     box-shadow: 0 5px 5px rgb(0, 0, 0, 0.1);
     border-radius: 5px;

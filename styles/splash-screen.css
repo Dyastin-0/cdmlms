@@ -11,7 +11,8 @@
     right: 0;
     z-index: 25;
     padding-bottom: 20px;
-    background: var(--radial-solid);
+    background: var(--green-solid);
+    overflow: hidden;
 }
 
 .splash-screen.active {
