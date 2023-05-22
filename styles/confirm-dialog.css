@@ -4,7 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--green-solid);
+    background-color: var(--white);
+    color: var(--black);
     box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
     position: fixed;
     opacity: 0;
@@ -31,8 +32,8 @@
 
 .confirm-dialog .footer-dialog button {
     font-size: 14px;
-    background-color: var(--dark-shade);
-    color: var(--white);
+    background-color: var(--dark-shade-low);
+    color: var(--black);
     border-width: 0px;
     border-radius: 10px;
     padding-left: 10px;

@@ -19,7 +19,8 @@
     --place-holder: rgba(235, 235, 235, 0.5);
     --overlay: rgba(0, 0, 0, 0.5);
 
-    --white: rgb(225, 225, 225);
+    --white: rgb(255, 255, 255);
+    --black: rgb(25, 25, 25);
 }
 
 * {
@@ -35,12 +36,8 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--green);
-    color: var(--white);
-}
-
-::placeholder {
-    color: var(--place-holder);
+    background: var(--white);
+    color: var(--black);
 }
 
 a {
@@ -68,7 +65,6 @@ a {
 .main {
     width: calc(100% - 20px);
     height: 100%;
-    background-color: var(--dark-shade);
     display: flex;
     flex-direction: row;
     border-radius: 5px;
@@ -117,7 +113,6 @@ a {
     width: calc(100% - 20px);
     height: fit-content;
     display: flex;
-    background-color: var(--dark-shade);
     border-radius: 5px;
     justify-content: center;
     flex-wrap: wrap;
@@ -130,6 +125,7 @@ a {
     border-radius: 5px;
     padding: 5px;
     text-decoration: underline;
+    color: var(--black);
     transition: background-color 0.3s ease;
 }
 

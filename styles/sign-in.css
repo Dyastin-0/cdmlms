@@ -11,7 +11,8 @@
     left: 50%;
     z-index: 12;
     border-radius: 10px;
-    background-color: var(--green-solid);
+    background-color: var(--white);
+    color: var(--black);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 

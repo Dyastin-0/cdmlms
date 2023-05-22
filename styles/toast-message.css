@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--dark-shade-high);
+    background-color: var(--white);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     position: fixed;
     opacity: 0;
@@ -12,7 +12,7 @@
     top: -25%;
     left: 50%;
     border-radius: 10px;
-    z-index: 23;
+    z-index: 27;
     transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease;
 }
 
@@ -31,11 +31,11 @@
 .toast-message button {
     margin-right: 10px;
     margin-left: 10px;
-    padding: 8px;
+    padding: 10px;
     border-radius: 50px;
     border-width: 0;
-    background-color: var(--dark-shade);
-    color: var(--white);
+    background-color: var(--dark-shade-low);
+    color: var(--black);
     transition: box-shadow 0.3s ease;
 }
 
