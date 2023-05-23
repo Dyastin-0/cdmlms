@@ -5,6 +5,7 @@ import { userInit } from "./user.js";
 import { logOut } from "./user.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
+import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
@@ -61,9 +62,14 @@ async function verifyEmailAndInputs(user) {
     }
 
     if (await areInputsValid()) {
-        const process = async () => { finalAccountSetup(currentUserRef, user) };
+        const process = async () => { 
+            const processMessage = "Setting up your account...";
+            displayProcessDialog(processMessage);
+            await finalAccountSetup(currentUserRef, user);
+            hideProcessDialog();
+        };
         const confirmMessage = "Make sure that all the information you have put in belongs to you. Continue?";
-        const toastMessage = "Account setup done! Browse the library mah g.";
+        const toastMessage = "Finished setting up your account!";
         await displayConfirmDialog(process, confirmMessage, toastMessage);
     }
 }

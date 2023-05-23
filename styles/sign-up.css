@@ -110,6 +110,7 @@
     padding: 5px;
     margin-bottom: 8px;
     background-color: rgb(161, 36, 57);
+    color: var(--white);
     border-radius: 3px;
     width: 90%;
     display: none;

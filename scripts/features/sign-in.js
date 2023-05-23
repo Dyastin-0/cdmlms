@@ -1,6 +1,8 @@
-import { signInUiInit } from '../ui/index/sign-in-ui.js';
+import { hideSignIn, signInUiInit } from '../ui/index/sign-in-ui.js';
 import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
+import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
+import { warning } from '../utils/validation.js';
 
 const modal = document.querySelector("#sign-in-modal");
 const username = modal.querySelector("#sign-in-email");
@@ -14,9 +16,13 @@ signInUiInit();
 bindEvents();
 
 function bindEvents() {
-    submit.addEventListener('click', (e) => {
+    submit.addEventListener('click', async (e) => {
         e.preventDefault();
-        signIn();
+        warning("", "sign-in");
+        const processMessage = "Signing in...";
+        displayProcessDialog(processMessage);
+        await signIn();
+        hideProcessDialog();
     });
     username.addEventListener('keyup', (e) => {
         e.key === "Enter" ? signIn() : null;
@@ -24,13 +30,18 @@ function bindEvents() {
     password.addEventListener('keyup', (e) => {
         e.key === "Enter" ? signIn() : null;
     });
-    signInGoogle.addEventListener('click', (e) => {
+    signInGoogle.addEventListener('click', async (e) => {
         e.preventDefault();
-        signInWithGoogle();
+        warning("", "sign-in");
+        await signInWithGoogle();
     });
 }
 
 async function signIn() {
+    warning("", "sign-in");
     const isSigninSuccess = await signInFirebaseAuth(username.value, password.value);
-    if (isSigninSuccess) window.location.href = './home.html';
+    if (isSigninSuccess) {
+        hideSignIn();
+        window.location.href = './home.html';
+    }
 }

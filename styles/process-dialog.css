@@ -1,0 +1,48 @@
+.process-dialog {
+    width: 250px;
+    height: fit-content;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: 30;
+    color: var(--black);
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 0 0 5px var(--dark-shade-low);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.process-dialog.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.process-message {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.process-spinner {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    animation: infiniteRotate 2s linear infinite;
+}
+
+@keyframes infiniteRotate {
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(-180deg);
+    }
+}

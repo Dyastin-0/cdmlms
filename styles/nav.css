@@ -88,7 +88,7 @@
 }
 
 .nav-button.small.fit:hover {
-    background-color: var(--dark-shade);
+    background-color: var(--dark-shade-low);
 }
 
 .search {

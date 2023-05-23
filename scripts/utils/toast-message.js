@@ -16,5 +16,5 @@ export function toastMessage(message) {
     toastText.textContent = message;
     setTimeout(() =>{
         toastMessageModal.classList.remove("active");
-    }, 5000);
+    }, 3000);
 }
