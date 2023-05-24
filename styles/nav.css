@@ -5,6 +5,8 @@
     z-index: 9;
     border-radius: 5px;
     display: flex;
+    background-color: var(--white);
+    box-shadow: 0 0 5px var(--dark-shade);
     justify-content: space-between;
     align-items: center;
 }

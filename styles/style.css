@@ -122,6 +122,8 @@ a {
     display: flex;
     border-radius: 5px;
     justify-content: center;
+    background-color: var(--white);
+    box-shadow: 0 0 5px var(--dark-shade);
     flex-wrap: wrap;
     margin-left: 10px;
     margin-right: 10px;
