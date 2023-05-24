@@ -123,7 +123,7 @@
     transition: transform 0.3s ease;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
     .nav-button.medium.display-none {
         display: block;
     }

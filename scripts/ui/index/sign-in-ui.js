@@ -9,7 +9,9 @@ const closeSignIn = signInModal.querySelector("#sign-in-close-button");
 const signInForm = signInModal.querySelector("#sign-in-form");
 const dontHaveAccountLabel = signInModal.querySelector("#dont-have-account");
 
-export function signInUiInit() {
+bindEvents();
+
+function bindEvents() {
     overlay.addEventListener('click', () => hideSignIn());
     openSignIn.addEventListener('click', () => showSignIn());
     closeSignIn.addEventListener('click', () => hideSignIn());

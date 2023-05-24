@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/nav.css">
+    <link rel="stylesheet" href="./styles/drop-down.css">
+    <link rel="stylesheet" href="./styles/wrapper.css">
+    <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="wrapper">
+            <button class="nav-button medium bg-none" id="index-button">
+                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+                CDMLMS
+            </button>
+        </div>
+        <button class="nav-button medium display-none fa fa-search" id="search-button" aria-label="search-button"></button>
+        <div class="drop-down" id="search-drop-down">
+            <div class="wrapper">
+                <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
+                <div class="drop-down" id="filter-drop-down">
+                    <button class="nav-button small" id="filter-by-drop-down-button" aria-label="filter-by-drop-down-button">
+                        <label id="selected-filter">Title</label>
+                        <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron"></i>
+                    </button>
+                    <div class="drop-down-menu left fit" id="filter-drop-down-menu">
+                        <button class="nav-button small fit" id="author-filter"> Title </button>
+                        <button class="nav-button small fit" id="title-filter"> Author </button>
+                        <button class="nav-button small fit" id="isbn-filter"> ISBN </button>
+                    </div>
+                </div>
+            </div>
+            <div class="drop-down-menu left fit" id="recent-searches-modal">
+                <Label class="head" id="recent-search-label"> Recent </Label>
+                <div class="recent-searches" id="recent-searches">
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <button class="nav-button medium" id="user-notification" aria-label="user-notification">
+                <i class="fa fa-bell"></i>
+            </button>
+            <div class="user-drop-down">
+                <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
+                    <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu" id="user-drop-down">
+                    <button class="nav-button small fit" id="display-name"> Display name </button>
+                    <button class="nav-button small fit" id="settings"> Settings </button>
+                    <button class="nav-button small fit" id="sign-out"> Sign out </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+
+    </main>
+
+    <footer class="footer">
+
+    </footer>
+
+</body>
+</html>

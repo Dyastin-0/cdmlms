@@ -94,8 +94,7 @@ function handleGlobalClick(e, input) {
 //hide && display of modals
 
 export function displayRecentSearchMobile() {
-    recentSearchesMobile.style.transform = "scaleY(1)";
-    recentSearchesMobile.style.opacity = "1";
+    recentSearchesMobile.classList.add("active");
 }
 
 function hideRecentSearch() {
@@ -103,13 +102,11 @@ function hideRecentSearch() {
 }
 
 function displaySearchResult() {
-    searchModal.style.transform = "translate(-50%, -50%) scale(1)";
-    searchModal.style.opacity = "1";
+    searchModal.classList.add("active");
 }
 
 function hideSearchResult() {
-    searchModal.style.transform = "translate(-50%, -50%) scale(0)";
-    searchModal.style.opacity = "0";   
+    searchModal.classList.remove("active");
     hideRecentSearch(); 
 }
 

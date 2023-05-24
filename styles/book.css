@@ -1,0 +1,33 @@
+.view-book-modal {
+    width: 600px;
+    height: 400px;
+    background-color: pink;
+    position: fixed;
+    transform: translate(-50%, -50%) scale(0);
+    left: 50%;
+    top: 50%;
+
+    border-radius: 10px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header label {
+    font-size: 14px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.header button {
+    border-color: transparent;
+    background: transparent;
+    margin: 10px;
+}
+
+.header button:hover {
+    cursor: pointer;
+}

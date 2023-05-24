@@ -1,5 +1,5 @@
 import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
-import { hideSignUp, signupUiInit } from '../ui/index/sign-up-ui.js';
+import { hideSignUp } from '../ui/index/sign-up-ui.js';
 import { createUser } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { initialAccoutSetUpAndEmailVerification } from './account-setup.js';
@@ -12,7 +12,6 @@ const email = modal.querySelector("#email");
 const password = modal.querySelector("#password");
 const confirmPassword = modal.querySelector("#password-confirm");
 
-signupUiInit();
 bindEvents();
 
 function bindEvents() {

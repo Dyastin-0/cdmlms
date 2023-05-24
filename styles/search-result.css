@@ -16,6 +16,11 @@
     transition: opacity 0.3s ease-in, transform 0.3s ease-in;
 }
 
+.search-modal.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 .error-label {
     padding-left: 10px;
     padding-right: 10px;
@@ -58,6 +63,11 @@
     transform: translateY(-50%) scaleY(0);
     right: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.search-modal-mobile.active {
+    opacity: 1;
+    transform: translateY(-50%) scaleY(1);
 }
 
 .delete-button {

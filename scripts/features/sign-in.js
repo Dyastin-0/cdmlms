@@ -1,4 +1,4 @@
-import { hideSignIn, signInUiInit } from '../ui/index/sign-in-ui.js';
+import { hideSignIn } from '../ui/index/sign-in-ui.js';
 import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
@@ -12,7 +12,6 @@ const submit = modal.querySelector("#sign-in-account-button");
 const signInGoogle = modal.querySelector("#sign-in-google");
 
 observerScroll();
-signInUiInit();
 bindEvents();
 
 function bindEvents() {

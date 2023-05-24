@@ -7,10 +7,8 @@ import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
 import { search } from "./search-book.js";
-import { sessionTokenCheck } from "./session-token.js";
 
 let cachedFeatured = {};
-let myBooks = {};
 
 const signOut = document.querySelector("#sign-out");
 const discover = document.querySelector("#discover");
@@ -22,7 +20,7 @@ const searchByMobile = document.querySelector("#search-by-mobile");
 
 const indexButton = document.querySelector("#index-button");
 
-sessionTokenCheck();
+sessionCheck();
 bindEvents();
 
 export async function userInit(user, currentUserData) {
@@ -71,5 +69,11 @@ async function bindEvents() {
 
     indexButton.addEventListener('click', () => {
         window.location.href = './';
+    });
+}
+
+function sessionCheck() {
+    auth.onAuthStateChanged(user => {
+        user ? null : window.location.href = "./";
     });
 }

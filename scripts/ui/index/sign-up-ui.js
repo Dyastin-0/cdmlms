@@ -9,7 +9,9 @@ const closeSignUp = signUpModal.querySelector("#sign-up-close-button");
 const signUpForm = signUpModal.querySelector("#sign-up-form");
 const haveAccountLabel = signUpModal.querySelector("#have-account");
 
-export function signupUiInit() {
+bindEvents();
+
+export function bindEvents() {
     overlay.addEventListener('click', () => hideSignUp());
     openSignUp.addEventListener('click', () => showSignUp());
     closeSignUp.addEventListener('click', () => hideSignUp());

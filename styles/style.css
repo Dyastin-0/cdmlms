@@ -20,7 +20,9 @@
     --overlay: rgba(0, 0, 0, 0.5);
 
     --white: rgb(255, 255, 255);
-    --black: rgb(25, 25, 25);
+    --black: rgb(60, 60, 60);
+
+    --mobile: 600px;
 }
 
 * {
@@ -84,6 +86,11 @@ a {
 .content.center {
     justify-content: center;
     align-items: center;
+}
+
+.content .label.small {
+    text-align: left;
+    font-size: 28px;
 }
 
 .content .label {

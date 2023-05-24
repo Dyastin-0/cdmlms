@@ -1,22 +1,21 @@
 .pin-container {
-    display: flex;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    overflow-y: auto;
-    gap: 8px;
+    gap: 16px;
 }
 
 .pin-container .pin {
-    width: 246px;
     display: flex;
-    position: relative;
+    flex-basis: calc(calc(100%/4) - 16px);
     flex-direction: column;
+    position: relative;
     justify-content: space-between;
     border-radius: 5px;
     bottom: 0;
     background-color: var(--dark-shade-low);
-    transition: border-radius 0.3s ease;
+    transition: border-radius 0.3s ease, bottom 0.3s ease;
 }
 
 .pin label {
@@ -67,6 +66,7 @@
 
 .pin-container .pin:hover {
     cursor: pointer;
+    bottom: 5px;
     border-radius: 15px;
 }
 
