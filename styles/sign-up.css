@@ -1,19 +1,31 @@
 .sign-up {
-    width: 270px;
+    width: fit-content;
     height: fit-content;
+    min-width: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: var(--white);
     color: var(--black);
     position: fixed;
     opacity: 0;
+    border-radius: 5px;
     transform: translate(-50%, -50%) scale(0);
     top: 50%;
     left: 50%;
-    border-radius: 10px;
     z-index: 11;
     transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sign-up .main .label {
+    font-size: 28px;
+    font-weight: 500;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .sign-up.active {
@@ -30,7 +42,7 @@
 .header label {
     font-size: 14px;
     margin: 10px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .header button {
@@ -55,8 +67,8 @@
 .form input {
     padding: 5px;
     margin-bottom: 8px;
-    width: 90%;
-    height: 15px;
+    width: 200px;
+    height: 20px;
     font-size: 14px;
     border-width: 0;
     border-radius: 5px;
@@ -67,11 +79,12 @@
 
 .form button {
     padding: 5px;
-    width: 90%;
+    width: 200px;
+    height: 20px;
     display: flex;
     justify-content: center;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     border-width: 0;
     border-radius: 5px;
     box-sizing: content-box;
@@ -109,10 +122,11 @@
 .warning {
     padding: 5px;
     margin-bottom: 8px;
-    background-color: rgb(161, 36, 57);
+    background-color: rgb(158, 62, 78);
     color: var(--white);
     border-radius: 3px;
-    width: 90%;
+    width: 200px;
+    height: 20px;
     display: none;
     font-weight: 400;
     font-size: 14px;

@@ -12,6 +12,7 @@ let cachedFeatured = {};
 
 const signOut = document.querySelector("#sign-out");
 const discover = document.querySelector("#discover");
+const recent = document.querySelector("#recent");
 
 const searchInput = document.querySelector("#search-input");
 const searchBy = document.querySelector("#selected-filter");
@@ -45,6 +46,8 @@ function renderBooks() {
     const formattedBooks = formatBooks(cachedFeatured.books);
     formattedBooks.forEach((formattedBook) => {
         discover.appendChild(formattedBook);
+        const clone = formattedBook.cloneNode(true);
+        recent.appendChild(clone);
     });
 }
 

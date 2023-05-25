@@ -1,6 +1,7 @@
 .sign-in {
-    width: 270px;
+    width: fit-content;
     height: fit-content;
+    min-width: 270px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@
     top: 50%;
     left: 50%;
     z-index: 12;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
     color: var(--black);
     transition: opacity 0.3s ease, transform 0.3s ease;

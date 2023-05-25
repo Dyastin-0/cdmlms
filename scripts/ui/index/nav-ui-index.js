@@ -1,7 +1,7 @@
 import { signOutFirebaseAuth } from "../../firebase/auth-api.js";
 
 const indexNavbar = document.querySelector("#index-navbar")
-const indexButton = indexNavbar.querySelector("#index-button");
+const indexButton = document.querySelector("#index-button");
 const openSignIn = indexNavbar.querySelector("#sign-in-modal-button");
 const openSignUp = indexNavbar.querySelector("#sign-up-modal-button");
 const homeButton = indexNavbar.querySelector("#home");

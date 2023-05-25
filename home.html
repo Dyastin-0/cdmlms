@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
     <link rel="stylesheet" href="./styles/nav.css">
+    <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/pin.css">
     <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="./styles/search-result.css">
@@ -20,18 +21,20 @@
     <link rel="stylesheet" href="./styles/toast-message.css">
     <link rel="stylesheet" href="./styles/edit-profile.css">
     <link rel="stylesheet" href="./styles/process-dialog.css">
+    <link rel="stylesheet" href="./styles/view-book.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
 <body>
 
+    <div class="main-header">
+		<button class="nav-button large bg-none" id="index-button">
+			<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+			Colegio de Montalban
+		</button>
+	</div>
+
     <nav class="nav">
-        <div class="wrapper">
-            <button class="nav-button medium bg-none" id="index-button">
-                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-                CDMLMS
-            </button>
-        </div>
         <button class="nav-button medium display-none fa fa-search" id="search-button" aria-label="search-button"></button>
         <div class="drop-down" id="search-drop-down">
             <div class="wrapper">
@@ -78,6 +81,9 @@
             <label class="label small hide"> Most viewed </label>
             <div class="pin-container" id="discover">
             </div>
+
+            <label class="label small hide"> Recently added </label>
+            <div class="pin-container" id="recent"></div>
         </content>
 
     </main>
@@ -108,6 +114,17 @@
     </footer>
 
     <!-- modals -->
+
+    <div class="view-book-modal" id="view-book-modal">
+        <div class="header">
+            <label id="viewed-book-title"></label>
+            <button class="close-button fa fa-close" id="close-view-book"></button>
+        </div>
+        <div class="book-details" id="book-details">
+
+        </div>
+    </div>
+
     <div class="search-modal" id="search-modal">
         <div class="header">
             <label class="result-label"> Result </label>

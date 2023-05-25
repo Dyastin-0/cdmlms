@@ -8,7 +8,7 @@
 
 .pin-container .pin {
     display: flex;
-    flex-basis: calc(calc(100%/4) - 16px);
+    flex-basis: calc(calc(100%/3) - 8px);
     flex-direction: column;
     position: relative;
     justify-content: space-between;
@@ -69,5 +69,3 @@
     bottom: 5px;
     border-radius: 15px;
 }
-
-

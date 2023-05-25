@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="./styles/style.css">
 	<link rel="stylesheet" href="./styles/wrapper.css">
 	<link rel="stylesheet" href="./styles/nav.css">
+	<link rel="stylesheet" href="./styles/footer.css">
 	<link rel="stylesheet" href="./styles/drop-down.css">
 	<link rel="stylesheet" href="/styles/pin.css">
 	<link rel="stylesheet" href="./styles/toast-message.css">
@@ -17,63 +18,39 @@
 	<link rel="stylesheet" href="./styles/sign-in.css">
 	<link rel="stylesheet" href="./styles/splash-screen.css">
 	<link rel="stylesheet" href="./styles/process-dialog.css">
+	<link rel="stylesheet" href="./styles/content.css">
 	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
 	<title> Cdmlms </title>
 </head>
 <body>
 
-	<nav class="nav trasparent" id="index-navbar">
-		<button class="nav-button medium bg-none" id="index-button">
-		<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-		CDMLMS
+	<div class="main-header">
+		<button class="nav-button large bg-none" id="index-button">
+			<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+			Colegio de Montalban
 		</button>
+	</div>
+
+	<nav class="nav trasparent" id="index-navbar">
 		<div class="wrapper fit">
 			<button class="nav-button medium" id="about" aria-label="about"> About </button>
 			<button class="nav-button medium none logged-in" id="home" aria-label="home"> Home </button>
 			<button class="nav-button medium none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
 			<button class="nav-button medium none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
-			<i class="fa fa-sign-in fa-lg"></i>
+				Sign in
 			</button>
 			<button class="nav-button medium none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
 		</div>
 	</nav>
 
-	<main class="main">
-		<content class="content center">
-			<label class="label hide"> Colegio de Montalban </label>
-			<div class="pin-container">
-				<div class="pin small hide">
-					<label class="header"> The new library management system of Colegio de Montalban </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> Designed and devoloped by CpE Students </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> Books now browsable online! </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> Sign up and browse our library!   </label>
-				</div>
-			</div>
+	<main class="main landing">
+		<div class="landing-page-content">
+			<label class="landing-page-label"> Welcome to CDMLMS </label>
+			<label class="landing-page-label medium"> Where knowledge is everywhere </label>
+		</div>
+		<div class="landing-page-content">
 
-			<label class="label hide"> Browsing the library made easy! </label>
-			<div class="pin-container">
-				<div class="pin small hide">
-					<label class="header"> Create an account; </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> Log in; </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> Browse; </label>
-				</div>
-				<div class="pin small hide">
-					<label class="header"> and borrow the book you need! </label>
-				</div>
-			</div>
-
-		</content>
-
+		</div>
 	</main>
 
 	<footer class="footer-global">
@@ -109,7 +86,7 @@
 			<label> Sign up </label>
 			<button class="fa fa-close" id="sign-up-close-button" aria-label="sign-up-close-button"></button>
 		</div>
-
+		
 		<form class="form" id="sign-up-form" action="">
 			<label class="warning" id="sign-up-warning">  </label>
 			<input type="text" placeholder="Email" id="email">
@@ -122,6 +99,7 @@
 				<label> Continue with Google </label>
 			</button>
 		</form>
+
 		<div class="footer">
 			<label class="underlined" id="have-account"> Already have an account? Click here </label>
 		</div>
