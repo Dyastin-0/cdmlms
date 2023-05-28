@@ -93,21 +93,23 @@ function handleGlobalClick(e, input) {
 
 //hide && display of modals
 
-export function displayRecentSearchMobile() {
-    recentSearchesMobile.classList.add("active");
-}
-
 function hideRecentSearch() {
     hideDropDown(recentSearchModal);
 }
 
+export function displayRecentSearchMobile() {
+    recentSearchesMobile.style.transform = "scaleY(1)";
+    recentSearchesMobile.style.opacity = "1";
+}
+
 function displaySearchResult() {
-    searchModal.classList.add("active");
+    searchModal.style.transform = "translate(-50%, -50%) scale(1)";
+    searchModal.style.opacity = "1";
 }
 
 function hideSearchResult() {
-    searchModal.classList.remove("active");
-    hideRecentSearch(); 
+    searchModal.style.transform = "translate(-50%, -50%) scale(0)";
+    searchModal.style.opacity = "0";
 }
 
 // Recent search items

@@ -22,7 +22,7 @@ export async function signInFirebaseAuth(email, password) {
         isSuccess = true;
     })
     .catch(() => {
-        warning('Invalid credentials.', 'log-in');
+        warning('Invalid credentials.', 'sign-in');
     });
     return isSuccess;
 }
@@ -47,6 +47,20 @@ export async function signInWithGoogle() {
     });
 }
 
-export async function signOutFirebaseAuth() {
-    await auth.signOut();
+export function signOutFirebaseAuth() {
+    auth.signOut();
+}
+
+export function recoverAccount(email) {
+    if (!email) {
+        warning('enter your email.', 'sign-in');
+        return;
+    }
+    firebase.auth().sendPasswordResetEmail(email)
+    .then(() => {
+      toastMessage("Password reset link sent.");
+    })
+    .catch((error) => {
+      console.error('Error sending password reset email:', error);
+    });
 }

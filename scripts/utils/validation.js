@@ -74,7 +74,7 @@ export function warning(message, where) {
         editWarning.style.display = "flex";
     }
 
-    if (where == "log-in") {
+    if (where == "sign-in") {
         warningLogin.textContent = message;
         warningLogin.style.display = "flex";
         return;

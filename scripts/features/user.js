@@ -1,4 +1,4 @@
-import { fetchAllFeaturedBooks, formatBooks } from "./books.js";
+import { formatBook } from "./books.js";
 import { userDropDownInit } from "../ui/home/user-drop-down-ui.js";
 import { sexDropDownInit } from "../ui/home/sex-drop-down.js";
 import { filterSearchInit } from "../ui/home/search-filter-drop-down.js";
@@ -7,17 +7,16 @@ import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
 import { search } from "./search-book.js";
-
-let cachedFeatured = {};
+import { scrollObserver } from "../observer.js";
 
 const signOut = document.querySelector("#sign-out");
-const discover = document.querySelector("#discover");
-const recent = document.querySelector("#recent");
+const mostViewed = document.querySelector("#most-viewed");
+const mostRecent = document.querySelector("#most-recent");
 
 const searchInput = document.querySelector("#search-input");
 const searchBy = document.querySelector("#selected-filter");
 const searchInputMobile = document.querySelector("#search-input-mobile");
-const searchByMobile = document.querySelector("#search-by-mobile");
+const searchByMobile = document.querySelector("#selected-filter-mobile");
 
 const indexButton = document.querySelector("#index-button");
 
@@ -25,8 +24,7 @@ sessionCheck();
 bindEvents();
 
 export async function userInit(user, currentUserData) {
-    cachedFeatured = await fetchAllFeaturedBooks();
-    renderData(user, currentUserData);
+    await renderData(user, currentUserData);
     displayRecentSearches(user.uid);
     displayRecentSearchMobile();
     userDropDownInit();
@@ -34,20 +32,31 @@ export async function userInit(user, currentUserData) {
     sexDropDownInit();
     filterSearchInit();
     filterSearchInitMobile();
-    observerScroll();
+    scrollObserver();
 }
 
 async function renderData(user, currentUserData) {
     displayProfile(user, currentUserData);
-    renderBooks();
+    await renderBooks();
 }
 
-function renderBooks() {
-    const formattedBooks = formatBooks(cachedFeatured.books);
-    formattedBooks.forEach((formattedBook) => {
-        discover.appendChild(formattedBook);
-        const clone = formattedBook.cloneNode(true);
-        recent.appendChild(clone);
+async function renderBooks() {
+    await displayBooks(mostViewed, 'views');
+    await displayBooks(mostRecent, 'dateAdded');
+}
+
+async function displayBooks(container, orderBy) {
+    const query = await db
+    .collection('books')
+    .orderBy(orderBy, 'desc')
+    .limit(4);
+
+    const unsubscribe = query.onSnapshot((querySnapshot) => {
+        container.innerHTML = "";
+        querySnapshot.forEach((doc) => {
+            const book = formatBook(doc.data(), doc.ref);
+            container.appendChild(book);
+        });
     });
 }
 

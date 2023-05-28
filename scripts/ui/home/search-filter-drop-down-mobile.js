@@ -9,6 +9,7 @@ const filterChevron = filterDropDown.querySelector("#filter-drop-down-chevron-mo
 
 const titleFilter = filterDropDownMenu.querySelector("#title-filter-mobile");
 const authorFilter = filterDropDownMenu.querySelector("#author-filter-mobile");
+const categoryFilter = filterDropDownMenu.querySelector("#category-filter-mobile");
 const isbnFilter = filterDropDownMenu.querySelector("#isbn-filter-mobile");
 
 export function filterSearchInitMobile() {
@@ -36,6 +37,10 @@ function bindEvents() {
 
     authorFilter.addEventListener('click', () => {
         selectedFilter.textContent = authorFilter.textContent; 
+    });
+
+    categoryFilter.addEventListener('click', () => {
+        selectedFilter.textContent = categoryFilter.textContent;
     });
 
     isbnFilter.addEventListener('click', () => {

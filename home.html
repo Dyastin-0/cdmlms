@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="./styles/search-result.css">
     <link rel="stylesheet" href="./styles/splash-screen.css">
-    <link rel="stylesheet" href="./styles/book.css">
     <link rel="stylesheet" href="./styles/set-up.css">
     <link rel="stylesheet" href="./styles/user-profile.css">
     <link rel="stylesheet" href="./styles/confirm-dialog.css">
@@ -41,12 +40,13 @@
                 <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
                 <div class="drop-down" id="filter-drop-down">
                     <button class="nav-button small" id="filter-by-drop-down-button" aria-label="filter-by-drop-down-button">
-                        <label id="selected-filter">Title</label>
+                        <label class="inherit" id="selected-filter">Title</label>
                         <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron"></i>
                     </button>
                     <div class="drop-down-menu left fit" id="filter-drop-down-menu">
                         <button class="nav-button small fit" id="author-filter"> Title </button>
                         <button class="nav-button small fit" id="title-filter"> Author </button>
+                        <button class="nav-button small fit" id="category-filter"> Category </button>
                         <button class="nav-button small fit" id="isbn-filter"> ISBN </button>
                     </div>
                 </div>
@@ -79,11 +79,61 @@
 
         <content class="content">
             <label class="label small hide"> Most viewed </label>
-            <div class="pin-container" id="discover">
+
+            <div class="pin-container" id="most-viewed">
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
             </div>
 
             <label class="label small hide"> Recently added </label>
-            <div class="pin-container" id="recent"></div>
+            <div class="pin-container" id="most-recent">
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
+                <div class="pin small">
+                    <div>
+                        <div class="loader title"></div>
+                        <div class="loader title"></div>
+                        <div class="loader title half"></div>   
+                    </div>
+                    <div class="loader author"></div>
+                </div>
+            </div>
         </content>
 
     </main>
@@ -117,25 +167,23 @@
 
     <div class="view-book-modal" id="view-book-modal">
         <div class="header">
-            <label id="viewed-book-title"></label>
-            <button class="close-button fa fa-close" id="close-view-book"></button>
+            <label class="black"> Details </label>
+            <button class="black fa fa-close" id="close-view-book-modal" aria-label="close-view-book"></button>
         </div>
-        <div class="book-details" id="book-details">
-
-        </div>
+        <div class="book-details" id="book-details"></div>
     </div>
 
     <div class="search-modal" id="search-modal">
         <div class="header">
-            <label class="result-label"> Result </label>
-            <button class="fa fa-close" id="close-result-button"></button>
+            <label class="black"> Result </label>
+            <button class="black fa fa-close" id="close-result-button"></button>
         </div>
         <div class="pin-container" id="search-results">
-
         </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
+    <div class="overlay second" id="second-overlay"></div>
 
     <div class="search-modal-mobile" id="recent-search-modal-mobile">
         <div class="drop-down">
@@ -151,11 +199,12 @@
                     <div class="drop-down-menu upper left fit" id="filter-drop-down-menu-mobile">
                         <button class="nav-button small fit" id="author-filter-mobile"> Title </button>
                         <button class="nav-button small fit" id="title-filter-mobile"> Author </button>
+                        <button class="nav-button small fit" id="category-filter-mobile"> Category </button>
                         <button class="nav-button small fit" id="isbn-filter-mobile"> ISBN </button>
                     </div>
                 </div>
 
-                <div class="drop-down-menu left fit" id="recent-searches-modal-mobile">
+                <div class="drop-down-menu left fit active" id="recent-searches-modal-mobile">
                     <Label class="head" id="recent-search-label"> Recent </Label>
                     <div class="recent-searches" id="recent-search-mobile">
                     </div>
@@ -180,8 +229,8 @@
             id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
             
             <div class="drop-down" id="setup-sex-drop-down">
-                <button class="nav-button small" id="setup-sex-drop-down-button" aria-label="setup-sex-drop-down-button">
-                    <label id="setup-selected-sex"> Male </label>
+                <button class="nav-button small dark" id="setup-sex-drop-down-button" aria-label="setup-sex-drop-down-button">
+                    <label class="inherit white" id="setup-selected-sex"> Male </label>
                     <i class="fa fa-chevron-down chevron" id="setup-sex-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu left fit" id="setup-sex-drop-down-menu">
@@ -191,8 +240,37 @@
             </div>
 
             <label for="birth-date"> Birth date </label>
-            <input type="date" placeholder="Birth date" id="birth-date">
-            <input type="text" placeholder="School ID" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
+            <input class="dark" type="date" placeholder="Birth date" id="birth-date">
+
+            <div class="container">
+                <div class="drop-down" id="course-drop-down">
+                    <button class="nav-button small dark" id="course-drop-down-button" aria-label="course-drop-down-button">
+                        <label class="inherit white" id="setup-selected-course"> Course </label>
+                        <i class="fa fa-chevron-down chevron" id="course-drop-down-chevron"></i>
+                    </button>
+                    <div class="drop-down-menu left fit" id="course-drop-down-menu">
+                        <button class="nav-button small fit" id="course-bscpe">BSCpE</button>
+                        <button class="nav-button small fit" id="course-bsit">BSIT</button>
+                        <button class="nav-button small fit" id="course-bsed">BSED</button>
+                        <button class="nav-button small fit" id="course-bsba">BSBA</button>
+                    </div>
+                </div>
+
+                <div class="drop-down" id="year-drop-down">
+                    <button class="nav-button small dark fit-content" id="year-drop-down-button" aria-label="year-drop-down-button">
+                        <label class="inherit white" id="setup-selected-year"> Year </label>
+                        <i class="fa fa-chevron-down chevron" id="year-drop-down-chevron"></i>
+                    </button>
+                    <div class="drop-down-menu left fit" id="year-drop-down-menu">
+                        <button class="nav-button small fit" id="year-1">1st year</button>
+                        <button class="nav-button small fit" id="year-2">2nd year</button>
+                        <button class="nav-button small fit" id="year-3">3rd year</button>
+                        <button class="nav-button small fit" id="year-4">4th year</button>
+                    </div>
+                </div>
+            </div>
+
+            <input type="text" placeholder="School ID (e.g., 00-00000)" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
             <input type="text" placeholder="Display name" id="display-name">
         </form>
         <div class="footer">
@@ -201,18 +279,10 @@
         </div>
     </div>
 
-    <div class="view-book-modal">
-        <div class="header">
-            <label> Book </label>
-            <button class="fa fa-close" id="close-profile"></button>
-        </div>
-        <label class="book-title"> Test </label>
-    </div>
-
     <div class="user-profile-modal" id="user-profile-modal">
         <div class="header">
             <label class="left" id="profile-modal-header"> Profile </label>
-            <button class="fa fa-close" id="close-profile" aria-label="close-profile-button">  </button>
+            <button class="fa fa-close white" id="close-profile" aria-label="close-profile-button">  </button>
         </div>
         <div class="background"> 
             <div class="photo-overlay fa fa-camera" id="photo-overlay">
@@ -246,7 +316,7 @@
             id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
 
             <div class="drop-down" id="sex-drop-down">
-                <button class="nav-button small" id="sex-drop-down-button" aria-label="sex-drop-down-button">
+                <button class="nav-button small dark" id="sex-drop-down-button" aria-label="sex-drop-down-button">
                     <label id="selected-sex"> Male </label>
                     <i class="fa fa-chevron-down chevron" id="sex-drop-down-chevron"></i>
                 </button>
@@ -315,7 +385,6 @@
 
 <!--custom scripts-->
 <script type="module" src="./scripts/features/user-first-login.js"></script>
-<script src="./scripts/observer.js"></script>
 <script type="module" src="./scripts/features/edit-profile.js"></script>
 <!---->
 

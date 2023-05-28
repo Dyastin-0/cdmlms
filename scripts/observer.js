@@ -1,4 +1,4 @@
-const scrollObserver = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add("show");
@@ -8,7 +8,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
     });
 });
 
-function observerScroll() {
+export function scrollObserver() {
     const elements = document.body.querySelectorAll(".hide");
-    elements.forEach((element) => scrollObserver.observe(element));
+    elements.forEach((element) => observer.observe(element));
 }

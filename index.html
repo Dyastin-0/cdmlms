@@ -22,7 +22,7 @@
 	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
 	<title> Cdmlms </title>
 </head>
-<body>
+<body class="w-bg">
 
 	<div class="main-header">
 		<button class="nav-button large bg-none" id="index-button">
@@ -31,20 +31,20 @@
 		</button>
 	</div>
 
-	<nav class="nav trasparent" id="index-navbar">
+	<nav class="nav right" id="index-navbar">
 		<div class="wrapper fit">
-			<button class="nav-button medium" id="about" aria-label="about"> About </button>
-			<button class="nav-button medium none logged-in" id="home" aria-label="home"> Home </button>
-			<button class="nav-button medium none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
-			<button class="nav-button medium none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
+			<button class="nav-button small-g" id="about" aria-label="about"> About </button>
+			<button class="nav-button small-g none logged-in" id="home" aria-label="home"> Home </button>
+			<button class="nav-button small-g none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
+			<button class="nav-button small-g none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
 				Sign in
 			</button>
-			<button class="nav-button medium none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
+			<button class="nav-button small-g none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
 		</div>
 	</nav>
 
 	<main class="main landing">
-		<div class="landing-page-content">
+		<div class="landing-page-content static">
 			<label class="landing-page-label"> Welcome to CDMLMS </label>
 			<label class="landing-page-label medium"> Where knowledge is everywhere </label>
 		</div>
@@ -114,6 +114,7 @@
 			<label class="warning" id="sign-in-warning">  </label>
 			<input type="text" placeholder="Email" id="sign-in-email" enterkeyhint="Enter">
 			<input type="password" placeholder="Password" id="sign-in-password" autocomplete="on" enterkeyhint="Enter">
+			<label class="underlined" id="forgot-password"> Forgot password? </label>
 			<button id="sign-in-account-button"> Sign in </button>
 			<label class="or-label"> or </label>
 			<button class="google-button" id="sign-in-google">	
@@ -159,19 +160,20 @@
 
 </body>
 
-  <!-- scripts -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-  <script src="./scripts/firebase/firebase.js"></script>
-  <!---->
+<!-- scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="./scripts/firebase/firebase.js"></script>
+<!---->
 
-  <!--custom scripts-->
-  <script src="./scripts/observer.js"></script>
-  <script type="module" src="./scripts/features/sign-up.js"></script>
-  <script type="module" src="./scripts/features/sign-in.js"> </script>
-  <script type="module" src="./scripts/ui/index/nav-ui-index.js"></script>
-  <!---->
+<!--custom scripts-->
+<script src="./scripts/observer.js"></script>
+<script type="module" src="./scripts/features/sign-up.js"></script>
+<script type="module" src="./scripts/features/sign-in.js"> </script>
+<script type="module" src="./scripts/features/user-reset-password.js"></script>
+<script type="module" src="./scripts/ui/index/nav-ui-index.js"></script>
+<!---->
 
 </html>

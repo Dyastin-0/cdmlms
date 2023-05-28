@@ -6,6 +6,8 @@ import { logOut } from "./user.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
+import { yearDropDownInit } from "../ui/home/year-drop-down.js";
+import { courseDropDownInit } from "../ui/home/course-drop-down.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
@@ -15,14 +17,14 @@ const lastName = oneTimeSetupModal.querySelector("#last-name");
 const middleName = oneTimeSetupModal.querySelector("#middle-name");
 const sex = oneTimeSetupModal.querySelector("#setup-selected-sex");
 const birthDate = oneTimeSetupModal.querySelector("#birth-date");
+const course = oneTimeSetupModal.querySelector("#setup-selected-course");
+const year = oneTimeSetupModal.querySelector("#setup-selected-year");
 const id = oneTimeSetupModal.querySelector("#id");
 const displayName = oneTimeSetupModal.querySelector("#display-name");
 
 const cancelSetupButton = document.querySelector("#cancel-setup");
 const doneSetupButton = document.querySelector("#done-setup");
 
-bindEvents();
-setupSexDropDownInit();
 checkIfFirstLogin();
 
 async function checkIfFirstLogin() {
@@ -32,6 +34,7 @@ async function checkIfFirstLogin() {
             const currentUser = querySnapshot.docs[0];
             const isNewUser = currentUser.data().newUser;
             if (isNewUser) {
+                bindEvents();
                 oneTimeSetupModal.classList.add("active");
             } else {
                 userInit(user, currentUser.data());
@@ -42,6 +45,9 @@ async function checkIfFirstLogin() {
 }
 
 function bindEvents() {
+    setupSexDropDownInit();
+    yearDropDownInit();
+    courseDropDownInit();
     doneSetupButton.addEventListener('click', async () => {
         auth.onAuthStateChanged(async (user) => {
             if (user) await verifyEmailAndInputs(user);
@@ -91,6 +97,8 @@ async function setupInformation(userRef, user) {
         lastName: lastName.value,
         sex: sex.textContent.trim(),
         birthDate: birthDate.value,
+        course: course.textContent.trim(),
+        year: year.textContent.trim(),
         id: id.value
     });
 
@@ -141,7 +149,19 @@ function areInputDataValid() {
         return false;
     }
 
-    return isIdValid(id.value);
+    if (!isIdValid(id.value)) return false;
+
+    if (year.textContent === "Year") {
+        warning("Select your year.", "setup");
+        return false;
+    }
+
+    if (course.textContent === "Course") {
+        warning("Select your course.", "setup");
+        return false;
+    }
+
+    return true;
 }
 
 async function areInputsAvailable() {

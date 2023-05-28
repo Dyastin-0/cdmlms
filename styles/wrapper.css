@@ -18,8 +18,9 @@
 }
 
 .wrapper.space-between:hover {
+    height: 100%;
     cursor: pointer;
-    background-color: var(--dark-shade);
+    background-color: var(--dark-shade-low);
     transition: background-color 0.5s ease;
 }
 

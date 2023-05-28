@@ -1,42 +1,112 @@
 import { getQueryWithLimit, searchQuery } from "../firebase/firestore-api.js";
 
-function bindPinEvent(pin) {
-    pin.addEventListener('click', () => {
-        console.log("Test");
+const overlay = document.querySelector("#second-overlay");
+
+const viewBookModal = document.querySelector("#view-book-modal");
+const bookDetails = viewBookModal.querySelector("#book-details");
+const closeButton = viewBookModal.querySelector("#close-view-book-modal");
+
+bindEvents();
+
+function bindEvents() {
+    closeButton.addEventListener('click', () => {
+        viewBookModal.classList.remove("active");
+        overlay.classList.remove("active");
+        bookDetails.innerHTML = "";
+    });
+
+    overlay.addEventListener('click', () => {
+        viewBookModal.classList.remove("active");
+        overlay.classList.remove("active");
+        bookDetails.innerHTML = "";
     });
 }
 
-export function formatBooks(books) {
-    let formattedBoooks = [];
+function bindPinEvent(pin, book, bookRef) {
+    pin.addEventListener('click', () => {
+        bookRef.update({
+            views: book.views + 1
+        });
 
-    books.forEach((book) => {
-        const pin = document.createElement("div");
         const title = document.createElement("label");
         const author = document.createElement("label");
-        const genre = document.createElement("label");
+        const description = document.createElement("label");
+        const category = document.createElement("label");
+        const availability = document.createElement("label");
         const isbn = document.createElement("label");
 
-
-        pin.classList.add("pin");
-        pin.classList.add("small");
+        const div = document.createElement("div");
+        const eye = document.createElement("label");
+        const views = document.createElement("label");
 
         title.classList.add("title");
         title.textContent = book.title;
 
-        author.classList.add("author");
+        author.classList.add("other-details");
+        author.classList.add("weighted");
         author.textContent = book.author;
 
-        genre.classList.add("genre");
-        genre.textContent = book.genre;
+        description.classList.add("other-details");
+        description.textContent = book.description;
+
+        isbn.classList.add("other-details");
+        isbn.textContent =  book.isbn;
+
+        category.classList.add("other-details");
+        category.classList.add("italic");
+        category.textContent = book.category;
+
+        availability.classList.add("other-details");
+        availability.classList.add("green");
+        availability.textContent = book.availability;
         
-        isbn.classList.add("author");
-        isbn.textContent = book.isbn;
+        views.classList.add("other-details");
+        views.classList.add("views");
+        views.classList.add("fa");
+        views.classList.add("fa-eye");
+        views.textContent = book.views;
 
-        pin.appendChild(title);
-        pin.appendChild(author);
-        pin.appendChild(genre);
-        pin.appendChild(isbn);
+        bookDetails.appendChild(title);
+        bookDetails.appendChild(author);
+        bookDetails.appendChild(description);
+        bookDetails.appendChild(category);
+        bookDetails.appendChild(isbn);
+        bookDetails.appendChild(availability);
+        bookDetails.appendChild(eye);
+        bookDetails.appendChild(views);
 
+        overlay.classList.add("active");
+        viewBookModal.classList.add("active");
+    });
+}
+
+export function formatBook(book, bookRef) {
+    const pin = document.createElement("div");
+    const title = document.createElement("label");
+    const author = document.createElement("label");
+
+    pin.classList.add("pin");
+    pin.classList.add("small");
+
+    title.classList.add("title");
+    title.textContent = book.title;
+
+    author.classList.add("author");
+    author.textContent = book.author;
+
+    pin.appendChild(title);
+    pin.appendChild(author);
+
+    bindPinEvent(pin, book, bookRef);
+
+    return pin;
+}
+
+export function formatBooks(books, bookRef) {
+    let formattedBoooks = [];
+
+    books.forEach((book) => {
+       const pin = formatBook(book, bookRef);
         formattedBoooks.push(pin);
     });
 
@@ -44,15 +114,6 @@ export function formatBooks(books) {
 }
 
 export async function fetchAllFeaturedBooks() {
-    const cachedBooks = fetchCachedBooks();
-    const currentTime = new Date().getTime();
-
-    if (cachedBooks && cachedBooks.expiration > currentTime) {
-        return cachedBooks;
-    }
-
-    localStorage.removeItem("books");
-
     try {
         const querySnapshot = await getQueryWithLimit('books', 5);
 
@@ -63,9 +124,7 @@ export async function fetchAllFeaturedBooks() {
             const bookData = book.data();
             allBooks.push(bookData);
         });
-
-        cacheBooks(allBooks);
-        return fetchCachedBooks();
+        return allBooks;
     } catch (error) {
         console.error(error);
     }
@@ -77,9 +136,12 @@ export async function findBookBy(by, input) {
         
         const search = {error: null, results: []};
         const queryResult = querySnapshot.docs;
-
         queryResult.forEach((book) => {
-            search.results.push(book.data());
+            const bookRef = {
+                details: book.data(),
+                ref: book.ref
+            }
+            search.results.push(bookRef)
         });
 
         if(search.results.length > 0) {
@@ -91,19 +153,4 @@ export async function findBookBy(by, input) {
     } catch (error) {
         console.error(error);
     }
-}
-
-function cacheBooks(books) {
-    const expirationTime = 24 * 60 * 60 * 1000;
-    const expirationDate = new Date().getTime() + expirationTime;
-    const cacheData = {
-        books: books.map((book) => book),
-        expiration: expirationDate
-    };
-
-    localStorage.setItem("books", JSON.stringify(cacheData));
-}
-
-function fetchCachedBooks() {
-    return JSON.parse(localStorage.getItem("books"));
 }

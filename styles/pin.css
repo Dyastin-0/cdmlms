@@ -1,24 +1,30 @@
 .pin-container {
-    width: 100%;
+    width: calc(100% - 20px);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 16px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 8px;
+    overflow-y: auto;
 }
 
 .pin-container .pin {
     display: flex;
-    flex-basis: calc(calc(100%/3) - 8px);
+    width: 200px;
     flex-direction: column;
     position: relative;
     justify-content: space-between;
     border-radius: 5px;
     bottom: 0;
-    background-color: var(--dark-shade-low);
+    background-color: var(--green);
+    box-shadow: 0 0 5px var(--dark-shade-low);
     transition: border-radius 0.3s ease, bottom 0.3s ease;
 }
 
 .pin label {
+    color: var(--white);
     cursor: inherit;
     font-weight: 700;
     margin: 5px;
@@ -68,4 +74,36 @@
     cursor: pointer;
     bottom: 5px;
     border-radius: 15px;
+}
+
+.loader {
+    margin: 5px;
+    width: calc(100% - 10px);
+    border-radius: 5px;
+    animation: loader 1.5s ease-in-out infinite;
+}
+
+.loader.title {
+    height: 18px;
+}
+
+.loader.author {
+    height: 14px;
+    width: 50%;
+}
+
+.loader.half {
+    width: 50%;
+}
+
+@keyframes loader {
+    0% {
+        background-color: var(--dark-shade-low);
+    }
+    50% {
+        background-color: var(--dark-shade-high);
+    }
+    100% {
+        background-color: var(--dark-shade-low);
+    }
 }

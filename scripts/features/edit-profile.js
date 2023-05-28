@@ -18,7 +18,7 @@ const editedDisplayName = editProfileModal.querySelector("#edit-display-name");
 
 const editDoneButton = editProfileModal.querySelector("#done-edit");
 
-const overlay = document.querySelector("#overlay");
+const overlay = document.querySelector("#second-overlay");
 
 bindEvents();
 
@@ -27,6 +27,7 @@ function bindEvents() {
 
     openEditProfile.addEventListener('click', () => {
         displayEditModal();
+        overlay.classList.add("active");
     });
 
     closeEditProfile.addEventListener('click', () => {

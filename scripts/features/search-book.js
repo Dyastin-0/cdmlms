@@ -1,5 +1,5 @@
 import { addRecentSearch, displayRecentSearches } from "../ui/home/search-ui.js";
-import { findBookBy, formatBooks } from "./books.js";
+import { findBookBy, formatBook } from "./books.js";
 
 const searchResult = document.querySelector("#search-results");
 
@@ -13,9 +13,10 @@ export async function search(by, input) {
 
     const search = await findBookBy(by, input);
     if (!search.error) {
-        const formattedBook = formatBooks(search.results);
-        formattedBook.forEach((book) => {
-            searchResult.appendChild(book);
+        searchResult.innerHTML = "";
+        search.results.forEach((book) => {
+            const formattedBook = formatBook(book.details, book.ref);
+            searchResult.appendChild(formattedBook);
         });
     } else {
         const error = document.createElement('label');

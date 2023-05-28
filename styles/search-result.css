@@ -1,6 +1,7 @@
 .search-modal {
     width: fit-content;
-    height: fit-content;
+    min-width: 90%;
+    height: 80%;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -11,9 +12,9 @@
     top: 50%;
     left: 50%;
     z-index: 15;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
-    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .search-modal.active {
@@ -25,9 +26,9 @@
     padding-left: 10px;
     padding-right: 10px;
     width: calc(100% - 20px);
-    height: 100%;
-    font-weight: 300;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--black);
 }
 
 .recent-searches {
@@ -71,15 +72,15 @@
 }
 
 .delete-button {
-    height: fit-content;
-    width: fit-content;
+    height: 24px;
+    width: 24px;
     display: flex;
     border: none;
     font-size: 14px;
     font-weight: 500;
     padding: 5px;
     margin: 3px;
-    border-radius: 30px;
+    border-radius: 20px;
     color: var(--black);
     background-color: transparent;
     transition: background-color 0.3s ease;
@@ -87,5 +88,5 @@
 
 .delete-button:hover {
     cursor: pointer;
-    background-color: var(--dark-shade);
+    background-color: var(--dark-shade-low);
 }
