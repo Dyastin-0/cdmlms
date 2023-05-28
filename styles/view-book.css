@@ -1,5 +1,6 @@
 .view-book-modal {
     position: fixed;
+    min-width: 90%;
     max-width: 95%;
     max-height: 95%;
     background: var(--white);
@@ -22,7 +23,6 @@
 
 .book-details {
     overflow-y: auto;
-    height: fit-content;
     color: var(--black);
     display: flex;
     flex-direction: column;
