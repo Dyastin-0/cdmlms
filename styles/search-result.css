@@ -1,7 +1,6 @@
 .search-modal {
-    width: fit-content;
-    min-width: 90%;
-    height: 80%;
+    max-width: 95%;
+    max-height: 80%;
     position: fixed;
     display: flex;
     flex-direction: column;

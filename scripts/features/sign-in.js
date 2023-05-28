@@ -3,6 +3,7 @@ import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
 import { warning } from '../utils/validation.js';
+import { scrollObserver } from '../observer.js';
 
 const modal = document.querySelector("#sign-in-modal");
 const username = modal.querySelector("#sign-in-email");
@@ -11,7 +12,7 @@ const submit = modal.querySelector("#sign-in-account-button");
 
 const signInGoogle = modal.querySelector("#sign-in-google");
 
-observerScroll();
+scrollObserver();
 bindEvents();
 
 function bindEvents() {

@@ -23,8 +23,8 @@ function bindEvents() {
 }
 
 function bindPinEvent(pin, book, bookRef) {
-    pin.addEventListener('click', () => {
-        bookRef.update({
+    pin.addEventListener('click', async () => {
+        await bookRef.update({
             views: book.views + 1
         });
 
@@ -35,7 +35,6 @@ function bindPinEvent(pin, book, bookRef) {
         const availability = document.createElement("label");
         const isbn = document.createElement("label");
 
-        const div = document.createElement("div");
         const eye = document.createElement("label");
         const views = document.createElement("label");
 

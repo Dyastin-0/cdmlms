@@ -49,7 +49,7 @@ async function displayBooks(container, orderBy) {
     const query = await db
     .collection('books')
     .orderBy(orderBy, 'desc')
-    .limit(4);
+    .limit(5);
 
     const unsubscribe = query.onSnapshot((querySnapshot) => {
         container.innerHTML = "";

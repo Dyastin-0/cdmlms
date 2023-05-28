@@ -32,7 +32,7 @@
 
 html, body {
     width: 100%;
-    min-width: 300px;
+    min-width: 200px;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -89,8 +89,7 @@ a {
 }
  
 .main.landing {
-    width: calc(100% - 40px);
-    padding: 20px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     background: var(--gradient-vertical);
@@ -98,7 +97,7 @@ a {
 
 .content {
     width: 100%;
-    min-width: 300px;
+    min-width: 200px;
     height: fit-content;
     min-height: 566px;
     display: flex;
