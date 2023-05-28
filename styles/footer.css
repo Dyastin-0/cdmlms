@@ -14,7 +14,6 @@
     border-radius: 5px;
     padding: 5px;
     text-decoration: underline;
-    color: var(--black);
     transition: background-color 0.3s ease;
 }
 
@@ -33,15 +32,12 @@
 .footer-label {
     font-size: 14px;
     font-weight: 550;
-    color: var(--black);
-
 }
 
 .footer-text {
     font-size: 14px;
     padding: 5px;
     border-radius: 5px;
-    color: var(--black);
     transition: background-color 0.3s ease;
 }
 

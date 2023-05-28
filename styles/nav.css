@@ -70,6 +70,11 @@
     font-size: 18px;
 }
 
+.nav-button.medium.fit {
+    width: 100%;
+    border-radius: 5px;
+}
+
 .nav-button.medium.display-none {
     display: none;
 }
@@ -84,7 +89,6 @@
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
-    
 }
 
 .nav-button.dark {

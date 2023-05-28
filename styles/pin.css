@@ -13,7 +13,7 @@
 
 .pin-container .pin {
     display: flex;
-    flex-basis: auto;
+    width: 200px;
     flex-direction: column;
     position: relative;
     justify-content: space-between;
@@ -40,7 +40,6 @@
 }
 
 .pin label.title {
-    max-width: 200px;
     padding: 5px;
     font-size: 24px;
     font-weight: 500;

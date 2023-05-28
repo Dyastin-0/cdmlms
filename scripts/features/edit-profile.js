@@ -133,5 +133,6 @@ function displayEditModal() {
 
 function hideEditModal() {
     editProfileForm.reset();
+    overlay.classList.remove("active");
     editProfileModal.classList.remove("active");
 }

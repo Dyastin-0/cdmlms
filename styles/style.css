@@ -18,8 +18,8 @@
     --white: rgb(255, 255, 255);
     --black: rgb(80, 80, 80);
 
-    --gradient-vertical-solid: linear-gradient(160deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
-    --gradient-vertical: linear-gradient(160deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
+    --gradient-vertical-solid: linear-gradient(180deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
+    --gradient-vertical: linear-gradient(120deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
 
     --mobile: 600px;
 }
@@ -27,13 +27,14 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 html, body {
     width: 100%;
-    min-width: 200px;
     height: fit-content;
+    min-height: 100%;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,16 +83,17 @@ a {
 
 .main {
     width: 100%;
-    height: 100%;
+    height: fit-content;
+    min-height: 100%;
     display: flex;
     flex-direction: row;
     background: var(--gradient-vertical-solid);
 }
  
 .main.landing {
-    width: 100%;
-    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
     background: var(--gradient-vertical);
 }
 

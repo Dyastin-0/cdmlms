@@ -1,5 +1,5 @@
 .search-modal {
-    max-width: 95%;
+    max-width: 90%;
     max-height: 80%;
     position: fixed;
     display: flex;
@@ -24,7 +24,7 @@
 .error-label {
     padding-left: 10px;
     padding-right: 10px;
-    width: calc(100% - 20px);
+    min-width: 200px;
     font-weight: 500;
     font-size: 24px;
     color: var(--black);
