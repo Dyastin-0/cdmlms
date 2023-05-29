@@ -11,6 +11,7 @@ import { courseDropDownInit } from "../ui/home/course-drop-down.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
+const adminButton = document.querySelector("#admin-button");
 
 const firstName = oneTimeSetupModal.querySelector("#first-name");
 const lastName = oneTimeSetupModal.querySelector("#last-name");
@@ -33,6 +34,8 @@ async function checkIfFirstLogin() {
             const querySnapshot = await getQueryOneField('users', 'email', user.email);
             const currentUser = querySnapshot.docs[0];
             const isNewUser = currentUser.data().newUser;
+            const isAdmin = currentUser.data().isAdmin;
+            if (isAdmin) adminButton.style.display = "flex";
             if (isNewUser) {
                 bindEvents();
                 oneTimeSetupModal.classList.add("active");
@@ -48,6 +51,7 @@ function bindEvents() {
     setupSexDropDownInit();
     yearDropDownInit();
     courseDropDownInit();
+
     doneSetupButton.addEventListener('click', async () => {
         auth.onAuthStateChanged(async (user) => {
             if (user) await verifyEmailAndInputs(user);

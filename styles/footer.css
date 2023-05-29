@@ -9,6 +9,10 @@
     padding-top: 10px;
 }
 
+.footer-global.bg-none {
+    background: none;
+}
+
 .footer-link {
     font-size: 14px;
     border-radius: 5px;

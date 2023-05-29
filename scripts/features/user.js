@@ -7,7 +7,8 @@ import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
 import { search } from "./search-book.js";
-import { scrollObserver } from "../observer.js";
+
+const adminButton = document.querySelector("#admin-button");
 
 const signOut = document.querySelector("#sign-out");
 const mostViewed = document.querySelector("#most-viewed");
@@ -32,7 +33,6 @@ export async function userInit(user, currentUserData) {
     sexDropDownInit();
     filterSearchInit();
     filterSearchInitMobile();
-    scrollObserver();
 }
 
 async function renderData(user, currentUserData) {
@@ -65,6 +65,10 @@ export async function logOut() {
 }
 
 async function bindEvents() {
+    adminButton.addEventListener('click', () => {
+        window.location.href = "./admin.html";
+    });
+
     signOut.addEventListener('click', async () => await logOut());
 
     searchInput.addEventListener('keyup', async (e) => {

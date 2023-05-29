@@ -14,6 +14,10 @@
     justify-content: right;
 }
 
+.nav.admin {
+    justify-content: right;
+}
+
 .logo {
     width: 30px;
     height: 30px;
@@ -42,6 +46,12 @@
 
 .nav-button.margin {
     margin-left: 5px;
+}
+
+.nav-button.white {
+    padding: 10px;
+    margin: 0;
+    color: var(--white);
 }
 
 .nav-button.bg-none {
@@ -153,6 +163,10 @@
 @media (max-width: 600px) {
     .nav-button.medium.display-none {
         display: block;
+    }
+
+    .nav.admin {
+        justify-content: space-between;
     }
 
     #search-drop-down {

@@ -8,65 +8,233 @@
     <link rel="stylesheet" href="./styles/nav.css">
     <link rel="stylesheet" href="./styles/drop-down.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
+    <link rel="stylesheet" href="./styles/dashboard.css">
+    <link rel="stylesheet" href="./styles/content.css">
+    <link rel="stylesheet" href="./styles/add-book-form.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/confirm-dialog.css">
+    <link rel="stylesheet" href="./styles/process-dialog.css">
+    <link rel="stylesheet" href="./styles/edit-profile.css">
+    <link rel="stylesheet" href="./styles/process-dialog.css">
+    <link rel="stylesheet" href="./styles/user-profile.css">
+    <link rel="stylesheet" href="./styles/view-book.css">
+    <link rel="stylesheet" href="./styles/splash-screen.css">
+    <link rel="stylesheet" href="./styles/toast-message.css">
+    <link rel="stylesheet" href="./styles/set-up.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
-    <title>Document</title>
+    <title>Admin</title>
 </head>
-<body>
 
-    <nav class="nav">
-        <div class="wrapper">
-            <button class="nav-button medium bg-none" id="index-button">
+<body class="admin">
+
+    <div class="dashboard">
+        <div class="header">
+            Cdmlms
+        </div>
+        
+        <div class="button-container">
+            <label class="divider"> Book </label>
+            <button> Add book </button>
+            <button> Edit book </button>
+            <button> Delete book </button>
+            <label class="divider"> Others </label>
+            <button> Users </button>
+            <button> Transactions </button>
+            <button> Statistics </button>
+        </div>
+
+        <div class="footer">
+
+        </div>
+    </div>
+
+    <main class="main admin">
+        <div class="main-header">
+            <button class="nav-button large bg-none" id="index-button">
                 <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-                CDMLMS
+                Colegio de Montalban
             </button>
         </div>
-        <button class="nav-button medium display-none fa fa-search" id="search-button" aria-label="search-button"></button>
-        <div class="drop-down" id="search-drop-down">
+    
+        <nav class="nav admin">
+            <button class="nav-button medium fa fa-bars display-none"></button>
+    
             <div class="wrapper">
-                <input class="search" placeholder="Search" id="search-input" enterkeyhint="Enter">
-                <div class="drop-down" id="filter-drop-down">
-                    <button class="nav-button small" id="filter-by-drop-down-button" aria-label="filter-by-drop-down-button">
-                        <label id="selected-filter">Title</label>
-                        <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron"></i>
+                <button class="nav-button medium"> Home </button>
+                <button class="nav-button medium" id="user-notification" aria-label="user-notification">
+                    <i class="fa fa-bell"></i>
+                </button>
+                <div class="user-drop-down">
+                    <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
+                        <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                     </button>
-                    <div class="drop-down-menu left fit" id="filter-drop-down-menu">
-                        <button class="nav-button small fit" id="author-filter"> Title </button>
-                        <button class="nav-button small fit" id="title-filter"> Author </button>
-                        <button class="nav-button small fit" id="isbn-filter"> ISBN </button>
+                    <div class="drop-down-menu" id="user-drop-down">
+                        <button class="nav-button small fit" id="display-name"> Display name </button>
+                        <button class="nav-button small fit" id="settings"> Settings </button>
+                        <button class="nav-button small fit" id="sign-out"> Sign out </button>
                     </div>
                 </div>
             </div>
-            <div class="drop-down-menu left fit" id="recent-searches-modal">
-                <Label class="head" id="recent-search-label"> Recent </Label>
-                <div class="recent-searches" id="recent-searches">
-                </div>
-            </div>
-        </div>
+        </nav>
 
-        <div class="wrapper">
-            <button class="nav-button medium" id="user-notification" aria-label="user-notification">
-                <i class="fa fa-bell"></i>
-            </button>
-            <div class="user-drop-down">
-                <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
-                    <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
-                </button>
-                <div class="drop-down-menu" id="user-drop-down">
-                    <button class="nav-button small fit" id="display-name"> Display name </button>
-                    <button class="nav-button small fit" id="settings"> Settings </button>
-                    <button class="nav-button small fit" id="sign-out"> Sign out </button>
+        <div class="landing-page-content admin">
+            <label class="landing-page-label medium"> Add book </label>
+			<form class="add-book-form" id="add-book-form">
+                <label class="warning" id="edit-warning"></label>
+                <input type="text" placeholder="Title" id="add-book-title">
+                <input type="text" placeholder="Author" id="add-book-author">
+                <input type="text" placeholder="Publiction" id="add-book-publication">
+                <input type="text" placeholder="Category" id="add-book-category">
+                <input type="text" placeholder="ISBN" id="add-book-isbn" onkeydown="return /\d/.test(event.key)">
+                <input type="text" placeholder="Availability" id="add-book-availability">
+                <textarea placeholder="Description" id="add-book-description" cols="30" rows="5"></textarea>
+                <button id="add-book-button"> Add </button>
+                <button id="add-book-clear-button"> Clear </button>
                 </div>
-            </div>
-        </div>
-    </nav>
+            </form>
+		</div>
 
-    <main class="main">
+        <footer class="footer-global bg-none">
+            <div class="footer-wrapper hide">
+                <label class="footer-label"> Address </label>
+                <a class="footer-link"
+                    href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
+                    target="_blank">
+                    Kasiglahan Village, Montalban, Rizal
+                </a>
+            </div>
+            <div class="footer-wrapper hide">
+                <label class="footer-label"> Contact </label>
+                <label class="footer-text"> 0282968667 | 0283959731 </label>
+            </div>    
+            <div class="footer-wrapper hide">
+                <label class="footer-label"> Email address  </label>
+                <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+            </div>    
+            <div class="footer-wrapper hide">
+                <label class="footer-label"> Facebook page </label>
+                <a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
+                    Colegio de Montalban MIS
+                  </a>
+            </div>    
+        </footer>
 
     </main>
 
-    <footer class="footer">
+    <!-- Modals -->
 
-    </footer>
+    <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="second-overlay"></div>
+
+    <div class="confirm-dialog" id="confirm-dialog-modal">
+        <div class="header">
+            <label id="comfirm-dialog-header"> Confirm </label>
+            <button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">  </button>
+        </div>
+
+        <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
+
+        <div class="footer-dialog">
+            <button id="yes-button"> Yes </button>
+            <button id="no-button"> No </button>
+        </div>
+    </div>
+
+    <div class="toast-message" id="toast-message-modal">
+        <p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
+        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
+    </div>
+
+    <div class="process-dialog" id="process-dialog-modal">
+		<label class="process-message" id="process-message"></label>
+		<label class="process-spinner fa fa-spinner"></label>
+	</div>
+
+    <div class="view-book-modal">
+        <div class="header">
+            <label id="book-title-header"></label>
+            <label class="fa fa-close" id=""></label>
+        </div>
+    </div>
+
+    <div class="user-profile-modal" id="user-profile-modal">
+        <div class="header">
+            <label class="left" id="profile-modal-header"> Profile </label>
+            <button class="fa fa-close white" id="close-profile" aria-label="close-profile-button">  </button>
+        </div>
+        <div class="background"> 
+            <div class="photo-overlay fa fa-camera" id="photo-overlay">
+                <form id="photo-input-form"> <input type="file" id="photo-input"> </form>
+                <label for="photo-input"></label> 
+            </div>
+            <div class="photo" id="profile-photo"> 
+                <img src="" alt="." id="display-photo">    
+            </div>    
+        </div>
+        <label class="name" id="full-name"> Name </label>
+        <label class="other-info" id="display-email"></label>
+        <label class="other-info" id="display-verified"> </label>
+        <div class="footer">
+            <button id="edit-profile-button"> Edit profile </button>
+        </div>
+    </div>
+
+    <div class="edit-profile-modal" id="edit-profile-modal">
+        <div class="header">
+            <label> Edit profile </label>
+            <button class="fa fa-close" id="close-edit-profile"></button>
+        </div>
+        <form class="form" id="edit-profile-form">
+            <label class="warning" id="edit-warning">  </label>
+            <input type="text" placeholder="First name" 
+            id="edit-first-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Last name"
+            id="edit-last-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Middle name" 
+            id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+
+            <div class="drop-down" id="sex-drop-down">
+                <button class="nav-button small dark" id="sex-drop-down-button" aria-label="sex-drop-down-button">
+                    <label id="selected-sex"> Male </label>
+                    <i class="fa fa-chevron-down chevron" id="sex-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu left fit" id="sex-drop-down-menu">
+                    <button class="nav-button small fit" id="male-sex"> Male </button>
+                    <button class="nav-button small fit" id="female-sex"> Female </button>
+                </div>
+            </div>
+
+            <label for="edit-birth-date"> Birth date </label>
+            <input type="date" placeholder="Birth date" id="edit-birth-date">
+            <input type="text" placeholder="Display name" id="edit-display-name">
+        </form>
+        <div class="footer">
+            <button id="done-edit"> Done </button>
+        </div>
+    </div>
+
+    <div class="splash-screen active" id="splash-screen">
+        <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
+        <label class="fa fa-spinner spinner" id="featured-spinner"></label>
+        <label class="splash-screen-label"> From </label>
+        <label class="splash-screen-text"> Agile Sprinters </label>
+    </div>
 
 </body>
+
+<!-- scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="./scripts/firebase/firebase.js"></script>
+<!---->
+
+<!-- custom scripts -->
+<script  type="module" src="./scripts/features/admin/admin-check.js"></script>
+<script type="module" src="./scripts/features/edit-profile.js"></script>
+<script src="./scripts/observer.js"></script>
+<script type="module" src="./scripts/features/user-profile.js"></script>
+<!---->
+
 </html>

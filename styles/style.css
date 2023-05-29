@@ -10,7 +10,7 @@
     --dark-shade-low: rgba(0, 0, 0, 0.1);
     --dark-shade-high: rgba(0, 0, 0, 0.2);
 
-    --white-shade: rgba(255, 255, 255, 0.3);
+    --white-shade: rgba(255, 255, 255, 0.5);
 
     --place-holder: rgba(235, 235, 235, 0.5);
     --overlay: rgba(0, 0, 0, 0.5);
@@ -18,8 +18,10 @@
     --white: rgb(255, 255, 255);
     --black: rgb(80, 80, 80);
 
-    --gradient-vertical-solid: linear-gradient(180deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
+    --gradient-horizontal-solid: linear-gradient(180deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
     --gradient-vertical: linear-gradient(120deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
+    --gradient-semi-vertical-solid: linear-gradient(90deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
+    --gradient-slanted: linear-gradient(120deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
 
     --mobile: 600px;
 }
@@ -39,6 +41,12 @@ html, body {
     flex-direction: column;
     align-items: center;
     color: var(--white);
+}
+
+body.admin {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
 }
 
 body.w-bg {
@@ -87,9 +95,14 @@ a {
     min-height: 100%;
     display: flex;
     flex-direction: row;
-    background: var(--gradient-vertical-solid);
+    background: var(--gradient-horizontal-solid);
 }
- 
+
+.main.admin {
+    background: var(--gradient-slanted);
+    flex-direction: column;
+}
+
 .main.landing {
     flex-wrap: wrap;
     justify-content: center;
