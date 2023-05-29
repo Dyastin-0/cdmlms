@@ -1,4 +1,4 @@
-import { getQueryWithLimit, searchQuery } from "../firebase/firestore-api.js";
+import { searchQuery } from "../firebase/firestore-api.js";
 
 const overlay = document.querySelector("#second-overlay");
 
@@ -23,8 +23,8 @@ function bindEvents() {
 }
 
 function bindPinEvent(pin, book, bookRef) {
-    pin.addEventListener('click', async () => {
-        await bookRef.update({
+    pin.addEventListener('click', () => {
+        bookRef.update({
             views: book.views + 1
         });
 
@@ -110,23 +110,6 @@ export function formatBooks(books, bookRef) {
     });
 
     return formattedBoooks;
-}
-
-export async function fetchAllFeaturedBooks() {
-    try {
-        const querySnapshot = await getQueryWithLimit('books', 5);
-
-        const books = querySnapshot.docs;
-        let allBooks = [];
-        
-        books.forEach((book) => {
-            const bookData = book.data();
-            allBooks.push(bookData);
-        });
-        return allBooks;
-    } catch (error) {
-        console.error(error);
-    }
 }
 
 export async function findBookBy(by, input) {

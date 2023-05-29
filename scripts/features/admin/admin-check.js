@@ -1,6 +1,7 @@
 import { getQueryOneField } from '../../firebase/firestore-api.js';
 import { bindAddBookEvents } from './add-book.js';
 import { userDropDownInit  } from '../../ui/home/user-drop-down-ui.js'
+import { adminNavUiInit } from '../../ui/admin/nav-ui.js';
 import { displayProfile } from '../user-profile.js'; 
 import { signOutFirebaseAuth } from '../../firebase/auth-api.js';
 
@@ -16,7 +17,7 @@ auth.onAuthStateChanged(async (user) => {
             await bindEvents(user, currentUser.data());
             splashScreen.remove();
         } else {
-            window.location.href = "./";
+            window.location.href = "./16.html";
         }
     } else {
         window.location.href = "./";
@@ -27,6 +28,7 @@ async function bindEvents(user, currentUser) {
     displayProfile(user, currentUser)
     userDropDownInit();
     bindAddBookEvents();
+    adminNavUiInit();
     signOut.addEventListener('click', () => {
         signOutFirebaseAuth();
     });

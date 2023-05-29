@@ -1,7 +1,7 @@
 .splash-screen {
     position: fixed;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     transform: scale(0);
@@ -19,9 +19,16 @@
     transform: scale(1);
 }
 
+.splash-screen .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .splash-screen-logo {
     height: 150px;
-    width: 150pxpx;
+    width: 150px;
     display: flex;
     color: var(--black);
 }
@@ -37,8 +44,8 @@
 
 .splash-screen-text {
     color: var(--black);
-    font-size: 20px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 700;
     display: flex;
     align-self: center;
     text-align: center;

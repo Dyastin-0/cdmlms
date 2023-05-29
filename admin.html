@@ -60,7 +60,7 @@
             <button class="nav-button medium fa fa-bars display-none"></button>
     
             <div class="wrapper">
-                <button class="nav-button medium"> Home </button>
+                <button class="nav-button medium" id="admin-home"> Home </button>
                 <button class="nav-button medium" id="user-notification" aria-label="user-notification">
                     <i class="fa fa-bell"></i>
                 </button>
@@ -69,9 +69,9 @@
                         <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                     </button>
                     <div class="drop-down-menu" id="user-drop-down">
-                        <button class="nav-button small fit" id="display-name"> Display name </button>
-                        <button class="nav-button small fit" id="settings"> Settings </button>
-                        <button class="nav-button small fit" id="sign-out"> Sign out </button>
+                        <button class="nav-button medium fit" id="display-name"> Display name </button>
+                        <button class="nav-button medium fit" id="settings"> Settings </button>
+                        <button class="nav-button medium fit" id="sign-out"> Sign out </button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 <input type="text" placeholder="Author" id="add-book-author">
                 <input type="text" placeholder="Publiction" id="add-book-publication">
                 <input type="text" placeholder="Category" id="add-book-category">
-                <input type="text" placeholder="ISBN" id="add-book-isbn" onkeydown="return /\d/.test(event.key)">
+                <input type="text" placeholder="ISBN" id="add-book-isbn">
                 <input type="text" placeholder="Availability" id="add-book-availability">
                 <textarea placeholder="Description" id="add-book-description" cols="30" rows="5"></textarea>
                 <button id="add-book-button"> Add </button>
@@ -214,10 +214,13 @@
     </div>
 
     <div class="splash-screen active" id="splash-screen">
-        <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
-        <label class="fa fa-spinner spinner" id="featured-spinner"></label>
-        <label class="splash-screen-label"> From </label>
-        <label class="splash-screen-text"> Agile Sprinters </label>
+		<div></div>
+		<img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
+		<label class="fa fa-spinner spinner" id="featured-spinner"></label>
+        <div class="text-wrapper">
+			<label class="splash-screen-label"> From </label>
+        	<label class="splash-screen-text"> Agile Sprinters </label>
+		</div>
     </div>
 
 </body>

@@ -10,7 +10,7 @@ const signOutButton = indexNavbar.querySelector("#sign-out-button");
 const splashScreen = document.querySelector("#splash-screen");
 
 auth.onAuthStateChanged(async (user) => {
-    user ? showSignedInButtons() : showSignedOutButtons();
+    await user ? showSignedInButtons() : showSignedOutButtons();
     splashScreen.remove();
 });
 

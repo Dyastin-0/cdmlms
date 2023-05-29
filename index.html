@@ -33,13 +33,13 @@
 
 	<nav class="nav right" id="index-navbar">
 		<div class="wrapper fit">
-			<button class="nav-button small-g" id="about" aria-label="about"> About </button>
-			<button class="nav-button small-g none logged-in" id="home" aria-label="home"> Home </button>
-			<button class="nav-button small-g none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
-			<button class="nav-button small-g none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
+			<button class="nav-button medium" id="about" aria-label="about"> About </button>
+			<button class="nav-button medium none logged-in" id="home" aria-label="home"> Home </button>
+			<button class="nav-button medium none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
+			<button class="nav-button medium none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
 				Sign in
 			</button>
-			<button class="nav-button small-g none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
+			<button class="nav-button medium none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> sign up </button>
 		</div>
 	</nav>
 
@@ -128,10 +128,13 @@
 	</div>
 
 	<div class="splash-screen active" id="splash-screen">
-        <img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
-        <label class="fa fa-spinner spinner" id="featured-spinner"></label>
-        <label class="splash-screen-label"> From </label>
-        <label class="splash-screen-text"> Agile Sprinters </label>
+		<div></div>
+		<img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
+		<label class="fa fa-spinner spinner" id="featured-spinner"></label>
+        <div class="text-wrapper">
+			<label class="splash-screen-label"> From </label>
+        	<label class="splash-screen-text"> Agile Sprinters </label>
+		</div>
     </div>
 
 	<div class="confirm-dialog" id="confirm-dialog-modal">
