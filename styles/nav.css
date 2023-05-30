@@ -133,19 +133,17 @@
     background-color: var(--dark-shade-low);
 }
 
-.nav-button.admin {
+.nav-button.small-g.admin {
     color: var(--green-solid);
-    font-size: 14px;
-    font-weight: 700;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav-button.admin:focus {
+.nav-button.small-g.admin:focus {
     background-color: var(--green-solid);
     color: var(--white);
 }
 
-.nav-button.admin:hover {
+.nav-button.small-g.admin:hover {
     background-color: var(--green-solid);
     color: var(--white);
 }

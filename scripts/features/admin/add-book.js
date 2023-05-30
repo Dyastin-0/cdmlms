@@ -6,6 +6,7 @@ const addBookForm = document.querySelector("#add-book-form");
 const title = addBookForm.querySelector("#add-book-title");
 const author = addBookForm.querySelector("#add-book-author");
 const  publication = addBookForm.querySelector("#add-book-publication");
+const datePublication = addBookForm.querySelector("#add-book-date-publication");
 const category = addBookForm.querySelector("#add-book-category");
 const isbn = addBookForm.querySelector("#add-book-isbn");
 const availability = addBookForm.querySelector("#add-book-availability");
@@ -36,6 +37,7 @@ function areInputsFilled() {
         title.value,
         author.value,
         publication.value,
+        datePublication.value,
         category.value,
         isbn.value,
         availability.value,
@@ -58,6 +60,7 @@ function bookInfo() {
         availability: availability.value,
         isbn: isbn.value,
         publication: publication.value,
+        datePublication: datePublication.value,
         dateAdded: currentDate(),
         views: 0
     }

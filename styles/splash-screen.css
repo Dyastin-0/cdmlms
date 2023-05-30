@@ -11,8 +11,7 @@
     right: 0;
     z-index: 25;
     padding-bottom: 20px;
-    background: var(--gradient-semi-vertical-solid);
-    background-size: 200% 200%;
+    background: var(--green-solid);
     overflow: hidden;
     animation: loading 5s ease infinite;
 }
@@ -61,10 +60,4 @@
     margin-top: 25px;
     margin-bottom: 25px;
     animation: infiniteRotate 2s linear infinite;
-}
-
-@keyframes loading {
-    0%{background-position:10% 0%}
-    50%{background-position:91% 100%}
-    100%{background-position:10% 0%}
 }
