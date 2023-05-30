@@ -35,7 +35,7 @@ function bindPinEvent(pin, book, bookRef) {
         const availability = document.createElement("label");
         const isbn = document.createElement("label");
 
-        const eye = document.createElement("label");
+        const eye = document.createElement("i");
         const views = document.createElement("label");
 
         title.classList.add("title");
@@ -61,9 +61,12 @@ function bindPinEvent(pin, book, bookRef) {
         
         views.classList.add("other-details");
         views.classList.add("views");
-        views.classList.add("fa");
-        views.classList.add("fa-eye");
-        views.textContent = book.views;
+        views.textContent = book.views + " ";
+
+        eye.classList.add("fa-solid");
+        eye.classList.add("fa-eye");
+        
+        views.appendChild(eye);
 
         bookDetails.appendChild(title);
         bookDetails.appendChild(author);
@@ -71,7 +74,6 @@ function bindPinEvent(pin, book, bookRef) {
         bookDetails.appendChild(category);
         bookDetails.appendChild(isbn);
         bookDetails.appendChild(availability);
-        bookDetails.appendChild(eye);
         bookDetails.appendChild(views);
 
         overlay.classList.add("active");
