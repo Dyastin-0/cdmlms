@@ -58,16 +58,12 @@ async function displayBooks(container, orderBy) {
     });
 }
 
-export async function logOut() {
-    await signOutFirebaseAuth();
-}
-
 async function bindEvents() {
     adminButton.addEventListener('click', () => {
         window.location.href = "./admin.html";
     });
 
-    signOut.addEventListener('click', async () => await logOut());
+    signOut.addEventListener('click', async () => signOutFirebaseAuth());
 
     searchInput.addEventListener('keyup', async (e) => {
         if (e.key === "Enter" && searchInput.value !== '') {

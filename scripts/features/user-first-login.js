@@ -2,7 +2,7 @@ import { getQueryOneField } from "../firebase/firestore-api.js";
 import { isIdValid, warning } from "../utils/validation.js";
 import { isDisplayNameAvailable, isIdAvailable } from "../utils/data-availability.js";
 import { userInit } from "./user.js";
-import { logOut } from "./user.js";
+import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
@@ -81,7 +81,7 @@ function bindEvents() {
         });
     });
 
-    cancelSetupButton.addEventListener('click', async () => await logOut());
+    cancelSetupButton.addEventListener('click', async () => signOutFirebaseAuth());
 }
 
 async function verifyEmailAndInputs(user) {
