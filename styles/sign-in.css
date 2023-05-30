@@ -7,7 +7,7 @@
     align-items: center;
     background: var(--gradient-slanted);
     background-size: 100% 100%;
-    animation: loading 3s ease;
+    animation: loading 5s ease;
 }
 
 .sign-in-label {
@@ -15,6 +15,7 @@
     font-weight: 700;
     margin-bottom: 5px;
     text-align: center;
+    animation: opacity 1s ease;
 }
 
 .sign-in-label.sm {
@@ -35,12 +36,14 @@
     width: 300px;
     max-width: calc(90% - 40px);
     padding: 20px;
-    background-color: var(--dark-shade-low);
+    background-color: var(--green-solid);
+    box-shadow: 0 5px 5px var(--dark-shade-low);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: opacity 3s ease;
+    animation: opacity 5s ease;
 }
 
 form input::placeholder {

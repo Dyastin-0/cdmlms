@@ -14,7 +14,7 @@
     background: var(--gradient-semi-vertical-solid);
     background-size: 200% 200%;
     overflow: hidden;
-    animation: loading 3s ease infinite;
+    animation: loading 5s ease infinite;
 }
 
 .splash-screen.active {

@@ -21,7 +21,7 @@
 }
 
 .add-book-form input::placeholder {
-    color: var(--white-shade);
+    color: var(--white);
 }
 
 .add-book-form input {
@@ -47,7 +47,7 @@
 }
 
 .add-book-form textarea::placeholder {
-    color: var(--white-shade);
+    color: var(--white);
 }
 
 .add-book-form textarea {
