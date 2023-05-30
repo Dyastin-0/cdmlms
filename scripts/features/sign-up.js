@@ -1,5 +1,4 @@
 import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
-import { hideSignUp } from '../ui/index/sign-up-ui.js';
 import { createUser } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { initialAccoutSetUpAndEmailVerification } from './account-setup.js';
@@ -54,10 +53,10 @@ async function signUp() {
     if (await areInputsValid()) {      
         if (await createUser(email.value, password.value)) {
             const processMessage = "Creating your account...";
-            await displayProcessDialog(processMessage);
+            displayProcessDialog(processMessage);
             await initialAccoutSetUpAndEmailVerification(email.value, password.value);
-            await hideProcessDialog();
-            hideSignUp();
+            hideProcessDialog();
+            window.location.href = './home.html';
         }
     }
 }

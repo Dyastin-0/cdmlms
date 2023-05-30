@@ -1,4 +1,3 @@
-import { hideSignIn } from '../ui/index/sign-in-ui.js';
 import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
@@ -10,6 +9,9 @@ const password = modal.querySelector("#sign-in-password");
 const submit = modal.querySelector("#sign-in-account-button");
 
 const signInGoogle = modal.querySelector("#sign-in-google");
+
+// const currentUser = auth.currentUser;
+// currentUser ? window.location.href = './home.html' : null;
 
 bindEvents();
 
@@ -37,9 +39,6 @@ function bindEvents() {
 
 async function signIn() {
     warning("", "sign-in");
-    const isSigninSuccess = await signInFirebaseAuth(username.value, password.value);
-    if (isSigninSuccess) {
-        hideSignIn();
-        window.location.href = './home.html';
-    }
+    const isSuccess = await signInFirebaseAuth(username.value, password.value);
+    if (isSuccess) window.location.href = './home.html';
 }

@@ -1,7 +1,7 @@
 .user-profile-modal {
     width: 250px;
     height: 300px;
-    background: var(--green-solid);
+    background: var(--white);
     top: 50%;
     left: 50%;
     z-index: 12;
@@ -28,13 +28,14 @@
 .user-profile-modal .header label {
     font-size: 14px;
     margin: 10px;
-    color: var(--white);
+    color: var(--black);
     font-weight: 500;
 }
 
 .user-profile-modal .header button {
     border-color: transparent;
     background: transparent;
+    color: var(--black);
     margin: 10px;
 }
 
@@ -109,7 +110,7 @@
 
 .user-profile-modal label {
     width: 100%;
-    color: var(--white);
+    color: var(--black);
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
@@ -130,4 +131,8 @@
     margin-top: 5px;
     font-size: 14px;
     font-weight: 400;
+}
+
+.black {
+    color: var(--black);
 }

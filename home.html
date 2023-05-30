@@ -60,7 +60,7 @@
         </div>
 
         <div class="wrapper">
-            <button class="nav-button medium display-none" id="admin-button"> Admin </button>
+            <a href="./admin.html" class="nav-button medium none admin" id="admin-button"> Admin </a>
             <button class="nav-button medium" id="user-notification" aria-label="user-notification">
                 <i class="fa fa-bell"></i>
             </button>
@@ -69,9 +69,9 @@
                     <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu" id="user-drop-down">
-                    <button class="nav-button medium fit" id="display-name"> Display name </button>
-                    <button class="nav-button medium fit" id="settings"> Settings </button>
-                    <button class="nav-button medium fit" id="sign-out"> Sign out </button>
+                    <button class="nav-button small fit" id="display-name"> Display name </button>
+                    <button class="nav-button small fit" id="settings"> Settings </button>
+                    <button class="nav-button small fit" id="sign-out"> Sign out </button>
                 </div>
             </div>
         </div>
@@ -217,11 +217,12 @@
 
     <div class="set-up" id="one-time-setup-modal">
         <label class="header-label"> Accout Setup</label>
-        <p class="header-text"> This is a one-time setup, we need to get your personal information 
+        <label class="header-text"> This is a one-time setup, we need to get your personal information 
             before you can continue. Make sure you have opened the verification link sent on your
             email (Disregard if you have signed in with your Google account).
-        </p>
+        </label>
         <form class="form">
+            <label class="underlined" id="resend-email-verification"> Resend email verification? </label>
             <label class="warning" id="setup-warning">  </label>
             <input type="text" placeholder="First name" 
             id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
@@ -247,7 +248,7 @@
             <div class="container">
                 <div class="drop-down" id="course-drop-down">
                     <button class="nav-button small dark" id="course-drop-down-button" aria-label="course-drop-down-button">
-                        <label class="inherit white" id="setup-selected-course"> Course </label>
+                        <label class="inherit white" id="setup-selected-course">Course</label>
                         <i class="fa fa-chevron-down chevron" id="course-drop-down-chevron"></i>
                     </button>
                     <div class="drop-down-menu left fit" id="course-drop-down-menu">
@@ -260,14 +261,14 @@
 
                 <div class="drop-down" id="year-drop-down">
                     <button class="nav-button small dark fit-content" id="year-drop-down-button" aria-label="year-drop-down-button">
-                        <label class="inherit white" id="setup-selected-year"> Year </label>
+                        <label class="inherit white" id="setup-selected-year">Year</label>
                         <i class="fa fa-chevron-down chevron" id="year-drop-down-chevron"></i>
                     </button>
                     <div class="drop-down-menu left fit" id="year-drop-down-menu">
-                        <button class="nav-button small fit" id="year-1">1st year</button>
-                        <button class="nav-button small fit" id="year-2">2nd year</button>
-                        <button class="nav-button small fit" id="year-3">3rd year</button>
-                        <button class="nav-button small fit" id="year-4">4th year</button>
+                        <button class="nav-button small fit" id="year-1">1st</button>
+                        <button class="nav-button small fit" id="year-2">2nd</button>
+                        <button class="nav-button small fit" id="year-3">3rd</button>
+                        <button class="nav-button small fit" id="year-4">4th</button>
                     </div>
                 </div>
             </div>
@@ -283,8 +284,8 @@
 
     <div class="user-profile-modal" id="user-profile-modal">
         <div class="header">
-            <label class="left" id="profile-modal-header"> Profile </label>
-            <button class="fa fa-close white" id="close-profile" aria-label="close-profile-button">  </button>
+            <label class="left black" id="profile-modal-header"> Profile </label>
+            <button class="fa fa-close black" id="close-profile" aria-label="close-profile-button">  </button>
         </div>
         <div class="background"> 
             <div class="photo-overlay fa fa-camera" id="photo-overlay">
@@ -299,26 +300,26 @@
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="display-verified"> </label>
         <div class="footer">
-            <button id="edit-profile-button"> Edit profile </button>
+            <button class="black" id="edit-profile-button"> Edit profile </button>
         </div>
     </div>
 
     <div class="edit-profile-modal" id="edit-profile-modal">
         <div class="header">
-            <label> Edit profile </label>
-            <button class="fa fa-close" id="close-edit-profile"></button>
+            <label class="black"> Edit profile </label>
+            <button class="fa fa-close black" id="close-edit-profile"></button>
         </div>
         <form class="form" id="edit-profile-form">
             <label class="warning" id="edit-warning">  </label>
-            <input type="text" placeholder="First name" 
+            <input class="black" type="text" placeholder="First name" 
             id="edit-first-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <input type="text" placeholder="Last name"
+            <input class="black" type="text" placeholder="Last name"
             id="edit-last-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <input type="text" placeholder="Middle name" 
+            <input class="black" type="text" placeholder="Middle name" 
             id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
 
             <div class="drop-down" id="sex-drop-down">
-                <button class="nav-button small dark" id="sex-drop-down-button" aria-label="sex-drop-down-button">
+                <button class="nav-button small g" id="sex-drop-down-button" aria-label="sex-drop-down-button">
                     <label id="selected-sex"> Male </label>
                     <i class="fa fa-chevron-down chevron" id="sex-drop-down-chevron"></i>
                 </button>
@@ -328,12 +329,12 @@
                 </div>
             </div>
 
-            <label for="edit-birth-date"> Birth date </label>
-            <input type="date" placeholder="Birth date" id="edit-birth-date">
-            <input type="text" placeholder="Display name" id="edit-display-name">
+            <label class="black" for="edit-birth-date"> Birth date </label>
+            <input class="black" type="date" placeholder="Birth date" id="edit-birth-date">
+            <input class="black" type="text" placeholder="Display name" id="edit-display-name">
         </form>
         <div class="footer">
-            <button id="done-edit"> Done </button>
+            <button class="black" id="done-edit"> Done </button>
         </div>
     </div>
 

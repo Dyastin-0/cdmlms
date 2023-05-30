@@ -1,4 +1,4 @@
-import { warning } from "../utils/validation.js";
+import { isEmailValidSignIn, warning } from "../utils/validation.js";
 import { toastMessage } from '../utils/toast-message.js';
 import { getQueryOneField } from '../firebase/firestore-api.js';
 import { initialAccountSetUp } from "../features/account-setup.js";
@@ -43,7 +43,7 @@ export async function signInWithGoogle() {
     })
     .catch((error) => {
         console.error(error);
-        toastMessage("Something when wrong, try again.");
+        toastMessage("Something went wrong, try again.");
     });
 }
 
@@ -52,8 +52,9 @@ export function signOutFirebaseAuth() {
 }
 
 export function recoverAccount(email) {
-    if (!email) {
-        warning('enter your email.', 'sign-in');
+    const isValid = isEmailValidSignIn(email);
+    if (!isValid) {
+        warning('Enter your valid email.', 'sign-in');
         return;
     }
     firebase.auth().sendPasswordResetEmail(email)

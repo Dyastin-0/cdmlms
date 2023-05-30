@@ -8,10 +8,15 @@ import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
 import { yearDropDownInit } from "../ui/home/year-drop-down.js";
 import { courseDropDownInit } from "../ui/home/course-drop-down.js";
+import { toastMessage } from "../utils/toast-message.js";
+
+const main = document.querySelector("#main");
 
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
 const adminButton = document.querySelector("#admin-button");
+
+const resendVerification = oneTimeSetupModal.querySelector("#resend-email-verification");
 
 const firstName = oneTimeSetupModal.querySelector("#first-name");
 const lastName = oneTimeSetupModal.querySelector("#last-name");
@@ -52,6 +57,24 @@ function bindEvents() {
     yearDropDownInit();
     courseDropDownInit();
 
+    resendVerification.addEventListener('click', () => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                if (user.emailVerified) {
+                    toastMessage("Your email is already verified.");
+                    return;
+                }
+                user.sendEmailVerification()
+                .then(() => {
+                    toastMessage("Email verification sent.");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            }
+        });
+    });
+
     doneSetupButton.addEventListener('click', async () => {
         auth.onAuthStateChanged(async (user) => {
             if (user) await verifyEmailAndInputs(user);
@@ -79,7 +102,7 @@ async function verifyEmailAndInputs(user) {
             hideProcessDialog();
         };
         const confirmMessage = "Make sure that all the information you have put in belongs to you. Continue?";
-        const toastMessage = "Finished setting up your account!";
+        const toastMessage = "Account set up done!";
         await displayConfirmDialog(process, confirmMessage, toastMessage);
     }
 }
@@ -122,11 +145,21 @@ async function isEmailVerified(user) {
 
 //input checks
 async function areInputsValid() {
-    if (!areInputFieldsFilled()) return false;
-    if (!areInputDataValid()) return false;
-
+    if (!areInputFieldsFilled()) {
+        hideProcessDialog();
+        return false;
+    }
+    if (!areInputDataValid()) {
+        hideProcessDialog();
+         return false;
+    }
+    displayProcessDialog("Checking info...");
     const areInputAvailable = await areInputsAvailable();
-    if (!areInputAvailable) return false;
+    if (!areInputAvailable) {
+        hideProcessDialog();
+        return false;
+    }
+    hideProcessDialog();
     return true;
 }
 

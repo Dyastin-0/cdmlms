@@ -20,7 +20,7 @@ auth.onAuthStateChanged(async (user) => {
             window.location.href = "./16.html";
         }
     } else {
-        window.location.href = "./";
+        window.location.href = "./sign-in.html";
     }
 });
 

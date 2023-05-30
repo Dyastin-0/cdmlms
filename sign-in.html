@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="form">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/nav.css">
+    <link rel="stylesheet" href="./styles/sign-in.css">
+    <link rel="stylesheet" href="./styles/toast-message.css">
+    <link rel="stylesheet" href="./styles/confirm-dialog.css">
+    <link rel="stylesheet" href="./styles/process-dialog.css">
+    <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
+    <title> Sign in </title>
+</head>
+<body class="form">
+    <div class="main-header">
+		<button class="nav-button large bg-none" id="index-button" onClick="window.location.href = './';">
+			<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+			Colegio de Montalban
+		</button>
+	</div>
+    <div class="sign-in" id="sign-in-modal">
+        <div class="container">
+            <label class="sign-in-label"> Welcome to CDMLS </label>
+            <label class="sign-in-label sm"> sign in to your account </label>
+            <form class="form" id="sign-in-form">
+                <label class="warning" id="sign-in-warning"> </label>
+                <input type="text" placeholder="Email" id="sign-in-email" enterkeyhint="Enter">
+                <input type="password" placeholder="Password" id="sign-in-password" autocomplete="on" enterkeyhint="Enter">
+                <label class="underlined" id="forgot-password"> Forgot password? </label>
+                <button id="sign-in-account-button"> Sign in </button>
+                <label class="or"> or </label>
+                <button id="sign-in-google">	
+                    <img src="./images/google_logo.webp" alt="Google logo.">	
+                    <label class="lg"> Continue with Google </label>
+                </button>
+                <label class="underlined" id="dont-have-account"> Don't have an account? </label>
+            </form>
+        </div>
+	</div>
+
+    <!-- modals -->
+    <div class="confirm-dialog" id="confirm-dialog-modal">
+        <div class="header">
+            <label id="comfirm-dialog-header"> Confirm </label>
+            <button class="fa fa-close" id="confirm-dialog-close-button" aria-label="confirm-dialog-close-button">  </button>
+        </div>
+
+        <p class="confirm-dialog-text" id="confirm-dialog-text">  </p>
+
+        <div class="footer-dialog">
+            <button id="yes-button"> Yes </button>
+            <button id="no-button"> No </button>
+        </div>
+    </div>
+
+	<div class="toast-message" id="toast-message-modal">
+        <p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
+        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
+    </div>
+
+	<div class="process-dialog" id="process-dialog-modal">
+		<label class="process-message" id="process-message"></label>
+		<label class="process-spinner fa fa-spinner"></label>
+	</div>
+</body>
+
+<!-- scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="./scripts/firebase/firebase.js"></script>
+<!---->
+
+<!--custom scripts -->
+<script type="module" src="./scripts/features/sign-in.js"></script>
+<script type="module" src="./scripts/features/user-reset-password.js"></script>
+<script src="./scripts/ui/index/sign-in-ui.js"></script>
+</html>

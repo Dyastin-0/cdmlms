@@ -11,8 +11,10 @@
     right: 0;
     z-index: 25;
     padding-bottom: 20px;
-    background: var(--white);
+    background: var(--gradient-semi-vertical-solid);
+    background-size: 200% 200%;
     overflow: hidden;
+    animation: loading 3s ease infinite;
 }
 
 .splash-screen.active {
@@ -30,11 +32,11 @@
     height: 150px;
     width: 150px;
     display: flex;
-    color: var(--black);
+    color: var(--white);
 }
 
 .splash-screen-label {
-    color: var(--black);
+    color: var(--white);
     font-size: 20px;
     font-weight: 600;
     display: flex;
@@ -43,10 +45,26 @@
 }
 
 .splash-screen-text {
-    color: var(--black);
+    color: var(--white);
     font-size: 18px;
     font-weight: 700;
     display: flex;
     align-self: center;
     text-align: center;
+}
+
+.spinner {
+    color: var(--white);
+    font-size: 50px;
+    width: fit-content;
+    align-self: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    animation: infiniteRotate 2s linear infinite;
+}
+
+@keyframes loading {
+    0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
 }

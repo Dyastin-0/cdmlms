@@ -101,6 +101,11 @@
     justify-content: space-around;
 }
 
+.nav-button.small.g {
+    background-color: var(--dark-shade-low);
+    color: var(--black);
+}
+
 .nav-button.dark {
     font-weight: 400;
     color: var(--white);
@@ -126,6 +131,23 @@
 
 .nav-button.small.fit:hover {
     background-color: var(--dark-shade-low);
+}
+
+.nav-button.admin {
+    color: var(--green-solid);
+    font-size: 14px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-button.admin:focus {
+    background-color: var(--green-solid);
+    color: var(--white);
+}
+
+.nav-button.admin:hover {
+    background-color: var(--green-solid);
+    color: var(--white);
 }
 
 .search {

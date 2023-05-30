@@ -19,8 +19,6 @@ const searchBy = document.querySelector("#selected-filter");
 const searchInputMobile = document.querySelector("#search-input-mobile");
 const searchByMobile = document.querySelector("#selected-filter-mobile");
 
-const indexButton = document.querySelector("#index-button");
-
 sessionCheck();
 bindEvents();
 
@@ -81,10 +79,6 @@ async function bindEvents() {
         if (e.key === "Enter" && searchInputMobile.value !== '') {
             await search(searchByMobile.textContent.toLowerCase().trim(), searchInputMobile.value);
         }
-    });
-
-    indexButton.addEventListener('click', () => {
-        window.location.href = './';
     });
 }
 

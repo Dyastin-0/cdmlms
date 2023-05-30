@@ -49,6 +49,22 @@ export function isEmailValid(email) {
     return false;
 }
 
+export function isEmailValidSignIn(email) {
+    if (email == "") {
+        warning("", "sign-in");
+        return;
+    }
+
+    let regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (regEx.test(email)) {
+        warning("", "sign-in");
+        return true;
+    }
+
+    warning(email + " is invalid.", "sign-in");
+    return false;
+}
+
 export function warning(message, where) {
     if (!message && where == "edit") {
         editWarning.style.display = "none";

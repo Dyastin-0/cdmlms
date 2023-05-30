@@ -43,10 +43,22 @@ html, body {
     color: var(--white);
 }
 
+a {
+    text-decoration: none;
+}
+
 body.admin {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: row;
+}
+
+body.form {
+    height: 100%;
+}
+
+html.form {
+    height: 100%;
 }
 
 body.w-bg {
@@ -150,16 +162,6 @@ a {
 .show {
     animation: animateX 0.3s ease;
     animation-fill-mode: forwards;
-}
-
-.spinner {
-    color: var(--black);
-    font-size: 50px;
-    width: fit-content;
-    align-self: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    animation: infiniteRotate 2s linear infinite;
 }
 
 @keyframes infiniteRotate {
