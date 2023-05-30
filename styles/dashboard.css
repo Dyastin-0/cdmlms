@@ -1,15 +1,28 @@
 .dashboard {
     top: 0;
-    position: sticky;
-    width: 200px;
-    height: 100vh;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 60px;
+    height: 100%;
     z-index: 20;
     background-color: var(--green-solid);
     opacity: 1;
+    overflow: hidden;
     transform: scaleX(1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    transition: width 0.3s ease;
+}
+
+.dashboard:hover {
+    width: 200px;
+    position: fixed;
+}
+
+.dashboard:focus {
+    width: 200px;
+    position: fixed;
 }
 
 .dashboard.active {
@@ -21,25 +34,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     font-size: 24px;
     font-weight: 700;
 }
 
 .dashboard button {
-    width: calc(100% - 20px);
-    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-width: 0;
-    border-radius: 5px;
-    margin: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--white);
+    margin-bottom: 8px;
     background-color: var(--dark-shade-low);
+    color: var(--white);
+    transition: background-color 0.3s ease;
+}
+
+.dashboard button:hover {
+    cursor: pointer;
+}
+
+.dashboard button label {
+    cursor: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 15px;
+    height: 24px;
+    color: var(--yellow-solid);
+}
+
+.dashboard button label.lg {
+    width: fit-content;
+    margin-left: 18px;
+    margin-right: 18px;
+    font-size: 24px;
+}
+
+.dashboard button label.lg.two {
+    margin-left: 20px;
 }
 
 .dashboard label {
@@ -47,11 +86,4 @@
     display: flex;
     justify-content: center;
     font-size: 12px;
-}
-
-@media (max-width: 600px) {
-    .dashboard {
-        display: none;
-        transform: scaleX(0);
-    }
 }

@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Library Management System of Colegio de Montalban.">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="./styles/style.css">
 	<link rel="stylesheet" href="./styles/wrapper.css">
 	<link rel="stylesheet" href="./styles/nav.css">
@@ -30,9 +30,11 @@
 		<div class="wrapper fit">
 			<a href="./about.html" class="nav-button small-g" id="about" aria-label="about"> About </a>
 			<a class="nav-button small-g none logged-in" id="home" aria-label="home"> Home </a>
-			<button class="nav-button small-g none logged-in fa fa-sign-out" id="sign-out-button" aria-label="sign out">  </button>
+			<button class="nav-button small-g none logged-in" id="sign-out-button" aria-label="sign out">
+				<i class="fas fa-arrow-right-from-bracket"></i>
+			</button>
 			<a href="./sign-in.html" class="nav-button small-g none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
-				Sign in
+				<i class="fas fa-arrow-right-to-bracket"></i>
 			</a>
 			<a href="./sign-up.html" class="nav-button small-g none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> 
 				sign up 
@@ -81,7 +83,7 @@
 	<div class="splash-screen active" id="splash-screen">
 		<div></div>
 		<img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
-		<label class="fa fa-spinner spinner" id="featured-spinner"></label>
+		<label class="fa fa-gear spinner" id="featured-spinner"></label>
         <div class="text-wrapper">
 			<label class="splash-screen-label"> From </label>
         	<label class="splash-screen-text"> Agile Sprinters </label>

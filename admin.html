@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/nav.css">
     <link rel="stylesheet" href="./styles/drop-down.css">
@@ -27,25 +27,26 @@
 
 <body class="admin">
 
-    <div class="dashboard">
+    <div class="dashboard" tabindex="1">
         <div class="header">
-            Cdmlms
+   
         </div>
         
-        <div class="button-container">
-            <label class="divider"> Book </label>
-            <button> Add book </button>
-            <button> Edit book </button>
-            <button> Delete book </button>
-            <label class="divider"> Others </label>
-            <button> Users </button>
-            <button> Transactions </button>
-            <button> Statistics </button>
-        </div>
+        <button>
+            <label class="fas fa-plus-circle lg"></label>
+            <label>Add book</label>
+        </button>
 
-        <div class="footer">
+        <button>
+            <label class="fas fa-circle-minus lg"></label>
+            <label>Delete book</label>
+        </button>
 
-        </div>
+        <button>
+            <label class="fas fa-square-pen lg two"></label>
+            <label>Edit book</label>
+        </button>
+
     </div>
 
     <main class="main admin">
@@ -57,8 +58,7 @@
         </div>
     
         <nav class="nav admin">
-            <button class="nav-button medium fa fa-bars display-none"></button>
-    
+            <div></div>
             <div class="wrapper">
                 <button class="nav-button small-g" id="admin-home"> Home </button>
                 <button class="nav-button medium" id="user-notification" aria-label="user-notification">
@@ -217,7 +217,7 @@
     <div class="splash-screen active" id="splash-screen">
 		<div></div>
 		<img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
-		<label class="fa fa-spinner spinner" id="featured-spinner"></label>
+		<label class="fas fa-gear spinner" id="featured-spinner"></label>
         <div class="text-wrapper">
 			<label class="splash-screen-label"> From </label>
         	<label class="splash-screen-text"> Agile Sprinters </label>

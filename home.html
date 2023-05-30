@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Library Management System of Colegio de Montalban.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
     <link rel="stylesheet" href="./styles/nav.css">
@@ -34,7 +34,9 @@
 	</div>
 
     <nav class="nav">
-        <button class="nav-button medium display-none fa fa-search" id="search-button" aria-label="search-button"></button>
+        <button class="nav-button medium display-none" id="search-button" aria-label="search-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         <div class="wrapper"></div>
         <div class="drop-down" id="search-drop-down">
             <div class="wrapper">
@@ -109,7 +111,7 @@
                 </div>
             </div>
 
-            <label class="label small hide"> Recently added </label>
+            <label class="label small hide"> Most recent </label>
             <div class="pin-container" id="most-recent">
                 <div class="pin small">
                     <div>
@@ -190,7 +192,9 @@
     <div class="search-modal-mobile" id="recent-search-modal-mobile">
         <div class="drop-down">
             <div class="wrapper padding left">
-                <button class="fa fa-chevron-up nav-button medium" id="back-button-search-modal-mobile" aria-label="back-button-search-modal-mobile"></button>
+                <button class="nav-button medium" id="back-button-search-modal-mobile" aria-label="back-button-search-modal-mobile">
+                    <i class="fa-solid fa-chevron-up"></i>
+                </button>
                 <input class="search" placeholder="Search" id="search-input-mobile" enterkeyhint="Enter">
                 
                 <div class="drop-down" id="filter-drop-down-mobile">
@@ -341,7 +345,7 @@
     <div class="splash-screen active" id="splash-screen">
 		<div></div>
 		<img class="splash-screen-logo" src="images/cdm_logo.webp" alt="Splash screen logo.">
-		<label class="fa fa-spinner spinner" id="featured-spinner"></label>
+		<label class="fas fa-gear spinner" id="featured-spinner"></label>
         <div class="text-wrapper">
 			<label class="splash-screen-label"> From </label>
         	<label class="splash-screen-text"> Agile Sprinters </label>

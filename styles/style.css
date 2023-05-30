@@ -48,7 +48,7 @@ a {
 }
 
 body.admin {
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: flex-start;
     flex-direction: row;
 }
@@ -111,6 +111,7 @@ a {
 }
 
 .main.admin {
+    width: calc(100% - 60px);
     background: var(--gradient-slanted);
     flex-direction: column;
 }
