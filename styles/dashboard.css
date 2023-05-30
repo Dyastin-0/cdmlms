@@ -67,7 +67,7 @@
     font-weight: 700;
     font-size: 15px;
     height: 24px;
-    color: var(--shite);
+    color: var(--yellow);
 }
 
 .dashboard button label.lg {

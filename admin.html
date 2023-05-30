@@ -176,26 +176,26 @@
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="display-verified"> </label>
         <div class="footer">
-            <button id="edit-profile-button"> Edit profile </button>
+            <button class="black" id="edit-profile-button"> Edit profile </button>
         </div>
     </div>
 
     <div class="edit-profile-modal" id="edit-profile-modal">
         <div class="header">
-            <label> Edit profile </label>
-            <button class="fa fa-close" id="close-edit-profile"></button>
+            <label class="black"> Edit profile </label>
+            <button class="fa fa-close black" id="close-edit-profile"></button>
         </div>
         <form class="form" id="edit-profile-form">
             <label class="warning" id="edit-warning">  </label>
-            <input type="text" placeholder="First name" 
+            <input class="black" type="text" placeholder="First name" 
             id="edit-first-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <input type="text" placeholder="Last name"
+            <input class="black" type="text" placeholder="Last name"
             id="edit-last-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <input type="text" placeholder="Middle name" 
+            <input class="black" type="text" placeholder="Middle name" 
             id="edit-middle-name" onkeydown="return /[a-z]/i.test(event.key)">
 
             <div class="drop-down" id="sex-drop-down">
-                <button class="nav-button small dark" id="sex-drop-down-button" aria-label="sex-drop-down-button">
+                <button class="nav-button small g" id="sex-drop-down-button" aria-label="sex-drop-down-button">
                     <label id="selected-sex"> Male </label>
                     <i class="fa fa-chevron-down chevron" id="sex-drop-down-chevron"></i>
                 </button>
@@ -205,12 +205,12 @@
                 </div>
             </div>
 
-            <label for="edit-birth-date"> Birth date </label>
-            <input type="date" placeholder="Birth date" id="edit-birth-date">
-            <input type="text" placeholder="Display name" id="edit-display-name">
+            <label class="black" for="edit-birth-date"> Birth date </label>
+            <input class="black" type="date" placeholder="Birth date" id="edit-birth-date">
+            <input class="black" type="text" placeholder="Display name" id="edit-display-name">
         </form>
         <div class="footer">
-            <button id="done-edit"> Done </button>
+            <button class="black" id="done-edit"> Done </button>
         </div>
     </div>
 
