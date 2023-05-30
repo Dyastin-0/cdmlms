@@ -153,6 +153,7 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         const container = document.createElement("div");
         const label = document.createElement("label");
         const button = document.createElement("button");
+        const icon = document.createElement('i');
 
         container.classList.add("wrapper");
         container.classList.add("space-between");
@@ -163,8 +164,12 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         label.id = 'recent-search';
 
         button.classList.add("delete-button");
-        button.classList.add("fa");
-        button.classList.add("fa-close");
+        
+        icon.classList.add('fa');
+        icon.classList.add('fa-close');
+
+        button.appendChild(icon);
+
         const buttonId = 'recent-search';
         button.id = buttonId;
         button.ariaLabel = buttonId;
