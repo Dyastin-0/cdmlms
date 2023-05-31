@@ -29,7 +29,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 html, body {
@@ -139,6 +139,7 @@ a {
 
 .content .label.small {
     text-align: left;
+    font-weight: 500;
     font-size: 28px;
 }
 
