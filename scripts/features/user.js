@@ -80,6 +80,6 @@ async function bindEvents() {
 
 function sessionCheck() {
     auth.onAuthStateChanged(user => {
-        user ? null : window.location.href = "./";
+        user ? null : window.location.href = "./sign-in.html";
     });
 }

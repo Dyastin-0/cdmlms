@@ -8,6 +8,7 @@
     z-index: 20;
     background-color: var(--green-solid);
     opacity: 1;
+    box-shadow: 5px 0 5px var(--dark-shade-low);
     overflow: hidden;
     transform: scaleX(1);
     display: flex;
@@ -40,49 +41,54 @@
 }
 
 .dashboard button {
-    width: 100%;
+    width: calc(100% - 16px);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
     border-width: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    margin-bottom: 8px;
-    background-color: var(--dark-shade-low);
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: transparent;
+    border-radius: 5px;
     color: var(--white);
     transition: background-color 0.3s ease;
 }
 
 .dashboard button:hover {
+    background-color: var(--dark-shade-low);
     cursor: pointer;
 }
 
 .dashboard button label {
     cursor: inherit;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 140px;
     font-weight: 700;
+    margin-left: 8px;
     font-size: 15px;
-    height: 24px;
-    color: var(--yellow);
+    color: var(--yellow-solid);
 }
 
 .dashboard button label.lg {
     width: fit-content;
-    margin-left: 18px;
-    margin-right: 18px;
-    font-size: 24px;
+    margin-left: 13px;
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+.dashboard button label.lg:hover {
+    background-color: var(--dark-shade-low);
 }
 
 .dashboard button label.lg.two {
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 .dashboard label {
     width: 100%;
     display: flex;
     justify-content: center;
+    color: var(--yellow-solid);
+    font-weight: 700;
     font-size: 12px;
 }

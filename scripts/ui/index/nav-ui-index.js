@@ -1,8 +1,11 @@
 import { signOutFirebaseAuth } from "../../firebase/auth-api.js";
 
 const indexNavbar = document.querySelector("#index-navbar")
+
 const openSignIn = indexNavbar.querySelector("#sign-in-modal-button");
+
 const openSignUp = indexNavbar.querySelector("#sign-up-modal-button");
+
 const homeButton = indexNavbar.querySelector("#home");
 const signOutButton = indexNavbar.querySelector("#sign-out-button");
 
@@ -20,16 +23,6 @@ async function navUiInit() {
 }
 
 function bindEvents() {
-    openSignUp.addEventListener('click', () => {
-        window.location.href = './sign-up.html';
-    });
-
-    openSignIn.addEventListener('click', () => {
-        window.location.href = './sign-in.html';
-    });
-
-    homeButton.addEventListener('click', () => window.location.href = "./home.html");
-
     signOutButton.addEventListener('click', async () => {
         await signOutFirebaseAuth();
         window.location.href = './';

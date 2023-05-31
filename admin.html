@@ -28,23 +28,44 @@
 <body class="admin">
 
     <div class="dashboard" tabindex="1">
-        <a class="nav-button large bg-none" id="index-button" onClick="window.location.href = './';">
-            <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
-        </a>
+        <div class="header">
+            <a href="./" class="nav-button large bg-none" id="index-button">
+                <img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+            </a>
+        </div>
         
+        <label> Book </label>
+
         <button>
             <label class="fas fa-plus-circle lg"></label>
-            <label>Add book</label>
+            <label class="no-overf">Add</label>
         </button>
 
         <button>
             <label class="fas fa-circle-minus lg"></label>
-            <label>Delete book</label>
+            <label class="no-overf">Delete</label>
         </button>
 
         <button>
             <label class="fas fa-square-pen lg two"></label>
-            <label>Edit book</label>
+            <label class="no-overf">Edit</label>
+        </button>
+
+        <label> Others </label>
+
+        <button>
+            <label class="fas fa-check-double lg two"></label>
+            <label> Requests </label>
+        </button>
+
+        <button>
+            <label class="fas fa-folder-open lg two"></label>
+            <label> Records </label>
+        </button>
+
+        <button>
+            <label class="fas fa-users lg two"></label>
+            <label> Users </label>
         </button>
 
     </div>
@@ -135,7 +156,7 @@
     </div>
 
     <div class="toast-message" id="toast-message-modal">
-        <p class="message" id="toast-message"> Verify your account to start customizing your profile. </p>
+        <p class="message" id="toast-message">  </p>
         <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
     </div>
 
