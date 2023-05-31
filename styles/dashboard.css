@@ -17,7 +17,7 @@
 }
 
 .dashboard:hover {
-    width: 200px;
+    width: 160px;
     position: fixed;
 }
 
@@ -42,6 +42,7 @@
 
 .dashboard button {
     width: calc(100% - 16px);
+    height: fit-content;
     display: flex;
     flex-direction: row;
     border-width: 0;
@@ -63,25 +64,18 @@
 .dashboard button label {
     cursor: inherit;
     width: 140px;
-    font-weight: 700;
+    font-weight: 500;
     margin-left: 8px;
+    display: flex;
+    justify-content: flex-start;
     font-size: 15px;
     color: var(--yellow-solid);
 }
 
-.dashboard button label.lg {
-    width: fit-content;
-    margin-left: 13px;
-    margin-right: 20px;
-    font-size: 18px;
-}
-
-.dashboard button label.lg:hover {
-    background-color: var(--dark-shade-low);
-}
-
-.dashboard button label.lg.two {
-    margin-left: 15px;
+.dashboard button i {
+    color: var(--yellow-solid);
+    margin-left: 18px;
+    margin-right: 18px;
 }
 
 .dashboard label {
