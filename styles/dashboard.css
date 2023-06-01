@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     position: fixed;
-    width: 60px;
+    width: 50px;
     height: 100%;
     z-index: 20;
     background-color: var(--green-solid);
@@ -17,17 +17,13 @@
 }
 
 .dashboard:hover {
-    width: 160px;
+    width: 140px;
     position: fixed;
 }
 
 .dashboard:focus {
-    width: 200px;
+    width: 140px;
     position: fixed;
-}
-
-.dashboard.active {
-    transform: scale(1);
 }
 
 .dashboard .header {
@@ -36,7 +32,6 @@
     align-items: center;
     margin-top: 30px;
     margin-bottom: 30px;
-    font-size: 24px;
     font-weight: 700;
 }
 
@@ -74,7 +69,7 @@
 
 .dashboard button i {
     color: var(--yellow-solid);
-    margin-left: 18px;
+    margin-left: 10px;
     margin-right: 18px;
 }
 
@@ -85,4 +80,11 @@
     color: var(--yellow-solid);
     font-weight: 700;
     font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .dashboard button:focus > .dashboard {
+        width: 140px;
+        position: fixed;
+    }
 }

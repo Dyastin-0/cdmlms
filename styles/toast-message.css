@@ -1,6 +1,6 @@
 .toast-message {
     width: 250px;
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,7 +11,7 @@
     transform: translate(-50%, -50%) scale(0);
     top: -25%;
     left: 50%;
-    border-radius: 10px;
+    border-radius: 5px;
     z-index: 27;
     transition: opacity 0.3s ease, transform 0.3s ease, top 0.3s ease;
 }

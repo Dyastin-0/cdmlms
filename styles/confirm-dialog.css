@@ -1,5 +1,6 @@
 .confirm-dialog {
     width: 270px;
+    max-width: 80%;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -12,7 +13,7 @@
     transform: translate(-50%, -50%) scale(0);
     top: 50%;
     left: 50%;
-    border-radius: 10px;
+    border-radius: 5px;
     z-index: 27;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -43,6 +44,14 @@
     margin-right: 10px;
     margin-bottom: 10px;
     transition: box-shadow 0.3s ease;
+}
+
+.confirm-dialog .header label {
+    color: var(--black);
+}
+
+.confirm-dialog .header button {
+    color: black;
 }
 
 .confirm-dialog .footer-dialog button:hover {

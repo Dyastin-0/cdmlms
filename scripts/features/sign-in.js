@@ -10,8 +10,12 @@ const submit = modal.querySelector("#sign-in-account-button");
 
 const signInGoogle = modal.querySelector("#sign-in-google");
 
-// const currentUser = auth.currentUser;
-// currentUser ? window.location.href = './home.html' : null;
+let signingIn = false;
+auth.onAuthStateChanged((user) => {
+    if (user && !signingIn) {
+        window.location.href = './home.html';
+    }
+});
 
 bindEvents();
 
@@ -33,12 +37,14 @@ function bindEvents() {
     signInGoogle.addEventListener('click', async (e) => {
         e.preventDefault();
         warning("", "sign-in");
+        signingIn = true;
         await signInWithGoogle();
     });
 }
 
 async function signIn() {
     warning("", "sign-in");
+    signingIn = true;
     const isSuccess = await signInFirebaseAuth(username.value, password.value);
     if (isSuccess) window.location.href = './home.html';
 }

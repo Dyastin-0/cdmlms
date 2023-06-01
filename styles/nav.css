@@ -24,6 +24,10 @@
     padding-right: 3px;
 }
 
+.logo.n-p {
+    padding-right: 0;
+}
+
 .nav-button {
     width: fit-content;
     height: fit-content;
@@ -74,6 +78,10 @@
     color: var(--white);
     font-weight: 500;
     font-size: 22px;
+}
+
+.nav-button.large.n-m {
+    margin-right: 0;
 }
 
 .nav-button.medium {

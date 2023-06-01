@@ -11,6 +11,14 @@ const email = modal.querySelector("#email");
 const password = modal.querySelector("#password");
 const confirmPassword = modal.querySelector("#password-confirm");
 
+let signingUp = false;
+
+auth.onAuthStateChanged((user) => {
+    if (user && !signingUp) {
+        console.log(signingUp);
+    }
+});
+
 bindEvents();
 
 function bindEvents() {
@@ -20,6 +28,7 @@ function bindEvents() {
     });
     signUpGoogle.addEventListener('click', (e) => {
         e.preventDefault();
+        signingUp = true;
         signInWithGoogle();
     });
     email.addEventListener('keyup', (e) => {
@@ -54,6 +63,7 @@ async function signUp() {
         if (await createUser(email.value, password.value)) {
             const processMessage = "Creating your account...";
             displayProcessDialog(processMessage);
+            signingUp = true;
             await initialAccoutSetUpAndEmailVerification(email.value, password.value);
             hideProcessDialog();
             window.location.href = './home.html';

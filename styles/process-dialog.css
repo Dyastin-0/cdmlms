@@ -1,16 +1,18 @@
 .process-dialog {
-    width: 250px;
+    width: fit-content;
     height: fit-content;
     position: fixed;
     display: flex;
     flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
     z-index: 30;
     color: var(--black);
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: var(--white);
     box-shadow: 0 0 5px var(--dark-shade-low);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -35,14 +37,4 @@
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    animation: infiniteRotate 2s linear infinite;
-}
-
-@keyframes infiniteRotate {
-    0% {
-        transform: rotate(180deg);
-    }
-    100% {
-        transform: rotate(-180deg);
-    }
 }

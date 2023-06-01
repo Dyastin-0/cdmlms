@@ -111,7 +111,7 @@ a {
 }
 
 .main.admin {
-    width: calc(100% - 60px);
+    width: calc(100% - 50px);
     background: var(--gradient-slanted);
     flex-direction: column;
 }

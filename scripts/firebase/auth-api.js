@@ -2,6 +2,7 @@ import { isEmailValidSignIn, warning } from "../utils/validation.js";
 import { toastMessage } from '../utils/toast-message.js';
 import { getQueryOneField } from '../firebase/firestore-api.js';
 import { initialAccountSetUp } from "../features/account-setup.js";
+import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
 
 export async function createUser(email, password) {
     let isSuccess = false;
@@ -37,8 +38,11 @@ export async function signInWithGoogle() {
         let isSetUpDone;
         querySnapshot.docs[0] ? isSetUpDone = true : isSetUpDone = false;
         if (!isSetUpDone) {
+            displayProcessDialog("Setting up your account...");
             await initialAccountSetUp(result.user.email);
+            hideProcessDialog();
         }
+        displayProcessDialog("Signing in...");
         window.location.href = './home.html';
     })
     .catch((error) => {
