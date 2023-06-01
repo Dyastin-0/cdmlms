@@ -62,3 +62,16 @@
     background-color: var(--green);
     width: fit-content;
 }
+
+.request-button {
+    border-width: 0;
+    border-radius: 5px;
+    color: var(--white);
+    background-color: var(--yellow-solid);
+    padding: 5px;
+    margin-top: 8px;
+}
+
+.request-button:hover {
+    cursor: pointer;
+}

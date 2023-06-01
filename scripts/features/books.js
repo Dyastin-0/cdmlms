@@ -1,4 +1,9 @@
-import { searchQuery } from "../firebase/firestore-api.js";
+import { getQueryOneField, searchQuery } from "../firebase/firestore-api.js";
+import { saveQuery } from "../firebase/firestore-api.js";
+import { currentDateTime } from '../../scripts/utils/date.js';
+import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
+import { toastMessage } from '../utils/toast-message.js'
+import { displayConfirmDialog } from '../utils/confirm-dialog.js';
 
 const overlay = document.querySelector("#second-overlay");
 
@@ -38,6 +43,8 @@ function bindPinEvent(pin, book, bookRef) {
         const eye = document.createElement("i");
         const views = document.createElement("label");
 
+        const requestButton = document.createElement("button");
+
         title.classList.add("title");
         title.textContent = book.title;
 
@@ -57,7 +64,7 @@ function bindPinEvent(pin, book, bookRef) {
 
         availability.classList.add("other-details");
         availability.classList.add("green");
-        availability.textContent = book.availability;
+        availability.textContent = book.isAvailable ? "Available" : "Not available";
         
         views.classList.add("other-details");
         views.classList.add("views");
@@ -68,6 +75,28 @@ function bindPinEvent(pin, book, bookRef) {
         
         views.appendChild(eye);
 
+        requestButton.classList.add("request-button");
+        requestButton.textContent = "Request";
+
+        requestButton.addEventListener('click', () => {
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    if (!book.isAvailable) {
+                        toastMessage("Book is not available.");
+                        return;
+                    }
+                    const querySnapshot = await getQueryOneField('users', 'email', user.email);
+                    const id = querySnapshot.docs[0].data().id;
+                    const process = async () => {
+                        sendBookRequest(book.isbn, book.title, id);
+                    }
+                    const processMessage = `You are about to send an issue request for '${book.title}.' Continue?`;
+                    const toastText = "Book request sent, wait for an update.";
+                    displayConfirmDialog(process, processMessage, toastText);
+                }
+            });
+        });
+
         bookDetails.appendChild(title);
         bookDetails.appendChild(author);
         bookDetails.appendChild(description);
@@ -75,6 +104,7 @@ function bindPinEvent(pin, book, bookRef) {
         bookDetails.appendChild(isbn);
         bookDetails.appendChild(availability);
         bookDetails.appendChild(views);
+        bookDetails.appendChild(requestButton);
 
         overlay.classList.add("active");
         viewBookModal.classList.add("active");
@@ -103,6 +133,19 @@ export function formatBook(book, bookRef) {
     return pin;
 }
 
+async function sendBookRequest(isbn, title, id) {
+    const requestInfo = {
+        requestID: crypto.randomUUID(),
+        isbn: isbn,
+        title: title,
+        id: id,
+        timeRequested: currentDateTime()
+    }
+    displayProcessDialog("Sending request...");
+    await saveQuery('requests', crypto.randomUUID(), requestInfo);
+    hideProcessDialog();
+}
+ 
 export function formatBooks(books, bookRef) {
     let formattedBoooks = [];
 

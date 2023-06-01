@@ -4,6 +4,8 @@ import { userDropDownInit  } from '../../ui/home/user-drop-down-ui.js'
 import { adminNavUiInit } from '../../ui/admin/nav-ui.js';
 import { displayProfile } from '../user-profile.js'; 
 import { signOutFirebaseAuth } from '../../firebase/auth-api.js';
+import { displayStatistics } from './statistics.js';
+import { displayRequests } from './issue-requests.js';
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -27,6 +29,8 @@ auth.onAuthStateChanged(async (user) => {
 async function bindEvents(user, currentUser) {
     displayProfile(user, currentUser)
     userDropDownInit();
+    displayRequests();
+    displayStatistics();
     bindAddBookEvents();
     adminNavUiInit();
     signOut.addEventListener('click', () => {

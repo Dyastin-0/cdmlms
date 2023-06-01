@@ -64,6 +64,7 @@ export async function getQueryWithLimit(collection, limit) {
 }
 
 export async function saveQuery(collection, documentID, document) {
+    console.log(document)
     try {
         await db.collection(collection)
         .doc(documentID)
@@ -86,4 +87,14 @@ export async function searchQuery(collection, orderBy, startAt, endAt) {
     } catch (error) {
         console.error(error)
     }
+}
+
+export async function getCollectionCount(collection) {
+    const querySnapshot = await db
+    .collection(collection)
+    .get();
+
+    const count = querySnapshot.size;
+
+    return count;
 }

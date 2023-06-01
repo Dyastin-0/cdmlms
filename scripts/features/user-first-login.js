@@ -124,6 +124,7 @@ async function setupInformation(userRef, user) {
         lastName: lastName.value,
         sex: sex.textContent.trim(),
         birthDate: birthDate.value,
+        isAdmin: false,
         course: course.textContent.trim(),
         year: year.textContent.trim(),
         id: id.value

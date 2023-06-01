@@ -8,16 +8,6 @@
     align-items: center;
 }
 
-.landing-page-content.admin {
-    width: calc(100% - 60px);
-    height: fit-content;
-    border-radius: 5px;
-    background: var(--green-solid);
-    box-shadow: 0 0 5px var(--dark-shade-low);
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
 .landing-page-label {
     display: block;
     text-align: center;

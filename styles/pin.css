@@ -24,11 +24,15 @@
     transition: border-radius 0.3s ease, bottom 0.3s ease;
 }
 
+.pin-container .pin.flex {
+    flex-basis: calc((100% / 2) - 60px);
+}
+
 .pin label {
     color: var(--black);
     cursor: inherit;
     font-weight: 700;
-    margin: 5px;
+    padding: 10px;
     text-align: left;
 }
 
@@ -40,9 +44,23 @@
 }
 
 .pin label.title {
-    padding: 5px;
     font-size: 24px;
     font-weight: 500;
+}
+
+.pin label.isbn {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.pin label.email {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.pin label.time {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .pin label.author {
@@ -50,6 +68,17 @@
     margin: none;
     font-weight: 300;
     font-size: 14px;
+}
+
+.pin label.statistics {
+    padding: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pin label.data {
+    padding: 10px;
+    font-size: 44px;
 }
 
 .pin-container .pin.small {
@@ -61,6 +90,7 @@
 }
 
 .pin-container .pin.large {
+    width: 200px;
     height: 300px;
 }
 

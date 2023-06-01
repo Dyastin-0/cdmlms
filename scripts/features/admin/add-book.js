@@ -1,6 +1,7 @@
 import { toastMessage } from "../../utils/toast-message.js";
 import { saveQuery } from "../../firebase/firestore-api.js";
 import { displayProcessDialog, hideProcessDialog } from '../../utils/process-dialog.js';
+import { currentDate } from '../../utils/date.js';
 
 const addBookForm = document.querySelector("#add-book-form");
 
@@ -69,12 +70,3 @@ function bookInfo() {
     }
     return info;
 }
-
-function currentDate() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
-  
-    return `${year}-${month}-${day}`;
-  }

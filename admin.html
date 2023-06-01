@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="admin" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/nav.css">
     <link rel="stylesheet" href="./styles/drop-down.css">
+    <link rel="stylesheet" href="./styles/pin.css">
     <link rel="stylesheet" href="./styles/wrapper.css">
     <link rel="stylesheet" href="./styles/dashboard.css">
     <link rel="stylesheet" href="./styles/content.css">
@@ -27,54 +28,49 @@
 
 <body class="admin">
 
-    <div class="dashboard" tabindex="1">
+    <div class="dashboard" tabindex="1" id="left-nav">
         <div class="header">
             <a href="./" class="nav-button large n-m bg-none" id="index-button">
                 <img class="logo n-p" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
             </a>
         </div>
-        
+        <button id="left-home-button">
+            <i class="fas fa-home"></i>
+            <label>Home</label>
+        </button>
         <label>Book</label>
-
-        <button>
+        <button id="left-add-button">
             <i class="fas fa-plus-circle"></i>
             <label>Add</label>
         </button>
-
-        <button>
+        <button id="left-delete-button">
             <i class="fas fa-circle-minus"></i>
             <label>Delete</label>
         </button>
-
-        <button>
+        <button id="left-edit-button">
             <i class="fas fa-square-pen"></i>
             <label>Edit</label>
         </button>
-
         <label>Others</label>
-
-        <button>
+        <button id="left-requests-button">
             <i class="fas fa-check-double"></i>
             <label>Requests</label>
         </button>
-
-        <button>
+        <button id="left-records-button">
             <i class="fas fa-folder"></i>
             <label>Records</label>
         </button>
-
-        <button>
+        <button id="left-users-button">
             <i class="fas fa-user"></i>
             <label>Users</label>
         </button>
-
     </div>
 
     <main class="main admin">
         <nav class="nav admin">
             <div></div>
             <div class="wrapper">
-                <button class="nav-button small-g" id="admin-home"> Home </button>
+                <a href="./home.html" class="nav-button small-g" id="admin-home"> Home </a>
                 <button class="nav-button medium" id="user-notification" aria-label="user-notification">
                     <i class="fa fa-bell"></i>
                 </button>
@@ -91,22 +87,54 @@
             </div>
         </nav>
 
-        <div class="landing-page-content admin">
-            <label class="landing-page-label medium"> Add book </label>
-			<form class="add-book-form" id="add-book-form">
-                <label class="warning" id="edit-warning"></label>
-                <input type="text" placeholder="Title" id="add-book-title">
-                <input type="text" placeholder="Author" id="add-book-author">
-                <input type="text" placeholder="Publiction" id="add-book-publication">
-                <input type="text" placeholder="Date of publiction" id="add-book-date-publication">
-                <input type="text" placeholder="Category" id="add-book-category">
-                <input type="text" placeholder="ISBN" id="add-book-isbn">
-                <input type="text" placeholder="Availability" id="add-book-availability">
-                <textarea placeholder="Description" id="add-book-description" cols="30" rows="5"></textarea>
-                <button id="add-book-button"> Add </button>
-                <button id="add-book-clear-button"> Clear </button>
+        <div class="content center-horizontal">
+            <div class="card active" id="statistics">
+                <label class="card-title">Statistics</label>
+                <div class="pin-container" id="statistic-pins">
+                    <div class="pin small flex">
+                        <label class="statistics">Total users</label>
+                        <label class="data" id="total-users"></label>
+                    </div>
+                    <div class="pin small  flex">
+                        <label class="statistics">Pending requests</label>
+                        <label class="data" id="pending-requests"></label>
+                    </div>
+                    <div class="pin small  flex">
+                        <label class="statistics">Total issued books</label>
+                        <label class="data" id="total-issued-books"></label>
+                    </div>
+                    <div class="pin small  flex">
+                        <label class="statistics">Total books</label>
+                        <label class="data" id="total-books"></label>
+                    </div>
                 </div>
-            </form>
+            </div>
+
+            <div class="card" id="add-book">
+                <label class="card-title"> Add book </label>
+                <form class="add-book-form" id="add-book-form">
+                    <label class="warning" id="edit-warning"></label>
+                    <input type="text" placeholder="Title" id="add-book-title">
+                    <input type="text" placeholder="Author" id="add-book-author">
+                    <input type="text" placeholder="Publication" id="add-book-publication">
+                    <input type="text" placeholder="Date of publication" id="add-book-date-publication">
+                    <input type="text" placeholder="Category" id="add-book-category">
+                    <input type="text" placeholder="ISBN" id="add-book-isbn">
+                    <input type="text" placeholder="Availability" id="add-book-availability">
+                    <textarea placeholder="Description" id="add-book-description" cols="30" rows="5"></textarea>
+                    <button id="add-book-button"> Add </button>
+                    <button id="add-book-clear-button"> Clear </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card" id="issue-requests">
+                <label class="card-title"> Requests </label>
+                <div class="pin-container" id="request-pins">
+                    
+                </div>
+            </div>
+
 		</div>
 
         <footer class="footer-global bg-none">
@@ -124,7 +152,7 @@
             </div>    
             <div class="footer-wrapper hide">
                 <label class="footer-label"> Email address  </label>
-                <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+                <label class="footer-text"> cdmlms.official@gmail.com </label>
             </div>    
             <div class="footer-wrapper hide">
                 <label class="footer-label"> Facebook page </label>
@@ -254,6 +282,7 @@
 <script type="module" src="./scripts/features/edit-profile.js"></script>
 <script src="./scripts/observer.js"></script>
 <script type="module" src="./scripts/features/user-profile.js"></script>
+<script src="./scripts/ui/admin/cards-ui.js"></script>
 <!---->
 
 </html>

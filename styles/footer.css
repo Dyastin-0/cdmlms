@@ -42,6 +42,9 @@
     font-size: 14px;
     padding: 5px;
     border-radius: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
 }
 
