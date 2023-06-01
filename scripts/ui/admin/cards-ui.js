@@ -3,7 +3,7 @@ const leftNav = document.querySelector("#left-nav");
 const homeButton = leftNav.querySelector("#left-home-button");
 const homeCard = document.querySelector("#statistics");
 
-const addBook = leftNav.querySelector("#left-add-button");
+const addBookButton = leftNav.querySelector("#left-add-button");
 const addBookCard = document.querySelector("#add-book");
 
 const requestButton = leftNav.querySelector("#left-requests-button");
@@ -18,17 +18,23 @@ const cards = [
 bindEvents();
 
 function bindEvents() {
-    addBook.addEventListener('click', () => {
-        hideCards();
-        addBookCard.classList.add("active");
+    addBookButton.addEventListener('click', () => {
+        if (!addBookCard.classList.contains("active")) {
+            hideCards();
+            addBookCard.classList.add("active");
+        }
     });
     homeButton.addEventListener('click', () => {
-        hideCards();
-        homeCard.classList.add("active");
+        if (!homeCard.classList.contains("active")) {
+            hideCards();
+            homeCard.classList.add("active");
+        }
     });
     requestButton.addEventListener('click', () => {
-        hideCards();
-        requestCard.classList.add("active");
+        if (!requestCard.classList.contains("active")) {
+            hideCards();
+            requestCard.classList.add("active");
+        }
     });
 }
 

@@ -88,26 +88,32 @@
         </nav>
 
         <div class="content center-horizontal">
+
             <div class="card active" id="statistics">
                 <label class="card-title">Statistics</label>
                 <div class="pin-container" id="statistic-pins">
-                    <div class="pin small flex">
+                    <div class="pin small">
                         <label class="statistics">Total users</label>
                         <label class="data" id="total-users"></label>
                     </div>
-                    <div class="pin small  flex">
+                    <div class="pin small">
                         <label class="statistics">Pending requests</label>
                         <label class="data" id="pending-requests"></label>
                     </div>
-                    <div class="pin small  flex">
+                    <div class="pin small">
                         <label class="statistics">Total issued books</label>
                         <label class="data" id="total-issued-books"></label>
                     </div>
-                    <div class="pin small  flex">
+                    <div class="pin small">
                         <label class="statistics">Total books</label>
                         <label class="data" id="total-books"></label>
                     </div>
                 </div>
+            </div>
+
+            <div class="card active" id="issue-requests">
+                <label class="card-title">Requests</label>
+                <div class="pin-container" id="request-pins"></div>
             </div>
 
             <div class="card" id="add-book">
@@ -126,13 +132,6 @@
                     <button id="add-book-clear-button"> Clear </button>
                     </div>
                 </form>
-            </div>
-
-            <div class="card" id="issue-requests">
-                <label class="card-title"> Requests </label>
-                <div class="pin-container" id="request-pins">
-                    
-                </div>
             </div>
 
 		</div>
