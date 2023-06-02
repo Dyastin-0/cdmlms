@@ -46,9 +46,17 @@
     animation: opacity 5s ease;
 }
 
+form input.black::placeholder {
+    color: var(--dark-shade-low);
+}
+
 form input::placeholder {
     color: var(--white);
 }
+
+form input[type="password"]::-ms-reveal {
+    filter: invert(100%);
+  }
 
 form input {
     width: 100%;
@@ -124,11 +132,13 @@ form label.lg {
     margin-top: 8px;
     width: 100%;
     display: flex;
+    font-size: 12px;
+    text-decoration: underline;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
-form label.underlined:hover {
-    text-decoration: underline;
+.underlined:hover {
     cursor: pointer;
 }
 

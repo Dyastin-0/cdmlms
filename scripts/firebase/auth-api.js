@@ -1,3 +1,12 @@
+import { auth } from './firebase.js';
+import { signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { isEmailValidSignIn, warning } from "../utils/validation.js";
 import { toastMessage } from '../utils/toast-message.js';
 import { getQueryOneField } from '../firebase/firestore-api.js';
@@ -6,7 +15,7 @@ import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog
 
 export async function createUser(email, password) {
     let isSuccess = false;
-    await auth.createUserWithEmailAndPassword(email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
         isSuccess = true;
     })
@@ -18,7 +27,7 @@ export async function createUser(email, password) {
 
 export async function signInFirebaseAuth(email, password) {
     let isSuccess = false;
-    await auth.signInWithEmailAndPassword(email, password)
+    await signInWithEmailAndPassword(auth, email, password)
     .then(() => {
         isSuccess = true;
     })
@@ -29,10 +38,10 @@ export async function signInFirebaseAuth(email, password) {
 }
 
 export async function signInWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    auth.signInWithPopup(provider)
+    signInWithPopup(auth, provider)
     .then(async (result) => {
         const querySnapshot = await getQueryOneField('users', 'email', result.user.email);
         let isSetUpDone;
@@ -52,7 +61,7 @@ export async function signInWithGoogle() {
 }
 
 export function signOutFirebaseAuth() {
-    auth.signOut();
+    signOut(auth);
 }
 
 export function recoverAccount(email) {
@@ -61,7 +70,7 @@ export function recoverAccount(email) {
         warning('Enter your valid email.', 'sign-in');
         return;
     }
-    firebase.auth().sendPasswordResetEmail(email)
+    sendPasswordResetEmail(auth, email)
     .then(() => {
       toastMessage("Password reset link sent.");
     })

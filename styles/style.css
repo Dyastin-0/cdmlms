@@ -178,6 +178,13 @@ a {
     animation-fill-mode: forwards;
 }
 
+@media (max-width: 600px) {
+    .main.admin {
+        transition: width 0.3s ease;
+        width: 100%;
+    }
+}
+
 @keyframes infiniteRotate {
     0% {
         transform: rotate(180deg);

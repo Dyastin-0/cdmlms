@@ -159,6 +159,20 @@ form input::placeholder {
     font-size: 14px;
 }
 
+.underlined {
+    margin-top: 8px;
+    width: 100%;
+    display: flex;
+    font-size: 12px;
+    text-decoration: underline;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.underlined:hover {
+    cursor: pointer;
+}
+
 .warning {
     padding: 5px;
     margin-bottom: 8px;

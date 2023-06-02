@@ -1,3 +1,11 @@
+import { auth } from "../firebase/firebase.js";
+import { updateQuery } from "../firebase/firestore-api.js";
+import { onAuthStateChanged,
+    updateProfile,
+    reload,
+    sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { getQueryOneField } from "../firebase/firestore-api.js";
 import { isIdValid, warning } from "../utils/validation.js";
 import { isDisplayNameAvailable, isIdAvailable } from "../utils/data-availability.js";
@@ -34,22 +42,26 @@ const doneSetupButton = document.querySelector("#done-setup");
 checkIfFirstLogin();
 
 async function checkIfFirstLogin() {
-    auth.onAuthStateChanged(async (user) => {
-        if (user) {
-            const querySnapshot = await getQueryOneField('users', 'email', user.email);
-            const currentUser = querySnapshot.docs[0];
-            const isNewUser = currentUser.data().newUser;
-            const isAdmin = currentUser.data().isAdmin;
-            if (isAdmin) adminButton.style.display = "flex";
-            if (isNewUser) {
-                bindEvents();
-                oneTimeSetupModal.classList.add("active");
-            } else {
-                userInit(user, currentUser.data());
-                splashScreen.remove();
+    try {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const querySnapshot = await getQueryOneField('users', 'email', user.email);
+                const currentUser = querySnapshot.docs[0];
+                const isNewUser = currentUser.data().newUser;
+                const isAdmin = currentUser.data().isAdmin;
+                if (isAdmin) adminButton.style.display = "flex";
+                if (isNewUser) {
+                    bindEvents();
+                    oneTimeSetupModal.classList.add("active");
+                } else {
+                    userInit(user, currentUser.data());
+                    splashScreen.remove();
+                }
             }
-        }
-    });
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function bindEvents() {
@@ -58,13 +70,14 @@ function bindEvents() {
     courseDropDownInit();
 
     resendVerification.addEventListener('click', () => {
-        auth.onAuthStateChanged((user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
+                reload(user);
                 if (user.emailVerified) {
                     toastMessage("Your email is already verified.");
                     return;
                 }
-                user.sendEmailVerification()
+                sendEmailVerification(user)
                 .then(() => {
                     toastMessage("Email verification sent.");
                 })
@@ -76,7 +89,7 @@ function bindEvents() {
     });
 
     doneSetupButton.addEventListener('click', async () => {
-        auth.onAuthStateChanged(async (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) await verifyEmailAndInputs(user);
         });
     });
@@ -117,7 +130,7 @@ async function finalAccountSetup(currentUserRef, user) {
 }
 
 async function setupInformation(userRef, user) {
-    await userRef.update({
+    const updatedDoc = {
         newUser: false,
         firstName: firstName.value,
         middleName: middleName.value,
@@ -128,17 +141,18 @@ async function setupInformation(userRef, user) {
         course: course.textContent.trim(),
         year: year.textContent.trim(),
         id: id.value
-    });
+    }
+    await updateQuery(userRef, updatedDoc);
 
-    await user.updateProfile({
+    updateProfile(user, {
         displayName: displayName.value
     });
 }
 
 async function isEmailVerified(user) {
     let isVerified = null;
-    await user.reload()
-    .then(async () => {
+    await reload(user)
+    .then(() => {
         isVerified = user.emailVerified;
     });
     return isVerified;

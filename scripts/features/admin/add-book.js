@@ -2,6 +2,7 @@ import { toastMessage } from "../../utils/toast-message.js";
 import { saveQuery } from "../../firebase/firestore-api.js";
 import { displayProcessDialog, hideProcessDialog } from '../../utils/process-dialog.js';
 import { currentDate } from '../../utils/date.js';
+import { displayConfirmDialog } from "../../utils/confirm-dialog.js";
 
 const addBookForm = document.querySelector("#add-book-form");
 
@@ -27,11 +28,15 @@ export async function bindAddBookEvents() {
         e.preventDefault();
         const areInputFilled = areInputsFilled();
         if (areInputFilled) {
-            displayProcessDialog("Adding book...");
-            await saveQuery('books', crypto.randomUUID(), bookInfo());
-            hideProcessDialog();
-            toastMessage("Book added!");
-            addBookForm.reset();
+            const proceess = async () => {
+                displayProcessDialog("Adding book...");
+                await saveQuery('books', crypto.randomUUID(), bookInfo());
+                hideProcessDialog();
+                addBookForm.reset();
+            }
+            const confirmMessage = "You are about to add the book on the catalouge, continue?";
+            const toastText = "Book added.";
+            displayConfirmDialog(proceess, confirmMessage, toastText);
         }
     });
 }

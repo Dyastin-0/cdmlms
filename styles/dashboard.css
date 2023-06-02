@@ -21,16 +21,6 @@
     display: none;
 }
 
-.dashboard:hover {
-    width: 140px;
-    position: fixed;
-}
-
-.dashboard:focus {
-    width: 140px;
-    position: fixed;
-}
-
 .dashboard .header {
     display: flex;
     justify-content: center;
@@ -109,11 +99,4 @@
     color: var(--white);
     font-size: 18px;
     font-weight: 600;
-}
-
-@media (max-width: 600px) {
-    .dashboard button:focus > .dashboard {
-        width: 140px;
-        position: fixed;
-    }
 }

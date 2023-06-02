@@ -28,14 +28,14 @@
                 <label class="warning" id="sign-in-warning"> </label>
                 <input type="text" placeholder="Email" id="sign-in-email" enterkeyhint="Enter">
                 <input type="password" placeholder="Password" id="sign-in-password" autocomplete="on" enterkeyhint="Enter">
-                <label class="underlined" id="forgot-password"> Forgot password? </label>
+                <a class="underlined" id="forgot-password"> Forgot password? </a>
                 <button id="sign-in-account-button"> Sign in </button>
                 <label class="or"> or </label>
                 <button id="sign-in-google">	
                     <img src="./images/google_logo.webp" alt="Google logo.">	
                     <label class="lg"> Continue with Google </label>
                 </button>
-                <label class="underlined" id="dont-have-account"> Don't have an account? </label>
+                <a class="underlined" id="dont-have-account"> Don't have an account? </a>
             </form>
         </div>
 	</div>
@@ -65,15 +65,6 @@
 		<label class="process-spinner fa-solid fa-circle-notch fa-spin"></label>
 	</div>
 </body>
-
-<!-- scripts -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
-<script src="./scripts/firebase/firebase.js"></script>
-<!---->
 
 <!--custom scripts -->
 <script type="module" src="./scripts/features/sign-in.js"></script>

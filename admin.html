@@ -68,7 +68,9 @@
 
     <main class="main admin">
         <nav class="nav admin">
-            <div></div>
+            <button class="nav-button medium display-none dashboard-button" id="left-nav-button">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="wrapper">
                 <a href="./home.html" class="nav-button small-g" id="admin-home"> Home </a>
                 <button class="nav-button medium" id="user-notification" aria-label="user-notification">
@@ -266,15 +268,6 @@
     </div>
 
 </body>
-
-<!-- scripts -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
-<script src="./scripts/firebase/firebase.js"></script>
-<!---->
 
 <!-- custom scripts -->
 <script  type="module" src="./scripts/features/admin/admin-check.js"></script>

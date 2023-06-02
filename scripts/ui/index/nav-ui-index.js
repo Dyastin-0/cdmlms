@@ -1,3 +1,6 @@
+import { auth } from "../../firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { signOutFirebaseAuth } from "../../firebase/auth-api.js";
 
 const indexNavbar = document.querySelector("#index-navbar")
@@ -11,7 +14,7 @@ const signOutButton = indexNavbar.querySelector("#sign-out-button");
 
 const splashScreen = document.querySelector("#splash-screen");
 
-auth.onAuthStateChanged(async (user) => {
+onAuthStateChanged(auth, async (user) => {
     await user ? showSignedInButtons() : showSignedOutButtons();
     splashScreen.remove();
 });

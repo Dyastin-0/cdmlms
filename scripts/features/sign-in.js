@@ -1,3 +1,6 @@
+import { auth } from "../firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
@@ -11,7 +14,7 @@ const submit = modal.querySelector("#sign-in-account-button");
 const signInGoogle = modal.querySelector("#sign-in-google");
 
 let signingIn = false;
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
     if (user && !signingIn) {
         window.location.href = './home.html';
     }

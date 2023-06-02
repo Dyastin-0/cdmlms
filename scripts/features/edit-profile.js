@@ -1,3 +1,10 @@
+import { auth } from "../firebase/firebase.js";
+import { updateProfile } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import { updateQuery } from "../firebase/firestore-api.js";
+import { onAuthStateChanged,
+    reload
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { getQueryOneField } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
 import { toastMessage } from '../utils/toast-message.js';
@@ -46,7 +53,7 @@ function bindEvents() {
         }
 
         const process = async () => {
-            await auth.onAuthStateChanged(async (user) => {
+            await onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     await processChanges(user, changes);
                 }
@@ -64,10 +71,13 @@ async function processChanges(user, changes) {
     const userDataRef = querySnapshot.docs[0].ref;
     await saveChanges(user, userDataRef, changes, editedDisplayName.value)
     .then(async () => {
-        await user.reload();
+        await reload(user);
         const querySnapshot = await getQueryOneField('users', 'email', user.email);
         const userData = querySnapshot.docs[0].data();
-        await displayProfile(user, userData);
+        displayProfile(user, userData);
+    })
+    .catch((error) => {
+        console.error(error);
     })
     .finally(() => {
         hideEditModal();
@@ -75,12 +85,12 @@ async function processChanges(user, changes) {
 }
 
 async function saveChanges(user, userDataRef, changes, editedDisplayName) {
-    await userDataRef.update(changes);
-    if (editedDisplayName !== user.displayName) await user.updateProfile({ displayName: editedDisplayName });
+    await updateQuery(userDataRef, changes)
+    if (editedDisplayName !== user.displayName) await updateProfile(user, { displayName: editedDisplayName });
 }
 
 async function getInfo() {
-    auth.onAuthStateChanged(async (user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
             const querySnapshot = await getQueryOneField('users', 'email', user.email);
             const currentUserData = querySnapshot.docs[0].data();

@@ -1,4 +1,10 @@
-import { getQueryOneField, searchQuery } from "../firebase/firestore-api.js";
+import { auth } from "../firebase/firebase.js";
+import { onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+import { updateQuery } from "../firebase/firestore-api.js";
+
+import { getQueryOneField, getQueryTwoFields, searchQuery } from "../firebase/firestore-api.js";
 import { saveQuery } from "../firebase/firestore-api.js";
 import { currentDateTime } from '../../scripts/utils/date.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
@@ -11,103 +17,102 @@ const viewBookModal = document.querySelector("#view-book-modal");
 const bookDetails = viewBookModal.querySelector("#book-details");
 const closeButton = viewBookModal.querySelector("#close-view-book-modal");
 
-bindEvents();
-
-function bindEvents() {
-    closeButton.addEventListener('click', () => {
-        viewBookModal.classList.remove("active");
-        overlay.classList.remove("active");
-        bookDetails.innerHTML = "";
-    });
-
-    overlay.addEventListener('click', () => {
-        viewBookModal.classList.remove("active");
-        overlay.classList.remove("active");
-        bookDetails.innerHTML = "";
-    });
-}
-
 function bindPinEvent(pin, book, bookRef) {
     pin.addEventListener('click', () => {
-        bookRef.update({
+        updateQuery(bookRef, {
             views: book.views + 1
         });
 
-        const title = document.createElement("label");
-        const author = document.createElement("label");
-        const description = document.createElement("label");
-        const category = document.createElement("label");
-        const availability = document.createElement("label");
-        const isbn = document.createElement("label");
+        const unsubscribe = onSnapshot(bookRef, (rtBook) => {
+            const rtBookData = rtBook.data();
 
-        const eye = document.createElement("i");
-        const views = document.createElement("label");
+            const title = document.createElement("label");
+            const author = document.createElement("label");
+            const description = document.createElement("label");
+            const category = document.createElement("label");
+            const availability = document.createElement("label");
+            const isbn = document.createElement("label");
 
-        const requestButton = document.createElement("button");
+            const eye = document.createElement("i");
+            const views = document.createElement("label");
 
-        title.classList.add("title");
-        title.textContent = book.title;
+            const requestButton = document.createElement("button");
 
-        author.classList.add("other-details");
-        author.classList.add("weighted");
-        author.textContent = book.author;
+            title.classList.add("title");
+            title.textContent = rtBookData.title;
 
-        description.classList.add("other-details");
-        description.textContent = book.description;
+            author.classList.add("other-details");
+            author.classList.add("weighted");
+            author.textContent = rtBookData.author;
 
-        isbn.classList.add("other-details");
-        isbn.textContent =  book.isbn;
+            description.classList.add("other-details");
+            description.textContent = rtBookData.description;
 
-        category.classList.add("other-details");
-        category.classList.add("italic");
-        category.textContent = book.category;
+            isbn.classList.add("other-details");
+            isbn.textContent =  rtBookData.isbn;
 
-        availability.classList.add("other-details");
-        availability.classList.add("green");
-        availability.textContent = book.isAvailable ? "Available" : "Not available";
-        
-        views.classList.add("other-details");
-        views.classList.add("views");
-        views.textContent = book.views + " ";
+            category.classList.add("other-details");
+            category.classList.add("italic");
+            category.textContent = rtBookData.category;
 
-        eye.classList.add("fa-solid");
-        eye.classList.add("fa-eye");
-        
-        views.appendChild(eye);
+            availability.classList.add("other-details");
+            availability.classList.add("green");
+            availability.textContent = rtBookData.isAvailable ? "Available" : "Not available";
+            
+            views.classList.add("other-details");
+            views.classList.add("views");
+            views.textContent = rtBookData.views + " ";
 
-        requestButton.classList.add("request-button");
-        requestButton.textContent = "Request";
+            eye.classList.add("fa-solid");
+            eye.classList.add("fa-eye");
+            
+            views.appendChild(eye);
 
-        requestButton.addEventListener('click', () => {
-            auth.onAuthStateChanged(async (user) => {
-                if (user) {
-                    if (!book.isAvailable) {
-                        toastMessage("Book is not available.");
-                        return;
+            requestButton.classList.add("request-button");
+            requestButton.textContent = "Request";
+
+            requestButton.addEventListener('click', () => {
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        if (!rtBookData.isAvailable) {
+                            toastMessage("Book is not available.");
+                            return;
+                        }
+                        const querySnapshot = await getQueryOneField('users', 'email', user.email);
+                        const id = querySnapshot.docs[0].data().id;
+                        const process = async () => {
+                            sendBookRequest(rtBookData.isbn, rtBookData.title, id);
+                        }
+                        const processMessage = `You are about to send an issue request for '${book.title}.' Continue?`;
+                        const toastText = "Book request sent, wait for an update.";
+                        displayConfirmDialog(process, processMessage, toastText);
                     }
-                    const querySnapshot = await getQueryOneField('users', 'email', user.email);
-                    const id = querySnapshot.docs[0].data().id;
-                    const process = async () => {
-                        sendBookRequest(book.isbn, book.title, id);
-                    }
-                    const processMessage = `You are about to send an issue request for '${book.title}.' Continue?`;
-                    const toastText = "Book request sent, wait for an update.";
-                    displayConfirmDialog(process, processMessage, toastText);
-                }
+                });
             });
+            bookDetails.innerHTML = "";
+            bookDetails.appendChild(title);
+            bookDetails.appendChild(author);
+            bookDetails.appendChild(description);
+            bookDetails.appendChild(category);
+            bookDetails.appendChild(isbn);
+            bookDetails.appendChild(availability);
+            bookDetails.appendChild(views);
+            bookDetails.appendChild(requestButton);
+
+            overlay.classList.add("active");
+            viewBookModal.classList.add("active");
+
+            const subscription = () => {
+                unsubscribe();
+                viewBookModal.classList.remove("active");
+                overlay.classList.remove("active");
+                closeButton.removeEventListener('click', subscription);
+                overlay.removeEventListener('click', subscription);
+            }
+
+            closeButton.addEventListener('click', subscription);
+            overlay.addEventListener('click', subscription);
         });
-
-        bookDetails.appendChild(title);
-        bookDetails.appendChild(author);
-        bookDetails.appendChild(description);
-        bookDetails.appendChild(category);
-        bookDetails.appendChild(isbn);
-        bookDetails.appendChild(availability);
-        bookDetails.appendChild(views);
-        bookDetails.appendChild(requestButton);
-
-        overlay.classList.add("active");
-        viewBookModal.classList.add("active");
     });
 }
 

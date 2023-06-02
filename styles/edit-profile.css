@@ -23,3 +23,7 @@
 .black {
     color: var(--black);
 }
+
+.black::placeholder {
+    color: var(--dark-shade);
+}

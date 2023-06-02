@@ -1,23 +1,37 @@
+import { db } from "./firebase.js";
+import { collection,
+    doc,
+    setDoc,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    query,
+    where,
+    limit, orderBy, startAt, endAt,
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
 export async function deleteQuery(collection, firstField, secondField, firstValue, secondValue) {
     try {
         const querySnapshot = await getQueryTwoFields(collection, 
             firstField, secondField, 
             firstValue, secondValue);
 
-        const deletePromises = querySnapshot.docs.map(doc => doc.ref.delete());
+        const deletePromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref));
         await Promise.all(deletePromises);
     } catch (error) {
         console.error(error)
     }
 }
 
-export async function getQueryTwoFields(collection, firstField, secondField, firstValue, secondValue) {
-    try {
-        const querySnapshot = await db
-        .collection(collection)
-        .where(firstField, '==', firstValue)
-        .where(secondField, '==', secondValue)
-        .get();
+export async function getQueryTwoFields(col, firstField, secondField, firstValue, secondValue) {
+    try {  
+        const colRef = collection(db, col);
+        const colQuery = query(colRef,
+            where(firstField, "==", firstValue),
+            where(secondField, "==", secondValue)
+        );
+
+        const querySnapshot = await getDocs(colQuery);
         
         return querySnapshot;
     } catch (error) {
@@ -25,12 +39,14 @@ export async function getQueryTwoFields(collection, firstField, secondField, fir
     }
 }
 
-export async function getQueryOneField(collection, firstField, firstValue) {
+export async function getQueryOneField(col, firstField, firstValue) {
     try {
-        const querySnapshot = await db
-        .collection(collection)
-        .where(firstField, '==', firstValue)
-        .get();
+        const colRef = collection(db, col);
+        const colQuery = query(colRef,
+            where(firstField, "==", firstValue)
+        );
+
+        const querySnapshot = await getDocs(colQuery);
         
         return querySnapshot;
     } catch (error) {
@@ -38,11 +54,10 @@ export async function getQueryOneField(collection, firstField, firstValue) {
     }
 }
 
-export async function getQuery(collection) {
+export async function getQuery(col) {
     try {
-        const querySnapshot = await db
-        .collection(collection)
-        .get();
+        const colRef = collection(db, col);
+        const querySnapshot = await getDocs(colRef);
 
         return querySnapshot;
     } catch (error) {
@@ -50,12 +65,13 @@ export async function getQuery(collection) {
     }
 }
 
-export async function getQueryWithLimit(collection, limit) {
+export async function getQueryWithLimit(col, lmt) {
     try {
-        const querySnapshot = await db
-        .collection(collection)
-        .limit(limit)
-        .get();
+        const colRef = collection(db, col);
+        const colQuery = query(colRef,
+            limit(lmt)
+        );
+        const querySnapshot = await getDocs(colQuery);
 
         return querySnapshot;
     } catch (error) {
@@ -63,27 +79,34 @@ export async function getQueryWithLimit(collection, limit) {
     }
 }
 
-export async function saveQuery(collection, documentID, document) {
-    console.log(document)
+export async function saveQuery(col, documentID, document) {
     try {
-        await db.collection(collection)
-        .doc(documentID)
-        .set(document);
+        const colRef = doc(db, col, documentID)
+        await setDoc(colRef, document);
     } catch (error) {
         console.error(error);
     }
 }
 
-export async function searchQuery(collection, orderBy, startAt, endAt) {
+export async function updateQuery(docRef, updatedDoc) {
     try {
-        const querySnapshot = await db
-        .collection(collection)
-        .orderBy(orderBy)
-        .startAt(startAt)
-        .endAt(endAt + "\uf8ff")
-        .get();
+        await updateDoc(docRef, updatedDoc);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-        return querySnapshot;
+export async function searchQuery(col, ob, st, ea) {
+    try {
+        const colRef = collection(db, col);
+        const colQuery = query(colRef,
+            orderBy(ob),
+            startAt(st),
+            endAt(ea  + "\uf8ff")
+        )
+
+        const querySnapshot = await getDocs(colQuery);
+        return querySnapshot;   
     } catch (error) {
         console.error(error)
     }

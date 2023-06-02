@@ -1,3 +1,12 @@
+import { auth } from "../firebase/firebase.js";
+import { db } from "../firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import { onSnapshot,
+    query,
+    collection,
+    limit, orderBy, startAt, endAt,
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
 import { formatBook } from "./books.js";
 import { userDropDownInit } from "../ui/home/user-drop-down-ui.js";
 import { sexDropDownInit } from "../ui/home/sex-drop-down.js";
@@ -5,10 +14,14 @@ import { filterSearchInit } from "../ui/home/search-filter-drop-down.js";
 import { filterSearchInitMobile } from "../ui/home/search-filter-drop-down-mobile.js";
 import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
-import { bindSearchEvent, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
-import { search } from "./search-book.js";
+import { hideSearchResult } from "../ui/home/search-ui.js";
+import { bindSearchEvent, addRecentSearch, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
+
+const searchResult = document.querySelector("#search-results");
+const closeResultButton = document.querySelector("#close-result-button");
 
 const adminButton = document.querySelector("#admin-button");
+const overlay = document.querySelector("#overlay");
 
 const signOut = document.querySelector("#sign-out");
 const mostViewed = document.querySelector("#most-viewed");
@@ -43,19 +56,57 @@ async function renderBooks() {
     await displayBooks(mostRecent, 'dateAdded');
 }
 
-async function displayBooks(container, orderBy) {
-    const query = await db
-    .collection('books')
-    .orderBy(orderBy, 'desc')
-    .limit(5);
+async function displayBooks(container, ob) {
+    const colRef = collection(db, 'books');
+    const colQuery = await query(colRef,
+        orderBy(ob, 'desc'),
+        limit(5)
+    );
 
-    const unsubscribe = query.onSnapshot((querySnapshot) => {
+    onSnapshot(colQuery, (querySnapshot) => {
         container.innerHTML = "";
         querySnapshot.forEach((doc) => {
             const book = formatBook(doc.data(), doc.ref);
             container.appendChild(book);
         });
     });
+}
+
+export async function searchBooks(by, input) {
+    onAuthStateChanged(auth, user => {
+        if (user) {
+            addRecentSearch(user.uid, input);
+            displayRecentSearches(user.uid);
+        }
+    });
+
+    const colRef = collection(db, 'books');
+    const colQuery = query(colRef, 
+        orderBy(by),
+        startAt(input),
+        endAt(input  + "\uf8ff")
+    );
+
+    const unsubscribe = await onSnapshot(colQuery, (querySnapshot) => {
+        if (querySnapshot.size > 0) {
+            searchResult.innerHTML = "";
+            querySnapshot.forEach((doc) => {
+                const formattedBook = formatBook(doc.data(), doc.ref);
+                searchResult.appendChild(formattedBook);
+            });
+        }
+    });
+    const subscription = async () => {
+        unsubscribe();
+        overlay.removeEventListener('click', subscription);
+        closeResultButton.removeEventListener('click', subscription);
+        searchResult.innerHTML = "";
+        overlay.classList.remove("active");
+        hideSearchResult();
+    }
+
+    overlay.addEventListener('click', subscription);
+    closeResultButton.addEventListener('click', subscription);
 }
 
 async function bindEvents() {
@@ -67,19 +118,19 @@ async function bindEvents() {
 
     searchInput.addEventListener('keyup', async (e) => {
         if (e.key === "Enter" && searchInput.value !== '') {
-            search(searchBy.textContent.toLowerCase().trim(), searchInput.value);
+            searchBooks(searchBy.textContent.toLowerCase().trim(), searchInput.value);
         }
     });
 
     searchInputMobile.addEventListener('keyup', async (e) => {
         if (e.key === "Enter" && searchInputMobile.value !== '') {
-            await search(searchByMobile.textContent.toLowerCase().trim(), searchInputMobile.value);
+            await searchBooks(searchByMobile.textContent.toLowerCase().trim(), searchInputMobile.value);
         }
     });
 }
 
 function sessionCheck() {
-    auth.onAuthStateChanged(user => {
+    onAuthStateChanged(auth, user => {
         user ? null : window.location.href = "./sign-in.html";
     });
 }

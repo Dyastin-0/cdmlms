@@ -1,7 +1,5 @@
-import { search } from "../../features/search-book.js";
+import { searchBooks } from "../../features/user.js";
 import { displayDropDown, hideDropDown } from "./home-ui-utils.js";
-
-const closeResultButton = document.querySelector("#close-result-button");
 
 //desktop view ui elements
 const searchInput = document.querySelector("#search-input");
@@ -57,17 +55,7 @@ export function bindSearchEvent() {
     });
 
     //global
-    overlay.addEventListener('click', () => {
-        hideSearchResult();
-        searchResult.innerHTML = "";
-        overlay.classList.remove("active");
-    });
 
-    closeResultButton.addEventListener('click', () => {
-        hideSearchResult();
-        searchResult.innerHTML = "";
-        overlay.classList.remove("active");
-    });
 }
 
 //global click for the searchInput on desktop view, specifically for hiding its modal
@@ -107,7 +95,7 @@ function displaySearchResult() {
     searchModal.style.opacity = "1";
 }
 
-function hideSearchResult() {
+export function hideSearchResult() {
     searchModal.style.transform = "translate(-50%, -50%) scale(0)";
     searchModal.style.opacity = "0";
 }
@@ -178,7 +166,7 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         container.appendChild(button);
     
         label.addEventListener('click', async () => {
-            await search(by.textContent.toLowerCase().trim(), label.textContent);
+            await searchBooks(by.textContent.toLowerCase().trim(), label.textContent);
             moveRecentSearchToTop(key, label.textContent, cachedSearches);
             displayRecentSearches(id);
             displaySearchResult();

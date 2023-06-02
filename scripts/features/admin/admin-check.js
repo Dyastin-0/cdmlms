@@ -1,3 +1,6 @@
+import { auth } from "../../firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { getQueryOneField } from '../../firebase/firestore-api.js';
 import { bindAddBookEvents } from './add-book.js';
 import { userDropDownInit  } from '../../ui/home/user-drop-down-ui.js'
@@ -10,7 +13,7 @@ import { displayRequests } from './issue-requests.js';
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
 
-auth.onAuthStateChanged(async (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         const querySnapshot = await getQueryOneField('users', 'email', user.email);
         const currentUser = querySnapshot.docs[0];

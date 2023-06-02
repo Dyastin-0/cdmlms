@@ -1,6 +1,6 @@
 .toast-message {
     width: 250px;
-    min-height: 50px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,6 +23,7 @@
 }
 
 .toast-message .message {
+
     font-weight: 500;
     font-size: 14px;
     padding: 10px;
@@ -30,8 +31,7 @@
 }
 
 .toast-message button {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin: 5px;
     padding: 5px;
     border-radius: 50px;
     background-color: transparent;

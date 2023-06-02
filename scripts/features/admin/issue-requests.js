@@ -1,9 +1,19 @@
+import { db } from "../../firebase/firebase.js";
+import { onSnapshot,
+    query,
+    collection,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
 const issueContainer = document.querySelector("#request-pins");
 
 export async function displayRequests() {
-    const query = await db.collection('requests');
+    const colRef = collection(db, 'requests');
+    const colQuery = query(colRef,
+        orderBy('timeRequested', 'asc')
+    );
 
-    const unsubscribe = query.onSnapshot((querySnapshot) => {
+    onSnapshot(colQuery, (querySnapshot) => {
         issueContainer.innerHTML = "";
         querySnapshot.forEach((doc) => {
             const formattedRequest = formatRequest(doc.data());

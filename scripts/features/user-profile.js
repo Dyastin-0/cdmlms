@@ -1,3 +1,8 @@
+import { auth } from "../firebase/firebase.js";
+import { onAuthStateChanged,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { fetchProfilePhoto, uploadProfilePhoto } from "../firebase/storage-api.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 import { toastMessage } from "../utils/toast-message.js";
@@ -44,17 +49,13 @@ function bindEvents() {
     });
 
     photoInput.addEventListener('input', async (event) => {
-        auth.onAuthStateChanged(async (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                if (user.emailVerified) { 
-                    const photo = event.target.files[0];
-                    const confirmMessage = "Are you sure you want to update your display photo?";
-                    const toastText = "Profile photo updated!";
-                    const process = () => updateProfilePhoto(photo, user);
-                    await displayConfirmDialog(process, confirmMessage, toastText);
-                } else {
-                    toastMessage("Verify your account to start customizing your profile.");
-                }
+                const photo = event.target.files[0];
+                const confirmMessage = "Are you sure you want to update your display photo?";
+                const toastText = "Profile photo updated!";
+                const process = () => updateProfilePhoto(photo, user);
+                await displayConfirmDialog(process, confirmMessage, toastText);
                 photoInputForm.reset();
             }
         })
@@ -65,7 +66,7 @@ async function updateProfilePhoto(photo, user) {
     toastMessage("Uploading your photo...");
     await uploadProfilePhoto(user, photo);
     const imageURL = await fetchProfilePhoto(user);
-    await user.updateProfile({
+    await updateProfile(user, {
         photoURL: imageURL
     });
     profilePhoto.src = imageURL;

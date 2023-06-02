@@ -1,15 +1,19 @@
+import { auth } from "../firebase/firebase.js";
+import { onAuthStateChanged,
+    sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { signInFirebaseAuth } from "../firebase/auth-api.js";
 import { saveQuery } from "../firebase/firestore-api.js";
 
 export async function initialAccoutSetUpAndEmailVerification(email, password) {
     await signInFirebaseAuth(email, password);
     await initialAccountSetUp(email);
-    auth.onAuthStateChanged(user => {
-        user.sendEmailVerification()
+    onAuthStateChanged(auth, (user) => {
+        sendEmailVerification(user)
         .catch(error => {
             console.error(error);
         });
-        window.location.href = './home.html';
     });
 }
 

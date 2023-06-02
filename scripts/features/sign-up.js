@@ -1,3 +1,6 @@
+import { auth } from "../firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
 import { isPasswordValid, isEmailValid, warning } from '../utils/validation.js';
 import { createUser } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
@@ -12,10 +15,9 @@ const password = modal.querySelector("#password");
 const confirmPassword = modal.querySelector("#password-confirm");
 
 let signingUp = false;
-
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
     if (user && !signingUp) {
-        console.log(signingUp);
+        window.location.href = './home.html';
     }
 });
 
@@ -59,11 +61,11 @@ async function areInputsValid() {
 }
 
 async function signUp() {
-    if (await areInputsValid()) {      
+    if (await areInputsValid()) {
+        signingUp = true;
         if (await createUser(email.value, password.value)) {
             const processMessage = "Creating your account...";
             displayProcessDialog(processMessage);
-            signingUp = true;
             await initialAccoutSetUpAndEmailVerification(email.value, password.value);
             hideProcessDialog();
             window.location.href = './home.html';
