@@ -8,7 +8,7 @@
     background: var(--gradient-horizontal-solid);
 }
 
-h1 {
+.error-label {
     text-align: center;
     font-size: 64px;
 }

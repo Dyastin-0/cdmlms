@@ -5,8 +5,10 @@ const overlay = document.querySelector("#overlay");
 const adminHomeButton = document.querySelector("#admin-home");
 const leftNavButton = document.querySelector("#left-nav-button");
 
+const desktopNavWidth = '50px';
+
 if (window.innerWidth > 600) {
-    leftNav.style.width = '50px';
+    leftNav.style.width = desktopNavWidth;
 } else {
     leftNav.style.width = '0px';
 }
@@ -27,14 +29,14 @@ export function adminNavUiInit() {
     };
 
     leftNav.onmouseleave = () => {
-        leftNav.style.width = window.innerWidth < 600 ? '0px' : '50px';
+        leftNav.style.width = window.innerWidth < 600 ? '0px' : desktopNavWidth;
         overlay.classList.remove("active");
     };
 
     overlay.addEventListener('click', () => {
         overlay.classList.remove("active");
         if (window.innerWidth > 600) {
-            leftNav.style.width = '50px';
+            leftNav.style.width = desktopNavWidth;
         } else {
             leftNav.style.width = '0px';
         }
@@ -42,7 +44,7 @@ export function adminNavUiInit() {
 
     window.addEventListener('resize', () => {
         if (window.innerWidth > 600) {
-            leftNav.style.width = '50px';
+            leftNav.style.width = desktopNavWidth;
         } else {
             leftNav.style.width = '0px';
         }

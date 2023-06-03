@@ -6,9 +6,16 @@
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     gap: 16px;
     overflow-y: auto;
+}
+
+.pin-container.btm-none {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .pin-container .pin {
@@ -87,6 +94,11 @@
 
 .pin-container .pin.large {
     height: 300px;
+}
+
+.pin-container .pin.wl {
+    width: 300px;
+    height: 230px;
 }
 
 .pin-container .pin:hover {

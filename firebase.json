@@ -11,7 +11,7 @@
       "source" : "**",
       "headers" : [{
         "key" : "Cache-Control",
-        "value" : "no-store, max-age=0"
+        "value" : "no-cache, max-age=3600"
       }]
     }]
   }

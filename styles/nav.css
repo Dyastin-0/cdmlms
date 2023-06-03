@@ -6,6 +6,7 @@
     display: flex;
     padding: 5px;
     background-color: var(--white);
+    box-shadow: 0 5px 5px var(--dark-shade-low);
     justify-content: space-between;
     align-items: center;
 }
@@ -19,8 +20,8 @@
 }
 
 .logo {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     padding-right: 3px;
 }
 
@@ -77,7 +78,7 @@
 .nav-button.large {
     color: var(--white);
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .nav-button.large.n-m {

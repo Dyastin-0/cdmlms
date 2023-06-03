@@ -11,6 +11,7 @@
 .landing-page-label {
     display: block;
     text-align: center;
+    text-overflow: ellipsis;
     font-size: 54px;
     font-weight: 400;
 }
