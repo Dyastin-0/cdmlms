@@ -34,7 +34,7 @@ export async function bindAddBookEvents() {
                 hideProcessDialog();
                 addBookForm.reset();
             }
-            const confirmMessage = "You are about to add the book on the catalouge, continue?";
+            const confirmMessage = "You are about to add the book on the catalogue. Continue?";
             const toastText = "Book added.";
             displayConfirmDialog(proceess, confirmMessage, toastText);
         }
