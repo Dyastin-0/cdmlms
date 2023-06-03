@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.drop-down.wd {
+    width: fit-content;
+}
+
 .drop-down.fit {
     width: 100%;
 }

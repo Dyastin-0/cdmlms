@@ -60,7 +60,7 @@ async function displayBooks(container, ob) {
     const colRef = collection(db, 'books');
     const colQuery = await query(colRef,
         orderBy(ob, 'desc'),
-        limit(5)
+        limit(8)
     );
 
     onSnapshot(colQuery, (querySnapshot) => {

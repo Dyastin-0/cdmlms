@@ -20,7 +20,8 @@
 
 .pin-container .pin {
     display: flex;
-    width: 200px;
+    width: 300px;
+    overflow: hidden;
     flex-direction: column;
     position: relative;
     justify-content: space-between;
@@ -104,7 +105,7 @@
 .pin-container .pin:hover {
     cursor: pointer;
     bottom: 5px;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .loader {

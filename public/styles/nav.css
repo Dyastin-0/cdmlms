@@ -53,6 +53,10 @@
     margin-left: 5px;
 }
 
+.nav-button.black {
+    color: var(--black);
+}
+
 .nav-button.white {
     padding: 10px;
     margin: 0;
@@ -94,6 +98,7 @@
     border-radius: 5px;
 }
 
+
 .nav-button.medium.display-none {
     display: none;
 }
@@ -108,6 +113,12 @@
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
+}
+
+.nav-button.small.mg-btm {
+    margin-bottom: 8px;
+    width: 90px;
+
 }
 
 .nav-button.small.g {

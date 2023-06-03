@@ -128,8 +128,19 @@
                     <input type="text" placeholder="Year of publication" id="add-book-date-publication">
                     <input type="text" placeholder="Category" id="add-book-category">
                     <input type="text" placeholder="ISBN" id="add-book-isbn">
-                    <input type="text" placeholder="Availability" id="add-book-availability">
                     <textarea placeholder="Description" id="add-book-description" cols="30" rows="5"></textarea>
+
+                    <div class="drop-down wd" id="availability-drop-down">
+                        <button class="nav-button small mg-btm" id="availability-by-drop-down-button" aria-label="availability-by-drop-down-button">
+                            <label class="inherit" id="add-book-availability">Available</label>
+                            <i class="fa fa-chevron-down chevron" id="availability-drop-down-chevron"></i>
+                        </button>
+                        <div class="drop-down-menu left fit" id="availability-drop-down-menu">
+                            <button class="nav-button small fit black" id="available">Available</button>
+                            <button class="nav-button small fit black" id="not-available">Not vailable</button>
+                        </div>
+                    </div>
+
                     <button id="add-book-button"> Add </button>
                     <button id="add-book-clear-button"> Clear </button>
                     </div>

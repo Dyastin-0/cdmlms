@@ -49,7 +49,7 @@ function areInputsFilled() {
         datePublication.value,
         category.value,
         isbn.value,
-        availability.value,
+        availability.textContent,
         description.value
     ]
     
@@ -61,15 +61,16 @@ function areInputsFilled() {
 }
 
 function bookInfo() {
+    const bookAvailability = availability.textContent == "Available" ? true : false;
     const info = {
         title: title.value,
         author: author.value,
         description: description.value,
         category: category.value,
-        availability: availability.value,
+        isAvailable: bookAvailability,
         isbn: isbn.value,
-        publication: publication.value,
-        datePublication: datePublication.value,
+        publisher: publication.value,
+        datePublicated: datePublication.value,
         dateAdded: currentDate(),
         views: 0
     }
