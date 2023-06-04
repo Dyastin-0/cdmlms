@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Library Management System of Colegio de Montalban.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/nav.css">
@@ -28,14 +29,14 @@
                 <label class="warning" id="sign-in-warning"> </label>
                 <input type="text" placeholder="Email" id="sign-in-email" enterkeyhint="Enter">
                 <input type="password" placeholder="Password" id="sign-in-password" autocomplete="on" enterkeyhint="Enter">
-                <a class="underlined" id="forgot-password"> Forgot password? </a>
+                <label class="underlined" id="forgot-password"> Forgot password? </label>
                 <button id="sign-in-account-button"> Sign in </button>
                 <label class="or"> or </label>
                 <button id="sign-in-google">	
                     <img src="./images/google_logo.webp" alt="Google logo.">	
                     <label class="lg"> Continue with Google </label>
                 </button>
-                <a class="underlined" id="dont-have-account"> Don't have an account? </a>
+                <a href="./sign-up.html" class="underlined" id="dont-have-account"> Don't have an account? </a>
             </form>
         </div>
 	</div>
@@ -69,5 +70,4 @@
 <!--custom scripts -->
 <script type="module" src="./scripts/features/sign-in.js"></script>
 <script type="module" src="./scripts/features/user-reset-password.js"></script>
-<script src="./scripts/ui/index/sign-in-ui.js"></script>
 </html>
