@@ -103,7 +103,7 @@ export function hideSearchResult() {
 // Recent search items
 export function addRecentSearch(id, input) {
     if (!input) return;
-
+    input = input.toString();
     const key = "cached_searches_" + id;
     const fetched = localStorage.getItem(key);
     const cachedSearches = fetched ? JSON.parse(fetched) : fetched;

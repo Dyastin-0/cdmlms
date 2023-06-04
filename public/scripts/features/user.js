@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/fi
 import { onSnapshot,
     query,
     collection,
-    limit, orderBy, startAt, endAt,
+    limit, orderBy, startAt, endAt, where
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 import { formatBook } from "./books.js";
@@ -34,16 +34,16 @@ const searchByMobile = document.querySelector("#selected-filter-mobile");
 
 sessionCheck();
 bindEvents();
+userDropDownInit();
+bindSearchEvent();
+sexDropDownInit();
+filterSearchInit();
+filterSearchInitMobile();
+displayRecentSearchMobile();
 
 export async function userInit(user, currentUserData) {
     await renderData(user, currentUserData);
     displayRecentSearches(user.uid);
-    displayRecentSearchMobile();
-    userDropDownInit();
-    bindSearchEvent();
-    sexDropDownInit();
-    filterSearchInit();
-    filterSearchInitMobile();
 }
 
 async function renderData(user, currentUserData) {
@@ -81,19 +81,41 @@ export async function searchBooks(by, input) {
     });
 
     const colRef = collection(db, 'books');
-    const colQuery = query(colRef, 
-        orderBy(by),
-        startAt(input),
-        endAt(input  + "\uf8ff")
-    );
+    let colQuery;
+
+    if (by === "author" || by === "category") {
+        input = input.split(",");
+        console.log(input)
+        colQuery = query(colRef,
+            where(by, 'array-contains-any', input)
+        );
+    } else {
+        colQuery = query(colRef,
+            orderBy(by),
+            startAt(input),
+            endAt(input  + "\uf8ff")
+        );
+    }
 
     const unsubscribe = await onSnapshot(colQuery, (querySnapshot) => {
+        searchResult.innerHTML = "";
         if (querySnapshot.size > 0) {
-            searchResult.innerHTML = "";
             querySnapshot.forEach((doc) => {
                 const formattedBook = formatBook(doc.data(), doc.ref);
                 searchResult.appendChild(formattedBook);
             });
+        } else {
+            const tipsLabel = document.createElement("label");
+            const notFound = document.createElement("label");
+            notFound.classList.add("black");
+            notFound.textContent = "Not found.";
+            tipsLabel.classList.add("black");
+            tipsLabel.textContent = "Searching tips: When searching for author or category, it needs to be " +
+                "an exact value, e.g., when you are searching for books with Programming catogery, " +
+                "click the drop-down filters, select Category and input 'Programming' on the search bar, you " +
+                "can also search for multiple categories, like this, 'Programming, Database'.";
+            searchResult.appendChild(notFound);
+            searchResult.appendChild(tipsLabel);
         }
     });
     const subscription = async () => {

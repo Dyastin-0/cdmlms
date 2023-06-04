@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/fi
 
 import { updateQuery } from "../firebase/firestore-api.js";
 
-import { getQueryOneField, getQueryTwoFields, searchQuery } from "../firebase/firestore-api.js";
+import { getQueryOneField, searchQuery } from "../firebase/firestore-api.js";
 import { saveQuery } from "../firebase/firestore-api.js";
 import { currentDateTime } from '../../scripts/utils/date.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
@@ -40,10 +40,14 @@ function bindPinEvent(pin, book, bookRef) {
 
             title.classList.add("title");
             title.textContent = rtBookData.title;
-
+            
             author.classList.add("other-details");
             author.classList.add("weighted");
-            author.textContent = rtBookData.author;
+
+            const authorsLength = rtBookData.author.length - 1;
+            for (let i = 0; i <= authorsLength; i++) {
+                author.textContent += i == authorsLength ? rtBookData.author[i] : rtBookData.author[i] + ", ";
+            }
 
             description.classList.add("other-details");
             description.textContent = rtBookData.description;
@@ -53,7 +57,11 @@ function bindPinEvent(pin, book, bookRef) {
 
             category.classList.add("other-details");
             category.classList.add("italic");
-            category.textContent = rtBookData.category;
+
+            const categoriesLength = rtBookData.category.length - 1;
+            for (let i = 0; i <= categoriesLength; i++) {
+                category.textContent += i == categoriesLength ? rtBookData.category[i] : rtBookData.category[i] + ", ";
+            }
 
             availability.classList.add("other-details");
             availability.classList.add("green");

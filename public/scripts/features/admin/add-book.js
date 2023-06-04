@@ -62,11 +62,13 @@ function areInputsFilled() {
 
 function bookInfo() {
     const bookAvailability = availability.textContent == "Available" ? true : false;
+    const categories = category.value.split(",").map(element => element.trim());
+    const authors = author.value.split(",").map(element => element.trim());
     const info = {
         title: title.value,
-        author: author.value,
+        author: authors,
         description: description.value,
-        category: category.value,
+        category: categories,
         isAvailable: bookAvailability,
         isbn: isbn.value,
         publisher: publication.value,
