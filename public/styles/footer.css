@@ -5,6 +5,7 @@
     justify-content: center;
     flex-wrap: wrap;
     background-color: var(--yellow-solid);
+    box-shadow: 0 0 5px var(--dark-shade-low);
     padding-bottom: 10px;
     padding-top: 10px;
 }

@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--gradient-slanted);
+    background: var(--gradient-slanted-solid);
     background-size: 100% 100%;
     animation: loading 5s ease;
 }

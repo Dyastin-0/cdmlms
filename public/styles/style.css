@@ -19,11 +19,13 @@
     --black: rgb(80, 80, 80);
 
     --gradient-horizontal-solid: linear-gradient(180deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
-    --gradient-vertical: linear-gradient(120deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
-    --gradient-semi-vertical-solid: linear-gradient(90deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
-    --gradient-slanted: linear-gradient(120deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
+    --gradient-horizontal: linear-gradient(180deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
+    --gradient-vertical-solid: linear-gradient(90deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
+    --gradient-vertical: linear-gradient(90deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
+    --gradient-semi-vertical-solid: linear-gradient(120deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
+    --gradient-slanted-solid: linear-gradient(120deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
+    --gradient-slanted: linear-gradient(120deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
 
-    --mobile: 600px;
 }
 
 * {
@@ -58,7 +60,6 @@ body.form {
 }
 
 body.home {
-    background: var(--gradient-slanted);
     background-repeat: no-repeat;
 }
 
@@ -117,13 +118,12 @@ a {
     min-height: 100%;
     display: flex;
     flex-direction: row;
-    background: var(--gradient-slanted);
+    background: var(--gradient-slanted-solid);
 }
 
 .main.admin {
     width: calc(100% - 50px);
     max-height: fit-content;
-    background: var(--gradient-slanted);
     flex-direction: column;
 }
 
@@ -131,7 +131,12 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-self: center;
-    background: var(--gradient-vertical);
+    background: var(--gradient-slanted);
+    animation: loading 4s ease;
+}
+
+.main.landing label {
+    animation: opacity 4s ease;
 }
 
 .content {
@@ -151,9 +156,10 @@ a {
 }
 
 .content .label.small {
+    margin-top: 24px;
     text-align: left;
-    font-weight: 500;
-    font-size: 24px;
+    font-weight: 600;
+    font-size: 32px;
 }
 
 .content .label {
@@ -188,6 +194,9 @@ a {
     .main.admin {
         width: 100%;
     }
+    .main.landing {
+        background: var(--gradient-horizontal);
+    }
 }
 
 @keyframes infiniteRotate {
@@ -209,5 +218,30 @@ a {
         opacity: 1;
         filter: blur(0px);
         transform: translateX(0%);
+    }
+}
+
+@keyframes loading {
+    0%{
+        background-position: 0% 0%;
+        background-size: 120% 120%;
+    }
+    50%{
+        background-position: 100% 100%;
+        background-size: 190% 190%;
+    }
+    100%{
+        background-position: 0% 0%;
+        background-size: 100% 100%;
+    }
+}
+
+@keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+
     }
 }
