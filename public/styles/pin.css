@@ -110,10 +110,53 @@
     height: 230px;
 }
 
+.pin-container .pin.nh:hover {
+    bottom: 0;
+    cursor: default;
+}
+
 .pin-container .pin:hover {
     cursor: pointer;
     bottom: 5px;
     border-radius: 10px;
+}
+
+.pin-container .pin button {
+    flex-basis: calc(50%);
+    height: fit-content;
+    display: flex;
+    background-color: var(--yellow-solid);
+    color: var(--white);
+    padding: 5px;
+    display: flex;
+    margin-left: 10px;
+    justify-content: center;
+    border-width: 0;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.pin-container .pin button:hover {
+    cursor: pointer;
+}
+
+.pin-container .pin .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: calc(100% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.pin-container .pin button.red {
+    background-color: rgb(158, 62, 78);
+}
+
+.pin-container .pin button.yellow {
+    height: fit-content;
+    flex-basis: 100%;
+    background-color: var(--yellow-solid);
 }
 
 .loader {

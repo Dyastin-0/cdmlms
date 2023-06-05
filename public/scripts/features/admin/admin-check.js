@@ -9,7 +9,7 @@ import { adminNavUiInit } from '../../ui/admin/nav-ui.js';
 import { displayProfile } from '../user-profile.js'; 
 import { signOutFirebaseAuth } from '../../firebase/auth-api.js';
 import { displayStatistics } from './statistics.js';
-import { displayRequests } from './issue-requests.js';
+import { displayRequests, displayReturnRequests } from './requests.js';
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -34,6 +34,7 @@ async function bindEvents(user, currentUser) {
     displayProfile(user, currentUser)
     userDropDownInit();
     displayRequests();
+    displayReturnRequests();
     availabilityDropDownInit();
     displayStatistics();
     bindAddBookEvents();

@@ -2,7 +2,7 @@ import { auth } from "../firebase/firebase.js";
 import { onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-import { updateQuery } from "../firebase/firestore-api.js";
+import { getQueryTwoFields, updateQuery } from "../firebase/firestore-api.js";
 
 import { getQueryOneField, searchQuery } from "../firebase/firestore-api.js";
 import { saveQuery } from "../firebase/firestore-api.js";
@@ -88,6 +88,11 @@ function bindPinEvent(pin, book, bookRef) {
                         }
                         const querySnapshot = await getQueryOneField('users', 'email', user.email);
                         const id = querySnapshot.docs[0].data().id;
+                        const querySnapshot1 = await getQueryTwoFields('requests', 'bookIsbn', 'requestedBy', rtBookData.isbn, id);
+                        if (!querySnapshot1.empty) {
+                            toastMessage("You have already sent a request for this book.");
+                            return;
+                        }
                         const process = async () => {
                             sendBookRequest(rtBookData.isbn, rtBookData.title, id);
                         }
@@ -148,10 +153,10 @@ export function formatBook(book, bookRef) {
 
 async function sendBookRequest(isbn, title, id) {
     const requestInfo = {
-        requestID: crypto.randomUUID(),
-        isbn: isbn,
-        title: title,
-        id: id,
+        type: "Request",
+        bookIsbn: isbn,
+        bookTitle: title,
+        requestedBy: id,
         timeRequested: currentDateTime()
     }
     displayProcessDialog("Sending request...");

@@ -1,0 +1,90 @@
+.user-transactions {
+    height: 100%;
+    width: 0px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 15;
+    box-shadow: 0 0 5px var(--dark-shade-low);
+    position: fixed;
+    background-color: var(--white);
+    transition: width 0.3s ease;
+}
+
+.user-transactions .transaction-header {
+    width: calc(100% - 20px);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--black);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-transactions .transaction-container {
+    width: calc(100% - 20px);
+    height: fit-content;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10x;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-transactions .transaction-container .transaction {
+    width: calc(100% - 40px);
+    padding: 10px;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px var(--dark-shade-low);
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+}
+
+.user-transactions .transaction-container .transaction:hover {
+    background-color: var(--dark-shade-low);
+}
+
+.user-transactions .transaction-container .transaction label {
+    margin-bottom: 8px;
+    width: 100%;
+    color: var(--black);    
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.user-transactions .transaction-container .transaction .title {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 550;
+    margin-bottom: 8px;
+}
+
+.user-transactions .transaction-container .transaction button {
+    width: 100%;
+    padding: 5px;
+    color: var(--white);
+    background-color: var(--yellow-solid);
+    border-radius: 5px;
+    border-width: 0;
+}
+
+.user-transactions .transaction-container .transaction button:hover {
+    cursor: pointer;
+}
+
+.user-transactions .transaction-container .transaction button.red {
+    background-color: rgb(158, 62, 78);
+}
+
+
+
+
+
+

@@ -16,6 +16,10 @@ import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { hideSearchResult } from "../ui/home/search-ui.js";
 import { bindSearchEvent, addRecentSearch, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
+import { renderPendingRequests, renderReturnedTransactions, renderTransactions } from "./user-transactions.js";
+
+const transactionModal = document.querySelector("#transactions");
+const notificationButton = document.querySelector("#user-notification");
 
 const searchResult = document.querySelector("#search-results");
 const closeResultButton = document.querySelector("#close-result-button");
@@ -48,6 +52,9 @@ export async function userInit(user, currentUserData) {
 
 async function renderData(user, currentUserData) {
     displayProfile(user, currentUserData);
+    renderTransactions(currentUserData.id);
+    renderPendingRequests(currentUserData.id);
+    renderReturnedTransactions(currentUserData.id);
     await renderBooks();
 }
 
@@ -148,6 +155,16 @@ async function bindEvents() {
         if (e.key === "Enter" && searchInputMobile.value !== '') {
             await searchBooks(searchByMobile.textContent.toLowerCase().trim(), searchInputMobile.value);
         }
+    });
+
+    notificationButton.addEventListener('click', () => {
+        overlay.classList.add("active");
+        transactionModal.style.width = '200px';
+    });
+
+    overlay.addEventListener('click', () => {
+        overlay.classList.remove("active");
+        transactionModal.style.width = '0px';
     });
 }
 

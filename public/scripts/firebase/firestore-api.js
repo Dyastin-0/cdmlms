@@ -10,6 +10,14 @@ import { collection,
     limit, orderBy, startAt, endAt,
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
+export async function deleteQueryFromRef(ref) {
+    try {
+        deleteDoc(ref);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function deleteQuery(collection, firstField, secondField, firstValue, secondValue) {
     try {
         const querySnapshot = await getQueryTwoFields(collection, 

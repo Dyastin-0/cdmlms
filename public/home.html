@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./styles/edit-profile.css">
     <link rel="stylesheet" href="./styles/process-dialog.css">
     <link rel="stylesheet" href="./styles/view-book.css">
+    <link rel="stylesheet" href="./styles/user-transactions.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
@@ -64,7 +65,7 @@
         <div class="wrapper">
             <a href="./admin.html" class="nav-button small-g admin none" id="admin-button"> Admin </a>
             <button class="nav-button medium" id="user-notification" aria-label="user-notification">
-                <i class="fa fa-bell"></i>
+                <i class="fa-solid fa-bell"></i>
             </button>
             <div class="user-drop-down">
                 <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
@@ -248,6 +249,22 @@
     </footer>
 
     <!-- modals -->
+
+    <div class="user-transactions" id="transactions">
+        <label class="transaction-header"> Your books </label>
+        <div class="transaction-container" id="transaction-container">
+
+        </div>
+        <label class="transaction-header"> Pending </label>
+        <div class="transaction-container" id="pending-container">
+
+        </div>
+
+        <label class="transaction-header"> History </label>
+        <div class="transaction-container" id="returned-container">
+
+        </div>
+    </div>
 
     <div class="view-book-modal" id="view-book-modal">
         <div class="header">
