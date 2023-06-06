@@ -112,7 +112,6 @@ async function verifyEmailAndInputs(user) {
             const processMessage = "Setting up your account...";
             displayProcessDialog(processMessage);
             await finalAccountSetup(currentUserRef, user);
-            hideProcessDialog();
         };
         const confirmMessage = "Make sure that all the information you have put in belongs to you. Continue?";
         const toastMessage = "Account set up done!";
@@ -125,7 +124,7 @@ async function finalAccountSetup(currentUserRef, user) {
     const querySnapshot = await getQueryOneField('users', 'email', user.email);
     const currentUser = querySnapshot.docs[0];
     oneTimeSetupModal.classList.remove("active");
-    await userInit(user, currentUser.data());
+    userInit(user, currentUser.data());
     splashScreen.remove();
 }
 

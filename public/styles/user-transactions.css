@@ -13,6 +13,10 @@
     transition: width 0.3s ease;
 }
 
+.user-transactions::-webkit-scrollbar {
+    display: none;
+}
+
 .user-transactions .transaction-header {
     width: calc(100% - 20px);
     font-size: 20px;

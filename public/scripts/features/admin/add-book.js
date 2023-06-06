@@ -1,7 +1,7 @@
 import { toastMessage } from "../../utils/toast-message.js";
 import { saveQuery } from "../../firebase/firestore-api.js";
-import { displayProcessDialog, hideProcessDialog } from '../../utils/process-dialog.js';
-import { currentDate } from '../../utils/date.js';
+import { displayProcessDialog } from '../../utils/process-dialog.js';
+import { currentDateTime } from '../../utils/date.js';
 import { displayConfirmDialog } from "../../utils/confirm-dialog.js";
 
 const addBookForm = document.querySelector("#add-book-form");
@@ -26,12 +26,11 @@ export async function bindAddBookEvents() {
 
     addBookButton.addEventListener('click', async (e) => {
         e.preventDefault();
-        const areInputFilled = areInputsFilled();
-        if (areInputFilled) {
+        const isValid = validateInputs();
+        if (isValid) {
             const proceess = async () => {
                 displayProcessDialog("Adding book...");
                 await saveQuery('books', crypto.randomUUID(), bookInfo());
-                hideProcessDialog();
                 addBookForm.reset();
             }
             const confirmMessage = "You are about to add the book on the catalogue. Continue?";
@@ -39,6 +38,12 @@ export async function bindAddBookEvents() {
             displayConfirmDialog(proceess, confirmMessage, toastText);
         }
     });
+}
+
+function validateInputs() {
+    if (!areInputsFilled()) return false;
+    if (!areInputsValid()) return false;
+    return true;
 }
 
 function areInputsFilled() {
@@ -60,20 +65,34 @@ function areInputsFilled() {
     return true;
 }
 
+function areInputsValid() {
+    if (!/^\d{4}$/.test(datePublication.value)) {
+        toastMessage("Invalid year format.");
+        return false;
+    }
+
+    if (!/^\d{13}$/.test(isbn.value)) {
+        toastMessage("Invalid ISBN format.");
+        return false;
+    }
+    
+    return true;
+}
+
 function bookInfo() {
     const bookAvailability = availability.textContent == "Available" ? true : false;
     const categories = category.value.split(",").map(element => element.trim());
     const authors = author.value.split(",").map(element => element.trim());
     const info = {
-        title: title.value,
+        title: title.value.trim(),
         author: authors,
-        description: description.value,
+        description: description.value.trim(),
         category: categories,
         isAvailable: bookAvailability,
-        isbn: isbn.value,
-        publisher: publication.value,
-        datePublicated: datePublication.value,
-        dateAdded: currentDate(),
+        isbn: isbn.value.trim(),
+        publisher: publication.value.trim(),
+        datePublicated: datePublication.value.trim(),
+        dateAdded: currentDateTime(),
         views: 0
     }
     return info;

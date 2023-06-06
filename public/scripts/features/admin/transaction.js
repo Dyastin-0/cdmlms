@@ -1,7 +1,8 @@
 import { deleteQueryFromRef, saveQuery, updateQuery, getQueryTwoFields, getQueryOneField } from '../../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../../utils/confirm-dialog.js';
-import { displayProcessDialog, hideProcessDialog } from '../../utils/process-dialog.js';
+import { displayProcessDialog } from '../../utils/process-dialog.js';
 import { currentDateTimePlus, currentDateTime } from '../../utils/date.js';
+import { toastMessage } from '../../utils/toast-message.js';
 
 export async function acceptRequest(requestObject, requestRef) {
     const transaction = {
@@ -12,15 +13,21 @@ export async function acceptRequest(requestObject, requestRef) {
         returnDue: currentDateTimePlus(2)
     }
 
+    const bookSnapshot = await getQueryTwoFields('books',
+    'title', 'isbn',  requestObject.bookTitle, requestObject.bookIsbn);
+    const bookData = bookSnapshot.docs[0].data();
+    if (!bookData.isAvailable) {
+        toastMessage("The book is currently not available.");
+        return;
+    }
+
     const process = async () => {
         displayProcessDialog("Saving transaction...");
-        const bookSnapshot = await getQueryTwoFields('books',
-            'title', 'isbn',  requestObject.bookTitle, requestObject.bookIsbn);
         const bookRef = bookSnapshot.docs[0].ref;
         await updateQuery(bookRef, {isAvailable: false});
         await saveQuery('transactions', crypto.randomUUID(), transaction);
         await deleteQueryFromRef(requestRef);
-        hideProcessDialog();
+        
     }
     const confirmMessage = "You are about to accept the book request. Continue?";
     const toastText = "Book request accepted.";
@@ -31,7 +38,6 @@ export async function deleteRequest(requestRef) {
     const process = async () => {
         displayProcessDialog("Deleting request...");
         await deleteQueryFromRef(requestRef);
-        hideProcessDialog();
     }
 
     const confirmMessage = "You are about to delete a request. Continue?";
@@ -41,17 +47,15 @@ export async function deleteRequest(requestRef) {
 
 export async function confirmReturnRequest(request, requestRef) {
     const process = async () => {
-        displayProcessDialog("Confirming request...");
-        console.log(request.bookIsbn)
+        displayProcessDialog("Proccessing...");
         const bookSnapshot = await getQueryOneField('books', 'isbn', request.bookIsbn);
         const trasactionSnapshot = await getQueryOneField('transactions', 'bookIsbn', request.bookIsbn);
-        const transactionRef = trasactionSnapshot.docs[0].ref;
         const bookRef = bookSnapshot.docs[0].ref;
-        console.log(bookRef);
+        const transactionRef = trasactionSnapshot.docs[0].ref;
         await deleteQueryFromRef(requestRef);
         await updateQuery(bookRef, {isAvailable: true});
         await updateQuery(transactionRef, {dateReturned: currentDateTime(), status: "Resolved"});
-        hideProcessDialog();
+        
     };
 
     const confirmMessage = "You are about to accept the return request. Continue?";

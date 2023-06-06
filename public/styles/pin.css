@@ -18,6 +18,10 @@
     padding-bottom: 0;
 }
 
+.pin-container.min-height {
+    min-height: 350px;
+}
+
 .pin-container .pin {
     display: flex;
     width: 200px;
@@ -57,6 +61,11 @@
 
 .pin label.title {
     font-size: 24px;
+    font-weight: 500;
+}
+
+.pin label.other-details {
+    font-size: 14px;
     font-weight: 500;
 }
 

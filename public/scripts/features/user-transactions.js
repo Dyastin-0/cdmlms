@@ -74,11 +74,12 @@ export function formatPendingRequest(request, requestRef) {
     return container;
 }
 
-export function formatReturnedTransaction(transaction) {
+function formatReturnedTransaction(transaction) {
     const container = document.createElement("div");
 
     const title = document.createElement("label");
     const isbn = document.createElement("label");
+    const status = document.createElement("label");
     const dateReturned = document.createElement("label");
 
     container.classList.add("transaction");
@@ -86,10 +87,12 @@ export function formatReturnedTransaction(transaction) {
     title.classList.add("title");
     title.textContent = transaction.bookTitle;
     isbn.textContent = transaction.bookIsbn;
+    status.textContent = `Status: ${transaction.status}`;
     dateReturned.textContent = `Date returned: ${transaction.dateReturned}`;
 
     container.appendChild(title);
     container.appendChild(isbn);
+    container.appendChild(status);
     container.appendChild(dateReturned);
     
     return container;
@@ -112,7 +115,6 @@ async function returnBook(transaction) {
     const process = async () => {
         displayProcessDialog("Sending rending request...");
         await saveQuery('requests', crypto.randomUUID(),transacInfo);
-        hideProcessDialog();
     };
 
     const confirmMessage = `You are about to send a return request for ${transaction.bookTitle}. Continue?`;

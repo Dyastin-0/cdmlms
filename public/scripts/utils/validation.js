@@ -9,7 +9,7 @@ export function isPasswordValid(password) {
         return false;
     }
 
-    const regEx =/^(?!.*([a-zA-Z0-9])\1{3,}).{6,}$/;
+    const regEx = /^(?!.*([a-zA-Z0-9])\1{3,}).{6,}$/;
     if(regEx.test(password)) {
         warning("", "sign-up");
         return true;

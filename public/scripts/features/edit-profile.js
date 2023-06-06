@@ -9,6 +9,7 @@ import { getQueryOneField } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
 import { toastMessage } from '../utils/toast-message.js';
 import { displayProfile } from './user-profile.js';
+import { displayProcessDialog } from "../utils/process-dialog.js";
 
 const openEditProfile = document.querySelector("#edit-profile-button");
 
@@ -38,7 +39,11 @@ function bindEvents() {
     });
 
     closeEditProfile.addEventListener('click', () => {
-        hideEditModal();
+        const process = async () => {
+            hideEditModal();
+        };
+        const confirmMessage = "The changes you made will be lost. Continue?";
+        displayConfirmDialog(process, confirmMessage, null);
     });
 
     editDoneButton.addEventListener('click', async () => {
@@ -53,9 +58,11 @@ function bindEvents() {
         }
 
         const process = async () => {
-            await onAuthStateChanged(auth, async (user) => {
+            onAuthStateChanged(auth, async (user) => {
                 if (user) {
+                    displayProcessDialog("Saving changes...");
                     await processChanges(user, changes);
+                    hideEditModal();
                 }
             });
         }
@@ -66,7 +73,6 @@ function bindEvents() {
 }
 
 async function processChanges(user, changes) {
-    toastMessage("Updating your profile info...");
     const querySnapshot = await getQueryOneField('users', 'email', user.email);
     const userDataRef = querySnapshot.docs[0].ref;
     await saveChanges(user, userDataRef, changes, editedDisplayName.value)
@@ -78,9 +84,6 @@ async function processChanges(user, changes) {
     })
     .catch((error) => {
         console.error(error);
-    })
-    .finally(() => {
-        hideEditModal();
     });
 }
 

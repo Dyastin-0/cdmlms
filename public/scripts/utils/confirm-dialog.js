@@ -1,3 +1,4 @@
+import { hideProcessDialog } from "./process-dialog.js";
 import { toastMessage } from "./toast-message.js";
 
 const confirmDialogModal = document.querySelector("#confirm-dialog-modal");
@@ -21,6 +22,7 @@ export async function displayConfirmDialog(process, message, toastText) {
             toastMessage("Something went wrong, try again.");
         })
         .finally(() => {
+            hideProcessDialog();
             removeEventListeners(yesHandler, clearConfirmEvent);
         });
     }

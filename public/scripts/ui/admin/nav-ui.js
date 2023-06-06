@@ -20,11 +20,11 @@ export function adminNavUiInit() {
 
     leftNavButton.addEventListener('click', () => {
         overlay.classList.add("active");
-        leftNav.style.width = '140px';
+        leftNav.style.width = '160px';
     });
 
     leftNav.onmouseover = () => {
-        leftNav.style.width = '140px';
+        leftNav.style.width = '160px';
         overlay.classList.add("active");
     };
 

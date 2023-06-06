@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./styles/content.css">
     <link rel="stylesheet" href="./styles/add-book-form.css">
     <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/user-transactions.css">
     <link rel="stylesheet" href="./styles/confirm-dialog.css">
     <link rel="stylesheet" href="./styles/process-dialog.css">
     <link rel="stylesheet" href="./styles/edit-profile.css">
@@ -37,7 +38,11 @@
         </div>
         <button id="left-home-button">
             <i class="fas fa-home"></i>
-            <label>Home</label>
+            <label>Dashboard</label>
+        </button>
+        <button id="left-search-button">
+            <i class="fas fa-search"></i>
+            <label>Search</label>
         </button>
         <label>Book</label>
         <button id="left-add-button">
@@ -93,7 +98,7 @@
         <div class="content center-horizontal">
 
             <div class="card active" id="statistics">
-                <label class="card-title">Statistics</label>
+                <label class="card-title">Dashboard</label>
                 <div class="pin-container" id="statistic-pins">
                     <div class="pin wl">
                         <label class="statistics">Total users</label>
@@ -111,6 +116,30 @@
                         <label class="statistics">Total books</label>
                         <label class="data" id="total-books"></label>
                     </div>
+                </div>
+            </div>
+
+            <div class="card fill" id="search-admin">
+                <label class="card-title"> Search for </label>
+                <label class="card-title small"> Users, transactions, or requests </label>
+
+                <div class="wrapper  margin-bottom">
+                    <input class="search white" placeholder="Search" id="search-input-admin" enterkeyhint="Enter">
+                    <div class="drop-down" id="filter-drop-down-admin">
+                        <button class="nav-button small white pointer" id="filter-by-drop-down-button-admin" aria-label="filter-by-drop-down-button-admin">
+                            <label class="white" id="where-filter-admin">Users</label>
+                            <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron-admin"></i>
+                        </button>
+                        <div class="drop-down-menu upper left fit" id="filter-drop-down-menu-admin">
+                            <button class="nav-button small fit" id="user-filter">Users</button>
+                            <button class="nav-button small fit" id="request-filter">Requests</button>
+                            <button class="nav-button small fit" id="transaction-filter">Transactions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pin-container min-height" id="search-result-admin">
+                    
                 </div>
             </div>
 

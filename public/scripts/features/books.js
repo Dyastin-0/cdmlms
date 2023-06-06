@@ -30,6 +30,7 @@ function bindPinEvent(pin, book, bookRef) {
             const author = document.createElement("label");
             const description = document.createElement("label");
             const category = document.createElement("label");
+            const publication = document.createElement("label");
             const availability = document.createElement("label");
             const isbn = document.createElement("label");
 
@@ -63,6 +64,9 @@ function bindPinEvent(pin, book, bookRef) {
                 category.textContent += i == categoriesLength ? rtBookData.category[i] : rtBookData.category[i] + ", ";
             }
 
+            publication.classList.add("other-details");
+            publication.textContent = `${rtBookData.publisher}, ${rtBookData.datePublicated}`;
+
             availability.classList.add("other-details");
             availability.classList.add("green");
             availability.textContent = rtBookData.isAvailable ? "Available" : "Not available";
@@ -94,6 +98,7 @@ function bindPinEvent(pin, book, bookRef) {
                             return;
                         }
                         const process = async () => {
+                            displayProcessDialog("Sending request...");
                             sendBookRequest(rtBookData.isbn, rtBookData.title, id);
                         }
                         const processMessage = `You are about to send an issue request for '${book.title}.' Continue?`;
@@ -107,6 +112,7 @@ function bindPinEvent(pin, book, bookRef) {
             bookDetails.appendChild(author);
             bookDetails.appendChild(description);
             bookDetails.appendChild(category);
+            bookDetails.appendChild(publication);
             bookDetails.appendChild(isbn);
             bookDetails.appendChild(availability);
             bookDetails.appendChild(views);
@@ -159,9 +165,7 @@ async function sendBookRequest(isbn, title, id) {
         requestedBy: id,
         timeRequested: currentDateTime()
     }
-    displayProcessDialog("Sending request...");
     await saveQuery('requests', crypto.randomUUID(), requestInfo);
-    hideProcessDialog();
 }
  
 export function formatBooks(books, bookRef) {

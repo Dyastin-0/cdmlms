@@ -10,9 +10,18 @@ import { displayProfile } from '../user-profile.js';
 import { signOutFirebaseAuth } from '../../firebase/auth-api.js';
 import { displayStatistics } from './statistics.js';
 import { displayRequests, displayReturnRequests } from './requests.js';
+import { adminFilterInit } from '../../ui/admin/search-filter-admin.js';
+import { bindAdminSearchEvents } from './search-admin.js';
+import { sexDropDownInit } from "../../ui/home/sex-drop-down.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
+
+userDropDownInit();
+adminFilterInit();
+sexDropDownInit();
+adminNavUiInit();
+availabilityDropDownInit();
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -31,14 +40,13 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 async function bindEvents(user, currentUser) {
-    displayProfile(user, currentUser)
-    userDropDownInit();
+    displayProfile(user, currentUser);
+    bindAdminSearchEvents();
+
     displayRequests();
     displayReturnRequests();
-    availabilityDropDownInit();
     displayStatistics();
     bindAddBookEvents();
-    adminNavUiInit();
     signOut.addEventListener('click', () => {
         signOutFirebaseAuth();
     });

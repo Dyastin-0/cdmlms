@@ -2,7 +2,7 @@ import { db } from "../../firebase/firebase.js";
 import { onSnapshot,
     query,
     collection,
-    orderBy, where
+    orderBy, where, limit
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 import { acceptRequest, confirmReturnRequest } from "./transaction.js";
@@ -14,7 +14,8 @@ export async function displayRequests() {
     const colRef = collection(db, 'requests');
     const colQuery = query(colRef,
         where('type', '==', 'Request'),
-        orderBy('timeRequested', 'asc')
+        orderBy('timeRequested', 'asc'),
+        limit(10)
     );
 
     onSnapshot(colQuery, (querySnapshot) => {
@@ -30,7 +31,8 @@ export async function displayReturnRequests() {
     const colRef = collection(db, 'requests');
     const colQuery = query(colRef,
         where('type', '==', 'Return'),
-        orderBy('timeRequested', 'asc')    
+        orderBy('timeRequested', 'asc'),
+        limit(10)
     );
 
     onSnapshot(colQuery, (querySnapshot) => {
@@ -42,7 +44,7 @@ export async function displayReturnRequests() {
     });
 }
 
-function formatRequest(requestInfo, requestRef) {
+export function formatRequest(requestInfo, requestRef) {
     const request = document.createElement("div");
 
     const title = document.createElement("label");
@@ -94,7 +96,7 @@ function formatRequest(requestInfo, requestRef) {
     return request;
 }
 
-function formatReturnRequest(requestInfo, requestRef) {
+export function formatReturnRequest(requestInfo, requestRef) {
     const request = document.createElement("div");
 
     const title = document.createElement("label");

@@ -67,7 +67,7 @@ async function displayBooks(container, ob) {
     const colRef = collection(db, 'books');
     const colQuery = await query(colRef,
         orderBy(ob, 'desc'),
-        limit(8)
+        limit(10)
     );
 
     onSnapshot(colQuery, (querySnapshot) => {
@@ -159,7 +159,7 @@ async function bindEvents() {
 
     notificationButton.addEventListener('click', () => {
         overlay.classList.add("active");
-        transactionModal.style.width = '200px';
+        transactionModal.style.width = '250px';
     });
 
     overlay.addEventListener('click', () => {

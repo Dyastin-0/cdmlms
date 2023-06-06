@@ -12,6 +12,13 @@
     justify-content: space-between;
 }
 
+.wrapper.margin-bottom {
+    width: calc(100% - 40px);
+    background-color: var(--dark-shade-low);
+    padding: 10px;
+    margin-bottom: 24px;
+}
+
 .wrapper.padding {
     padding: 5px;
     width: calc(100% - 10px);

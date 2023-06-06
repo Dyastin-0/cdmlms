@@ -1,5 +1,6 @@
 .toast-message {
     width: 250px;
+    max-width: 90%;
     min-height: 40px;
     display: flex;
     align-items: center;

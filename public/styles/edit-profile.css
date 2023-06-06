@@ -1,5 +1,6 @@
 .edit-profile-modal {
-    width: 250px;
+    width: 500px;
+    max-width: 90%;
     height: fit-content;
     background: var(--white);
     top: 50%;
