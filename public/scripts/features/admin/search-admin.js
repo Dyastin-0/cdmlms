@@ -141,7 +141,6 @@ async function searchRequests(input, col) {
 }
 
 async function searchTransanctions(input, col) {
-    console.log(col.toLowerCase())
     const colRef = collection(db, col.toLowerCase());
     const colQuery = await query(colRef,
         orderBy('requestedBy'),
@@ -151,7 +150,6 @@ async function searchTransanctions(input, col) {
 
     onSnapshot(colQuery, (querySnapshot) => {
         searchResultContainer.innerHTML = "";
-        console.log(querySnapshot.size)
         querySnapshot.forEach((doc) => {
             const formatted = formatReturnedTransaction(doc.data());
             searchResultContainer.appendChild(formatted);
