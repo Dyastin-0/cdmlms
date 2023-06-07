@@ -147,8 +147,10 @@ export function formatBook(book, bookRef) {
     title.textContent = book.title;
 
     author.classList.add("author");
-    author.textContent = book.author;
-
+    const authorsLength = book.author.length - 1;
+    for (let i = 0; i <= authorsLength; i++) {
+        author.textContent += i == authorsLength ? book.author[i] : book.author[i] + ", ";
+    }
     pin.appendChild(title);
     pin.appendChild(author);
 
