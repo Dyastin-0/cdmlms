@@ -72,7 +72,6 @@ function handleGlobalClick(e, input, eventRef) {
 
     let isChild = null;
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
-
     if (!isClicked && !isChild) {
         hideRecentSearch();
         document.removeEventListener('click', eventRef);
@@ -159,6 +158,7 @@ function generateRecentSearchItem(key, id, cachedSearches, wrapper, by) {
         button.appendChild(icon);
 
         const buttonId = 'recent-search';
+        icon.id = buttonId;
         button.id = buttonId;
         button.ariaLabel = buttonId;
 
