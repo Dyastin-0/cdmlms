@@ -66,13 +66,11 @@ function addGlobalClick() {
     document.addEventListener('click', globalClickListener);
 }
 
-let i = 0;
 function handleGlobalClick(e, input, eventRef) {
     const isClicked = input.contains(e.target);
     const target = e.target.id ? e.target.id : null;
 
     let isChild = null;
-    console.log(++i);
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild) {
