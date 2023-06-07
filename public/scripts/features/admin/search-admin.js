@@ -60,16 +60,20 @@ function formatReturnedTransaction(transaction) {
     const title = document.createElement("label");
     const isbn = document.createElement("label");
     const status = document.createElement("label");
+    const by = document.createElement("label");
     const date = document.createElement("label");
 
     container.classList.add("pin");
-    container.classList.add("medium");
+    container.classList.add("large");
 
     title.classList.add("title");
     title.textContent = transaction.bookTitle;
 
     isbn.classList.add("other-details");
     isbn.textContent = transaction.bookIsbn;
+
+    by.classList.add("other-details");
+    by.textContent = transaction.requestedBy;
 
     status.classList.add("other-details");
     status.textContent = `Status: ${transaction.status}`;
@@ -81,6 +85,7 @@ function formatReturnedTransaction(transaction) {
 
     container.appendChild(title);
     container.appendChild(isbn);
+    container.appendChild(by);
     container.appendChild(status);
     container.appendChild(date);
 
@@ -90,7 +95,7 @@ function formatReturnedTransaction(transaction) {
 async function searchFor(input, col) {
     if (col === "Transactions") { searchTransanctions(input, col); return }
     if (col === "Requests") { searchRequests(input, col); return }
-    if (col === "Users") { searchUsers(input, col); return }
+    if (col === "Users") { searchUsers(input, col); }
 }
 
 async function searchUsers(input, col) {
