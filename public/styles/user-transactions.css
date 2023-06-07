@@ -34,6 +34,7 @@
     overflow-y: auto;
     padding-left: 10px;
     padding-bottom: 10px;
+    overflow: hidden;
     padding-right: 10x;
     display: flex;
     flex-direction: column;
@@ -41,8 +42,9 @@
 }
 
 .user-transactions .transaction-container .transaction {
-    width: calc(100% - 40px);
+    width: 210px;
     padding: 10px;
+    overflow: hidden;
     display: flex;
     border-radius: 5px;
     box-shadow: 0 5px 5px var(--dark-shade-low);
