@@ -60,22 +60,24 @@ export function bindSearchEvent() {
 
 //global click for the searchInput on desktop view, specifically for hiding its modal
 function addGlobalClick() {
-    document.addEventListener('click', (e) => {
-        handleGlobalClick(e, searchInput)
-    });
+    const globalClickListener = function(e) {
+        handleGlobalClick(e, searchInput, globalClickListener);
+    }
+    document.addEventListener('click', globalClickListener);
 }
 
-function handleGlobalClick(e, input) {
+let i = 0;
+function handleGlobalClick(e, input, eventRef) {
     const isClicked = input.contains(e.target);
     const target = e.target.id ? e.target.id : null;
 
     let isChild = null;
-
+    console.log(++i);
     if (target) isChild = recentSearchModal.querySelector("#" + e.target.id) ? true : false;
 
     if (!isClicked && !isChild) {
         hideRecentSearch();
-        document.removeEventListener('click', handleGlobalClick);
+        document.removeEventListener('click', eventRef);
     }
 }
 

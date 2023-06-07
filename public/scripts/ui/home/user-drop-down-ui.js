@@ -23,7 +23,6 @@ export function userDropDownInit() {
 let isOpen = false;
 function handleGlobalClick(e) {
     const isClicked = userDropDownButton.contains(e.target);
-
     if (!isClicked) {
         hideDropDown(userDropDown);
         isOpen = false;
