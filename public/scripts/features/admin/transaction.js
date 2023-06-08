@@ -1,8 +1,18 @@
+import { db } from "../../firebase/firebase.js";
+import { onSnapshot,
+    query,
+    collection,
+    limit, orderBy
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
 import { deleteQueryFromRef, saveQuery, updateQuery, getQueryTwoFields, getQueryOneField } from '../../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../../utils/confirm-dialog.js';
 import { displayProcessDialog } from '../../utils/process-dialog.js';
 import { currentDateTimePlus, currentDateTime } from '../../utils/date.js';
 import { toastMessage } from '../../utils/toast-message.js';
+import { formatReturnedTransaction } from './search-admin.js';
+
+const mostRecentContainer = document.querySelector("#most-recent-transactions");
 
 export async function acceptRequest(requestObject, requestRef) {
     const transaction = {
@@ -61,4 +71,21 @@ export async function confirmReturnRequest(request, requestRef) {
     const confirmMessage = "You are about to accept the return request. Continue?";
     const toastText = "Book received.";
     displayConfirmDialog(process, confirmMessage, toastText);
+}
+
+export async function displayMostRecentTransactions() {
+    const colRef = collection(db, 'transactions');
+    const colQuery = await query(colRef, 
+           orderBy('dateReturned'),
+           limit(10)
+    );
+
+    onSnapshot(colQuery, (querySnapshot) => {
+        mostRecentContainer.innerHTML = "";
+        console.log(querySnapshot.size)
+        querySnapshot.forEach((doc) => {
+            const formatted = formatReturnedTransaction(doc.data());
+            mostRecentContainer.appendChild(formatted);
+        });
+    });
 }

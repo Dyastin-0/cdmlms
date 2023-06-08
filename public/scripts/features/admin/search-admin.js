@@ -55,7 +55,7 @@ function formatUser(user) {
     return container;
 }
 
-function formatReturnedTransaction(transaction) {
+export function formatReturnedTransaction(transaction) {
     const container = document.createElement("div");
 
     const title = document.createElement("label");

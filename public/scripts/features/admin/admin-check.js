@@ -18,6 +18,7 @@ import { filterSearchInit } from '../../ui/home/search-filter-drop-down.js';
 import { editBookInit } from "./edit-book.js";
 import { deleteFilterSearchInit } from "../../ui/admin/search-filter-delete-drop-down.js";
 import { delebookInit } from "./delete-book.js";
+import { displayMostRecentTransactions } from '../admin/transaction.js';
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -53,6 +54,7 @@ async function bindEvents(user, currentUser) {
     editBookInit();
     displayRequests();
     delebookInit();
+    displayMostRecentTransactions();
     displayReturnRequests();
     displayStatistics();
     bindAddBookEvents();
