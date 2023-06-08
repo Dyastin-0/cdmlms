@@ -63,7 +63,7 @@ function formatBookToDelete(book, bookRef) {
             displayProcessDialog("Deleting book...");
             await deleteBook(bookRef);
         }
-        const confirmMessage = `You are about to delete ${book.title} permanently. Continue?`;
+        const confirmMessage = `You are about to delete '${book.title}' permanently. Continue?`;
         const toastText = "Book deleted.";
         displayConfirmDialog(process, confirmMessage, toastText);
     });
