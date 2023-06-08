@@ -15,12 +15,16 @@ const searchCard = document.querySelector("#search-admin");
 const editButton = leftNav.querySelector("#left-edit-button");
 const editCard = document.querySelector("#edit-book");
 
+const deleteButton = leftNav.querySelector("#left-delete-button");
+const deleteCard = document.querySelector("#delete-book");
+
 const cards = [
     homeCard,
     addBookCard,
     requestCard,
     searchCard,
-    editCard
+    editCard,
+    deleteCard
 ];
 
 bindEvents();
@@ -56,10 +60,16 @@ function bindEvents() {
             editCard.classList.add("active");
         }
     });
+    deleteButton.addEventListener('click', () => {
+        if (!deleteCard.classList.contains("active")) {
+            hideCards();
+            deleteCard.classList.add("active");
+        }
+    });
 }
 
 function hideCards() {
     cards.forEach((card) => {
-        card.classList.remove("active");
+        if (card.classList.contains("active")) card.classList.remove("active");
     });
 }

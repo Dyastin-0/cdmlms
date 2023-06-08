@@ -8,6 +8,7 @@ import { collection,
 import { displayConfirmDialog } from '../../utils/confirm-dialog.js';
 import { currentDateTime } from '../../utils/date.js';
 import { toastMessage } from '../../utils/toast-message.js';
+import { displayProcessDialog } from '../../utils/process-dialog.js';
 
 const overlay = document.querySelector("#third-overlay");
 
@@ -126,7 +127,6 @@ function formatBookToEdit(book, bookRef) {
 }
 
 async function searchCatalogueFor(input, by) {
-    console.log(input, by)
     const colRef = collection(db, 'books');
     let colQuery;
 
@@ -143,10 +143,8 @@ async function searchCatalogueFor(input, by) {
         );
     }
     onSnapshot(colQuery, (querySnapshot) => {
-        console.log(querySnapshot.docs)
         editBookContainer.innerHTML = "";
         querySnapshot.forEach((doc) => {
-            console.log(doc.data())
             const formatted = formatBookToEdit(doc.data(), doc.ref);
             editBookContainer.appendChild(formatted);
         });

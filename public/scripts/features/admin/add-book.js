@@ -33,7 +33,7 @@ export async function bindAddBookEvents() {
                 await saveQuery('books', crypto.randomUUID(), bookInfo());
                 addBookForm.reset();
             }
-            const confirmMessage = "You are about to add the book on the catalogue. Continue?";
+            const confirmMessage = `You are about to add '${title.value.trim()}' on the catalogue. Continue?`;
             const toastText = "Book added.";
             displayConfirmDialog(proceess, confirmMessage, toastText);
         }
