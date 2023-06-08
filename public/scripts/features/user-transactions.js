@@ -8,7 +8,7 @@ import { onSnapshot,
 import { deleteRequest } from "./admin/transaction.js";
 import { getQueryTwoFields, saveQuery } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
-import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
+import { displayProcessDialog } from '../utils/process-dialog.js';
 import { currentDateTime } from "../utils/date.js";
 import { toastMessage } from "../utils/toast-message.js";
 

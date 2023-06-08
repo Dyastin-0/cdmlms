@@ -18,7 +18,7 @@ import { filterSearchInit } from '../../ui/home/search-filter-drop-down.js';
 import { editBookInit } from "./edit-book.js";
 import { deleteFilterSearchInit } from "../../ui/admin/search-filter-delete-drop-down.js";
 import { delebookInit } from "./delete-book.js";
-import { displayMostRecentTransactions } from '../admin/transaction.js';
+import { displayMostRecentTransactions } from '../admin/records.js';
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");

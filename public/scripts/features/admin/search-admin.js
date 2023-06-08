@@ -55,7 +55,7 @@ function formatUser(user) {
     return container;
 }
 
-export function formatReturnedTransaction(transaction) {
+export function formatReturnedTransactionAdmin(transaction) {
     const container = document.createElement("div");
 
     const title = document.createElement("label");
@@ -157,7 +157,7 @@ async function searchTransanctions(input, col) {
     onSnapshot(colQuery, (querySnapshot) => {
         searchResultContainer.innerHTML = "";
         querySnapshot.forEach((doc) => {
-            const formatted = formatReturnedTransaction(doc.data());
+            const formatted = formatReturnedTransactionAdmin(doc.data());
             searchResultContainer.appendChild(formatted);
         });
     });
