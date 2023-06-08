@@ -171,6 +171,10 @@
     background-color: rgb(158, 62, 78);
 }
 
+.pin-container .pin button.red.fill {
+    flex-basis: 100%;
+}
+
 .pin-container .pin button.yellow {
     height: fit-content;
     flex-basis: 100%;

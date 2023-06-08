@@ -16,6 +16,8 @@ import { sexDropDownInit } from "../../ui/home/sex-drop-down.js";
 import { editAvailabilityDropDownInit } from "../../ui/admin/edit-availability-drop-down.js";
 import { filterSearchInit } from '../../ui/home/search-filter-drop-down.js';
 import { editBookInit } from "./edit-book.js";
+import { deleteFilterSearchInit } from "../../ui/admin/search-filter-delete-drop-down.js";
+import { delebookInit } from "./delete-book.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -23,6 +25,7 @@ const signOut = document.querySelector("#sign-out");
 userDropDownInit();
 adminFilterInit();
 sexDropDownInit();
+deleteFilterSearchInit();
 filterSearchInit();
 editAvailabilityDropDownInit();
 adminNavUiInit();
@@ -49,6 +52,7 @@ async function bindEvents(user, currentUser) {
     bindAdminSearchEvents();
     editBookInit();
     displayRequests();
+    delebookInit();
     displayReturnRequests();
     displayStatistics();
     bindAddBookEvents();

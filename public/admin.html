@@ -120,6 +120,27 @@
                 </div>
             </div>
 
+            <div class="card" id="delete-book">
+                <label class="card-title">Delete</label>
+                <label class="card-title small">search for book to remove</label>
+                <div class="wrapper margin-bottom">
+                    <input class="search white" placeholder="Search" id="search-input-delete-book" enterkeyhint="Enter">
+                    <div class="drop-down" id="delete-filter-drop-down">
+                        <button class="nav-button small white pointer wpx" id="delete-filter-by-drop-down-button" aria-label="delete-filter-by-drop-down-button">
+                            <label class="inherit" id="delete-selected-filter">Title</label>
+                            <i class="fa fa-chevron-down chevron" id="delete-filter-drop-down-chevron"></i>
+                        </button>
+                        <div class="drop-down-menu left fit" id="delete-filter-drop-down-menu">
+                            <button class="nav-button small fit" id="delete-author-filter"> Title </button>
+                            <button class="nav-button small fit" id="delete-title-filter"> Author </button>
+                            <button class="nav-button small fit" id="delete-category-filter"> Category </button>
+                            <button class="nav-button small fit" id="delete-isbn-filter"> ISBN </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pin-container min-height" id="delete-book-pins-container"></div>
+            </div>
+
             <div class="card" id="edit-book">
                 <label class="card-title">Edit</label>
                 <label class="card-title small">search for book to modify</label>

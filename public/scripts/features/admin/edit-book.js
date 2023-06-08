@@ -91,7 +91,8 @@ function formatBookToEdit(book, bookRef) {
             const isValid = validateInputs();
             if (isValid) {
                 const process = async () => {
-                    save(bookRef);
+                    displayProcessDialog("Updating book...");
+                    await save(bookRef);
                     overlay.classList.remove("active");
                     editBookModal.classList.remove("active");
                 };
@@ -131,7 +132,6 @@ async function searchCatalogueFor(input, by) {
 
     if (by === "author" || by === "category") {
         input = input.split(",");
-        console.log(input)
         colQuery = query(colRef,
             where(by, 'array-contains-any', input)
         );
@@ -153,7 +153,7 @@ async function searchCatalogueFor(input, by) {
     });
 }
 
-function save(bookRef) {
+async function save(bookRef) {
     const bookAvailability = availability.textContent == "Available" ? true : false;
     const categories = category.value.split(",").map(element => element.trim());
     const authors = author.value.split(",").map(element => element.trim());

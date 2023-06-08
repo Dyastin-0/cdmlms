@@ -92,7 +92,6 @@ export async function searchBooks(by, input) {
 
     if (by === "author" || by === "category") {
         input = input.split(",");
-        console.log(input)
         colQuery = query(colRef,
             where(by, 'array-contains-any', input)
         );
