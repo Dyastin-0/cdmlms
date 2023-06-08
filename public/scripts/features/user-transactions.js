@@ -36,7 +36,6 @@ export function formatTransaction(transaction, transactionRef) {
         returnBook(transaction, transactionRef);
     });
 
-
     container.appendChild(title);
     container.appendChild(isbn);
     container.appendChild(dueReturn);

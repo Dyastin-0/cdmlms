@@ -7,7 +7,6 @@ const searchBy = document.querySelector("#selected-filter");
 const recentSearchModal = document.querySelector("#recent-searches-modal");
 const recentSearch = document.querySelector("#recent-searches");
 const searchModal = document.querySelector("#search-modal");
-const searchResult = document.querySelector("#search-results");
 const overlay = document.querySelector("#overlay");
 
 //mobile view ui elements
@@ -53,9 +52,6 @@ export function bindSearchEvent() {
         hideSearchResult();
         overlay.classList.remove("active");
     });
-
-    //global
-
 }
 
 //global click for the searchInput on desktop view, specifically for hiding its modal

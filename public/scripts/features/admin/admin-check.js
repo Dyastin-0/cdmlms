@@ -13,6 +13,9 @@ import { displayRequests, displayReturnRequests } from './requests.js';
 import { adminFilterInit } from '../../ui/admin/search-filter-admin.js';
 import { bindAdminSearchEvents } from './search-admin.js';
 import { sexDropDownInit } from "../../ui/home/sex-drop-down.js";
+import { editAvailabilityDropDownInit } from "../../ui/admin/edit-availability-drop-down.js";
+import { filterSearchInit } from '../../ui/home/search-filter-drop-down.js';
+import { editBookInit } from "./edit-book.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -20,6 +23,8 @@ const signOut = document.querySelector("#sign-out");
 userDropDownInit();
 adminFilterInit();
 sexDropDownInit();
+filterSearchInit();
+editAvailabilityDropDownInit();
 adminNavUiInit();
 availabilityDropDownInit();
 
@@ -42,7 +47,7 @@ onAuthStateChanged(auth, async (user) => {
 async function bindEvents(user, currentUser) {
     displayProfile(user, currentUser);
     bindAdminSearchEvents();
-
+    editBookInit();
     displayRequests();
     displayReturnRequests();
     displayStatistics();

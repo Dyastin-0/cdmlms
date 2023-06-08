@@ -12,11 +12,15 @@ const requestCard = document.querySelector("#issue-requests");
 const searchButton = document.querySelector("#left-search-button");
 const searchCard = document.querySelector("#search-admin");
 
+const editButton = leftNav.querySelector("#left-edit-button");
+const editCard = document.querySelector("#edit-book");
+
 const cards = [
     homeCard,
     addBookCard,
     requestCard,
-    searchCard
+    searchCard,
+    editCard
 ];
 
 bindEvents();
@@ -44,6 +48,12 @@ function bindEvents() {
         if (!searchCard.classList.contains("active")) {
             hideCards();
             searchCard.classList.add("active");
+        }
+    });
+    editButton.addEventListener('click', () => {
+        if (!editCard.classList.contains("active")) {
+            hideCards();
+            editCard.classList.add("active");
         }
     });
 }

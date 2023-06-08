@@ -24,13 +24,14 @@
     <link rel="stylesheet" href="./styles/splash-screen.css">
     <link rel="stylesheet" href="./styles/toast-message.css">
     <link rel="stylesheet" href="./styles/set-up.css">
+    <link rel="stylesheet" href="./styles/edit-book-form.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title>Admin</title>
 </head>
 
 <body class="admin">
 
-    <div class="dashboard" tabindex="0" id="left-nav">
+    <div class="dashboard" id="left-nav">
         <div class="header">
             <a href="./" class="nav-button large n-m bg-none" id="index-button">
                 <img class="logo n-p" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
@@ -119,14 +120,38 @@
                 </div>
             </div>
 
-            <div class="card fill" id="search-admin">
+            <div class="card" id="edit-book">
+                <label class="card-title">Edit</label>
+                <label class="card-title small">search for book to modify</label>
+                
+                <div class="wrapper margin-bottom">
+                    <input class="search white" placeholder="Search" id="search-input-edit-book" enterkeyhint="Enter">
+                    <div class="drop-down" id="filter-drop-down">
+                        <button class="nav-button small white pointer wpx" id="filter-by-drop-down-button" aria-label="filter-by-drop-down-button">
+                            <label class="inherit" id="selected-filter">Title</label>
+                            <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron"></i>
+                        </button>
+                        <div class="drop-down-menu left fit" id="filter-drop-down-menu">
+                            <button class="nav-button small fit" id="author-filter"> Title </button>
+                            <button class="nav-button small fit" id="title-filter"> Author </button>
+                            <button class="nav-button small fit" id="category-filter"> Category </button>
+                            <button class="nav-button small fit" id="isbn-filter"> ISBN </button>
+                        </div>
+                    </div>
+                </div>                
+                <div class="pin-container pm-none" id="edit-book-pins"></div>
+                <label class="card-title">Recently added books</label>
+                <div class="pin-container" id="edit-book-pins-recent"></div>
+            </div>
+
+            <div class="card" id="search-admin">
                 <label class="card-title"> Search for </label>
                 <label class="card-title small"> Users, transactions, or requests </label>
 
-                <div class="wrapper  margin-bottom">
+                <div class="wrapper margin-bottom">
                     <input class="search white" placeholder="Search" id="search-input-admin" enterkeyhint="Enter">
                     <div class="drop-down" id="filter-drop-down-admin">
-                        <button class="nav-button small white pointer" id="filter-by-drop-down-button-admin" aria-label="filter-by-drop-down-button-admin">
+                        <button class="nav-button small white pointer wpx" id="filter-by-drop-down-button-admin" aria-label="filter-by-drop-down-button-admin">
                             <label class="white" id="where-filter-admin">Users</label>
                             <i class="fa fa-chevron-down chevron" id="filter-drop-down-chevron-admin"></i>
                         </button>
@@ -153,7 +178,6 @@
             <div class="card" id="add-book">
                 <label class="card-title"> Add book </label>
                 <form class="add-book-form" id="add-book-form">
-                    <label class="warning" id="edit-warning"></label>
                     <input type="text" placeholder="Title" id="add-book-title">
                     <input type="text" placeholder="Author" id="add-book-author">
                     <input type="text" placeholder="Publisher" id="add-book-publication">
@@ -211,7 +235,45 @@
     <!-- Modals -->
 
     <div class="overlay" id="overlay"></div>
-    <div class="overlay" id="second-overlay"></div>
+    <div class="overlay second" id="second-overlay"></div>
+    <div class="overlay second" id="third-overlay"></div>
+
+    <div class="edit-book-modal" id="edit-book-modal">
+        <div class="header">
+            <label>Modify book</label>
+            <button class="fas fa-close" id="close-edit-book-modal"></button>
+        </div>
+
+        <form class="add-book-form" id="edit-book-form">
+            <input type="text" placeholder="Title" id="edit-book-title">
+            <input type="text" placeholder="Author" id="edit-book-author">
+            <input type="text" placeholder="Publisher" id="edit-book-publication">
+            <input type="text" placeholder="Year of publication" id="edit-book-date-publication">
+            <input type="text" placeholder="Category" id="edit-book-category">
+            <input type="text" placeholder="ISBN" id="edit-book-isbn">
+            <textarea placeholder="Description" id="edit-book-description" cols="30" rows="5"></textarea>
+
+            <div class="drop-down wd" id="edit-availability-drop-down">
+                <button class="nav-button small mg-btm" id="edit-availability-by-drop-down-button" aria-label="edit-availability-by-drop-down-button">
+                    <label class="inherit" id="edit-book-availability">Available</label>
+                    <i class="fa fa-chevron-down chevron" id="edit-availability-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu left fit" id="edit-availability-drop-down-menu">
+                    <button class="nav-button small fit black" id="edit-available">Available</button>
+                    <button class="nav-button small fit black" id="edit-not-available">Not vailable</button>
+                </div>
+            </div>
+
+            <button id="save-book-button"> Save </button>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="toast-message" id="toast-message-modal">
+        <p class="message" id="toast-message"></p>
+        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button">  </button>
+    </div>
 
     <div class="confirm-dialog" id="confirm-dialog-modal">
         <div class="header">

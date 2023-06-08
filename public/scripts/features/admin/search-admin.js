@@ -7,9 +7,10 @@ import { onSnapshot,
 
 import { formatRequest, formatReturnRequest } from "./requests.js";
 
-const searchResultContainer = document.querySelector("#search-result-admin");
-const searchInput = document.querySelector("#search-input-admin");
-const searchWhere = document.querySelector("#where-filter-admin");
+const searchCard = document.querySelector("#search-admin");
+const searchResultContainer = searchCard.querySelector("#search-result-admin");
+const searchInput = searchCard.querySelector("#search-input-admin");
+const searchWhere = searchCard.querySelector("#where-filter-admin");
 
 export function bindAdminSearchEvents() {
     searchInput.addEventListener('keyup', (e) => {

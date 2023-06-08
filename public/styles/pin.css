@@ -18,6 +18,11 @@
     padding-bottom: 0;
 }
 
+.pin-container.pm-none {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 .pin-container.min-height {
     min-height: 350px;
 }
@@ -67,6 +72,10 @@
 .pin label.other-details {
     font-size: 14px;
     font-weight: 500;
+}
+
+.pin label.other-details.italic {
+    font-style: italic;
 }
 
 .pin label.isbn {
