@@ -105,13 +105,12 @@ function formatBookToEdit(book, bookRef) {
         }
     
         saveButton.addEventListener('click', saveProcess);
-    
-        closeModal.addEventListener('click', () => {
-            hideModal(saveProcess);
-        });
-        overlay.addEventListener('click', () => {
-            hideModal(saveProcess);
-        });
+
+        const close = async () => {
+            hideModal(saveProcess, close);
+        }
+        closeModal.addEventListener('click', close);
+        overlay.addEventListener('click', close);
 
     }
     
@@ -233,14 +232,14 @@ function bindEvents() {
     });
 }
 
-function hideModal(eventRef) {
+function hideModal(eventRef, closeRef) {
     const process = async () => {
         overlay.classList.remove("active");
         editBookModal.classList.remove("active");
         editBookForm.reset();
         saveButton.removeEventListener('click', eventRef);
-        overlay.removeEventListener('click', eventRef);
-        closeModal.removeEventListener('click', eventRef);
+        overlay.removeEventListener('click', closeRef);
+        closeModal.removeEventListener('click', closeRef);
     }
     const confirmMessage = "The changes you made will be lost. Continue?";
     displayConfirmDialog(process, confirmMessage, null);

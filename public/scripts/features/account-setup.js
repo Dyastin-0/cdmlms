@@ -5,6 +5,7 @@ import { onAuthStateChanged,
 
 import { signInFirebaseAuth } from "../firebase/auth-api.js";
 import { saveQuery } from "../firebase/firestore-api.js";
+import { currentDateTime } from "../utils/date.js";
 
 export async function initialAccoutSetUpAndEmailVerification(email, password) {
     await signInFirebaseAuth(email, password);
@@ -18,5 +19,9 @@ export async function initialAccoutSetUpAndEmailVerification(email, password) {
 }
 
 export async function initialAccountSetUp(email) {
-    await saveQuery('users', crypto.randomUUID(), {email: email, newUser: true});
+    await saveQuery('users', crypto.randomUUID(), {
+        email: email,
+        isNewUser: true,
+        timeCreated: currentDateTime()
+    });
 }

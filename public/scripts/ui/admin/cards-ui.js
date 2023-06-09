@@ -21,6 +21,9 @@ const deleteCard = document.querySelector("#delete-book");
 const recordsButton = leftNav.querySelector("#left-records-button");
 const recordsCard = document.querySelector("#records");
 
+const usersButton = leftNav.querySelector("#left-users-button");
+const usersCard = document.querySelector("#recent-users");
+
 const cards = [
     homeCard,
     addBookCard,
@@ -28,7 +31,8 @@ const cards = [
     searchCard,
     editCard,
     deleteCard,
-    recordsCard
+    recordsCard,
+    usersCard
 ];
 
 bindEvents();
@@ -74,6 +78,12 @@ function bindEvents() {
         if (!recordsCard.classList.contains("active")) {
             hideCards();
             recordsCard.classList.add("active");
+        }
+    });
+    usersButton.addEventListener('click', () => {
+        if (!usersCard.classList.contains("active")) {
+            hideCards();
+            usersCard.classList.add("active");
         }
     });
 }

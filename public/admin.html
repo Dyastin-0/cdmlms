@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="./styles/toast-message.css">
     <link rel="stylesheet" href="./styles/set-up.css">
     <link rel="stylesheet" href="./styles/edit-book-form.css">
+    <link rel="stylesheet" href="./styles/edit-user.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title>Admin</title>
 </head>
@@ -118,6 +119,12 @@
                         <label class="data" id="total-books"></label>
                     </div>
                 </div>
+            </div>
+
+            <div class="card" id="recent-users">
+                <label class="card-title">Users</label>
+                <label class="card-title small">recently created users</label>
+                <div class="pin-container" id="most-recent-user-pins"></div>
             </div>
 
             <div class="card" id="records">
@@ -264,11 +271,33 @@
     <div class="overlay" id="overlay"></div>
     <div class="overlay second" id="second-overlay"></div>
     <div class="overlay second" id="third-overlay"></div>
+    <div class="overlay second" id="fourth-overlay"></div>
+
+    <div class="edit-user-modal" id="edit-user-modal">
+        <div class="header">
+            <label class="black">Edit user</label>
+            <button class="fas fa-close black" id="close-edit-user-modal" aria-label="close-edit-user-label"></button>
+        </div>
+        <form class="edit-user-form" id="edit-user-form">
+            <input type="text" id="edit-user-id">
+            <div class="drop-down wd" id="edit-role-drop-down">
+                <button class="nav-button small g" id="edit-role-by-drop-down-button" aria-label="edit-role-by-drop-down-button">
+                    <label class="inherit" id="edit-user-role">User</label>
+                    <i class="fa fa-chevron-down chevron" id="edit-role-drop-down-chevron"></i>
+                </button>
+                <div class="drop-down-menu left fit" id="edit-role-drop-down-menu">
+                    <button class="nav-button small fit black" id="edit-admin">Admin</button>
+                    <button class="nav-button small fit black" id="edit-user">User</button>
+                </div>
+            </div>
+            <button class="button" id="save-user-changes"> Save </button>
+        </form>
+    </div>
 
     <div class="edit-book-modal" id="edit-book-modal">
         <div class="header">
-            <label>Modify book</label>
-            <button class="fas fa-close" id="close-edit-book-modal"></button>
+            <label>Edit book</label>
+            <button class="fas fa-close" id="close-edit-book-modal" aria-label="close-edit-book-modal"></button>
         </div>
 
         <form class="add-book-form" id="edit-book-form">
@@ -351,7 +380,7 @@
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="display-verified"> </label>
         <div class="footer">
-            <button class="black" id="edit-profile-button"> Edit profile </button>
+            <button id="edit-profile-button"> Edit profile </button>
         </div>
     </div>
 
@@ -385,7 +414,7 @@
             <input class="black" type="text" placeholder="Display name" id="edit-display-name">
         </form>
         <div class="footer">
-            <button class="black" id="done-edit"> Done </button>
+            <button id="done-edit"> Done </button>
         </div>
     </div>
 

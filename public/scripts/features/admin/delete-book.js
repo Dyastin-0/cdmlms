@@ -71,6 +71,7 @@ function formatBookToDelete(book, bookRef) {
     pin.appendChild(title);
     pin.appendChild(author);
     pin.appendChild(category);
+    pin.appendChild(isbn);
     pin.appendChild(wrapper);
 
     return pin;

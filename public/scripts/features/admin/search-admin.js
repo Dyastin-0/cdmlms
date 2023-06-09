@@ -4,13 +4,28 @@ import { onSnapshot,
     collection,
     orderBy, startAt, endAt
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import { updateQuery } from "../../firebase/firestore-api.js";
 
 import { formatRequest, formatReturnRequest } from "./requests.js";
+import { isIdValid } from "../../utils/validation.js";
+import { displayProcessDialog } from "../../utils/process-dialog.js";
+import { displayConfirmDialog } from "../../utils/confirm-dialog.js";
+import { toastMessage } from "../../utils/toast-message.js";
 
 const searchCard = document.querySelector("#search-admin");
 const searchResultContainer = searchCard.querySelector("#search-result-admin");
 const searchInput = searchCard.querySelector("#search-input-admin");
 const searchWhere = searchCard.querySelector("#where-filter-admin");
+
+const editUserModal = document.querySelector("#edit-user-modal");
+const overlay = document.querySelector("#fourth-overlay");
+
+const editUserForm = editUserModal.querySelector("#edit-user-form");
+const userId = editUserForm.querySelector("#edit-user-id");
+const userRole = editUserForm.querySelector("#edit-user-role");
+const closeEditUSer = editUserModal.querySelector("#close-edit-user-modal");
+
+const saveUserChanges = editUserForm.querySelector("#save-user-changes");
 
 export function bindAdminSearchEvents() {
     searchInput.addEventListener('keyup', (e) => {
@@ -20,7 +35,7 @@ export function bindAdminSearchEvents() {
     });
 }
 
-function formatUser(user) {
+export function formatUser(user, userRef) {
     const container = document.createElement("div");
 
     const name = document.createElement("label");
@@ -29,8 +44,12 @@ function formatUser(user) {
     const id = document.createElement("label");
     const courseYear = document.createElement("label");
 
+    const wrapper = document.createElement("div");
+    const editButton = document.createElement("button");
+
     container.classList.add("pin");
-    container.classList.add("small");
+    container.classList.add("medium");
+    container.classList.add("nh");
 
     name.classList.add("title");
     name.textContent = `${user.firstName} ${user.middleName} ${user.lastName}`;
@@ -47,12 +66,74 @@ function formatUser(user) {
     courseYear.classList.add("other-details");
     courseYear.textContent = `${user.course}, ${user.year} year`;
 
+    const process = async () => {
+        editUserModal.classList.add("active");
+        overlay.classList.add("active");
+        userId.value = user.id;
+        userRole.textContent = user.isAdmin? "Admin" : "User";
+
+        const saveProcess = async function(e) {
+            e.preventDefault();
+            if (/^\d{2}-\d{5}$/.test(userId.value)) {
+                const process = async () => {
+                    displayProcessDialog("Proccessing...");
+                    updateUser(userRef);
+                    overlay.classList.remove("active");
+                    editUserModal.classList.remove("active");
+                }
+                const confirmMessage = "Save the changes you made?";
+                const toastText = "User updated.";
+                displayConfirmDialog(process, confirmMessage, toastText);
+            } else {
+                toastMessage("Invalid ID format.");
+            }
+        }
+        saveUserChanges.addEventListener('click', saveProcess);
+
+        const closeEvent = async () => {
+            hideEditUSerModal(saveProcess, closeEvent);
+        }
+        closeEditUSer.addEventListener('click', closeEvent);
+        overlay.addEventListener('click', closeEvent);
+    }
+
+    wrapper.classList.add("wrapper");
+    editButton.classList.add("yellow");
+    editButton.textContent = "Edit";
+
+    editButton.addEventListener('click', process);
+
+    wrapper.appendChild(editButton);
+
     container.appendChild(name);
     container.appendChild(gender);
     container.appendChild(id);
     container.appendChild(courseYear);
+    container.appendChild(wrapper);
 
     return container;
+}
+
+function hideEditUSerModal(eventRef, closeRef) {
+    const process = async () => {
+        overlay.classList.remove("active");
+        editUserModal.classList.remove("active");
+        editUserForm.reset();
+        saveUserChanges.removeEventListener('click', eventRef);
+        closeEditUSer.removeEventListener('click', closeRef);
+        overlay.removeEventListener('click', closeRef);
+    }
+    const confirmMessage = "The changes you made will be lost. Continue?";
+    displayConfirmDialog(process, confirmMessage, null);
+} 
+
+async function updateUser(userRef) {
+    const isAdmin = userRole.textContent === "Admin" ? true : false;
+    const changes = {
+        id: userId.value, 
+        isAdmin: isAdmin
+    };
+    updateQuery(userRef, changes);
 }
 
 export function formatReturnedTransactionAdmin(transaction) {
@@ -110,7 +191,7 @@ async function searchUsers(input, col) {
     onSnapshot(colQuery, (querySnapshot) => {
         searchResultContainer.innerHTML = "";
         querySnapshot.forEach((doc) => {
-            const formatted = formatUser(doc.data());
+            const formatted = formatUser(doc.data(), doc.ref);
             searchResultContainer.appendChild(formatted);
         });
     });

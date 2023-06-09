@@ -19,6 +19,8 @@ import { editBookInit } from "./edit-book.js";
 import { deleteFilterSearchInit } from "../../ui/admin/search-filter-delete-drop-down.js";
 import { delebookInit } from "./delete-book.js";
 import { displayMostRecentTransactions } from '../admin/records.js';
+import { editRoleDropDownInit } from "../../ui/admin/edit-role-drop-down.js";
+import { displayRecentUsers } from "./users.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOut = document.querySelector("#sign-out");
@@ -27,6 +29,7 @@ userDropDownInit();
 adminFilterInit();
 sexDropDownInit();
 deleteFilterSearchInit();
+editRoleDropDownInit();
 filterSearchInit();
 editAvailabilityDropDownInit();
 adminNavUiInit();
@@ -54,6 +57,7 @@ async function bindEvents(user, currentUser) {
     editBookInit();
     displayRequests();
     delebookInit();
+    displayRecentUsers();
     displayMostRecentTransactions();
     displayReturnRequests();
     displayStatistics();

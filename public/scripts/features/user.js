@@ -46,7 +46,7 @@ filterSearchInitMobile();
 displayRecentSearchMobile();
 
 export async function userInit(user, currentUserData) {
-    await renderData(user, currentUserData);
+    renderData(user, currentUserData);
     displayRecentSearches(user.uid);
 }
 
@@ -55,7 +55,7 @@ async function renderData(user, currentUserData) {
     renderTransactions(currentUserData.id);
     renderPendingRequests(currentUserData.id);
     renderReturnedTransactions(currentUserData.id);
-    await renderBooks();
+    renderBooks();
 }
 
 async function renderBooks() {

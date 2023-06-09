@@ -7,7 +7,7 @@
     width: 100%;
     height: 100%;
     z-index: 27;
-    background: var(--gradient-horizontal-solid);
+    background: var(--gradient-slanted-solid);
     color: var(--white);
     transform: scale(0);
     pointer-events: all;
