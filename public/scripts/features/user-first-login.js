@@ -47,7 +47,7 @@ async function checkIfFirstLogin() {
             if (user) {
                 const querySnapshot = await getQueryOneField('users', 'email', user.email);
                 const currentUser = querySnapshot.docs[0];
-                const isNewUser = currentUser.data().newUser;
+                const isNewUser = currentUser.data().isNewUser;
                 const isAdmin = currentUser.data().isAdmin;
                 if (isAdmin) adminButton.style.display = "flex";
                 if (isNewUser) {
@@ -130,7 +130,7 @@ async function finalAccountSetup(currentUserRef, user) {
 
 async function setupInformation(userRef, user) {
     const updatedDoc = {
-        newUser: false,
+        isNewUser: false,
         firstName: firstName.value,
         middleName: middleName.value,
         lastName: lastName.value,
