@@ -8,12 +8,27 @@
     align-items: center;
 }
 
+.landing-page-content.bottom {
+    justify-content: flex-end;
+}
+
 .landing-page-label {
     display: block;
     text-align: center;
     text-overflow: ellipsis;
-    font-size: 54px;
-    font-weight: 600;
+    font-size: 94px;
+    font-weight: 700;
+}
+
+.landing-page-label.left {
+    display: flex;
+    text-align: left;
+}
+
+.landing-page-label.strokes {
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--white);
 }
 
 .landing-page-label.medium {
@@ -28,10 +43,13 @@
     width: 100%;
     font-size: 18px;
     font-weight: 400;
-}
+} 
 
 @media (max-width: 600px) {
-    .landing-page-content {
+    /* .landing-page-content {
         flex-basis: calc(100% - 60px);
+    } */
+    .landing-page-label {
+        font-size: 64px;
     }
 }

@@ -1,5 +1,5 @@
 .add-book-form {
-    width: 100%;
+    width: calc(100% - 60px);
     height: fit-content;
     display: flex;
     flex-direction: column;

@@ -1,4 +1,9 @@
-import { auth } from "../firebase/firebase.js";
+import { auth, db } from "../firebase/firebase.js";
+import { onSnapshot,
+    query,
+    collection,
+    where
+} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import { onAuthStateChanged,
     updateProfile
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
@@ -12,6 +17,7 @@ const profileHeader = profileModal.querySelector("#profile-modal-header");
 
 const fullName = profileModal.querySelector("#full-name");
 const email = profileModal.querySelector("#display-email");
+const penaltyCount = profileModal.querySelector("#penalty-count");
 const verified = profileModal.querySelector("#display-verified");
 
 const profileButton = document.querySelector("#display-name");
@@ -84,4 +90,22 @@ export function displayProfile(user, userData) {
         email.textContent = user.email;
     }
     user.emailVerified ? verified.textContent = "Verified ✓" : verified.textContent = "Not verified";
+    
+    const colRef = collection(db, 'users');
+    const colQuery = query(colRef,
+        where('id', '==', userData.id)
+    );
+
+    onSnapshot(colQuery, (querySnapshot) => {
+        const data = querySnapshot.docs[0].data();
+        const penalties = data.penaltyCount;
+
+        if (penalties > 0 && penalties <= 4) {
+            penaltyCount.textContent = "Status: warning";
+        } else if (penalties >= 5) {
+            penaltyCount.textContent = "Status: blocked";
+        } else {
+            penaltyCount.textContent = "Status: good";
+        }
+    });
 }

@@ -13,7 +13,7 @@
 }
 
 .wrapper.margin-bottom {
-    width: calc(100%);
+    width: calc(100% - 60px);
     background-color: var(--dark-shade-low);
     padding: 10px;
     margin-bottom: 24px;

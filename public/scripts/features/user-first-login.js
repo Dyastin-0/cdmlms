@@ -1,21 +1,18 @@
 import { auth } from "../firebase/firebase.js";
-import { updateQuery } from "../firebase/firestore-api.js";
+import { updateQuery, getQueryOneField } from "../firebase/firestore-api.js";
 import { onAuthStateChanged,
     updateProfile,
     reload,
     sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-import { getQueryOneField } from "../firebase/firestore-api.js";
 import { isIdValid, warning } from "../utils/validation.js";
-import { isDisplayNameAvailable, isIdAvailable } from "../utils/data-availability.js";
+import { isIdAvailable } from "../utils/data-availability.js";
 import { userInit } from "./user.js";
 import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayConfirmDialog } from "../utils/confirm-dialog.js";
 import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
-import { yearDropDownInit } from "../ui/home/year-drop-down.js";
-import { courseDropDownInit } from "../ui/home/course-drop-down.js";
 import { toastMessage } from "../utils/toast-message.js";
 
 const main = document.querySelector("#main");
@@ -31,8 +28,6 @@ const lastName = oneTimeSetupModal.querySelector("#last-name");
 const middleName = oneTimeSetupModal.querySelector("#middle-name");
 const sex = oneTimeSetupModal.querySelector("#setup-selected-sex");
 const birthDate = oneTimeSetupModal.querySelector("#birth-date");
-const course = oneTimeSetupModal.querySelector("#setup-selected-course");
-const year = oneTimeSetupModal.querySelector("#setup-selected-year");
 const id = oneTimeSetupModal.querySelector("#id");
 const displayName = oneTimeSetupModal.querySelector("#display-name");
 
@@ -66,13 +61,10 @@ async function checkIfFirstLogin() {
 
 function bindEvents() {
     setupSexDropDownInit();
-    yearDropDownInit();
-    courseDropDownInit();
-
     resendVerification.addEventListener('click', () => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                reload(user);
+                await reload(user);
                 if (user.emailVerified) {
                     toastMessage("Your email is already verified.");
                     return;
@@ -137,12 +129,13 @@ async function setupInformation(userRef, user) {
         sex: sex.textContent.trim(),
         birthDate: birthDate.value,
         isAdmin: false,
-        course: course.textContent.trim(),
-        year: year.textContent.trim(),
-        id: id.value
+        id: id.value,
+        penaltyCount: 0
     }
     await updateQuery(userRef, updatedDoc);
-
+    const querySnapshot = await getQueryOneField('enrolledStudents', 'id', id.value);
+    const studentRef = querySnapshot.docs[0].ref;
+    await updateQuery(studentRef, {isAvailable: false});
     updateProfile(user, {
         displayName: displayName.value
     });
@@ -195,22 +188,13 @@ function areInputFieldsFilled() {
 }
 
 function areInputDataValid() {
-    if (!birthDate.value) {
-        warning("Provide your birth date.", "setup");
+    const dateRegex = /^(?:19|20)\d\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-9]|3[01])$/;
+    if (!dateRegex.test(birthDate.value.trim())) {
+        warning("Invalid birth date format.", "setup");
         return false;
     }
 
     if (!isIdValid(id.value)) return false;
-
-    if (year.textContent === "Year") {
-        warning("Select your year.", "setup");
-        return false;
-    }
-
-    if (course.textContent === "Course") {
-        warning("Select your course.", "setup");
-        return false;
-    }
 
     return true;
 }
@@ -218,13 +202,7 @@ function areInputDataValid() {
 async function areInputsAvailable() {
     const idRes = await isIdAvailable(id.value);
     if (!idRes.result) {
-        warning(idRes.id + " is already used, contact the MIS if there is any problem.", "setup");
-        return false;
-    }
-
-    const res = await isDisplayNameAvailable(displayName.value);
-    if (!res.result) {
-        warning(res.displayName + " is already used.", "setup");
+        warning(idRes.error, "setup");
         return false;
     }
 

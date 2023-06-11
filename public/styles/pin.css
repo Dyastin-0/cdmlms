@@ -4,10 +4,6 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
     padding-bottom: 10px;
     gap: 16px;
     overflow-y: auto;
@@ -71,7 +67,7 @@
 
 .pin label.other-details {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 250;
 }
 
 .pin label.other-details.italic {
@@ -210,5 +206,26 @@
     }
     100% {
         background-color: var(--dark-shade-low);
+    }
+}
+
+@media (max-width: 600px) {
+    .pin-container .pin {
+        width: 170px;
+    }
+    .pin-container .pin.large {
+        height: 335px;
+    }
+}
+
+@media (max-width: 395px) {
+    .pin-container .pin {
+        width: 300px;
+    }
+}
+
+@media (max-width: 230px) {
+    .pin-container .pin.large {
+        height: 335px;
     }
 }

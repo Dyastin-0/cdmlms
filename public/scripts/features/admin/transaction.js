@@ -1,7 +1,7 @@
 import { deleteQueryFromRef, saveQuery, updateQuery, getQueryTwoFields, getQueryOneField } from '../../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../../utils/confirm-dialog.js';
 import { displayProcessDialog } from '../../utils/process-dialog.js';
-import { currentDateTimePlus, currentDateTime } from '../../utils/date.js';
+import { currentDateTimePlus } from '../../utils/date.js';
 import { toastMessage } from '../../utils/toast-message.js';
 
 export async function acceptRequest(requestObject, requestRef) {
@@ -10,6 +10,7 @@ export async function acceptRequest(requestObject, requestRef) {
         bookTitle: requestObject.bookTitle,
         bookIsbn: requestObject.bookIsbn,
         requestedBy: requestObject.requestedBy,
+        transactionId: crypto.randomUUID(),
         returnDue: currentDateTimePlus(2)
     }
 
@@ -49,15 +50,26 @@ export async function confirmReturnRequest(request, requestRef) {
     const process = async () => {
         displayProcessDialog("Proccessing...");
         const bookSnapshot = await getQueryOneField('books', 'isbn', request.bookIsbn);
-        const trasactionSnapshot = await getQueryOneField('transactions', 'bookIsbn', request.bookIsbn);
+        const trasactionSnapshot = await getQueryOneField('transactions', 'transactionId', request.transactionId);
         const bookRef = bookSnapshot.docs[0].ref;
         const transactionRef = trasactionSnapshot.docs[0].ref;
+        
+        const timeReturned = new Date(request.timeRequested);
+        const returnDue = new Date(request.returnDue);
+        const isReturnedLate = timeReturned > returnDue;
+        if (isReturnedLate) {
+            const querySnapshot = await getQueryOneField('users', 'id', request.returnedBy);
+            const userData = querySnapshot.docs[0].data();
+            const userRef = querySnapshot.docs[0].ref;
+            await updateQuery(userRef, {
+                penaltyCount: userData.penaltyCount + 1
+            });
+        }
         await deleteQueryFromRef(requestRef);
         await updateQuery(bookRef, {isAvailable: true});
-        await updateQuery(transactionRef, {dateReturned: currentDateTime(), status: "Resolved"});
+        await updateQuery(transactionRef, {dateReturned: request.timeRequested, status: "Resolved"});
         
     };
-
     const confirmMessage = "You are about to accept the return request. Continue?";
     const toastText = "Book received.";
     displayConfirmDialog(process, confirmMessage, toastText);

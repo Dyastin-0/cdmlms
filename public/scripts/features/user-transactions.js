@@ -6,7 +6,7 @@ import { onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 import { deleteRequest } from "./admin/transaction.js";
-import { getQueryTwoFields, saveQuery } from '../firebase/firestore-api.js';
+import { getQueryOneField, saveQuery } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
 import { displayProcessDialog } from '../utils/process-dialog.js';
 import { currentDateTime } from "../utils/date.js";
@@ -103,10 +103,11 @@ async function returnBook(transaction) {
         bookTitle: transaction.bookTitle,
         bookIsbn: transaction.bookIsbn,
         returnedBy: transaction.requestedBy,
-        timeRequested: currentDateTime()
+        transactionId: transaction.transactionId,
+        timeRequested: currentDateTime(),
+        returnDue: transaction.returnDue
     }
-    const querySnapshot = await getQueryTwoFields('requests', 'bookIsbn', 'returnedBy',
-        transaction.bookIsbn, transaction.requestedBy);
+    const querySnapshot = await getQueryOneField('requests', 'transactionId', transaction.transactionId);
     if (!querySnapshot.empty) {
         toastMessage("You have already sent a return request for this book.");
         return;

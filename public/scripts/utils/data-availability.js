@@ -1,57 +1,24 @@
 import { getQueryOneField } from '../firebase/firestore-api.js';
 
-export async function isEmailAvailable(email) {
-    let result = {result: null, email: null};
-
-    try {
-        const querySnapshot = await getQueryOneField('users',
-        'email',
-        email);
-
-        if (!querySnapshot.empty) {
-            result.result = false;
-            result.email = email;
-            return result;
-        }
-
-        result.result = true;
-        return result;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-export async function isDisplayNameAvailable(displayName) {
-    let result = {result: null, displayName: null};
-    
-    try {
-        const querySnapshot = await getQueryOneField('users',
-         'displayName',
-          displayName);
-
-        if (!querySnapshot.empty) {
-            result.result = false;
-            result.displayName = displayName;
-            return result;
-        }
-
-    result.result = true;
-    return result;
-    } catch (error) {
-        console.error(error)
-    }
-}
-
 export async function isIdAvailable(id) {
-    let result = {result: null, id: null};
+    let result = {result: null, error: null};
 
-    const querySnapshot = await getQueryOneField('users',
-    'id',
-     await id);
+    const querySnapshot = await getQueryOneField('enrolledStudents',
+    'id', await id);
 
-    if (!querySnapshot.empty) {
+    const isEmpty = querySnapshot.empty;
+
+    if (isEmpty) {
         result.result = false;
-        result.id = id;
+        result.error = `The id '${id}' is not found, you are currently not enrolled.`;
+        return result;
+    }
+
+    const studentId = querySnapshot.docs[0].data();
+    const isAvailable = studentId.isAvailable;
+    if (!isAvailable) {
+        result.result = false;
+        result.error = `${id} is already used, contact an admin if there is a problem.`;
         return result;
     }
     

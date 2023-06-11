@@ -194,6 +194,9 @@ a {
     .main.admin {
         width: 100%;
     }
+}
+
+@media (max-width: 770px) {
     .main.landing {
         background: var(--gradient-horizontal);
     }

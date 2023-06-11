@@ -93,6 +93,10 @@ form label.underlined:hover {
     cursor: pointer;
 }
 
+.form .button {
+    height: 20px;
+}
+
 .form input {
     padding: 5px;
     margin-bottom: 8px;
@@ -104,6 +108,12 @@ form label.underlined:hover {
     background-color: var(--dark-shade-low);
     color: var(--white);
     outline-width: 0;
+}
+
+.form .sex-button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .form input.black {

@@ -91,15 +91,20 @@ function bindPinEvent(pin, book, bookRef) {
                             return;
                         }
                         const querySnapshot = await getQueryOneField('users', 'email', user.email);
-                        const id = querySnapshot.docs[0].data().id;
-                        const querySnapshot1 = await getQueryTwoFields('requests', 'bookIsbn', 'requestedBy', rtBookData.isbn, id);
+                        const userData = querySnapshot.docs[0].data();
+                        const penaltyCount = userData.penaltyCount;
+                        if (penaltyCount >= 5) {
+                            toastMessage("You are blocked from requesting a book.");
+                            return;
+                        }
+                        const querySnapshot1 = await getQueryTwoFields('requests', 'bookIsbn', 'requestedBy', rtBookData.isbn, userData.id);
                         if (!querySnapshot1.empty) {
                             toastMessage("You have already sent a request for this book.");
                             return;
                         }
                         const process = async () => {
                             displayProcessDialog("Sending request...");
-                            sendBookRequest(rtBookData.isbn, rtBookData.title, id);
+                            sendBookRequest(rtBookData.isbn, rtBookData.title, userData);
                         }
                         const processMessage = `You are about to send an issue request for '${book.title}.' Continue?`;
                         const toastText = "Book request sent, wait for an update.";
@@ -159,12 +164,12 @@ export function formatBook(book, bookRef) {
     return pin;
 }
 
-async function sendBookRequest(isbn, title, id) {
+async function sendBookRequest(isbn, title, userData) {
     const requestInfo = {
         type: "Request",
         bookIsbn: isbn,
         bookTitle: title,
-        requestedBy: id,
+        requestedBy: userData.id,
         timeRequested: currentDateTime()
     }
     await saveQuery('requests', crypto.randomUUID(), requestInfo);

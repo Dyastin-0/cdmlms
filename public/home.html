@@ -82,7 +82,7 @@
 
     <main class="main" id="main">
 
-        <content class="content">
+        <content class="content center">
             <label class="label small center hide"> Most viewed </label>
 
             <div class="pin-container btm-none" id="most-viewed">
@@ -224,29 +224,41 @@
     </main>
 
     <footer class="footer-global">
-        <div class="footer-wrapper hide">
-            <label class="footer-label"> Address </label>
-            <a class="footer-link"
-                href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
-                target="_blank">
-                Kasiglahan Village, Montalban, Rizal
-            </a>
-        </div>
-        <div class="footer-wrapper hide">
-            <label class="footer-label"> Contact </label>
-            <label class="footer-text"> 0282968667 | 0283959731 </label>
-        </div>    
-        <div class="footer-wrapper hide">
-            <label class="footer-label"> Email address  </label>
-            <label class="footer-text"> colegiodemontalban.official@gmail.com </label>
-        </div>    
-        <div class="footer-wrapper hide">
-            <label class="footer-label"> Facebook page </label>
-            <a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
-                Colegio de Montalban MIS
-              </a>
-        </div>    
-    </footer>
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-solid fa-location-dot"></i>
+				Address
+			</label>
+			<a class="footer-link"
+			href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
+			target="_blank">
+			Kasiglahan Village, Montalban, Rizal
+			</a>
+		</div>
+		<div class="footer-wrapper hide">
+			<label class="footer-label"> 
+				<i class="fa-solid fa-phone"></i>
+				Contact
+			</label>
+			<label class="footer-text"> 0282968667 | 0283959731 </label>
+		</div>    
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-solid fa-envelope"></i>
+				Email address
+				</label>
+			<label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+		</div>    
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-brands fa-facebook"></i>
+				Facebook 
+				</label>
+			<a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
+				Colegio de Montalban LMS
+			</a>
+		</div>    
+	</footer>
 
     <!-- modals -->
 
@@ -328,13 +340,13 @@
             <label class="warning" id="setup-warning">  </label>
             <input type="text" placeholder="First name" 
             id="first-name" onkeydown="return /[a-z]/i.test(event.key)">
-            <input type="text" placeholder="Last name"
-            id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
             <input type="text" placeholder="Middle name" 
             id="middle-name" onkeydown="return /[a-z]/i.test(event.key)">
+            <input type="text" placeholder="Last name"
+            id="last-name" onkeydown="return /[a-z]/i.test(event.key)">
             
             <div class="drop-down" id="setup-sex-drop-down">
-                <button class="nav-button small dark" id="setup-sex-drop-down-button" aria-label="setup-sex-drop-down-button">
+                <button class="nav-button small dark sex-button" id="setup-sex-drop-down-button" aria-label="setup-sex-drop-down-button">
                     <label class="inherit white" id="setup-selected-sex"> Male </label>
                     <i class="fa fa-chevron-down chevron" id="setup-sex-drop-down-chevron"></i>
                 </button>
@@ -344,36 +356,7 @@
                 </div>
             </div>
 
-            <label for="birth-date"> Birth date </label>
-            <input class="dark" type="date" placeholder="Birth date" id="birth-date">
-
-            <div class="container">
-                <div class="drop-down" id="course-drop-down">
-                    <button class="nav-button small dark" id="course-drop-down-button" aria-label="course-drop-down-button">
-                        <label class="inherit white" id="setup-selected-course">Course</label>
-                        <i class="fa fa-chevron-down chevron" id="course-drop-down-chevron"></i>
-                    </button>
-                    <div class="drop-down-menu left fit" id="course-drop-down-menu">
-                        <button class="nav-button small fit" id="course-bscpe">BSCpE</button>
-                        <button class="nav-button small fit" id="course-bsit">BSIT</button>
-                        <button class="nav-button small fit" id="course-bsed">BSED</button>
-                        <button class="nav-button small fit" id="course-bsba">BSBA</button>
-                    </div>
-                </div>
-
-                <div class="drop-down" id="year-drop-down">
-                    <button class="nav-button small dark fit-content" id="year-drop-down-button" aria-label="year-drop-down-button">
-                        <label class="inherit white" id="setup-selected-year">Year</label>
-                        <i class="fa fa-chevron-down chevron" id="year-drop-down-chevron"></i>
-                    </button>
-                    <div class="drop-down-menu left fit" id="year-drop-down-menu">
-                        <button class="nav-button small fit" id="year-1">1st</button>
-                        <button class="nav-button small fit" id="year-2">2nd</button>
-                        <button class="nav-button small fit" id="year-3">3rd</button>
-                        <button class="nav-button small fit" id="year-4">4th</button>
-                    </div>
-                </div>
-            </div>
+            <input class="dark" type="text" placeholder="Birth date (yyyy-mm-dd)" id="birth-date">
 
             <input type="text" placeholder="School ID (e.g., 00-00000)" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
             <input type="text" placeholder="Display name" id="display-name">
@@ -400,6 +383,7 @@
         </div>
         <label class="name" id="full-name"> Name </label>
         <label class="other-info" id="display-email"></label>
+        <label class="other-info" id="penalty-count"></label>
         <label class="other-info" id="display-verified"> </label>
         <div class="footer">
             <button class="black" id="edit-profile-button"> Edit profile </button>
