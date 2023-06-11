@@ -42,7 +42,6 @@ export function formatUser(user, userRef) {
     const email = document.createElement("label");
     const gender = document.createElement("label");
     const id = document.createElement("label");
-    const courseYear = document.createElement("label");
 
     const wrapper = document.createElement("div");
     const editButton = document.createElement("button");
@@ -62,9 +61,6 @@ export function formatUser(user, userRef) {
 
     id.classList.add("other-details");
     id.textContent = `${user.id}`;
-
-    courseYear.classList.add("other-details");
-    courseYear.textContent = `${user.course}, ${user.year} year`;
 
     const process = async () => {
         editUserModal.classList.add("active");
@@ -108,7 +104,6 @@ export function formatUser(user, userRef) {
     container.appendChild(name);
     container.appendChild(gender);
     container.appendChild(id);
-    container.appendChild(courseYear);
     container.appendChild(wrapper);
 
     return container;
