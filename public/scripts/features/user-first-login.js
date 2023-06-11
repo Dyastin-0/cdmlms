@@ -123,13 +123,13 @@ async function finalAccountSetup(currentUserRef, user) {
 async function setupInformation(userRef, user) {
     const updatedDoc = {
         isNewUser: false,
-        firstName: firstName.value,
-        middleName: middleName.value,
-        lastName: lastName.value,
+        firstName: firstName.value.trim(),
+        middleName: middleName.value.trim(),
+        lastName: lastName.value.trim(),
         sex: sex.textContent.trim(),
-        birthDate: birthDate.value,
+        birthDate: birthDate.value.trim(),
         isAdmin: false,
-        id: id.value,
+        id: id.value.trim(),
         penaltyCount: 0
     }
     await updateQuery(userRef, updatedDoc);

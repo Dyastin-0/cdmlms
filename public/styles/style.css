@@ -196,7 +196,7 @@ a {
     }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 1007px) {
     .main.landing {
         background: var(--gradient-horizontal);
     }

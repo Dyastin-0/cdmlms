@@ -46,9 +46,9 @@
 } 
 
 @media (max-width: 600px) {
-    /* .landing-page-content {
-        flex-basis: calc(100% - 60px);
-    } */
+    .landing-page-content {
+        flex-basis: calc(100% - 50px);
+    }
     .landing-page-label {
         font-size: 64px;
     }
