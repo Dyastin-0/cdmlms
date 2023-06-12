@@ -39,7 +39,7 @@
     padding: 20px;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-shade-low);
+    /* background-color: var(--dark-shade-low); */
     -webkit-scroll-snap-align: start;
     scroll-snap-align: start;
 }
