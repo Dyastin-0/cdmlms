@@ -26,7 +26,8 @@
 .edit-user-modal form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    row-gap: 8px;
+    width: calc(100% - 20px);
 }
 
 .edit-user-modal form input {
