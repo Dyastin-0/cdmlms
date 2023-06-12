@@ -1,6 +1,6 @@
 .slider {
-    width: 700px;
-    max-width: 95%;
+    width: 400px;
+    max-width: 50%;
     background-color: transparent;
     display: flex;
     row-gap: 8px;
@@ -104,5 +104,8 @@
 @media (max-width: 600px) {
     .slider .container .card {
         flex-direction: column;
+    }
+    .slider {
+        max-width: 95%;
     }
 }
