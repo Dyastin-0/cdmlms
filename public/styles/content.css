@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+.landing-page-content.fit {
+    width: 100%;
+    height: fit-content;
+    flex-direction: row;
+}
+
 .landing-page-content.column {
     max-width: calc(100% - 40px);
     margin-top: 20px;
@@ -17,7 +23,8 @@
 }
 
 .landing-page-content.fixed-size {
-    max-width: calc(100% - 40px);
+    height: fit-content;
+    flex-basis: 100%;
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 20px;
@@ -41,7 +48,6 @@
     width: 400px;
     max-width: 95%;
     min-height: 100px;
-    max-height: 90%;
     min-width: 100px;
     height: 400px;
     object-fit: cover;
@@ -60,7 +66,6 @@
 
 .landing-page-label.left {
     width: 100px;
-    max-width: 90%;
     display: flex;
     text-align: left;
 }
@@ -107,5 +112,8 @@
     }
     .landing-page-label.medium-x {
         font-size: 22px;
+    }
+    .landing-page-content.half-size {
+        flex-direction: column;
     }
 }

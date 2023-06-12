@@ -1,11 +1,16 @@
 .slider {
-    width: 400px;
-    max-width: 50%;
+    width: calc(100% - 40px);
     background-color: transparent;
     display: flex;
+    margin: 20px;
     row-gap: 8px;
     flex-direction: column;
     align-items: center;
+}
+
+.slider.small {
+    width: 50%;
+    max-width: 90%;
 }
 
 .slider label {
@@ -29,7 +34,6 @@
 }
 
 .slider .container .card {
-    max-width: calc(100% - 40px);
     min-width: calc(100% - 40px);
     display: flex;
     padding: 20px;
@@ -40,12 +44,16 @@
     scroll-snap-align: start;
 }
 
+.slider .container .card.fill {
+    flex-basis: 100%;
+}
+
 .slider .container .card label {
     font-size: 14px;
     font-weight: 400;
-    margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    order: 2;
 }
 
 .slider .container .card .wrapper {
@@ -80,6 +88,7 @@
     height: fit-content;
     width: fit-content;
     display: flex;
+    margin-top: 16px;
     column-gap: 16px;
     z-index: 5;
 }
@@ -105,7 +114,7 @@
     .slider .container .card {
         flex-direction: column;
     }
-    .slider {
-        max-width: 95%;
+    .slider .container .card label {
+        order: 2;
     }
 }
