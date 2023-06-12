@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: var(--yellow-solid);
+    background-color: var(--green-solid);
     box-shadow: 0 0 5px var(--dark-shade-low);
     padding-bottom: 10px;
     padding-top: 10px;
@@ -14,6 +14,11 @@
     background: none;
 }
 
+.footer-global label, a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .footer-link {
     font-size: 14px;
     border-radius: 5px;
@@ -29,9 +34,14 @@
 
 .footer-wrapper {
     width: 270px;
+    max-width: 90%;
     margin: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.footer-wrapper label, a {
+    width: fit-content;
 }
 
 .footer-label {

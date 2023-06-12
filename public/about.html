@@ -1,11 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/nav.css">
+	<link rel="stylesheet" href="./styles/wrapper.css">
+	<link rel="stylesheet" href="./styles/footer.css">
+	<link rel="stylesheet" href="./styles/slider.css">
+	<link rel="stylesheet" href="./styles/content.css">
+	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
+	<title>About us</title>
 </head>
 <body>
-  
+
+	<div class="main-header">
+		<a href="./" class="nav-button large bg-none" id="index-button">
+			<img class="logo" src="./images/cdm_logo.webp" alt="Colegio de Montalban logo">
+			Cdmlms
+        </a>
+	</div>
+
+	<nav class="nav-not-sticky right" id="index-navbar">
+		<div class="wrapper fit">
+			<a href="./about.html" class="nav-button small-g" id="about" aria-label="about"> About </a>
+			<a href="./home.html" class="nav-button small-g none logged-in" id="home" aria-label="home"> Home </a>
+			<button class="nav-button small-g none logged-in" id="sign-out-button" aria-label="sign out">
+				<i class="fas fa-arrow-right-from-bracket"></i>
+			</button>
+			<a href="./sign-in.html" class="nav-button small-g none logged-out" id="sign-in-modal-button" aria-label="sign-in-modal-button">
+				<i class="fas fa-arrow-right-to-bracket"></i>
+			</a>
+			<a href="./sign-up.html" class="nav-button small-g none logged-out" id="sign-up-modal-button" aria-label="sign-up-modal-button"> 
+				sign up 
+			</a>
+		</div>
+	</nav>
+
+	<main class="main about">
+
+		<div class="landing-page-content fixed-size">
+			<img src="./images/book.webp" class="landing-page-img">
+			<div class="landing-page-wrapper">
+				<div class="landing-page-label medium-x"> Content about the app </div>
+				<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+			</div>
+		</div>
+
+		<div class="landing-page-content fixed-size">
+			<div class="landing-page-wrapper">
+				<div class="landing-page-label medium-x"> Content about the app </div>
+				<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+			</div>
+			<img src="./images/book-1.webp" class="landing-page-img" loading="eager">
+		</div>
+
+		<div class="landing-page-content column">
+			<label class="landing-page-label medium-x"> Our team </label>
+			<div class="slider">
+				<div class="container">
+					
+					<div class="card" id="project-manager-card">
+						<div class="wrapper">
+							<img src="./images/blank_profile.webp" loading="eager">
+							<label class="name"> Charlotte Vasquez </label>
+							<label class="title"> Project Manager </label>
+						</div>
+						<label> Some info Some info Some info Some info Some info Some info Some info Some info </label>
+					</div>
+	
+					<div class="card" id="business-analyst-card">
+						<div class="wrapper">
+							<img src="./images/blank_profile.webp">
+							<label class="name"> Xantrux Emanuel Gonzales </label>
+							<label class="title"> Business Analyst </label>
+						</div>
+						<label> Some info Some info Some info Some info Some info Some info Some info Some info </label>
+					</div>
+	
+					<div class="card" id="architect-designer-card">
+						<div class="wrapper">
+							<img src="./images/blank_profile.webp">
+							<label class="name"> Mareille Razon </label>
+							<label class="title"> Architect & UI Designer </label>
+						</div>
+						<label> Some info Some info Some info Some info Some info Some info Some info Some info </label>
+					</div>
+	
+					<div class="card" id="developer-card">
+						<div class="wrapper">
+							<img src="./images/blank_profile.webp">
+							<label class="name"> Justine Paralejas </label>
+							<label class="title"> Full-stack Developer </label>
+						</div>
+						<label> Some info Some info Some info Some info Some info Some info Some info Some info </label>
+					</div>
+	
+					<div class="card" id="tester-card">
+						<div class="wrapper">
+							<img src="./images/blank_profile.webp">
+							<label class="name"> Jason Virtudazo </label>
+							<label class="title"> QA Tester </label>
+						</div>
+						<label> Some info Some info Some info Some info Some info Some info Some info Some info </label>
+					</div>
+	
+				</div>
+				<div class="navigation">
+					<a href="#project-manager-card"></a>
+					<a href="#business-analyst-card"></a>
+					<a href="#architect-designer-card"></a>
+					<a href="#developer-card"></a>
+					<a href="#tester-card"></a>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer class="footer-global">
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-solid fa-location-dot"></i>
+				Address
+			</label>
+			<a class="footer-link"
+			href="https://www.google.com/maps/place/Colegio+de+Montalban/@14.7504908,121.1403429,17.5z/data=!4m6!3m5!1s0x3397bbe8733338e5:0xc845d7b6001522e1!8m2!3d14.7505016!4d121.1416472!16s%2Fm%2F080f_k2"
+			target="_blank">
+			Kasiglahan Village, Montalban, Rizal
+			</a>
+		</div>
+		<div class="footer-wrapper hide">
+			<label class="footer-label"> 
+				<i class="fa-solid fa-phone"></i>
+				Contact
+			</label>
+			<label class="footer-text"> 0282968667 | 0283959731 </label>
+		</div>    
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-solid fa-envelope"></i>
+				Email address
+				</label>
+			<label class="footer-text"> colegiodemontalban.official@gmail.com </label>
+		</div>    
+		<div class="footer-wrapper hide">
+			<label class="footer-label">
+				<i class="fa-brands fa-facebook"></i>
+				Facebook 
+				</label>
+			<a class="footer-link" href="https://www.facebook.com/colegiodemontalban.cdmmis" target="_blank"> 
+				Colegio de Montalban LMS
+			</a>
+		</div>    
+	</footer>
+
+	<!-- modals -->
+
 </body>
+
+<!-- Custom scripts -->
+<script src="./scripts/observer.js"></script>
+<script type="module" src="./scripts/ui/index/nav-ui-index.js"></script>
 </html>

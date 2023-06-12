@@ -121,6 +121,13 @@ a {
     background: var(--gradient-slanted-solid);
 }
 
+.main.about {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: var(--green-solid);
+}
+
 .main.admin {
     width: calc(100% - 50px);
     max-height: fit-content;
@@ -131,8 +138,8 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-self: center;
-    background: var(--gradient-slanted);
-    animation: loading 4s ease;
+    background: var(--gradient-vertical);
+    animation: loading 3s ease;
 }
 
 .main.landing label {

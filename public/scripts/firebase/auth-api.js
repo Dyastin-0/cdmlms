@@ -60,10 +60,6 @@ export async function signInWithGoogle() {
     });
 }
 
-export function signOutFirebaseAuth() {
-    signOut(auth);
-}
-
 export function recoverAccount(email) {
     const isValid = isEmailValidSignIn(email);
     if (!isValid) {

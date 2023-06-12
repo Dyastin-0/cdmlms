@@ -1,5 +1,5 @@
 import { auth } from "../../firebase/firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
 import { getQueryOneField } from '../../firebase/firestore-api.js';
 import { bindAddBookEvents } from './add-book.js';
@@ -7,7 +7,6 @@ import { availabilityDropDownInit } from "../../ui/admin/availability-drop-down.
 import { userDropDownInit  } from '../../ui/home/user-drop-down-ui.js'
 import { adminNavUiInit } from '../../ui/admin/nav-ui.js';
 import { displayProfile } from '../user-profile.js'; 
-import { signOutFirebaseAuth } from '../../firebase/auth-api.js';
 import { displayStatistics } from './statistics.js';
 import { displayRequests, displayReturnRequests } from './requests.js';
 import { adminFilterInit } from '../../ui/admin/search-filter-admin.js';
@@ -23,7 +22,7 @@ import { editRoleDropDownInit } from "../../ui/admin/edit-role-drop-down.js";
 import { displayRecentUsers } from "./users.js";
 
 const splashScreen = document.querySelector("#splash-screen");
-const signOut = document.querySelector("#sign-out");
+const signOutButton = document.querySelector("#sign-out");
 
 userDropDownInit();
 adminFilterInit();
@@ -62,7 +61,7 @@ async function bindEvents(user, currentUser) {
     displayReturnRequests();
     displayStatistics();
     bindAddBookEvents();
-    signOut.addEventListener('click', () => {
-        signOutFirebaseAuth();
+    signOutButton.addEventListener('click', () => {
+        signOut(auth);
     });
 }

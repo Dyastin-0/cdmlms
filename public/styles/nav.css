@@ -11,6 +11,21 @@
     align-items: center;
 }
 
+.nav-not-sticky {
+    width: calc(100% - 10px);
+    z-index: 9;
+    display: flex;
+    padding: 5px;
+    background-color: var(--white);
+    box-shadow: 0 5px 5px var(--dark-shade-low);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-not-sticky.right {
+    justify-content: right;
+}
+
 .nav.right {
     justify-content: right;
 }

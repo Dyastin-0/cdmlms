@@ -7,7 +7,7 @@
     align-items: center;
     background: var(--gradient-slanted-solid);
     background-size: 100% 100%;
-    animation: loading 5s ease;
+    animation: loading 3s ease;
 }
 
 .sign-in-label {
@@ -36,7 +36,6 @@
     width: 300px;
     max-width: calc(90% - 40px);
     padding: 20px;
-    background-color: var(--green-solid);
     box-shadow: 0 5px 5px var(--dark-shade-low);
     border-radius: 5px;
     display: flex;

@@ -1,0 +1,108 @@
+.slider {
+    width: 700px;
+    max-width: 95%;
+    background-color: transparent;
+    display: flex;
+    row-gap: 8px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider label {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.slider .container {
+    width: 100%;
+    border-radius: 5px;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider .container::-webkit-scrollbar {
+    display: none;
+}
+
+.slider .container .card {
+    max-width: calc(100% - 40px);
+    min-width: calc(100% - 40px);
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-shade-low);
+    -webkit-scroll-snap-align: start;
+    scroll-snap-align: start;
+}
+
+.slider .container .card label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.slider .container .card .wrapper {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.slider .container .card .wrapper label {
+    display: flex;
+    text-align: center;
+    margin: 0;
+}
+
+.slider .container .card .wrapper label.title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.slider .container .card .wrapper label.name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.slider .container .card .wrapper img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.slider .navigation {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    column-gap: 16px;
+    z-index: 5;
+}
+
+.slider .navigation a {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--white);
+    box-shadow: 0 0 5px var(--dark-shade-high);
+    transition: transform 0.3s ease;
+}
+
+.slider .navigation a:active {
+    transform: scale(1.2);
+}
+
+.slider .navigation a:hover {
+    transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+    .slider .container .card {
+        flex-direction: column;
+    }
+}

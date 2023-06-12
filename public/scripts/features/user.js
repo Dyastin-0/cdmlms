@@ -1,6 +1,6 @@
 import { auth } from "../firebase/firebase.js";
 import { db } from "../firebase/firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 import { onSnapshot,
     query,
     collection,
@@ -12,7 +12,6 @@ import { userDropDownInit } from "../ui/home/user-drop-down-ui.js";
 import { sexDropDownInit } from "../ui/home/sex-drop-down.js";
 import { filterSearchInit } from "../ui/home/search-filter-drop-down.js";
 import { filterSearchInitMobile } from "../ui/home/search-filter-drop-down-mobile.js";
-import { signOutFirebaseAuth } from "../firebase/auth-api.js";
 import { displayProfile } from "./user-profile.js";
 import { hideSearchResult } from "../ui/home/search-ui.js";
 import { bindSearchEvent, addRecentSearch, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
@@ -27,7 +26,7 @@ const closeResultButton = document.querySelector("#close-result-button");
 const adminButton = document.querySelector("#admin-button");
 const overlay = document.querySelector("#overlay");
 
-const signOut = document.querySelector("#sign-out");
+const signOutButton = document.querySelector("#sign-out");
 const mostViewed = document.querySelector("#most-viewed");
 const mostRecent = document.querySelector("#most-recent");
 
@@ -142,7 +141,7 @@ async function bindEvents() {
         window.location.href = "./admin.html";
     });
 
-    signOut.addEventListener('click', async () => signOutFirebaseAuth());
+    signOutButton.addEventListener('click', async () => signOut(auth));
 
     searchInput.addEventListener('keyup', async (e) => {
         if (e.key === "Enter" && searchInput.value !== '') {
