@@ -2,22 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Library Management System of Colegio de Montalban.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/nav.css">
 	<link rel="stylesheet" href="./styles/wrapper.css">
-	<link rel="stylesheet" href="./styles/nav.css">
-	<link rel="stylesheet" href="./styles/pin.css">
 	<link rel="stylesheet" href="./styles/footer.css">
-	<link rel="stylesheet" href="./styles/drop-down.css">
-	<link rel="stylesheet" href="./styles/process-dialog.css">
+	<link rel="stylesheet" href="./styles/slider.css">
 	<link rel="stylesheet" href="./styles/content.css">
 	<link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
-	<title> Cdmlms </title>
+	<title>Cdmlms</title>
 </head>
-<body class="w-bg">
+<body>
 
 	<div class="main-header">
 		<a href="./" class="nav-button large bg-none" id="index-button">
@@ -42,28 +38,73 @@
 		</div>
 	</nav>
 
-	<main class="main landing">
+	<main class="main about">
 
-		<div class="landing-page-content">
-			<label class="landing-page-label strokes"> Welcome to CDMLMS! </label>
-			<label class="landing-page-label small"> Your gateway to the world of knowledge and discovery </label>
+		<div class="slider hide">
+			<div class="container">
+
+				<div class="card" id="first">
+					<div class="landing-page-content fixed-size">
+						<img src="./images/book.webp" class="landing-page-img" loading="eager">
+						<div class="landing-page-wrapper">
+							<div class="landing-page-label medium-x"> Welcome to Cdmlms </div>
+							<div class="landing-page-label small left"> 
+								Discover a world of knowledge at your fingertips with our user-friendly library management system - revolutionizing the way you explore, learn, and connect.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="second">
+					<div class="landing-page-content fixed-size">
+						<div class="landing-page-wrapper">
+							<div class="landing-page-label medium-x"> Content about the app </div>
+							<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+						</div>
+						<img src="./images/book-1.webp" class="landing-page-img">
+					</div>
+				</div>
+
+				<div class="card" id="third">
+					<div class="landing-page-content fixed-size">
+						<img src="./images/book.webp" class="landing-page-img" loading="eager">
+						<div class="landing-page-wrapper">
+							<div class="landing-page-label medium-x"> Content about the app </div>
+							<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card" id="fourth">
+					<div class="landing-page-content fixed-size">
+						<div class="landing-page-wrapper">
+							<div class="landing-page-label medium-x"> Content about the app </div>
+							<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+						</div>
+						<img src="./images/book-1.webp" class="landing-page-img">
+					</div>
+				</div>
+
+				<div class="card" id="fifth">
+					<div class="landing-page-content fixed-size">
+						<img src="./images/book.webp" class="landing-page-img" loading="eager">
+						<div class="landing-page-wrapper">
+							<div class="landing-page-label medium-x"> Content about the app </div>
+							<div class="landing-page-label small left"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae augue vitae nulla luctus tempus.</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="navigation">
+				<a href="#first"></a>
+				<a href="#second"></a>
+				<a href="#third"></a>
+				<a href="#fourth"></a>
+				<a href="#fifth"></a>
+			</div>
 		</div>
 
-		<div class="landing-page-content">
-			<label class="landing-page-label medium">
-				<i class="fas fa-user"></i>
-				 Create an account 
-			</label>
-			<label class="landing-page-label medium">
-				<i class="fas fa-id-badge"></i>
-				Verify
-			</label>
-			<label class="landing-page-label medium">
-				<i class="fas fa-book"></i>
-				Browse efficiently
-			</label>
-		</div>
-		
 	</main>
 
 	<footer class="footer-global">
@@ -104,18 +145,10 @@
 	</footer>
 
 	<!-- modals -->
-	<div class="overlay" id="overlay">	</div>
-
-	<div class="process-dialog" id="process-dialog-modal">
-		<label class="process-message" id="process-message"></label>
-		<label class="process-spinner fa-solid fa-circle-notch fa-spin"></label>
-	</div>
 
 </body>
 
-<!--custom scripts-->
+<!-- Custom scripts -->
 <script src="./scripts/observer.js"></script>
 <script type="module" src="./scripts/ui/index/nav-ui-index.js"></script>
-<!---->
-
 </html>

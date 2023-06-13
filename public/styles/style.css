@@ -138,7 +138,7 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-self: center;
-    background: var(--gradient-slanted);
+    background: var(--green-solid);
     animation: loading 3s ease;
 }
 

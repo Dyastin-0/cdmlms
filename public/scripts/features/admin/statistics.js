@@ -2,7 +2,7 @@ import { db } from "../../firebase/firebase.js";
 import { onSnapshot,
     query,
     collection,
-    getCountFromServer
+    getCountFromServer, where
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 const pinContainer = document.querySelector("#statistic-pins");
@@ -13,10 +13,20 @@ const totalIssuedBook = pinContainer.querySelector("#total-issued-books");
 const totalBooks = pinContainer.querySelector("#total-books");
 
 export async function displayStatistics() {
-    await getRealTimeDocumentCountOf('users', allUsers);
+    await getRealTimeDocumentCountWithFilterOf('users', allUsers, 'isNewUser', '==', false);
     await getRealTimeDocumentCountOf('requests', pendingRequest);
     await getRealTimeDocumentCountOf('transactions', totalIssuedBook);
     await getRealTimeDocumentCountOf('books', totalBooks);
+}
+
+async function getRealTimeDocumentCountWithFilterOf(col, element, filter, comparison, value) {
+    const colRef = collection(db, col);
+    const colQuery = query(colRef, 
+        where(filter, comparison, value));
+
+    onSnapshot(colQuery, (querySnapshot) => {
+        element.textContent = querySnapshot.size > 0 ? querySnapshot.size : 0;
+    });
 }
 
 async function getRealTimeDocumentCountOf(col, element) {

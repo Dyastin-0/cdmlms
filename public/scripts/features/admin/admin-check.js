@@ -20,6 +20,7 @@ import { delebookInit } from "./delete-book.js";
 import { displayMostRecentTransactions } from '../admin/records.js';
 import { editRoleDropDownInit } from "../../ui/admin/edit-role-drop-down.js";
 import { displayRecentUsers } from "./users.js";
+import { editStatusDropDownInit } from "../../ui/admin/edit-status-drop-down.js";
 
 const splashScreen = document.querySelector("#splash-screen");
 const signOutButton = document.querySelector("#sign-out");
@@ -30,6 +31,7 @@ sexDropDownInit();
 deleteFilterSearchInit();
 editRoleDropDownInit();
 filterSearchInit();
+editStatusDropDownInit();
 editAvailabilityDropDownInit();
 adminNavUiInit();
 availabilityDropDownInit();

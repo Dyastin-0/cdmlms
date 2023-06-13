@@ -23,6 +23,7 @@ const overlay = document.querySelector("#fourth-overlay");
 const editUserForm = editUserModal.querySelector("#edit-user-form");
 const userId = editUserForm.querySelector("#edit-user-id");
 const userRole = editUserForm.querySelector("#edit-user-role");
+const userStatus = editUserForm.querySelector("#edit-user-status");
 const closeEditUSer = editUserModal.querySelector("#close-edit-user-modal");
 
 const saveUserChanges = editUserForm.querySelector("#save-user-changes");
@@ -67,7 +68,8 @@ export function formatUser(user, userRef) {
         overlay.classList.add("active");
         userId.value = user.id;
         userRole.textContent = user.isAdmin? "Admin" : "User";
-
+        userStatus.textContent = user.penaltyCount <= 4 && user.penaltyCount !== 0 ? "Warning" 
+            : (user.penaltyCount > 4 ? "Blocked" : "Good");
         const saveProcess = async function(e) {
             e.preventDefault();
             if (/^\d{2}-\d{5}$/.test(userId.value)) {
@@ -124,9 +126,12 @@ function hideEditUSerModal(eventRef, closeRef) {
 
 async function updateUser(userRef) {
     const isAdmin = userRole.textContent === "Admin" ? true : false;
+    const penaltyCount = userStatus.textContent === "Warning" ? 4 
+        : userStatus.textContent === "Blocked" ? 5 : 0; 
     const changes = {
         id: userId.value, 
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        penaltyCount: penaltyCount
     };
     updateQuery(userRef, changes);
 }
