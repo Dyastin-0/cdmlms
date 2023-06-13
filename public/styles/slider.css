@@ -39,9 +39,13 @@
     padding: 20px;
     align-items: center;
     justify-content: center;
-    /* background-color: var(--dark-shade-low); */
+    background: var(--gradient-slanted-solid);
     -webkit-scroll-snap-align: start;
     scroll-snap-align: start;
+}
+
+.slider .container .card.reversed {
+    background: var(--gradient-slanted-reversed-solid);
 }
 
 .slider .container .card.fill {
@@ -115,5 +119,11 @@
     }
     .slider .container .card label {
         order: 2;
+    }
+    .slider .container .card.reversed {
+        background: var(--gradient-horizontal-reversed-solid);
+    }
+    slider .container .card {
+        background: var(--gradient-horizontal-reversed-solid);
     }
 }
