@@ -123,4 +123,11 @@
     .slider .container .card label {
         order: 2;
     }
+    .slider .container .card.colored {
+        background: var(--gradient-slanted-top-solid);
+}
+
+    .slider .container .card.reversed {
+        background: var(--gradient-slanted-top-solid);
+    }
 }
