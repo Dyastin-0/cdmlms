@@ -46,7 +46,7 @@
 
 .landing-page-img {
     width: 400px;
-    max-width: 95%;
+    max-width: 100%;
     min-height: 100px;
     min-width: 100px;
     height: 400px;
@@ -76,7 +76,7 @@
 }
 
 .landing-page-label.medium-x {
-    font-size: 44px;
+    font-size: 74px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -90,7 +90,7 @@
 }
 
 .landing-page-label.small {
-    width: 100%;
+    width: 50%;
     font-size: 18px;
     font-weight: 400;
 } 
@@ -109,9 +109,12 @@
         order: 2;
     }
     .landing-page-label.medium-x {
-        font-size: 26px;
+        font-size: 36px;
     }
     .landing-page-content.half-size {
         flex-direction: column;
+    }
+    .landing-page-label.small {
+        width: 100%;
     }
 }
