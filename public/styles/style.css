@@ -43,19 +43,27 @@ html, body {
     align-items: center;
     color: var(--white);
     transition: width 0.3s ease;
+    background-repeat: no-repeat;
+}
+
+.fill {
+    height: 100%;
+}
+
+.flex-end {
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: row;
 }
 
 a {
     text-decoration: none;
 }
 
-html.form {
-    height: 100%;
-}
-
-html.admin {
-    height: 100%;
-    width: 100%;
+body.admin {
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: row;
 }
 
 body.w-bg {
