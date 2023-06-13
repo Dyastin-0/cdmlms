@@ -49,20 +49,6 @@ a {
     text-decoration: none;
 }
 
-body.admin {
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex-direction: row;
-}
-
-body.form {
-    height: 100%;
-}
-
-body.home {
-    background-repeat: no-repeat;
-}
-
 html.form {
     height: 100%;
 }
