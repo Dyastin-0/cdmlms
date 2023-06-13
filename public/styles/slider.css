@@ -39,9 +39,12 @@
     padding: 20px;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-slanted-solid);
     -webkit-scroll-snap-align: start;
     scroll-snap-align: start;
+}
+
+.slider .container .card.colored {
+    background: var(--gradient-slanted-solid);
 }
 
 .slider .container .card.reversed {
@@ -119,11 +122,5 @@
     }
     .slider .container .card label {
         order: 2;
-    }
-    .slider .container .card.reversed {
-        background: var(--gradient-horizontal-reversed-solid);
-    }
-    slider .container .card {
-        background: var(--gradient-horizontal-reversed-solid);
     }
 }
