@@ -13,8 +13,8 @@
     max-width: 90%;
 }
 
-.slider label {
-    font-size: 24px;
+.slider .label {
+    font-size: 56px;
     font-weight: 700;
 }
 
@@ -55,7 +55,8 @@
     flex-basis: 100%;
 }
 
-.slider .container .card label {
+.slider .container .card .info-label {
+    width: 300px;
     font-size: 16px;
     font-weight: 400;
     margin-left: 20px;
@@ -125,9 +126,11 @@
     }
     .slider .container .card.colored {
         background: var(--gradient-slanted-top-solid);
-}
-
+    }
     .slider .container .card.reversed {
-        background: var(--gradient-slanted-top-solid);
+        background: var(--gradient-slanted-top-reversed-solid);
+    }
+    .slider .container .card .info-label {
+        width: 90%;
     }
 }

@@ -9,7 +9,8 @@
 }
 
 .landing-page-content.fit {
-    width: 100%;
+    flex-basis:fit-content ;
+    margin-top: 0;
     height: fit-content;
     flex-direction: row;
 }
@@ -25,10 +26,7 @@
 .landing-page-content.fixed-size {
     height: fit-content;
     flex-basis: 100%;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin: 10px;
     flex-direction: row;
     gap: 32px;
 }

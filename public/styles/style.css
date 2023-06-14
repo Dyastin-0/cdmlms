@@ -27,6 +27,7 @@
     
     --gradient-slanted-solid: linear-gradient(120deg, var(--green-solid) 49.5%, var(--yellow-solid) calc(49.5% + 1px));
     --gradient-slanted-top-solid: linear-gradient(140deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
+    --gradient-slanted-top-reversed-solid: linear-gradient(220deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
     --gradient-slanted-reversed-solid: linear-gradient(60deg, var(--yellow-solid) 49.5%, var(--green-solid) calc(49.5% + 1px));
     --gradient-slanted: linear-gradient(100deg, var(--green) 49.5%, var(--yellow) calc(49.5% + 1px));
 

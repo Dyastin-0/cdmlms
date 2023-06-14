@@ -1,6 +1,6 @@
 .view-book-modal {
     position: fixed;
-    min-width: 90%;
+    min-width: 50%;
     max-width: 95%;
     max-height: 95%;
     background: var(--white);
