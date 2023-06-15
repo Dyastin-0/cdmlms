@@ -40,6 +40,15 @@
     padding-right: 3px;
 }
 
+.user-img {
+    border-width: 0;
+    margin-right: 3px;
+    height: 24px;
+    width: 24px;
+    border-color: transparent;
+    border-radius: 17px;
+}
+
 .logo.n-p {
     padding-right: 0;
 }

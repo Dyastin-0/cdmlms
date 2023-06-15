@@ -27,6 +27,8 @@ const profilePhoto = profileModal.querySelector("#display-photo");
 const photoInput = profileModal.querySelector("#photo-input");
 const photoInputForm = profileModal.querySelector("#photo-input-form");
 
+const navProfile = document.querySelector("#nav-user-photo");
+
 const overlay = document.getElementById("overlay");
 
 bindEvents();
@@ -76,6 +78,7 @@ async function updateProfilePhoto(photo, user) {
         photoURL: imageURL
     });
     profilePhoto.src = imageURL;
+    navProfile.src = imageURL;
 }
 
 export function displayProfile(user, userData) {
@@ -83,7 +86,13 @@ export function displayProfile(user, userData) {
         email.textContent = user.email;
         profileButton.textContent = user.displayName;
         profileHeader.textContent = user.displayName;
-        user.photoURL? profilePhoto.src = user.photoURL : null;
+        if (user.photoURL) {
+            profilePhoto.src = user.photoURL;
+            navProfile.src = user.photoURL;
+        } else {
+            profilePhoto.src = '../images/blank_profile.webp';
+            navProfile.src = '../images/blank_profile.webp';
+        }
         fullName.textContent = userData.firstName + " " + userData.middleName + " " + userData.lastName;
     } else {
         profileButton.textContent = user.email;
