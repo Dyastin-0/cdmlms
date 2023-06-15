@@ -88,6 +88,7 @@
 .slider .container .card .wrapper img {
     width: 200px;
     height: 200px;
+    margin-bottom: 10px;
     border-radius: 50%;
 }
 
@@ -132,5 +133,8 @@
     }
     .slider .container .card .info-label {
         width: 90%;
+    }
+    .slider .label {
+        font-size: 36px;
     }
 }

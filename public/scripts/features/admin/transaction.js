@@ -11,7 +11,7 @@ export async function acceptRequest(requestObject, requestRef) {
         bookIsbn: requestObject.bookIsbn,
         requestedBy: requestObject.requestedBy,
         transactionId: crypto.randomUUID(),
-        returnDue: currentDateTimePlus(2)
+        returnDue: currentDateTimePlus(7)
     }
 
     const bookSnapshot = await getQueryTwoFields('books',
