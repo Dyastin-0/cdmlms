@@ -1,8 +1,7 @@
 .landing-page-content {
-    flex-basis: calc((100% / 2) - 60px);
+    flex-basis: calc((100% / 2));
     height: 500px;
     display: flex;
-    margin: 30px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -32,7 +31,6 @@
     flex-basis: 100%;
     margin: 20px;
     flex-direction: row;
-    gap: 32px;
 }
 
 .landing-page-content.fixed-size.space {
@@ -47,16 +45,13 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    padding: 20px;
 }
 
 .landing-page-img {
-    width: 400px;
     max-width: 100%;
     min-height: 100px;
     min-width: 100px;
-    height: 400px;
-    object-fit: cover;
+    object-fit: contain;
     background-position: center;
     border-radius: 5px;
 }
@@ -82,8 +77,6 @@
 
 .landing-page-label.medium-x {
     font-size: 54px;
-    margin-left: 20px;
-    margin-right: 20px;
     margin-bottom: 20px;
     text-shadow: 0px 0px 30px rgb(0, 0, 0, 0.5);
 }
@@ -99,7 +92,6 @@
     width: 70%;
     font-size: 18px;
     font-weight: 400;
-    margin: 20px;
     text-shadow: 0px 0px 30px rgb(0, 0, 0, 0.5);
 } 
 

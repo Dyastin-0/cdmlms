@@ -43,6 +43,18 @@
     scroll-snap-align: start;
 }
 
+.slider .container .card.photo {
+    min-width: calc(100% - 46px);
+    background: var(--gradient-slanted-solid);
+    border: solid;
+    border-width: 3px;
+    border-color: var(--yellow-solid);
+}
+
+.slider .container .card.photo.reversed {
+    background: var(--gradient-slanted-reversed-solid);
+}
+
 .slider .container .card.colored {
     background: var(--gradient-slanted-solid);
 }
@@ -129,6 +141,13 @@
         background: var(--gradient-slanted-top-solid);
     }
     .slider .container .card.reversed {
+        background: var(--gradient-slanted-top-reversed-solid);
+    }
+    .slider .container .card.photo {
+        background: var(--gradient-slanted-top-solid);
+    }
+    
+    .slider .container .card.photo.reversed {
         background: var(--gradient-slanted-top-reversed-solid);
     }
     .slider .container .card .info-label {
