@@ -15,8 +15,6 @@ import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
 import { toastMessage } from "../utils/toast-message.js";
 
-const main = document.querySelector("#main");
-
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
 const adminButton = document.querySelector("#admin-button");

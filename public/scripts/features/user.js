@@ -16,6 +16,7 @@ import { displayProfile } from "./user-profile.js";
 import { hideSearchResult } from "../ui/home/search-ui.js";
 import { bindSearchEvent, addRecentSearch, displayRecentSearches, displayRecentSearchMobile } from "../ui/home/search-ui.js";
 import { renderPendingRequests, renderReturnedTransactions, renderTransactions } from "./user-transactions.js";
+import { settingsInit } from "./account-settings.js";
 
 const transactionModal = document.querySelector("#transactions");
 const notificationButton = document.querySelector("#user-notification");
@@ -47,6 +48,7 @@ displayRecentSearchMobile();
 export async function userInit(user, currentUserData) {
     renderData(user, currentUserData);
     displayRecentSearches(user.uid);
+    settingsInit();
 }
 
 async function renderData(user, currentUserData) {

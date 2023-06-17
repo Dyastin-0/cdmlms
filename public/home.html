@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="./styles/process-dialog.css">
     <link rel="stylesheet" href="./styles/view-book.css">
     <link rel="stylesheet" href="./styles/user-transactions.css">
+    <link rel="stylesheet" href="./styles/settings-modal.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
@@ -70,7 +71,6 @@
             <div class="user-drop-down">
                 <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
                     <img class="user-img" id="nav-user-photo">
-                    <i class="fa fa-chevron-down chevron" id="user-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu" id="user-drop-down">
                     <button class="nav-button small fit" id="display-name"> Display name </button>
@@ -263,6 +263,15 @@
 
     <!-- modals -->
 
+    <div class="settings-modal" id="account-settings-modal">
+        <div class="header">
+            <label class="black">Account settings</label>
+            <button class="fas fa-close black" id="close-settings"></button>
+        </div>
+        <button class="action-button" id="change-password-button">Change password</button>
+        <button class="action-button red" id="delete-user-account-button">Delete accout</button>
+    </div>
+
     <div class="user-transactions" id="transactions">
         <label class="transaction-header"> Your books </label>
         <div class="transaction-container" id="transaction-container">
@@ -385,7 +394,6 @@
         <label class="name" id="full-name"> Name </label>
         <label class="other-info" id="display-email"></label>
         <label class="other-info" id="penalty-count"></label>
-        <label class="other-info" id="display-verified"> </label>
         <div class="footer">
             <button class="black" id="edit-profile-button"> Edit profile </button>
         </div>

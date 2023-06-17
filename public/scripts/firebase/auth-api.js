@@ -4,7 +4,8 @@ import { signInWithEmailAndPassword,
     sendPasswordResetEmail,
     signInWithPopup,
     GoogleAuthProvider,
-    signOut
+    updateEmail,
+    deleteUser
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
 import { isEmailValidSignIn, warning } from "../utils/validation.js";
@@ -72,5 +73,32 @@ export function recoverAccount(email) {
     })
     .catch((error) => {
       console.error('Error sending password reset email:', error);
+    });
+}
+
+export function changePassword(email) {    
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+      toastMessage("Password reset link sent.");
+    })
+    .catch((error) => {
+      console.error('Error sending password reset email:', error);
+    });
+}
+
+export async function updateUserEmail(user, email) {
+    await updateEmail(user, email)
+    .then(() => {
+        toastMessage("Email updated!")
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
+
+export async function deleteUserAccount(user) {
+    deleteUser(user)
+    .catch((error) => {
+        console.error(error);
     });
 }

@@ -18,7 +18,6 @@ const profileHeader = profileModal.querySelector("#profile-modal-header");
 const fullName = profileModal.querySelector("#full-name");
 const email = profileModal.querySelector("#display-email");
 const penaltyCount = profileModal.querySelector("#penalty-count");
-const verified = profileModal.querySelector("#display-verified");
 
 const profileButton = document.querySelector("#display-name");
 const closeProfile = profileModal.querySelector("#close-profile");
@@ -81,7 +80,7 @@ async function updateProfilePhoto(photo, user) {
     navProfile.src = imageURL;
 }
 
-export function displayProfile(user, userData) {
+export async function displayProfile(user, userData) {
     if (userData && !userData.newUser) {
         email.textContent = user.email;
         profileButton.textContent = user.displayName;
@@ -98,7 +97,6 @@ export function displayProfile(user, userData) {
         profileButton.textContent = user.email;
         email.textContent = user.email;
     }
-    user.emailVerified ? verified.textContent = "Verified ✓" : verified.textContent = "Not verified";
     
     const colRef = collection(db, 'users');
     const colQuery = query(colRef,
@@ -110,11 +108,11 @@ export function displayProfile(user, userData) {
         const penalties = data.penaltyCount;
 
         if (penalties > 0 && penalties <= 4) {
-            penaltyCount.textContent = "Status: warning";
+            penaltyCount.textContent = "Account tatus: warning";
         } else if (penalties >= 5) {
-            penaltyCount.textContent = "Status: blocked";
+            penaltyCount.textContent = "Account status: blocked";
         } else {
-            penaltyCount.textContent = "Status: good";
+            penaltyCount.textContent = "Account tatus: good";
         }
     });
 }
