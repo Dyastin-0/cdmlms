@@ -1,9 +1,9 @@
 .report-modal {
     position: fixed;
     width: 500px;
-    max-width: 95%;
+    max-width: 90%;
     height: fit-content;
-    max-height: 95%;
+    max-height: 90%;
     overflow-y: auto;
     border-radius: 5px;
     background-color: var(--white);
