@@ -15,6 +15,9 @@ import { setupSexDropDownInit } from "../ui/home/setup-sex-drop-down.js";
 import { displayProcessDialog, hideProcessDialog } from "../utils/process-dialog.js";
 import { toastMessage } from "../utils/toast-message.js";
 
+const profileTitle = document.querySelector("#profile-modal-header");
+const displayedName = document.querySelector("#display-name");
+
 const splashScreen = document.querySelector("#splash-screen");
 const oneTimeSetupModal = document.querySelector("#one-time-setup-modal");
 const adminButton = document.querySelector("#admin-button");
@@ -115,6 +118,8 @@ async function finalAccountSetup(currentUserRef, user) {
     const currentUser = querySnapshot.docs[0];
     oneTimeSetupModal.classList.remove("active");
     userInit(user, currentUser.data());
+    profileTitle.textContent = displayName.value.trim();
+    displayedName.textContent = displayName.value.trim();
     splashScreen.remove();
 }
 

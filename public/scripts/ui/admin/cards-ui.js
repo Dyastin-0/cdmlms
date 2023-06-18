@@ -1,28 +1,32 @@
 const leftNav = document.querySelector("#left-nav");
+const dashBoards = document.querySelector("#admin-dashboard");
 
 const homeButton = leftNav.querySelector("#left-home-button");
-const homeCard = document.querySelector("#statistics");
+const homeCard = dashBoards.querySelector("#statistics");
 
 const addBookButton = leftNav.querySelector("#left-add-button");
-const addBookCard = document.querySelector("#add-book");
+const addBookCard = dashBoards.querySelector("#add-book");
 
 const requestButton = leftNav.querySelector("#left-requests-button");
-const requestCard = document.querySelector("#issue-requests");
+const requestCard = dashBoards.querySelector("#issue-requests");
 
-const searchButton = document.querySelector("#left-search-button");
-const searchCard = document.querySelector("#search-admin");
+const searchButton = leftNav.querySelector("#left-search-button");
+const searchCard = dashBoards.querySelector("#search-admin");
 
 const editButton = leftNav.querySelector("#left-edit-button");
-const editCard = document.querySelector("#edit-book");
+const editCard = dashBoards.querySelector("#edit-book");
 
 const deleteButton = leftNav.querySelector("#left-delete-button");
-const deleteCard = document.querySelector("#delete-book");
+const deleteCard = dashBoards.querySelector("#delete-book");
 
 const recordsButton = leftNav.querySelector("#left-records-button");
-const recordsCard = document.querySelector("#records");
+const recordsCard = dashBoards.querySelector("#records");
 
 const usersButton = leftNav.querySelector("#left-users-button");
-const usersCard = document.querySelector("#recent-users");
+const usersCard = dashBoards.querySelector("#recent-users");
+
+const reportsButton = leftNav.querySelector("#left-reports-button");
+const reportsCard = dashBoards.querySelector("#user-reports");
 
 const cards = [
     homeCard,
@@ -32,7 +36,8 @@ const cards = [
     editCard,
     deleteCard,
     recordsCard,
-    usersCard
+    usersCard,
+    reportsCard
 ];
 
 bindEvents();
@@ -84,6 +89,13 @@ function bindEvents() {
         if (!usersCard.classList.contains("active")) {
             hideCards();
             usersCard.classList.add("active");
+        }
+    });
+
+    reportsButton.addEventListener('click', () => {
+        if (!reportsCard.classList.contains("active")) {
+            hideCards();
+            reportsCard.classList.add("active");
         }
     });
 }

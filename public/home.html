@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./styles/view-book.css">
     <link rel="stylesheet" href="./styles/user-transactions.css">
     <link rel="stylesheet" href="./styles/settings-modal.css">
+    <link rel="stylesheet" href="./styles/report.css">
     <link rel="icon" type="image/webp" sizes="32x32" href="./images/cdm_logo.webp">
     <title> Home </title>
 </head>
@@ -65,6 +66,9 @@
 
         <div class="wrapper">
             <a href="./admin.html" class="nav-button small-g admin none" id="admin-button"> Admin </a>
+            <button class="nav-button medium fa" aria-label="report-button" id="report-button">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </button>
             <button class="nav-button medium" id="user-notification" aria-label="user-notification">
                 <i class="fa-solid fa-bell"></i>
             </button>
@@ -263,13 +267,27 @@
 
     <!-- modals -->
 
+    <div class="report-modal" id="report-modal">
+        <div class="header">
+            <label class="black">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Report/Request
+            </label>
+            <button class="black fas fa-close" id="close-report-modal"></button>
+        </div>
+        <form id="report-form">
+            <input type="text" id="report-title" placeholder="Title">
+            <textarea id="report-details" cols="20" rows="10" placeholder="Details"></textarea>
+        </form>
+        <button class="send-button" id="send-report-button">Send</button>
+    </div>
+
     <div class="settings-modal" id="account-settings-modal">
         <div class="header">
             <label class="black">Account settings</label>
             <button class="fas fa-close black" id="close-settings"></button>
         </div>
         <button class="action-button" id="change-password-button">Change password</button>
-        <button class="action-button red" id="delete-user-account-button">Delete accout</button>
     </div>
 
     <div class="user-transactions" id="transactions">
@@ -480,6 +498,7 @@
 <script src="./scripts/observer.js"></script>
 <script type="module" src="./scripts/features/user-first-login.js"></script>
 <script type="module" src="./scripts/features/edit-profile.js"></script>
+<script type="module" src="./scripts/features/report.js"></script>
 <!---->
 
 </html>

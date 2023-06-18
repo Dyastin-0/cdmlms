@@ -96,9 +96,13 @@ export async function updateUserEmail(user, email) {
     });
 }
 
-export async function deleteUserAccount(user) {
-    deleteUser(user)
+export async function deleteUserAccount(user, process) {
+    await deleteUser(user)
+    .then(() => {
+        process();
+    })
     .catch((error) => {
+        isResolved = false;
         console.error(error);
     });
 }

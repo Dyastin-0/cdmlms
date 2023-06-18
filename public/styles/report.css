@@ -1,0 +1,82 @@
+.report-modal {
+    position: fixed;
+    width: 500px;
+    max-width: 95%;
+    height: fit-content;
+    max-height: 95%;
+    overflow-y: auto;
+    border-radius: 5px;
+    background-color: var(--white);
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    z-index: 13;
+    transform: translate(-50%, -50%) scale(0);
+    box-shadow: 0 0 5px var(--dark-shade-low);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.report-modal.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.report-modal input {
+    width: calc(100% - 30px);
+    height: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: var(--dark-shade-low);
+    color: var(--black);
+    outline: none;
+    padding: 5px;
+}
+
+.report-modal input::placeholder {
+    color: var(--black);
+}
+
+.report-modal textarea {
+    width: calc(100% - 30px);
+    height: 300px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    border-width: 0;
+    resize: none;
+    border-width: 0;
+    outline: none;
+    border-radius: 5px;
+    color: var(--black);
+    background-color: var(--dark-shade-low);
+}
+
+.report-modal textarea::placeholder {
+    color: var(--black);
+}
+
+.report-modal .send-button {
+    width: calc(100% - 30px);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    box-sizing:content-box;
+    color: var(--white);
+    background-color: var(--yellow-solid);
+}
+
+.report-modal .send-button:hover {
+    cursor: pointer;
+}
+
