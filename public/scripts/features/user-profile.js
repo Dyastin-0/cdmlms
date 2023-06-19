@@ -112,7 +112,7 @@ export async function displayProfile(user, userData) {
         } else if (penalties >= 5) {
             penaltyCount.textContent = "Account status: blocked";
         } else {
-            penaltyCount.textContent = "Account tatus: good";
+            penaltyCount.textContent = "Account status: good";
         }
     });
 }
