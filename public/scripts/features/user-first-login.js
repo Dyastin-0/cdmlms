@@ -30,7 +30,7 @@ const middleName = oneTimeSetupModal.querySelector("#middle-name");
 const sex = oneTimeSetupModal.querySelector("#setup-selected-sex");
 const birthDate = oneTimeSetupModal.querySelector("#birth-date");
 const id = oneTimeSetupModal.querySelector("#id");
-const displayName = oneTimeSetupModal.querySelector("#display-name");
+const displayName = oneTimeSetupModal.querySelector("#display-name-setup");
 
 const cancelSetupButton = document.querySelector("#cancel-setup");
 const doneSetupButton = document.querySelector("#done-setup");

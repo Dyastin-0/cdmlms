@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Library Management System of Colegio de Montalban.">
+    <meta name="description" content="Library management system of Colegio de Montalban.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/nav.css">
@@ -80,7 +80,7 @@
 
     <main class="main admin">
         <nav class="nav admin">
-            <button class="nav-button medium display-none dashboard-button" id="left-nav-button">
+            <button class="nav-button medium display-none dashboard-button" id="left-nav-button" aria-label="menu-button">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="wrapper">
@@ -90,7 +90,7 @@
                 </button>
                 <div class="user-drop-down">
                     <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
-                        <img class="user-img" id="nav-user-photo">
+                        <img class="user-img" id="nav-user-photo" alt="User profile">
                     </button>
                     <div class="drop-down-menu" id="user-drop-down">
                         <button class="nav-button small fit" id="display-name"> Display name </button>
@@ -301,7 +301,7 @@
             <button class="fas fa-close black" id="close-edit-user-modal" aria-label="close-edit-user-label"></button>
         </div>
         <form class="edit-user-form" id="edit-user-form">
-            <input type="text" id="edit-user-id">
+            <input type="text" id="edit-user-id" placeholder="School ID">
             <div class="drop-down wd" id="edit-role-drop-down">
                 <button class="nav-button small g" id="edit-role-by-drop-down-button" aria-label="edit-role-by-drop-down-button">
                     <label class="inherit" id="edit-user-role">User</label>
@@ -318,9 +318,9 @@
                     <i class="fa fa-chevron-down chevron" id="edit-status-drop-down-chevron"></i>
                 </button>
                 <div class="drop-down-menu left fit" id="edit-status-drop-down-menu">
-                    <button class="nav-button small fit black" id="edit-good">Good</button>
-                    <button class="nav-button small fit black" id="edit-warning">Warning</button>
-                    <button class="nav-button small fit black" id="edit-blocked">Blocked</button>
+                    <button class="nav-button small fit black" id="status-good">Good</button>
+                    <button class="nav-button small fit black" id="status-warning">Warning</button>
+                    <button class="nav-button small fit black" id="status-blocked">Blocked</button>
                 </div>
             </div>
             <button class="button" id="save-user-changes"> Save </button>
@@ -376,11 +376,6 @@
             <button id="yes-button"> Yes </button>
             <button id="no-button"> No </button>
         </div>
-    </div>
-
-    <div class="toast-message" id="toast-message-modal">
-        <p class="message" id="toast-message"></p>
-        <button class="fa fa-close" id="toast-button" aria-label="toast-close-button"></button>
     </div>
 
     <div class="process-dialog" id="process-dialog-modal">

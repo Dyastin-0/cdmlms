@@ -74,7 +74,7 @@
             </button>
             <div class="user-drop-down">
                 <button class="nav-button medium" id="user-drop-down-button" aria-label="user-drop-down-button">
-                    <img class="user-img" id="nav-user-photo">
+                    <img class="user-img" id="nav-user-photo" alt="User profile">
                 </button>
                 <div class="drop-down-menu" id="user-drop-down">
                     <button class="nav-button small fit" id="display-name"> Display name </button>
@@ -273,7 +273,7 @@
                 <i class="fa-solid fa-circle-exclamation"></i>
                 Report/Request
             </label>
-            <button class="black fas fa-close" id="close-report-modal"></button>
+            <button class="black fas fa-close" id="close-report-modal" aria-label="close-report-modal"></button>
         </div>
         <form id="report-form">
             <input type="text" id="report-title" placeholder="Title">
@@ -285,7 +285,7 @@
     <div class="settings-modal" id="account-settings-modal">
         <div class="header">
             <label class="black">Account settings</label>
-            <button class="fas fa-close black" id="close-settings"></button>
+            <button class="fas fa-close black" id="close-settings" aria-label="close-settings"></button>
         </div>
         <button class="action-button" id="change-password-button">Change password</button>
     </div>
@@ -387,7 +387,7 @@
             <input class="dark" type="text" placeholder="Birth date (yyyy-mm-dd)" id="birth-date">
 
             <input type="text" placeholder="School ID (e.g., 00-00000)" id="id" onkeydown="return /[0-9-/b]/i.test(event.key)">
-            <input type="text" placeholder="Display name" id="display-name">
+            <input type="text" placeholder="Display name" id="display-name-setup">
         </form>
         <div class="footer">
             <button id="cancel-setup"> Cancel </button>

@@ -7,7 +7,6 @@ import { onAuthStateChanged,
 
 import { getQueryOneField } from '../firebase/firestore-api.js';
 import { displayConfirmDialog } from '../utils/confirm-dialog.js';
-import { toastMessage } from '../utils/toast-message.js';
 import { displayProfile } from './user-profile.js';
 import { displayProcessDialog } from "../utils/process-dialog.js";
 

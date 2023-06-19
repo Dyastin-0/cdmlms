@@ -7,9 +7,9 @@ const selectedStatus = statusDropDown.querySelector("#edit-user-status");
 const statusDropDownButton = statusDropDown.querySelector("#edit-status-by-drop-down-button");
 const statusChevron = statusDropDown.querySelector("#edit-status-drop-down-chevron");
 
-const good = statusDropDownMenu.querySelector("#edit-good");
-const warning = statusDropDownMenu.querySelector("#edit-warning");
-const blocked = statusDropDownMenu.querySelector("#edit-blocked");
+const good = statusDropDownMenu.querySelector("#status-good");
+const warning = statusDropDownMenu.querySelector("#status-warning");
+const blocked = statusDropDownMenu.querySelector("#status-blocked");
 
 export function editStatusDropDownInit() {
     bindEvents();

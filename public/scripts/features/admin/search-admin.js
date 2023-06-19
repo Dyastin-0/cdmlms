@@ -7,7 +7,6 @@ import { onSnapshot,
 import { updateQuery } from "../../firebase/firestore-api.js";
 
 import { formatRequest, formatReturnRequest } from "./requests.js";
-import { isIdValid } from "../../utils/validation.js";
 import { displayProcessDialog } from "../../utils/process-dialog.js";
 import { displayConfirmDialog } from "../../utils/confirm-dialog.js";
 import { toastMessage } from "../../utils/toast-message.js";
