@@ -17,6 +17,7 @@ const profileHeader = profileModal.querySelector("#profile-modal-header");
 
 const fullName = profileModal.querySelector("#full-name");
 const email = profileModal.querySelector("#display-email");
+const userID = profileModal.querySelector("#display-user-id");
 const penaltyCount = profileModal.querySelector("#penalty-count");
 
 const profileButton = document.querySelector("#display-name");
@@ -83,6 +84,7 @@ async function updateProfilePhoto(photo, user) {
 export async function displayProfile(user, userData) {
     if (userData && !userData.newUser) {
         email.textContent = user.email;
+        userID.textContent = userData.id;
         profileButton.textContent = user.displayName;
         profileHeader.textContent = user.displayName;
         if (user.photoURL) {
