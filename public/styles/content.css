@@ -22,10 +22,6 @@
     margin-bottom: 10px;
 }
 
-.icons-wrapper {
-    padding: 5px;
-}
-
 .landing-page-content.fixed-size {
     height: fit-content;
     flex-basis: 100%;

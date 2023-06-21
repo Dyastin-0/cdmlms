@@ -68,12 +68,13 @@
 }
 
 .slider .container .card .info-label {
-    width: 300px;
-    font-size: 16px;
-    font-weight: 400;
+    width: 70%;
+    font-size: 18px;
+    font-weight: 500;
     margin-top: 8px;
     margin-left: 20px;
     margin-right: 20px;
+    text-shadow: 0 0 5px var(--dark-shade-high);
 }
 
 .slider .container .card .wrapper {
@@ -129,6 +130,11 @@
 
 .slider .navigation a:hover {
     transform: scale(1.2);
+}
+
+.icons-wrapper {
+    gap: 5px;
+    margin-top: 5px;
 }
 
 @media (max-width: 600px) {
