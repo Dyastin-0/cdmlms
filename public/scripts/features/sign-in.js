@@ -4,10 +4,10 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/fi
 import { signInFirebaseAuth } from '../firebase/auth-api.js';
 import { signInWithGoogle } from '../firebase/auth-api.js';
 import { displayProcessDialog, hideProcessDialog } from '../utils/process-dialog.js';
-import { warning } from '../utils/validation.js';
+import { isEmailValidSignIn, warning } from '../utils/validation.js';
 
 const modal = document.querySelector("#sign-in-modal");
-const username = modal.querySelector("#sign-in-email");
+const email = modal.querySelector("#sign-in-email");
 const password = modal.querySelector("#sign-in-password");
 const submit = modal.querySelector("#sign-in-account-button");
 
@@ -31,7 +31,7 @@ function bindEvents() {
         await signIn();
         hideProcessDialog();
     });
-    username.addEventListener('keyup', (e) => {
+    email.addEventListener('keyup', (e) => {
         e.key === "Enter" ? signIn() : null;
     });
     password.addEventListener('keyup', (e) => {
@@ -46,8 +46,24 @@ function bindEvents() {
 }
 
 async function signIn() {
-    warning("", "sign-in");
-    signingIn = true;
-    const isSuccess = await signInFirebaseAuth(username.value, password.value);
-    if (isSuccess) window.location.href = './home.html';
+    if (areInputsFilled()) {
+        warning("", "sign-in");
+        signingIn = true;
+        const isSuccess = await signInFirebaseAuth(email.value, password.value);
+        if (isSuccess) window.location.href = './home.html';
+    }
+}
+
+function areInputsFilled() {
+    if (!password.value || !email.value) {
+        warning("There is an empty field.", "sign-in");
+        return false;
+    }
+
+    if (!isEmailValidSignIn(email.value)) {
+        warning("Invalid email format.", "sign-in");
+        return false;
+    }
+
+    return true;
 }
