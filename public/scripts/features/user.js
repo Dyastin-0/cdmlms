@@ -94,10 +94,12 @@ export async function searchBooks(by, input) {
     if (by === "author" || by === "category") {
         input = input.split(",");
         colQuery = query(colRef,
+            where('isAvailable', '==', true),
             where(by, 'array-contains-any', input)
         );
     } else {
         colQuery = query(colRef,
+            where('isAvailable', '==', true),
             orderBy(by),
             startAt(input),
             endAt(input  + "\uf8ff")
