@@ -203,11 +203,11 @@ function areInputDataValid() {
 }
 
 async function areInputsAvailable() {
-    const idRes = await isIdAvailable(id.value);
-    if (!idRes.result) {
-        warning(idRes.error, "setup");
-        return false;
-    }
+    // const idRes = await isIdAvailable(id.value);
+    // if (!idRes.result) {
+    //     warning(idRes.error, "setup");
+    //     return false;
+    // }
 
     return true;
 }
