@@ -46,7 +46,7 @@ onAuthStateChanged(auth, async (user) => {
             await bindEvents(user, currentUser.data());
             splashScreen.remove();
         } else {
-            window.location.href = "./16.html";
+            window.location.href = "./403.html";
         }
     } else {
         window.location.href = "./sign-in.html";
